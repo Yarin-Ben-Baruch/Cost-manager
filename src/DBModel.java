@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.PrimitiveIterator;
@@ -51,8 +53,8 @@ public class DBModel implements IModel {
             preparedStatement.setString(1,item.getName());
             preparedStatement.setString(1,item.getDescribing());
             preparedStatement.setString(1,item.getCurrency());
-            preparedStatement.setString(1,item.getCategoryObject().getCategory());
-            preparedStatement.setDouble(1,item.getSum());
+            preparedStatement.setString(1,item.getCategory());
+            preparedStatement.setString(1,item.getSum());
             preparedStatement.setDate(1, (Date) item.getDate());
 
             preparedStatement.executeQuery();
@@ -89,18 +91,18 @@ public class DBModel implements IModel {
         return items;
     }
 
+    // update only names !!!!
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, int itemId) throws CostMangerException {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE items" +
-                            "set ? = ?" +
-                            "WHERE id = ?");
+                    "UPDATE Items SET name = ? WHERE id = ?");  // מעדכן רק שמות עושה בעיה איפה שהשם
 
-            preparedStatement.setString(1,nameColToUpdate);
-            preparedStatement.setObject(2,dataToSet); // יכולה להיות בעיה כי לא יודעים איזה סוג משתנה זה
-            preparedStatement.setInt(3,itemId);
+            //preparedStatement.setObject(1,nameColToUpdate); // אי אפשר לעדכן עמודה לפי ערך שנותנים רק ערך ספציפי
+            preparedStatement.setObject(1,dataToSet); // יכולה להיות בעיה כי לא יודעים איזה סוג משתנה זה
+            preparedStatement.setInt(2,itemId);
+
             preparedStatement.executeUpdate();
 
         }
@@ -126,8 +128,32 @@ public class DBModel implements IModel {
     }
 
     @Override
-    public Collection<Item> getDetailedReport(Item[] item, String date) throws CostMangerException {
-        return null;
+    public Collection<Item> getDetailedReport(Item[] item, Date startDate, Date endDate) throws CostMangerException {
+        ResultSet myResult = null;
+        Collection<Item> reportItems = new LinkedList<>();
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from Items WHERE date >= ? AND date <= ?");
+
+            preparedStatement.setDate(1,startDate);
+            preparedStatement.setDate(1,endDate);
+            myResult = preparedStatement.executeQuery();
+
+            while(myResult.next()) {
+
+                    Item currentItemToAdd = new Item(
+                            myResult.getInt("id"),myResult.getString("name"),
+                            myResult.getString("description"),myResult.getString("currency"),
+                            myResult.getString("category"),myResult.getString("sum"),
+                            myResult.getDate("date"));
+
+                    reportItems.add(currentItemToAdd);
+
+            }
+        } catch (SQLException e) {
+            throw new CostMangerException("Unable to pull data from DB");
+        }
+        return reportItems;
     }
 
     @Override
@@ -142,7 +168,11 @@ public class DBModel implements IModel {
         try {
             DBModel test = new DBModel();
             test.getItems();
-            test.removeItem(3);
+            Item currentItemToAdd = new Item(
+                    2,"Dani",
+                    "aksfhksdhfjksd","USD",
+                    "House","200M", "2021-12-03"); // prpblem !!!! date !!!
+            test.addItem(currentItemToAdd);
             test.getItems();
         } catch (CostMangerException e) {
             e.printStackTrace();

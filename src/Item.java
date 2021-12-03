@@ -5,11 +5,24 @@ public class Item {
 
     private int id;
     private String name;
-    private String currency;
-    private double sum;
     private String describing;
-    private Category category;
+    private String currency;
+    private String category;
+    private String sum;
     private Date date;
+
+    public Item() {
+    }
+
+    public Item(int id, String name, String describing, String currency, String category, String sum, Date date) {
+        this.id = id;
+        this.name = name;
+        this.describing = describing;
+        this.currency = currency;
+        this.category = category;
+        this.sum = sum;
+        this.date = date;
+    }
 
     public int getId() {
         return id;
@@ -19,20 +32,20 @@ public class Item {
         return name;
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public double getSum() {
-        return sum;
-    }
-
     public String getDescribing() {
         return describing;
     }
 
-    public Category getCategoryObject() {
+    public String getCurrency() {
+        return currency;
+    }
+
+    public String getCategory() {
         return category;
+    }
+
+    public String getSum() {
+        return sum;
     }
 
     public Date getDate() {
