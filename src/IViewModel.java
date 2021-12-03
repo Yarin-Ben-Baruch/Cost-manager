@@ -1,4 +1,5 @@
 public interface IViewModel {
+
     public void setView(IView view);
     public void setModel(IModel model);
     public void addItem(Item item);

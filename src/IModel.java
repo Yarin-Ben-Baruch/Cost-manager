@@ -1,7 +1,9 @@
 import java.util.Collection;
 
 public interface IModel {
-    public void addItem(Item item) throws CostMangerException;
-    public Collection<Item> getDetailedReport(Item[] item,String date) throws CostMangerException;
-    public void addNewCategory(Category category) throws CostMangerException;
+    void addItem(Item item) throws CostMangerException;
+    Collection<Item> getDetailedReport(Item[] item,String date) throws CostMangerException;
+    void addNewCategory(Category category) throws CostMangerException;
+    Collection<Item> getItems() throws CostMangerException;
+    void updateItem(String nameColToUpdate, String dataToSet, int itemId) throws CostMangerException;
 }
