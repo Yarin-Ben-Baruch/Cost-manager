@@ -171,7 +171,7 @@ public class DBModel implements IModel {
             Item currentItemToAdd = new Item(
                     2,"Dani",
                     "aksfhksdhfjksd","USD",
-                    "House","200M", "2021-12-03"); // prpblem !!!! date !!!
+                    "House","200M", "2021-12-03"); // problem !!!! date !!!
             test.addItem(currentItemToAdd);
             test.getItems();
         } catch (CostMangerException e) {
