@@ -41,18 +41,27 @@ public class DBModel implements IModel {
 
     @Override
     public void addItem(Item item) throws CostMangerException {
-//        try {
-//            int numberRowAdding = statement.executeQuery(
-//                    "insert into items" +
-//                            "(id,name,description,currency,category,sum,date) " +
-//                            "values " +
-//                            "(??????)");
-//        }
-//        catch (SQLException e) {
-//            throw new CostMangerException("Unable insert into the DB",e);
-//        }
-    }
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "insert into items (id,name,description,currency,category,sum,date) " +
+                            "values " +
+                            "(?,?,?,?,?,?,?)");
 
+            preparedStatement.setInt(1,item.getId());
+            preparedStatement.setString(1,item.getName());
+            preparedStatement.setString(1,item.getDescribing());
+            preparedStatement.setString(1,item.getCurrency());
+            preparedStatement.setString(1,item.getCategoryObject().getCategory());
+            preparedStatement.setDouble(1,item.getSum());
+            preparedStatement.setDate(1, (Date) item.getDate());
+
+            preparedStatement.executeQuery();
+
+        }
+        catch (SQLException e) {
+            throw new CostMangerException("Unable insert into the DB",e);
+        }
+    }
 
     @Override
     public Collection<Item> getItems() throws CostMangerException {
@@ -84,10 +93,16 @@ public class DBModel implements IModel {
     public void updateItem(String nameColToUpdate, String dataToSet, int itemId) throws CostMangerException {
 
         try {
-            int numberRowAffected = statement.executeUpdate(
+            PreparedStatement preparedStatement = connection.prepareStatement(
                     "UPDATE items" +
-                            "set {nameColToUpdate} = {dataToSet}" +
-                            "WHERE id = {itemId}");
+                            "set ? = ?" +
+                            "WHERE id = ?");
+
+            preparedStatement.setString(1,nameColToUpdate);
+            preparedStatement.setObject(2,dataToSet); // יכולה להיות בעיה כי לא יודעים איזה סוג משתנה זה
+            preparedStatement.setInt(3,itemId);
+            preparedStatement.executeUpdate();
+
         }
         catch (SQLException e) {
             throw new CostMangerException("Unable to update data to DB",e);

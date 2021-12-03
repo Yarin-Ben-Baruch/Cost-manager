@@ -9,6 +9,10 @@ public class Category {
     public void addCategory(Category category) {
 
     }
+
+    public String getCategory() {
+        return category;
+    }
 }
 
 

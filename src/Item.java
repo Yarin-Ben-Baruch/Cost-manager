@@ -1,4 +1,5 @@
 import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class Item {
 
@@ -8,7 +9,7 @@ public class Item {
     private double sum;
     private String describing;
     private Category category;
-    private Data data;
+    private Date date;
 
     public int getId() {
         return id;
@@ -30,11 +31,11 @@ public class Item {
         return describing;
     }
 
-    public Category getCategory() {
+    public Category getCategoryObject() {
         return category;
     }
 
-    public Data getData() {
-        return data;
+    public Date getDate() {
+        return date;
     }
 }
