@@ -14,7 +14,8 @@ public class DBModel implements IModel {
 
     public DBModel() throws CostMangerException {
 
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try {
+            Connection connection = DriverManager.getConnection(dbUrl, user, password);
             System.out.println("Connection success !");
             //משתנה שנותן לי לעשות פעולות על db
             Statement myStatement = connection.createStatement();
@@ -25,7 +26,7 @@ public class DBModel implements IModel {
             items = new LinkedList<>();
         }
         catch (SQLException e) {
-            throw new CostMangerException("Connection field!",e);
+            throw new CostMangerException("Connection failed!",e);
         }
 
     }
@@ -40,19 +41,18 @@ public class DBModel implements IModel {
 
     @Override
     public void addItem(Item item) throws CostMangerException {
-
-        try {
-            int numberRowAdding = statement.executeQuery(
-                    "insert into items" +
-                            "(id,name,description,currency,category,sum,date) " +
-                            "values " +
-                            "(??????)");
-        }
-        catch (SQLException e) {
-            throw new CostMangerException("Unable insert into the DB",e);
-        }
-
+//        try {
+//            int numberRowAdding = statement.executeQuery(
+//                    "insert into items" +
+//                            "(id,name,description,currency,category,sum,date) " +
+//                            "values " +
+//                            "(??????)");
+//        }
+//        catch (SQLException e) {
+//            throw new CostMangerException("Unable insert into the DB",e);
+//        }
     }
+
 
     @Override
     public Collection<Item> getItems() throws CostMangerException {
@@ -60,12 +60,17 @@ public class DBModel implements IModel {
         // שאילתא שמחזירה את כל הטבלה
         ResultSet myResult = null;
         try {
-            myResult = statement.executeQuery("select * from Items");
+            myResult = statement.executeQuery("SELECT * from Items");
+
             while (myResult.next())
             {
-                System.out.println(myResult.getString("id") + myResult.getString("name")
-                        + myResult.getString("description") + myResult.getString("currency")
-                        +myResult.getString("category") + myResult.getString("sum" + myResult.getString("date"));
+                System.out.println(myResult.getString("id"));
+                System.out.println(myResult.getString("name"));
+                System.out.println(myResult.getString("description"));
+                System.out.println(myResult.getString("currency"));
+                System.out.println(myResult.getString("category"));
+                System.out.println(myResult.getString("sum"));
+                System.out.println(myResult.getString("date"));
             }
 
         } catch (SQLException e) {
@@ -79,10 +84,10 @@ public class DBModel implements IModel {
     public void updateItem(String nameColToUpdate, String dataToSet, int itemId) throws CostMangerException {
 
         try {
-            int numberRowUpdate= statement.executeUpdate(
-                    "update items" +
-                            "set {nameColToUpdate} = {dataToSet} " +
-                            "where id = {itemId}");
+            int numberRowAffected = statement.executeUpdate(
+                    "UPDATE items" +
+                            "set {nameColToUpdate} = {dataToSet}" +
+                            "WHERE id = {itemId}");
         }
         catch (SQLException e) {
             throw new CostMangerException("Unable to update data to DB",e);
@@ -90,6 +95,20 @@ public class DBModel implements IModel {
 
     }
 
+    @Override
+    public void removeItem(int itemId) throws CostMangerException {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "DELETE FROM items WHERE id = ?");
+
+            preparedStatement.setInt(1,itemId);
+            preparedStatement.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            throw new CostMangerException("Unable to update data to DB",e);
+        }
+    }
 
     @Override
     public Collection<Item> getDetailedReport(Item[] item, String date) throws CostMangerException {
@@ -107,6 +126,9 @@ public class DBModel implements IModel {
 
         try {
             DBModel test = new DBModel();
+            test.getItems();
+            test.removeItem(3);
+            test.getItems();
         } catch (CostMangerException e) {
             e.printStackTrace();
         }
