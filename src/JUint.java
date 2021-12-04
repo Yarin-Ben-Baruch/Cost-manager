@@ -1,8 +1,9 @@
+import java.sql.Date;
 import java.util.Collection;
 
-//        Collection<Item> getItems() throws CostMangerException;
-//        void updateItem(String nameColToUpdate, String dataToSet, int itemId) throws CostMangerException;
-//        void removeItem(int itemId) throws CostMangerException;
+//java.sql.Date date = new java.sql.Date(0000-00-00);
+//date = java.sql.Date.valueOf("2013-09-04");
+//System.out.println(new java.sql.Date(System.currentTimeMillis()));
 
 public class JUint {
 
@@ -14,6 +15,22 @@ public class JUint {
             Collection<Item> item2;
             Collection<Item> item3;
             Collection<Item> item4;
+
+            test.addItem(new Item(
+                    "Matan",
+                    "buying new TV","USD",
+                    "House","1000", new java.sql.Date(System.currentTimeMillis())));
+
+            test.addItem(new Item(
+                    "",
+                    "buying new House","NIS",
+                    "House","100000", java.sql.Date.valueOf("2013-09-04")));
+
+
+            test.addNewCategory("House");
+            test.addNewCategory("house");
+            test.addNewCategory("car");
+            test.addNewCategory("Car");
 
             item = test.getItems();
 
@@ -42,8 +59,5 @@ public class JUint {
             e.printStackTrace();
         }
 
-        //java.sql.Date date = new java.sql.Date(0000-00-00);
-        //date = java.sql.Date.valueOf("2013-09-04");
-        //System.out.println(new java.sql.Date(System.currentTimeMillis()));
     }
 }
