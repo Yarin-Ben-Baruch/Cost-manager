@@ -1,5 +1,5 @@
 import javax.xml.crypto.Data;
-import java.util.Date;
+import java.sql.Date;
 
 public class Item {
 
@@ -9,13 +9,16 @@ public class Item {
     private String currency;
     private String category;
     private String sum;
-    private Date date;
+    private java.sql.Date date;
+    //java.sql.Date date = new java.sql.Date(0000-00-00);
+    //date = java.sql.Date.valueOf("2013-09-04");
+    //System.out.println(new java.sql.Date(System.currentTimeMillis()));
+
 
     public Item() {
     }
 
-    public Item(int id, String name, String describing, String currency, String category, String sum, Date date) {
-        this.id = id;
+    public Item(String name, String describing, String currency, String category, String sum, java.sql.Date date) {
         this.name = name;
         this.describing = describing;
         this.currency = currency;
@@ -51,4 +54,17 @@ public class Item {
     public Date getDate() {
         return date;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", describing='" + describing + '\'' +
+                ", currency='" + currency + '\'' +
+                ", category='" + category + '\'' +
+                ", sum='" + sum + '\'' +
+                ", date=" + date +
+                '}';
+    }
+
 }

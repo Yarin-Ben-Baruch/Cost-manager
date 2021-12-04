@@ -45,19 +45,18 @@ public class DBModel implements IModel {
     public void addItem(Item item) throws CostMangerException {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "insert into items (id,name,description,currency,category,sum,date) " +
+                    "insert into items (name,description,currency,category,sum,date) " +
                             "values " +
-                            "(?,?,?,?,?,?,?)");
+                            "(?,?,?,?,?,?)");
 
-            preparedStatement.setInt(1,item.getId());
             preparedStatement.setString(1,item.getName());
-            preparedStatement.setString(1,item.getDescribing());
-            preparedStatement.setString(1,item.getCurrency());
-            preparedStatement.setString(1,item.getCategory());
-            preparedStatement.setString(1,item.getSum());
-            preparedStatement.setDate(1, (Date) item.getDate());
+            preparedStatement.setString(2,item.getDescribing());
+            preparedStatement.setString(3,item.getCurrency());
+            preparedStatement.setString(4,item.getCategory());
+            preparedStatement.setString(5,item.getSum());
+            preparedStatement.setDate(6, item.getDate());
 
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
 
         }
         catch (SQLException e) {
@@ -128,21 +127,22 @@ public class DBModel implements IModel {
     }
 
     @Override
-    public Collection<Item> getDetailedReport(Item[] item, Date startDate, Date endDate) throws CostMangerException {
+    public Collection<Item> getDetailedReport(Date startDate, Date endDate) throws CostMangerException {
         ResultSet myResult = null;
         Collection<Item> reportItems = new LinkedList<>();
+
         try {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from Items WHERE date >= ? AND date <= ?");
 
-            preparedStatement.setDate(1,startDate);
-            preparedStatement.setDate(1,endDate);
+            preparedStatement.setDate(1, startDate);
+            preparedStatement.setDate(2, endDate);
             myResult = preparedStatement.executeQuery();
 
             while(myResult.next()) {
 
                     Item currentItemToAdd = new Item(
-                            myResult.getInt("id"),myResult.getString("name"),
+                            myResult.getString("name"),
                             myResult.getString("description"),myResult.getString("currency"),
                             myResult.getString("category"),myResult.getString("sum"),
                             myResult.getDate("date"));
@@ -153,6 +153,7 @@ public class DBModel implements IModel {
         } catch (SQLException e) {
             throw new CostMangerException("Unable to pull data from DB");
         }
+
         return reportItems;
     }
 
@@ -162,18 +163,29 @@ public class DBModel implements IModel {
     }
 
 
-
     public static void main(String[] args){
 
         try {
+
             DBModel test = new DBModel();
+            Collection<Item> item;
+
             test.getItems();
             Item currentItemToAdd = new Item(
-                    2,"Dani",
+                    "DaniGlafend",
                     "aksfhksdhfjksd","USD",
-                    "House","200M", "2021-12-03"); // prpblem !!!! date !!!
+                    "House","200M", java.sql.Date.valueOf("2017-09-04"));
+
             test.addItem(currentItemToAdd);
             test.getItems();
+
+            item = test.getDetailedReport(java.sql.Date.valueOf("2016-09-04"), new java.sql.Date(System.currentTimeMillis()));
+
+            for(Item s : item)
+            {
+                System.out.println(s);
+            }
+
         } catch (CostMangerException e) {
             e.printStackTrace();
         }
