@@ -60,6 +60,8 @@ class DBModelTest {
     @AfterEach
     void tearDown() {
         test = null;
+
+        //assertEquals();
     }
 
     @Test
