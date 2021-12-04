@@ -95,15 +95,40 @@ public class DBModel implements IModel {
     }
 
     // ask haim (life) !!!!
+    // לא נבדק
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, int itemId) throws CostMangerException {
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE Items SET name = ? WHERE id = ?");  // מעדכן רק שמות עושה בעיה איפה שהשם
+            PreparedStatement preparedStatement = null;
+            Object date = dataToSet;
+
+            switch (nameColToUpdate)
+            {
+                case "name" :
+                    preparedStatement = connection.prepareStatement("UPDATE Items SET name = ? WHERE id = ?");
+                    break;
+                case "description" :
+                    preparedStatement = connection.prepareStatement("UPDATE Items SET description = ? WHERE id = ?");
+                    break;
+                case "currency" :
+                    preparedStatement = connection.prepareStatement("UPDATE Items SET currency = ? WHERE id = ?");
+                    break;
+                case "category" :
+                    preparedStatement = connection.prepareStatement("UPDATE Items SET category = ? WHERE id = ?");
+                    break;
+                case "sum" :
+                    preparedStatement = connection.prepareStatement("UPDATE Items SET sum = ? WHERE id = ?");
+                    break;
+                case "date" :
+                    preparedStatement = connection.prepareStatement("UPDATE Items SET date = ? WHERE id = ?");
+                    date = java.sql.Date.valueOf(dataToSet);
+                    break;
+
+            }
 
             //preparedStatement.setObject(1,nameColToUpdate); // אי אפשר לעדכן עמודה לפי ערך שנותנים רק ערך ספציפי
-            preparedStatement.setObject(1,dataToSet); // יכולה להיות בעיה כי לא יודעים איזה סוג משתנה זה
+            preparedStatement.setObject(1,date); // יכולה להיות בעיה כי לא יודעים איזה סוג משתנה זה
             preparedStatement.setInt(2,itemId);
 
             preparedStatement.executeUpdate();
