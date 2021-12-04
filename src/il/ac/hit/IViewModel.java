@@ -1,3 +1,5 @@
+package il.ac.hit;
+
 public interface IViewModel {
 
     public void setView(IView view);

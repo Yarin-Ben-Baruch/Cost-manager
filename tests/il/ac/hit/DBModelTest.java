@@ -1,31 +1,27 @@
-import java.sql.Date;
+package il.ac.hit;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.util.Collection;
 
-//java.sql.Date date = new java.sql.Date(0000-00-00);
-//date = java.sql.Date.valueOf("2013-09-04");
-//System.out.println(new java.sql.Date(System.currentTimeMillis()));
+import static org.junit.jupiter.api.Assertions.*;
 
-public class JUint {
+class DBModelTest {
 
-    public static void main(String[] args) {
+    private DBModel test;
+
+    @BeforeEach
+    void setUp() {
 
         try {
-            DBModel test = new DBModel();
+            test = new DBModel();
+
             Collection<Item> item;
             Collection<Item> item2;
             Collection<Item> item3;
             Collection<Item> item4;
-
-            test.addItem(new Item(
-                    "Matan",
-                    "buying new TV","USD",
-                    "House","1000", new java.sql.Date(System.currentTimeMillis())));
-
-            test.addItem(new Item(
-                    "",
-                    "buying new House","NIS",
-                    "House","100000", java.sql.Date.valueOf("2013-09-04")));
-
 
             test.addNewCategory("House");
             test.addNewCategory("house");
@@ -60,4 +56,48 @@ public class JUint {
         }
 
     }
+
+    @AfterEach
+    void tearDown() {
+        test = null;
+    }
+
+    @Test
+    void addItem() {
+        //???????????
+        try {
+            test.addItem(new Item(
+                    "Matan",
+                    "buying new TV","USD",
+                    "House","1000", new java.sql.Date(System.currentTimeMillis())));
+
+            Item expected = new Item(
+                    "Matan",
+                    "buying new TV","USD",
+                    "House","1000", new java.sql.Date(System.currentTimeMillis()));
+
+
+        } catch (CostMangerException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    void getItems() {
+
+    }
+
+    @Test
+    void updateItem() {
+    }
+
+    @Test
+    void removeItem() {
+    }
+
+    @Test
+    void getDetailedReport() {
+    }
+
 }

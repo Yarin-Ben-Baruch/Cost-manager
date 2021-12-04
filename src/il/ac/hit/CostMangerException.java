@@ -1,3 +1,5 @@
+package il.ac.hit;
+
 public class CostMangerException extends Exception {
 
     public CostMangerException(String message) {

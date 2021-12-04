@@ -1,3 +1,4 @@
+package il.ac.hit;
 
 import java.sql.Date;
 
@@ -64,7 +65,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "il.ac.hit.Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", describing='" + describing + '\'' +

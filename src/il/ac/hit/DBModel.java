@@ -1,10 +1,9 @@
+package il.ac.hit;
+
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.PrimitiveIterator;
 
 public class DBModel implements IModel {
 

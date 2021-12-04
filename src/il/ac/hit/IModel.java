@@ -1,3 +1,5 @@
+package il.ac.hit;
+
 import java.sql.Date;
 import java.util.Collection;
 

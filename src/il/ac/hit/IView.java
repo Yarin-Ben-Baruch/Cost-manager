@@ -1,3 +1,5 @@
+package il.ac.hit;
+
 import java.util.Collection;
 
 public interface IView {
