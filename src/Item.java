@@ -27,6 +27,8 @@ public class Item {
         this.date = date;
     }
 
+
+
     public int getId() {
         return id;
     }
