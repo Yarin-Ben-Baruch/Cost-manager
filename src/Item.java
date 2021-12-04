@@ -1,4 +1,4 @@
-import javax.xml.crypto.Data;
+
 import java.sql.Date;
 
 public class Item {
@@ -10,12 +10,9 @@ public class Item {
     private String category;
     private String sum;
     private java.sql.Date date;
-    //java.sql.Date date = new java.sql.Date(0000-00-00);
-    //date = java.sql.Date.valueOf("2013-09-04");
-    //System.out.println(new java.sql.Date(System.currentTimeMillis()));
-
 
     public Item() {
+
     }
 
     public Item(String name, String describing, String currency, String category, String sum, java.sql.Date date) {
@@ -27,7 +24,15 @@ public class Item {
         this.date = date;
     }
 
-
+    public Item(int id, String name, String describing, String currency, String category, String sum, java.sql.Date date) {
+        this.id = id;
+        this.name = name;
+        this.describing = describing;
+        this.currency = currency;
+        this.category = category;
+        this.sum = sum;
+        this.date = date;
+    }
 
     public int getId() {
         return id;
@@ -60,7 +65,8 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", describing='" + describing + '\'' +
                 ", currency='" + currency + '\'' +
                 ", category='" + category + '\'' +
@@ -68,5 +74,4 @@ public class Item {
                 ", date=" + date +
                 '}';
     }
-
 }
