@@ -1,6 +1,7 @@
 package il.ac.hit;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Item {
 
@@ -59,6 +60,16 @@ public class Item {
 
     public String getUserName() {
         return userName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return costNumber == item.costNumber && Objects.equals(name, item.name) && Objects.equals(describing, item.describing) &&
+                Objects.equals(currency, item.currency) && Objects.equals(category, item.category) && Objects.equals(sum, item.sum) &&
+                Objects.equals(date, item.date) && Objects.equals(userName, item.userName);
     }
 
     @Override
