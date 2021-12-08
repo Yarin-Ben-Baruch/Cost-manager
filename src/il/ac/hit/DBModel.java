@@ -16,7 +16,6 @@ public class DBModel implements IModel {
 
     private Collection<Item> items; // ?
 
-
     public DBModel() throws CostMangerException {
 
         try {
@@ -52,16 +51,16 @@ public class DBModel implements IModel {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into items (costName,name,description,currency,category,sum,date,userName) " +
                             "values " +
-                            "(?,?,?,?,?,?)");
+                            "(?,?,?,?,?,?,?,?)");
 
-            preparedStatement.setString(1,item.getCostName());
+            preparedStatement.setInt(1,item.getCostNumber());
             preparedStatement.setString(2,item.getName());
-            preparedStatement.setString(3,item.getDescription());
+            preparedStatement.setString(3,item.getDescribing());
             preparedStatement.setString(4,item.getCurrency());
             preparedStatement.setString(5,item.getCategory());
-            preparedStatement.setDate(6, item.getSum());
+            preparedStatement.setString(6, item.getSum());
             preparedStatement.setDate(7, item.getDate());
-            preparedStatement.setDate(8, item.getUserName());
+            preparedStatement.setString(8, item.getUserName());
 
 
             preparedStatement.executeUpdate();
