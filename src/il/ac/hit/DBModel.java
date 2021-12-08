@@ -99,40 +99,16 @@ public class DBModel implements IModel {
     // ask haim (life) !!!!
     // לא נבדק
     @Override
-    public void updateItem(String nameColToUpdate, String dataToSet, int itemId) throws CostMangerException {
+    public void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException {
 
         try {
             PreparedStatement preparedStatement = null;
             Object date = dataToSet;
+            StringBuffer queryToExecute = new StringBuffer();
 
-            switch (nameColToUpdate)
-            {
-                case "name" :
-                    preparedStatement = connection.prepareStatement("UPDATE Items SET name = ? WHERE id = ?");
-                    break;
-                case "description" :
-                    preparedStatement = connection.prepareStatement("UPDATE Items SET description = ? WHERE id = ?");
-                    break;
-                case "currency" :
-                    preparedStatement = connection.prepareStatement("UPDATE Items SET currency = ? WHERE id = ?");
-                    break;
-                case "category" :
-                    preparedStatement = connection.prepareStatement("UPDATE Items SET category = ? WHERE id = ?");
-                    break;
-                case "sum" :
-                    preparedStatement = connection.prepareStatement("UPDATE Items SET sum = ? WHERE id = ?");
-                    break;
-                case "date" :
-                    preparedStatement = connection.prepareStatement("UPDATE Items SET date = ? WHERE id = ?");
-                    date = java.sql.Date.valueOf(dataToSet);
-                    break;
+            queryToExecute.append("UPDATE Items SET " + nameColToUpdate + " = " + dataToSet + " WHERE costNumber = "+ costNumber + " and userName = " +userName);
 
-            }
-
-            //preparedStatement.setObject(1,nameColToUpdate); // אי אפשר לעדכן עמודה לפי ערך שנותנים רק ערך ספציפי
-            preparedStatement.setObject(1,date); // יכולה להיות בעיה כי לא יודעים איזה סוג משתנה זה
-            preparedStatement.setInt(2,itemId);
-
+            preparedStatement = connection.prepareStatement(queryToExecute.toString());
             preparedStatement.executeUpdate();
 
         }

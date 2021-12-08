@@ -8,6 +8,6 @@ public interface IModel {
     Collection<Item> getDetailedReport(Date startDate, Date endDate) throws CostMangerException;
     void addNewCategory(String category) throws CostMangerException;
     Collection<Item> getItems() throws CostMangerException;
-    void updateItem(String nameColToUpdate, String dataToSet, int itemId) throws CostMangerException;
+    void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException;
     void removeItem(int itemId) throws CostMangerException;
 }
