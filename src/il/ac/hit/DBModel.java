@@ -12,9 +12,6 @@ public class DBModel implements IModel {
     private String dbUrl = "jdbc:mysql://localhost:8889/admin";
     private Connection connection;
     private Statement statement;
-    private final Collection<String> categorys;
-
-    private Collection<Item> items; // ?
 
     public DBModel() throws CostMangerException {
 
@@ -27,9 +24,6 @@ public class DBModel implements IModel {
 
             setConnection(connection);
             setStatement(myStatement);
-
-            //items = new LinkedList<>();
-            categorys = new HashSet<>();
         }
         catch (SQLException e) {
             throw new CostMangerException("Connection failed!",e);
