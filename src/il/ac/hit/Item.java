@@ -9,7 +9,7 @@ public class Item {
     private String name;
     private String describing;
     private String currency;
-    private String category;
+    private Category category;
     private String sum;
     private java.sql.Date date;
     private String userName;
@@ -18,16 +18,7 @@ public class Item {
 
     }
 
-//    public Item(String name, String describing, String currency, String category, String sum, java.sql.Date date) {
-//        this.name = name;
-//        this.describing = describing;
-//        this.currency = currency;
-//        this.category = category;
-//        this.sum = sum;
-//        this.date = date;
-//    }
-
-    public Item(int costNumber, String name, String describing, String currency, String category, String sum, Date date, String userName) {
+    public Item(int costNumber, String name, String describing, String currency, Category category, String sum, Date date, String userName) {
         this.costNumber = costNumber;
         this.name = name;
         this.describing = describing;
@@ -42,10 +33,6 @@ public class Item {
         return costNumber;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
     public String getName() {
         return name;
     }
@@ -58,7 +45,7 @@ public class Item {
         return currency;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -70,4 +57,7 @@ public class Item {
         return date;
     }
 
+    public String getUserName() {
+        return userName;
+    }
 }

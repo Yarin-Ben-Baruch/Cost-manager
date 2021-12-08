@@ -47,6 +47,7 @@ public class DBModel implements IModel {
 
     @Override
     public void addItem(Item item) throws CostMangerException {
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into items (costName,name,description,currency,category,sum,date,userName) " +
@@ -57,7 +58,7 @@ public class DBModel implements IModel {
             preparedStatement.setString(2,item.getName());
             preparedStatement.setString(3,item.getDescribing());
             preparedStatement.setString(4,item.getCurrency());
-            preparedStatement.setString(5,item.getCategory());
+            preparedStatement.setString(5,item.getCategory().getCategoryName());
             preparedStatement.setString(6, item.getSum());
             preparedStatement.setDate(7, item.getDate());
             preparedStatement.setString(8, item.getUserName());
@@ -84,7 +85,7 @@ public class DBModel implements IModel {
             {
                 currentItems.add(new Item(myResult.getInt("costNumber"), myResult.getString("name"),
                         myResult.getString("description"),myResult.getString("currency"),
-                        myResult.getString("category"),myResult.getString("sum"),
+                        new Category(myResult.getString("category")),myResult.getString("sum"),
                         myResult.getDate("date"), myResult.getString("userName")));
 
             }
@@ -150,7 +151,7 @@ public class DBModel implements IModel {
 
                     Item currentItemToAdd = new Item(myResult.getInt("costNumber"), myResult.getString("name"),
                             myResult.getString("description"),myResult.getString("currency"),
-                            myResult.getString("category"),myResult.getString("sum"),
+                            new Category(myResult.getString("category")),myResult.getString("sum"),
                             myResult.getDate("date"), myResult.getString("userName"));
 
                     reportItems.add(currentItemToAdd);
@@ -163,9 +164,49 @@ public class DBModel implements IModel {
         return reportItems;
     }
 
+
+    // לבדוק שאין יוזר קיים כזה
     @Override
-    public void addNewCategory(String category) throws CostMangerException {
-        categorys.add(category);
+    public void addNewUser(User user) throws CostMangerException {
+
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "insert into users (userName,password) " +
+                            "values " +
+                            "(?,?)");
+
+            preparedStatement.setString(1, user.getUserName());
+            preparedStatement.setString(2, user.getPassword());
+
+            preparedStatement.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            throw new CostMangerException("Unable insert into the DB",e);
+        }
+
     }
 
+    // לבדוק שאין קטגוריה קיים כזה
+    @Override
+    public void addNewCategory(Category category) throws CostMangerException {
+
+        try {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "insert into categories (category) " +
+                            "values " +
+                            "(?)");
+
+            preparedStatement.setString(1, category.getCategoryName());
+
+            preparedStatement.executeUpdate();
+
+        }
+        catch (SQLException e) {
+            throw new CostMangerException("Unable insert into the DB",e);
+        }
+
+    }
 }
