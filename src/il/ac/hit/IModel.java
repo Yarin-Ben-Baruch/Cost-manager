@@ -9,5 +9,5 @@ public interface IModel {
     void addNewCategory(String category) throws CostMangerException;
     Collection<Item> getItems() throws CostMangerException;
     void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException;
-    void removeItem(int itemId) throws CostMangerException;
+    void removeItem(int costNumber, String userName) throws CostMangerException;
 }

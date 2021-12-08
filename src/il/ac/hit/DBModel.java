@@ -78,14 +78,14 @@ public class DBModel implements IModel {
         Collection<Item> currentItems = new LinkedList<>();
 
         try {
-            myResult = statement.executeQuery("SELECT * from Items");
+            myResult = statement.executeQuery("SELECT * from items");
 
             while (myResult.next())
             {
-                currentItems.add(new Item(myResult.getInt("id"), myResult.getString("name"),
+                currentItems.add(new Item(myResult.getInt("costNumber"), myResult.getString("name"),
                         myResult.getString("description"),myResult.getString("currency"),
                         myResult.getString("category"),myResult.getString("sum"),
-                        myResult.getDate("date")));
+                        myResult.getDate("date"), myResult.getString("userName")));
 
             }
 
@@ -96,8 +96,6 @@ public class DBModel implements IModel {
         return currentItems;
     }
 
-    // ask haim (life) !!!!
-    // לא נבדק
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException {
 
@@ -119,12 +117,14 @@ public class DBModel implements IModel {
     }
 
     @Override
-    public void removeItem(int itemId) throws CostMangerException {
+    public void removeItem(int costNumber, String userName) throws CostMangerException {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM items WHERE id = ?");
+                    "DELETE FROM items WHERE costNumber = ? AND userName = ?");
 
-            preparedStatement.setInt(1,itemId);
+            preparedStatement.setInt(1,costNumber);
+            preparedStatement.setString(2,userName);
+
             preparedStatement.executeUpdate();
 
         }
@@ -140,7 +140,7 @@ public class DBModel implements IModel {
 
         try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from Items WHERE date >= ? AND date <= ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE date >= ? AND date <= ?");
 
             preparedStatement.setDate(1, startDate);
             preparedStatement.setDate(2, endDate);
@@ -148,11 +148,10 @@ public class DBModel implements IModel {
 
             while(myResult.next()) {
 
-                    Item currentItemToAdd = new Item(
-                            myResult.getString("name"),
+                    Item currentItemToAdd = new Item(myResult.getInt("costNumber"), myResult.getString("name"),
                             myResult.getString("description"),myResult.getString("currency"),
                             myResult.getString("category"),myResult.getString("sum"),
-                            myResult.getDate("date"));
+                            myResult.getDate("date"), myResult.getString("userName"));
 
                     reportItems.add(currentItemToAdd);
 
