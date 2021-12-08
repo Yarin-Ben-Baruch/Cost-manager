@@ -12,5 +12,6 @@ public interface IModel {
     void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException;
     void removeItem(int costNumber, String userName) throws CostMangerException;
 
-
+    Collection<User> getAllUsers() throws CostMangerException;
+    Collection<Category> getAllCategories() throws CostMangerException;
 }

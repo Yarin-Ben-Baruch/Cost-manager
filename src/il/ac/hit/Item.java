@@ -60,4 +60,18 @@ public class Item {
     public String getUserName() {
         return userName;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "costNumber=" + costNumber +
+                ", name='" + name + '\'' +
+                ", describing='" + describing + '\'' +
+                ", currency='" + currency + '\'' +
+                ", category=" + category.getCategoryName() +
+                ", sum='" + sum + '\'' +
+                ", date=" + date +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

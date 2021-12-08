@@ -15,6 +15,12 @@ class DBModelTest {
     @BeforeEach
     void setUp() {
 
+        try {
+            test = new DBModel();
+        } catch (CostMangerException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @AfterEach
@@ -27,7 +33,6 @@ class DBModelTest {
     @Test
     void addItem() {
 
-
     }
 
     @Test
@@ -37,14 +42,17 @@ class DBModelTest {
 
     @Test
     void updateItem() {
+
     }
 
     @Test
     void removeItem() {
+
     }
 
     @Test
     void getDetailedReport() {
+
     }
 
 }
