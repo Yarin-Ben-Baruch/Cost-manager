@@ -93,21 +93,31 @@ public class DBModel implements IModel {
         return currentItems;
     }
 
-    // מתאים רק ל varchar
-    // אם מנסה לשנות username לזרוק אקספשין
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException {
 
         try {
 
+            // אם מנסה לשנות username לזרוק אקספשין
+            if(nameColToUpdate.equals("userName")){
+                throw new CostMangerException("Can't change here userName");
+            }
+
             PreparedStatement preparedStatement = null;
             Object date = dataToSet;
             StringBuffer queryToExecute = new StringBuffer();
 
-            queryToExecute.append("UPDATE Items SET " + nameColToUpdate + " = " + "'" + dataToSet + "'" + " WHERE costNumber = "
-                    + costNumber + " and userName = " + "'" + userName + "'");
+            // מתאים רק ל date
+            if(nameColToUpdate.equals("date")){
+                queryToExecute.append("UPDATE Items SET " + nameColToUpdate + " = " + dataToSet + " WHERE costNumber = "
+                        + costNumber + " and userName = " + "'" + userName + "'");
+            }
+            else {
+                // מתאים רק ל varchar
+                queryToExecute.append("UPDATE Items SET " + nameColToUpdate + " = " + "'" + dataToSet + "'" + " WHERE costNumber = "
+                        + costNumber + " and userName = " + "'" + userName + "'");
+            }
 
-            System.out.println(queryToExecute);
 
             preparedStatement = connection.prepareStatement(queryToExecute.toString());
             int howManyUpdates = preparedStatement.executeUpdate();
