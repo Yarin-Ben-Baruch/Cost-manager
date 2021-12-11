@@ -2,7 +2,6 @@ package il.ac.hit;
 
 import java.sql.*;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 
 public class DBModel implements IModel {
@@ -44,6 +43,8 @@ public class DBModel implements IModel {
     public void addItem(Item item) throws CostMangerException {
 
         try {
+            addNewCategory(item.getCategory()); // במידה והקטגוריה חדשה מוסיף לרשימת הקטגוריות
+
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into items (costNumber,name,description,currency,category,sum,date,userName) " +
                             "values " +
@@ -205,28 +206,27 @@ public class DBModel implements IModel {
         catch (SQLException e) {
             throw new CostMangerException("Unable insert into the DB",e);
         }
-
     }
 
     @Override
     public void addNewCategory(Category category) throws CostMangerException {
 
         try {
-
             Collection<Category> allCategories = getAllCategories();
+//            if(allCategories.contains(category)) {
+//                throw new CostMangerException("This category is already exists");
+//            }
 
-            if(allCategories.contains(category)) {
-                throw new CostMangerException("This category is already exists");
+            if(!allCategories.contains(category)){
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "insert into categories (category) " +
+                                "values " +
+                                "(?)");
+
+                preparedStatement.setString(1, category.getCategoryName());
+
+                preparedStatement.executeUpdate();
             }
-
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "insert into categories (category) " +
-                            "values " +
-                            "(?)");
-
-            preparedStatement.setString(1, category.getCategoryName());
-
-            preparedStatement.executeUpdate();
 
         }
         catch (SQLException e) {
@@ -277,5 +277,4 @@ public class DBModel implements IModel {
 
         return currentItems;
     }
-
 }

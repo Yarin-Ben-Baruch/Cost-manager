@@ -44,9 +44,7 @@ public class Program {
             for(Category category : allCategories){
                 System.out.println(category);
             }
-
-
-
+            
 
         } catch (CostMangerException e) {
             e.printStackTrace();
