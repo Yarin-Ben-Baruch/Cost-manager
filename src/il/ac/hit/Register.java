@@ -8,15 +8,14 @@ public class Register extends JFrame implements ActionListener {
 
     // Components of the Form
     private Container m_Container;
-    private JLabel m_Title,m_UserName;
-    private JTextField m_TextUsername;
-    private JLabel m_Password;
-    private JTextField m_TextPassword;
-    private JCheckBox m_TermCB;
-    private JButton sub;
-    private JButton reset;
+    private JLabel m_TitleLabel, m_UserNameLabel;
+    private JTextField m_UsernameTextField;
+    private JLabel m_PasswordLabel;
+    private JTextField m_PasswordTextField;
+    private JCheckBox m_TermCheckBox;
+    private JButton m_SubmitButton, m_ResetJButton;
     private JTextArea tout;
-    private JLabel res;
+    private JLabel m_ResetJLabel;
     private JTextArea resadd;
 
 
@@ -32,70 +31,70 @@ public class Register extends JFrame implements ActionListener {
         m_Container.setLayout(null);
 
         // כותרת של ההרשמה
-        m_Title = new JLabel("Registration Form");
-        m_Title.setFont(new Font("Arial", Font.PLAIN, 30));
-        m_Title.setSize(300, 30);
-        m_Title.setLocation(300, 30);
-        m_Container.add(m_Title);
+        m_TitleLabel = new JLabel("Registration Form");
+        m_TitleLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+        m_TitleLabel.setSize(300, 30);
+        m_TitleLabel.setLocation(300, 30);
+        m_Container.add(m_TitleLabel);
 
         // החלק של הכנסת השם
-        m_UserName = new JLabel("UserName");
-        m_UserName.setFont(new Font("Arial", Font.PLAIN, 20));
-        m_UserName.setSize(100, 20);
-        m_UserName.setLocation(100, 100);
+        m_UserNameLabel = new JLabel("UserName");
+        m_UserNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        m_UserNameLabel.setSize(100, 20);
+        m_UserNameLabel.setLocation(100, 100);
 
-        m_TextUsername = new JTextField();
-        m_TextUsername.setFont(new Font("Arial", Font.PLAIN, 15));
-        m_TextUsername.setSize(190, 20);
-        m_TextUsername.setLocation(200, 100);
+        m_UsernameTextField = new JTextField();
+        m_UsernameTextField.setFont(new Font("Arial", Font.PLAIN, 15));
+        m_UsernameTextField.setSize(190, 20);
+        m_UsernameTextField.setLocation(200, 100);
 
-        m_Container.add(m_UserName);
-        m_Container.add(m_TextUsername);
+        m_Container.add(m_UserNameLabel);
+        m_Container.add(m_UsernameTextField);
 
         // החלק של הכנסת הסיסמא
-        m_Password = new JLabel("Password");
-        m_Password.setFont(new Font("Arial", Font.PLAIN, 20));
-        m_Password.setSize(100, 20);
-        m_Password.setLocation(100, 150);
+        m_PasswordLabel = new JLabel("Password");
+        m_PasswordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        m_PasswordLabel.setSize(100, 20);
+        m_PasswordLabel.setLocation(100, 150);
 
-        m_TextPassword = new JTextField();
-        m_TextPassword.setFont(new Font("Arial", Font.PLAIN, 15));
-        m_TextPassword.setSize(190, 20);
-        m_TextPassword.setLocation(200, 150);
+        m_PasswordTextField = new JTextField();
+        m_PasswordTextField.setFont(new Font("Arial", Font.PLAIN, 15));
+        m_PasswordTextField.setSize(190, 20);
+        m_PasswordTextField.setLocation(200, 150);
 
-        m_Container.add(m_Password);
-        m_Container.add(m_TextPassword);
+        m_Container.add(m_PasswordLabel);
+        m_Container.add(m_PasswordTextField);
 
 
         // החלק של אישור התנאים
-        m_TermCB = new JCheckBox("Accept Terms And Conditions.");
-        m_TermCB.setFont(new Font("Arial", Font.PLAIN, 15));
-        m_TermCB.setSize(250, 20);
-        m_TermCB.setLocation(150, 250);
-        m_Container.add(m_TermCB);
+        m_TermCheckBox = new JCheckBox("Accept Terms And Conditions.");
+        m_TermCheckBox.setFont(new Font("Arial", Font.PLAIN, 15));
+        m_TermCheckBox.setSize(250, 20);
+        m_TermCheckBox.setLocation(150, 250);
+        m_Container.add(m_TermCheckBox);
 
         // כפתור של submit
-        sub = new JButton("Submit");
-        sub.setFont(new Font("Arial", Font.PLAIN, 15));
-        sub.setSize(100, 20);
-        sub.setLocation(150, 300);
-        sub.addActionListener(this);
-        m_Container.add(sub);
+        m_SubmitButton = new JButton("Submit");
+        m_SubmitButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        m_SubmitButton.setSize(100, 20);
+        m_SubmitButton.setLocation(150, 300);
+        m_SubmitButton.addActionListener(this);
+        m_Container.add(m_SubmitButton);
 
         // כפתור של reset
-        reset = new JButton("Reset");
-        reset.setFont(new Font("Arial", Font.PLAIN, 15));
-        reset.setSize(100, 20);
-        reset.setLocation(270, 300);
-        reset.addActionListener(this);
-        m_Container.add(reset);
+        m_ResetJButton = new JButton("Reset");
+        m_ResetJButton.setFont(new Font("Arial", Font.PLAIN, 15));
+        m_ResetJButton.setSize(100, 20);
+        m_ResetJButton.setLocation(270, 300);
+        m_ResetJButton.addActionListener(this);
+        m_Container.add(m_ResetJButton);
 
 
-        res = new JLabel("");
-        res.setFont(new Font("Arial", Font.PLAIN, 20));
-        res.setSize(500, 25);
-        res.setLocation(100, 500);
-        m_Container.add(res);
+        m_ResetJLabel = new JLabel("");
+        m_ResetJLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        m_ResetJLabel.setSize(500, 25);
+        m_ResetJLabel.setLocation(100, 500);
+        m_Container.add(m_ResetJLabel);
 
 
         // שניהם עובדים על הלוח מצד ימין
@@ -121,32 +120,32 @@ public class Register extends JFrame implements ActionListener {
     // to get the action performed
     // by the user and act accordingly
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == sub) {
-            if (m_TermCB.isSelected()) {
+        if (e.getSource() == m_SubmitButton) {
+            if (m_TermCheckBox.isSelected()) {
                 String data
                         = "Name : "
-                        + m_TextUsername.getText() + "\n"
+                        + m_UsernameTextField.getText() + "\n"
                         + "Password : "
-                        + m_TextPassword.getText() + "\n";
+                        + m_PasswordTextField.getText() + "\n";
 
                 tout.setText(data);
                 tout.setEditable(false);
-                res.setText("Registration Successfully..");
+                m_ResetJLabel.setText("Registration Successfully..");
             }
             else {
                 tout.setText("");
                 resadd.setText("");
-                res.setText("Please accept the"
+                m_ResetJLabel.setText("Please accept the"
                         + " terms & conditions..");
             }
         }
-        else if (e.getSource() == reset) {
+        else if (e.getSource() == m_ResetJButton) {
             String def = "";
-            m_TextUsername.setText(def);
-            m_TextPassword.setText(def);
-            res.setText(def);
+            m_UsernameTextField.setText(def);
+            m_PasswordTextField.setText(def);
+            m_ResetJLabel.setText(def);
             tout.setText(def);
-            m_TermCB.setSelected(false);
+            m_TermCheckBox.setSelected(false);
             resadd.setText(def);
         }
     }
