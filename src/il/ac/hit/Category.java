@@ -1,7 +1,7 @@
 package il.ac.hit;
 
 /**
- * A department that maintains the existing categories in the expense tracking software.
+ * A class that maintains the existing categories in the expense tracking software.
  */
 
 public class Category {

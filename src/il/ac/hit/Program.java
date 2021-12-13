@@ -1,10 +1,28 @@
 package il.ac.hit;
 
+import javax.swing.*;
 import java.util.Collection;
 
 
 public class Program {
     public static void main(String[] args) {
+
+
+
+//        IModel model = new DBModel();
+//        IViewModel vm = new CostManagerViewModel();
+//        IView view = new CostMangerGUIView();
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                view.init();
+//                view.start();
+//            }
+//        });
+//        vm.setModel(model);
+//        vm.setView(view);
+//        view.setIViewModel(vm);
+
 
         try {
 
