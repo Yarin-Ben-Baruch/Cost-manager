@@ -120,15 +120,13 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "costNumber=" + costNumber +
-                ", name='" + name + '\'' +
-                ", describing='" + describing + '\'' +
-                ", currency='" + currency + '\'' +
-                ", category=" + category.getCategoryName() +
-                ", sum='" + sum + '\'' +
-                ", date=" + date +
-                ", userName='" + userName + '\'' +
-                '}';
+        return costNumber +
+                "." + name +
+                "\ndescribing: " + describing +
+                "\ncost: " + sum +
+                " " + currency +
+                " category= " + category.getCategoryName() +
+                " date=" + date +
+                " userName=" + userName;
     }
 }

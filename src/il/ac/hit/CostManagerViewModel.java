@@ -210,7 +210,28 @@ public class CostManagerViewModel implements IViewModel {
 
     @Override
     public void getAllCategories() {
+        m_Service.submit(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Collection<Category> categories = m_Model.getAllCategories();
 
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.ShowCategories(categories);
+                        }
+                    });
+                } catch (CostMangerException e) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.showMessage(new Message(e.getMessage()));
+                        }
+                    });
+                }
+            }
+        });
     }
 
     /**

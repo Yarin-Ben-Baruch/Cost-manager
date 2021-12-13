@@ -92,12 +92,7 @@ public class DBModel implements IModel {
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items");
-            int howManyItems = preparedStatement.executeUpdate();
-
-            // If the get query was not execute properly throw CostMangerException.
-            if(howManyItems < 0){
-                throw new CostMangerException("Unable to pull data from DB");
-            }
+            myResult = preparedStatement.executeQuery();
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
@@ -315,12 +310,7 @@ public class DBModel implements IModel {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users");
 
-            int howManyUsers = preparedStatement.executeUpdate();
-
-            // If the get query was not execute properly throw CostMangerException.
-            if(howManyUsers < 0){
-                throw new CostMangerException("Unable to pull data from DB");
-            }
+            myResult = preparedStatement.executeQuery();
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
@@ -349,12 +339,7 @@ public class DBModel implements IModel {
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from categories");
-            int howManyCategories = preparedStatement.executeUpdate();
-
-            // If the get query was not execute properly throw CostMangerException.
-            if(howManyCategories < 0){
-                throw new CostMangerException("Unable to pull data from DB");
-            }
+            myResult = preparedStatement.executeQuery();
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
