@@ -4,10 +4,11 @@ import java.util.Collection;
 
 public interface IView {
 
-    void showItems(Collection<Item> items);
-    void showCategories(Collection<Category> categories);
+    void showItems(Collection<Item> i_Items);
+    void showCategories(Collection<Category> i_Categories);
     void showDetailedReport();
-    void setIViewModel(IViewModel vm);
+    void setIViewModel(IViewModel i_Vm);
+    void showMessage(Message i_Message);
     void init();
     void start();
 }
