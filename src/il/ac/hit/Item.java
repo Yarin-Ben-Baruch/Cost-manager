@@ -19,6 +19,7 @@ public class Item {
 
     }
 
+    // add  set
     public Item(int costNumber, String name, String describing, String currency, Category category, String sum, Date date, String userName) {
         this.costNumber = costNumber;
         this.name = name;
@@ -60,6 +61,12 @@ public class Item {
 
     public String getUserName() {
         return userName;
+    }
+
+    //עודכן תוך כדי שיעור
+    @Override
+    public int hashCode() {
+        return Objects.hash(costNumber, name, describing, currency, category, sum, date, userName);
     }
 
     @Override

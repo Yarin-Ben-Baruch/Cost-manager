@@ -9,9 +9,22 @@ public class DBModel implements IModel {
     private String user = "admin";
     private String password = "admin";
     private String dbUrl = "jdbc:mysql://localhost:8889/admin";
+
+
     private Connection connection; // pull connection
     private Statement statement;
+    // קונקשין להחליף בהיברנט ממש את הפול קונקשין
 
+    /*
+    הערות מהסגנון הזה, מיועדות להסביר על אלגוריתם מורכב בקוד
+     */
+
+    // הערות שכותבים תוך כדי הקוד להסביר משהו עד לנקודה מסוימת
+
+    /**
+     * להוסיף לכל קלאס, ומתודות
+     * @throws CostMangerException
+     */
     public DBModel() throws CostMangerException {
 
         try {
@@ -29,6 +42,8 @@ public class DBModel implements IModel {
             throw new CostMangerException("Connection failed!",e);
         }
 
+        // לשחרר את הקונקשין
+        // בלוק פינלי
     }
 
     public void setConnection(Connection connection) {
@@ -210,7 +225,7 @@ public class DBModel implements IModel {
 
     @Override
     public void addNewCategory(Category category) throws CostMangerException {
-
+        // להחליף את השם ליותר נכון
         try {
             Collection<Category> allCategories = getAllCategories();
 //            if(allCategories.contains(category)) {
@@ -226,6 +241,7 @@ public class DBModel implements IModel {
                 preparedStatement.setString(1, category.getCategoryName());
 
                 preparedStatement.executeUpdate();
+                // לוודא שחזר 1, אם לא לזרוק הערה מתאימה
             }
 
         }
