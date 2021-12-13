@@ -14,8 +14,9 @@ public class CostMangerGUIView implements IView {
     private JPanel m_MessagePanel;
     private TextField m_MessageTextField;
     private TextArea m_CostInfoTextArea;
-    private JButton m_ShowItemsButton,m_ShowCategoriesButton, m_ShowReportButton;
-
+    private JButton m_ShowItemsButton, m_ShowCategoriesButton, m_ShowReportButton, m_ShowUsersButton;
+    private JButton m_AddItemButton, m_AddUserButton , m_AddCategory;
+    private JButton m_RemoveItemButton, m_UpdateItemButton;
     private IViewModel vm;
 
     @Override
@@ -26,10 +27,16 @@ public class CostMangerGUIView implements IView {
         m_ButtonsPanel = new JPanel();
         m_MessagePanel = new JPanel();
         m_CostPanel = new JPanel();
-        // Create all the JLabels
+        // Create all the JButtons
         m_ShowItemsButton = new JButton("Show Items");
         m_ShowCategoriesButton = new JButton("Show Categories");
         m_ShowReportButton = new JButton("Show detail report");
+        m_ShowUsersButton = new JButton("Show users names"); // I THINK WE DONT NEED THIS!
+        m_AddItemButton = new JButton("Add item");
+        m_AddUserButton = new JButton("Add user"); // NO NEED !
+        m_AddCategory = new JButton("Add category");
+        m_RemoveItemButton = new JButton("Remove item");
+        m_UpdateItemButton = new JButton("Update item");
         // Create TextField
         m_MessageTextField = new TextField(40);
         // Creating TextArea
@@ -49,6 +56,12 @@ public class CostMangerGUIView implements IView {
         m_ButtonsPanel.add(m_ShowItemsButton);
         m_ButtonsPanel.add(m_ShowCategoriesButton);
         m_ButtonsPanel.add(m_ShowReportButton);
+        m_ButtonsPanel.add(m_ShowUsersButton);
+        m_ButtonsPanel.add(m_AddItemButton);
+        m_ButtonsPanel.add(m_AddUserButton);
+        m_ButtonsPanel.add(m_AddCategory);
+        m_ButtonsPanel.add(m_RemoveItemButton);
+        m_ButtonsPanel.add(m_UpdateItemButton);
         m_MainFrame.add(m_ButtonsPanel,BorderLayout.CENTER);
 
         // Creating the cost Area
@@ -75,6 +88,10 @@ public class CostMangerGUIView implements IView {
 
     }
 
+    /**
+     * A method that gets collection of items and print the items into the TextArea.
+     * @param i_Items
+     */
     @Override
     public void showItems(Collection<Item> i_Items) {
 
@@ -83,6 +100,10 @@ public class CostMangerGUIView implements IView {
         }
     }
 
+    /**
+     * A method that gets collection of categories and print the items into the TextArea.
+     * @param i_Categories
+     */
     @Override
     public void ShowCategories(Collection<Category> i_Categories) {
         for (Category category : i_Categories) {
@@ -90,14 +111,34 @@ public class CostMangerGUIView implements IView {
         }
     }
 
+    /**
+     * A method that gets collection of users and print the items into the TextArea.
+     * @param i_Users
+     */
+    @Override
+    public void showUsers(Collection<User> i_Users) {
+        for (User user : i_Users) {
+            m_CostInfoTextArea.append(user.toString() + "\n");
+        }
+    }
+
+    /**
+     * A method that set the IViewModel that send to her from the main program.
+     * @param i_Vm
+     */
     @Override
     public void setIViewModel(IViewModel i_Vm) {
         vm = i_Vm;
     }
 
+    /**
+     * A method that get message from the ViewModel and put it in the TextView.
+     * Let the user know what action was preformed.
+     * @param i_Message
+     */
     @Override
     public void showMessage(Message i_Message) {
-
+        m_MessageTextField.setText(i_Message.getText());
     }
 
 }
