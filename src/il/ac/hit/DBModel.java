@@ -64,12 +64,12 @@ public class DBModel implements IModel {
             preparedStatement.setDate(7, item.getDate());
             preparedStatement.setString(8, item.getUserName());
 
-            // checking if the update was performed.
-            int checkUpdateItems = preparedStatement.executeUpdate();
+            // checking if adding user was performed.
+            int checkAddItem = preparedStatement.executeUpdate();
 
-            // if the update was not performed throws CostMangerException.
-            if(checkUpdateItems != 1)
-                throw new CostMangerException("Update was not executed!");
+            // if the add user not performed throws CostMangerException.
+            if(checkAddItem != 1)
+                throw new CostMangerException("Adding was not executed!");
 
         }
         catch (SQLException e) {
@@ -89,11 +89,15 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<Item> currentItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
-              Statement statement = connection.createStatement();)
-        {
-            // CHECK WITH YARIN IF NEED TO BE IN preparedStatement !!!!!!!
-            myResult = statement.executeQuery("SELECT * from items");
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items");
+            int howManyItems = preparedStatement.executeUpdate();
+
+            // If the get query was not execute properly throw CostMangerException.
+            if(howManyItems < 0){
+                throw new CostMangerException("Unable to pull data from DB");
+            }
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
@@ -122,6 +126,7 @@ public class DBModel implements IModel {
     public void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException {
 
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
             // If the user try to change username throw CostMangerException.
             if(nameColToUpdate.equals("userName")){
                 throw new CostMangerException("Can't change here userName");
@@ -171,12 +176,13 @@ public class DBModel implements IModel {
 
             preparedStatement.setInt(1,costNumber);
             preparedStatement.setString(2,userName);
-            // Check that the update execute properly.
+
+            // Check that the remove item was executed properly.
             int howManyUpdates = preparedStatement.executeUpdate();
 
-            // If the update not execute properly throw CostMangerException.
+            // If the remove item not execute properly throw CostMangerException.
             if(howManyUpdates != 1){
-                throw new CostMangerException("Can't update more than one item !");
+                throw new CostMangerException("Can't remove the Item!");
             }
         }
         catch (SQLException e) {
@@ -247,11 +253,11 @@ public class DBModel implements IModel {
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getPassword());
 
-            // Check that the update execute properly.
-            int howManyUpdates = preparedStatement.executeUpdate();
+            // Check that the add new user was executed properly.
+            int howManyAdded = preparedStatement.executeUpdate();
 
-            // If the update not execute properly throw CostMangerException.
-            if(howManyUpdates != 1) {
+            // If the add user not execute properly throw CostMangerException.
+            if(howManyAdded != 1) {
                 throw new CostMangerException("Can't add same user twice!");
             }
         }
@@ -280,12 +286,12 @@ public class DBModel implements IModel {
 
                 preparedStatement.setString(1, category.getCategoryName());
 
-                // Check that the update execute properly.
-                int howManyUpdates = preparedStatement.executeUpdate();
+                // Check that the add category was executed properly.
+                int howManyAdded = preparedStatement.executeUpdate();
 
-                // If the update not execute properly throw CostMangerException.
-                if(howManyUpdates != 1){
-                    throw new CostMangerException("Can't add same user twice!");
+                // If the add category was not execute properly throw CostMangerException.
+                if(howManyAdded != 1){
+                    throw new CostMangerException("Can't add same category twice!");
                 }
             }
         }
@@ -305,11 +311,16 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<User> currentItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
-              Statement statement = connection.createStatement();) {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
 
-            // CHECK WITH YARIN ABOUT preparedStatement
-            myResult = statement.executeQuery("SELECT * from users");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users");
+
+            int howManyUsers = preparedStatement.executeUpdate();
+
+            // If the get query was not execute properly throw CostMangerException.
+            if(howManyUsers < 0){
+                throw new CostMangerException("Unable to pull data from DB");
+            }
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
@@ -335,10 +346,15 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<Category> currentItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
-              Statement statement = connection.createStatement();) {
-            // CHECK WITH YARIN ABOUT preparedStatement
-            myResult = statement.executeQuery("SELECT * from categories");
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from categories");
+            int howManyCategories = preparedStatement.executeUpdate();
+
+            // If the get query was not execute properly throw CostMangerException.
+            if(howManyCategories < 0){
+                throw new CostMangerException("Unable to pull data from DB");
+            }
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
