@@ -3,6 +3,9 @@ package il.ac.hit;
 import java.sql.Date;
 import java.util.Objects;
 
+/**
+ * A class that holds the existing table data in the database related to the user's expense tracking data.
+ */
 public class Item {
 
     private int costNumber;
@@ -14,10 +17,17 @@ public class Item {
     private java.sql.Date date;
     private String userName;
 
-    public Item() {
-
-    }
-
+    /**
+     * A constructor that updates the user expense information.
+     * @param costNumber
+     * @param name
+     * @param describing
+     * @param currency
+     * @param category
+     * @param sum
+     * @param date
+     * @param userName
+     */
     public Item(int costNumber, String name, String describing, String currency, Category category, String sum, Date date, String userName) {
         setCostNumber(costNumber);
         setName(name);

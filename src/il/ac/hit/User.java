@@ -1,10 +1,18 @@
 package il.ac.hit;
 
+/**
+ * A class that holds the existing table data in the database related to the user data.
+ */
 public class User {
 
     private String userName;
     private String password;
 
+    /**
+     * A constructor that updates the user's name and password User expense information.
+     * @param userName
+     * @param password
+     */
     public User(String userName, String password) {
         setUserName(userName);
         setPassword(password);

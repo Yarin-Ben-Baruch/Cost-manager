@@ -1,9 +1,17 @@
 package il.ac.hit;
 
+/**
+ * A department that maintains the existing categories in the expense tracking software.
+ */
+
 public class Category {
 
     private String categoryName;
 
+    /**
+     * A constructor that updates the category in DB.
+     * @param category
+     */
     public Category(String category) {
         setCategoryName(category);
     }
