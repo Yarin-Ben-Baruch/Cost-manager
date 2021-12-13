@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public interface IViewModel {
 
-    void setView(IView view);
-    void setModel(IModel model);
-    void addItem(Item item);
-    void addNewUser(User user);
-    void addNewCategoryIfExists(Category category);
-    void removeItem(int costNumber, String userName);
-    void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName);
-    void getDetailedReport(Date startDate, Date endDate);
+    void setView(IView i_View);
+    void setModel(IModel i_Model);
+    void addItem(Item i_Item);
+    void addNewUser(User i_User);
+    void addNewCategoryIfExists(Category i_Category);
+    void removeItem(int i_CostNumber, String i_UserName);
+    void updateItem(String i_NameColToUpdate, String i_DataToSet, int i_CostNumber, String i_UserName);
+    void getDetailedReport(Date i_StartDate, Date i_EndDate);
     void getAllUsers();
     void getAllCategories();
     void getItems();
