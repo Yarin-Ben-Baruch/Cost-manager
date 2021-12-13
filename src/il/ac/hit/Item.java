@@ -61,35 +61,35 @@ public class Item {
         return userName;
     }
 
-    public void setCostNumber(int costNumber) {
+    private void setCostNumber(int costNumber) {
         this.costNumber = costNumber;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
-    public void setDescribing(String describing) {
+    private void setDescribing(String describing) {
         this.describing = describing;
     }
 
-    public void setCurrency(String currency) {
+    private void setCurrency(String currency) {
         this.currency = currency;
     }
 
-    public void setCategory(Category category) {
+    private void setCategory(Category category) {
         this.category = category;
     }
 
-    public void setSum(String sum) {
+    private void setSum(String sum) {
         this.sum = sum;
     }
 
-    public void setDate(Date date) {
+    private void setDate(Date date) {
         this.date = date;
     }
 
-    public void setUserName(String userName) {
+    private void setUserName(String userName) {
         this.userName = userName;
     }
 

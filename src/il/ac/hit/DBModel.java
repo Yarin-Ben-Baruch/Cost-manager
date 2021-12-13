@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 /**
  * DBModel class contact with the sql DB.
+ * This class implements the IModel.
  */
 public class DBModel implements IModel {
 
@@ -13,10 +14,6 @@ public class DBModel implements IModel {
     private String password = "admin";
     private String dbUrl = "jdbc:mysql://localhost:8889/admin";
 
-
-    private Connection connection; // pull connection
-    private Statement statement;
-    // קונקשין להחליף בהיברנט ממש את הפול קונקשין
 
     /*
     הערות מהסגנון הזה, מיועדות להסביר על אלגוריתם מורכב בקוד
@@ -30,33 +27,15 @@ public class DBModel implements IModel {
      */
     public DBModel() throws CostMangerException {
 
-        try {
-
-            Connection connection = DriverManager.getConnection(dbUrl, user, password);
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
             System.out.println("Connection success !");
-
-            //משתנה שנותן לי לעשות פעולות על db
-            Statement myStatement = connection.createStatement();
-
-            setConnection(connection);
-            setStatement(myStatement);
         }
         catch (SQLException e) {
             throw new CostMangerException("Connection failed!",e);
         }
 
-        // לשחרר את הקונקשין
-        // בלוק פינלי
     }
 
-    // NEED TO REMOVE ! WAIT FOR YARIN CONFIRMATION
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
-    public void setStatement(Statement statement) {
-        this.statement = statement;
-    }
 
     /**
      * Add item method adding cost item for the items sql table.
@@ -67,7 +46,7 @@ public class DBModel implements IModel {
     @Override
     public void addItem(Item item) throws CostMangerException {
 
-        try {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
             // if the category is not exists add the category to the categories sql table.
             addNewCategoryIfExists(item.getCategory());
 
@@ -110,7 +89,9 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<Item> currentItems = new LinkedList<>();
 
-        try {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              Statement statement = connection.createStatement();)
+        {
             // CHECK WITH YARIN IF NEED TO BE IN preparedStatement !!!!!!!
             myResult = statement.executeQuery("SELECT * from items");
 
@@ -121,9 +102,7 @@ public class DBModel implements IModel {
                         myResult.getString("description"),myResult.getString("currency"),
                         new Category(myResult.getString("category")),myResult.getString("sum"),
                         myResult.getDate("date"), myResult.getString("userName")));
-
             }
-
         } catch (SQLException e) {
             throw new CostMangerException("Unable to pull data from DB");
         }
@@ -142,8 +121,7 @@ public class DBModel implements IModel {
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException {
 
-        try {
-
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
             // If the user try to change username throw CostMangerException.
             if(nameColToUpdate.equals("userName")){
                 throw new CostMangerException("Can't change here userName");
@@ -172,13 +150,11 @@ public class DBModel implements IModel {
            if(howManyUpdates != 1){
                throw new CostMangerException("Can't update the item !");
            }
-
         }
         catch (SQLException e) {
             System.out.println(e.fillInStackTrace());
             throw new CostMangerException("Unable to update data to DB",e);
         }
-
     }
 
     /**
@@ -189,7 +165,7 @@ public class DBModel implements IModel {
      */
     @Override
     public void removeItem(int costNumber, String userName) throws CostMangerException {
-        try {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM items WHERE costNumber = ? AND userName = ?");
 
@@ -221,7 +197,8 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<Item> reportItems = new LinkedList<>();
 
-        try {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE date >= ? AND date <= ?");
 
             preparedStatement.setDate(1, startDate);
@@ -253,13 +230,11 @@ public class DBModel implements IModel {
      */
     @Override
     public void addNewUser(User user) throws CostMangerException {
-        try {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, this.user, password)) {
+
             Collection<User> allUsers = getAllUsers();
 
-            /*
-                Check if the user is exists in the users sql table.
-                If the user exists throws CostMangerException.
-            */
+            // Check if the user is exists in the users sql table. If the user exists throws CostMangerException.
             if(allUsers.contains(user)) {
                 throw new CostMangerException("This user is already exists");
             }
@@ -276,7 +251,7 @@ public class DBModel implements IModel {
             int howManyUpdates = preparedStatement.executeUpdate();
 
             // If the update not execute properly throw CostMangerException.
-            if(howManyUpdates != 1){
+            if(howManyUpdates != 1) {
                 throw new CostMangerException("Can't add same user twice!");
             }
         }
@@ -292,7 +267,8 @@ public class DBModel implements IModel {
      */
     @Override
     public void addNewCategoryIfExists(Category category) throws CostMangerException {
-        try {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
             Collection<Category> allCategories = getAllCategories();
 
             // If the category is not in the list of the categories add the category.
@@ -329,7 +305,9 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<User> currentItems = new LinkedList<>();
 
-        try {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              Statement statement = connection.createStatement();) {
+
             // CHECK WITH YARIN ABOUT preparedStatement
             myResult = statement.executeQuery("SELECT * from users");
 
@@ -357,7 +335,8 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<Category> currentItems = new LinkedList<>();
 
-        try {
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              Statement statement = connection.createStatement();) {
             // CHECK WITH YARIN ABOUT preparedStatement
             myResult = statement.executeQuery("SELECT * from categories");
 
