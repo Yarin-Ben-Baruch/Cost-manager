@@ -6,8 +6,8 @@ public class User {
     private String password;
 
     public User(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
+        setUserName(userName);
+        setPassword(password);
     }
 
     public String getUserName() {
@@ -16,6 +16,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

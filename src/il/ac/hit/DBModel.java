@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * DBModel class contact with the sql DB.
+ */
 public class DBModel implements IModel {
 
     private String user = "admin";
@@ -22,7 +25,7 @@ public class DBModel implements IModel {
     // הערות שכותבים תוך כדי הקוד להסביר משהו עד לנקודה מסוימת
 
     /**
-     * להוסיף לכל קלאס, ומתודות
+     *  C'tor that set the connection and the statement.
      * @throws CostMangerException
      */
     public DBModel() throws CostMangerException {
@@ -46,6 +49,7 @@ public class DBModel implements IModel {
         // בלוק פינלי
     }
 
+    // NEED TO REMOVE ! WAIT FOR YARIN CONFIRMATION
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
@@ -54,11 +58,18 @@ public class DBModel implements IModel {
         this.statement = statement;
     }
 
+    /**
+     * Add item method adding cost item for the items sql table.
+     * Add item method also adding category if not exists to the categories sql table.
+     * @param item
+     * @throws CostMangerException
+     */
     @Override
     public void addItem(Item item) throws CostMangerException {
 
         try {
-            addNewCategory(item.getCategory()); // במידה והקטגוריה חדשה מוסיף לרשימת הקטגוריות
+            // if the category is not exists add the category to the categories sql table.
+            addNewCategoryIfExists(item.getCategory());
 
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into items (costNumber,name,description,currency,category,sum,date,userName) " +
@@ -74,8 +85,12 @@ public class DBModel implements IModel {
             preparedStatement.setDate(7, item.getDate());
             preparedStatement.setString(8, item.getUserName());
 
+            // checking if the update was performed.
+            int checkUpdateItems = preparedStatement.executeUpdate();
 
-            preparedStatement.executeUpdate();
+            // if the update was not performed throws CostMangerException.
+            if(checkUpdateItems != 1)
+                throw new CostMangerException("Update was not executed!");
 
         }
         catch (SQLException e) {
@@ -84,6 +99,11 @@ public class DBModel implements IModel {
         }
     }
 
+    /**
+     * Get all the items in the cost items sql table.
+     * @return
+     * @throws CostMangerException
+     */
     @Override
     public Collection<Item> getItems() throws CostMangerException {
 
@@ -91,8 +111,10 @@ public class DBModel implements IModel {
         Collection<Item> currentItems = new LinkedList<>();
 
         try {
+            // CHECK WITH YARIN IF NEED TO BE IN preparedStatement !!!!!!!
             myResult = statement.executeQuery("SELECT * from items");
 
+            // Put all the values form the query in LinkedList.
             while (myResult.next())
             {
                 currentItems.add(new Item(myResult.getInt("costNumber"), myResult.getString("name"),
@@ -109,12 +131,20 @@ public class DBModel implements IModel {
         return currentItems;
     }
 
+    /**
+     * Updating specific data that the user selected, in cost item sql table.
+     * @param nameColToUpdate
+     * @param dataToSet
+     * @param costNumber
+     * @param userName
+     * @throws CostMangerException
+     */
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException {
 
         try {
 
-            // אם מנסה לשנות username לזרוק אקספשין
+            // If the user try to change username throw CostMangerException.
             if(nameColToUpdate.equals("userName")){
                 throw new CostMangerException("Can't change here userName");
             }
@@ -123,23 +153,24 @@ public class DBModel implements IModel {
             Object date = dataToSet;
             StringBuffer queryToExecute = new StringBuffer();
 
-            // מתאים רק ל date
+            // Work for dates only.
             if(nameColToUpdate.equals("date")){
                 queryToExecute.append("UPDATE Items SET " + nameColToUpdate + " = " + dataToSet + " WHERE costNumber = "
                         + costNumber + " and userName = " + "'" + userName + "'");
             }
             else {
-                // מתאים רק ל varchar
+                // Work with VARCHAR.
                 queryToExecute.append("UPDATE Items SET " + nameColToUpdate + " = " + "'" + dataToSet + "'" + " WHERE costNumber = "
                         + costNumber + " and userName = " + "'" + userName + "'");
             }
 
-
             preparedStatement = connection.prepareStatement(queryToExecute.toString());
+            // Check that the update execute properly.
             int howManyUpdates = preparedStatement.executeUpdate();
 
-           if(howManyUpdates > 1){
-               throw new CostMangerException("Can't update more than one item !");
+            // If the update not execute properly throw CostMangerException.
+           if(howManyUpdates != 1){
+               throw new CostMangerException("Can't update the item !");
            }
 
         }
@@ -150,6 +181,12 @@ public class DBModel implements IModel {
 
     }
 
+    /**
+     * Remove item from the cost items sql table
+     * @param costNumber
+     * @param userName
+     * @throws CostMangerException
+     */
     @Override
     public void removeItem(int costNumber, String userName) throws CostMangerException {
         try {
@@ -158,28 +195,40 @@ public class DBModel implements IModel {
 
             preparedStatement.setInt(1,costNumber);
             preparedStatement.setString(2,userName);
+            // Check that the update execute properly.
+            int howManyUpdates = preparedStatement.executeUpdate();
 
-            preparedStatement.executeUpdate();
-
+            // If the update not execute properly throw CostMangerException.
+            if(howManyUpdates != 1){
+                throw new CostMangerException("Can't update more than one item !");
+            }
         }
         catch (SQLException e) {
             throw new CostMangerException("Unable to update data to DB",e);
         }
     }
 
+    /**
+     * Get Report return collection of all the items in the items sql table that start with the startDate and end with the endDate.
+     * @param startDate
+     * @param endDate
+     * @return
+     * @throws CostMangerException
+     */
     @Override
     public Collection<Item> getDetailedReport(Date startDate, Date endDate) throws CostMangerException {
+
         ResultSet myResult = null;
         Collection<Item> reportItems = new LinkedList<>();
 
         try {
-
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE date >= ? AND date <= ?");
 
             preparedStatement.setDate(1, startDate);
             preparedStatement.setDate(2, endDate);
             myResult = preparedStatement.executeQuery();
 
+            // Put all the values form the query in LinkedList.
             while(myResult.next()) {
 
                     Item currentItemToAdd = new Item(myResult.getInt("costNumber"), myResult.getString("name"),
@@ -197,12 +246,20 @@ public class DBModel implements IModel {
         return reportItems;
     }
 
+    /**
+     * Adding new user to the users sql table.
+     * @param user
+     * @throws CostMangerException
+     */
     @Override
     public void addNewUser(User user) throws CostMangerException {
         try {
-
             Collection<User> allUsers = getAllUsers();
 
+            /*
+                Check if the user is exists in the users sql table.
+                If the user exists throws CostMangerException.
+            */
             if(allUsers.contains(user)) {
                 throw new CostMangerException("This user is already exists");
             }
@@ -215,23 +272,30 @@ public class DBModel implements IModel {
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getPassword());
 
-            preparedStatement.executeUpdate();
+            // Check that the update execute properly.
+            int howManyUpdates = preparedStatement.executeUpdate();
 
+            // If the update not execute properly throw CostMangerException.
+            if(howManyUpdates != 1){
+                throw new CostMangerException("Can't add same user twice!");
+            }
         }
         catch (SQLException e) {
             throw new CostMangerException("Unable insert into the DB",e);
         }
     }
 
+    /**
+     * Adding new category to the categories sql table if the category is not exists.
+     * @param category
+     * @throws CostMangerException
+     */
     @Override
-    public void addNewCategory(Category category) throws CostMangerException {
-        // להחליף את השם ליותר נכון
+    public void addNewCategoryIfExists(Category category) throws CostMangerException {
         try {
             Collection<Category> allCategories = getAllCategories();
-//            if(allCategories.contains(category)) {
-//                throw new CostMangerException("This category is already exists");
-//            }
 
+            // If the category is not in the list of the categories add the category.
             if(!allCategories.contains(category)){
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "insert into categories (category) " +
@@ -240,17 +304,25 @@ public class DBModel implements IModel {
 
                 preparedStatement.setString(1, category.getCategoryName());
 
-                preparedStatement.executeUpdate();
-                // לוודא שחזר 1, אם לא לזרוק הערה מתאימה
-            }
+                // Check that the update execute properly.
+                int howManyUpdates = preparedStatement.executeUpdate();
 
+                // If the update not execute properly throw CostMangerException.
+                if(howManyUpdates != 1){
+                    throw new CostMangerException("Can't add same user twice!");
+                }
+            }
         }
         catch (SQLException e) {
             throw new CostMangerException("Unable insert into the DB",e);
         }
-
     }
 
+    /**
+     * Get all the users in the users sql table.
+     * @return
+     * @throws CostMangerException
+     */
     @Override
     public Collection<User> getAllUsers() throws CostMangerException {
 
@@ -258,14 +330,15 @@ public class DBModel implements IModel {
         Collection<User> currentItems = new LinkedList<>();
 
         try {
+            // CHECK WITH YARIN ABOUT preparedStatement
             myResult = statement.executeQuery("SELECT * from users");
 
+            // Put all the values form the query in LinkedList.
             while (myResult.next())
             {
                 currentItems.add(new User(myResult.getString("userName"),
                         myResult.getString("password")));
             }
-
         } catch (SQLException e) {
             throw new CostMangerException("Unable to pull data from DB");
         }
@@ -273,6 +346,11 @@ public class DBModel implements IModel {
         return currentItems;
     }
 
+    /**
+     * Get all the categories in the categories sql table.
+     * @return
+     * @throws CostMangerException
+     */
     @Override
     public Collection<Category> getAllCategories() throws CostMangerException {
 
@@ -280,8 +358,10 @@ public class DBModel implements IModel {
         Collection<Category> currentItems = new LinkedList<>();
 
         try {
+            // CHECK WITH YARIN ABOUT preparedStatement
             myResult = statement.executeQuery("SELECT * from categories");
 
+            // Put all the values form the query in LinkedList.
             while (myResult.next())
             {
                 currentItems.add(new Category(myResult.getString("category")));

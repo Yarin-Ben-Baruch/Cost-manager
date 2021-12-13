@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Item {
 
-
     private int costNumber;
     private String name;
     private String describing;
@@ -19,16 +18,15 @@ public class Item {
 
     }
 
-    // add  set
     public Item(int costNumber, String name, String describing, String currency, Category category, String sum, Date date, String userName) {
-        this.costNumber = costNumber;
-        this.name = name;
-        this.describing = describing;
-        this.currency = currency;
-        this.category = category;
-        this.sum = sum;
-        this.date = date;
-        this.userName = userName;
+        setCostNumber(costNumber);
+        setName(name);
+        setDescribing(describing);
+        setCurrency(currency);
+        setCategory( category);
+        setSum(sum);
+        setDate(date);
+        setUserName(userName);
     }
 
     public int getCostNumber() {
@@ -63,7 +61,38 @@ public class Item {
         return userName;
     }
 
-    //עודכן תוך כדי שיעור
+    public void setCostNumber(int costNumber) {
+        this.costNumber = costNumber;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescribing(String describing) {
+        this.describing = describing;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setSum(String sum) {
+        this.sum = sum;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(costNumber, name, describing, currency, category, sum, date, userName);

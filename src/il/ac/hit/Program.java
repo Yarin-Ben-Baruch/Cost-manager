@@ -36,8 +36,8 @@ public class Program {
 
 
 
-            test.addNewCategory(new Category("House"));
-            test.addNewCategory(new Category("Car"));
+            test.addNewCategoryIfExists(new Category("House"));
+            test.addNewCategoryIfExists(new Category("Car"));
 
             Collection<Category> allCategories = test.getAllCategories();
 
