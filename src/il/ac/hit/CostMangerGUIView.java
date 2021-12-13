@@ -54,6 +54,10 @@ public class CostMangerGUIView implements IView {
 
     }
 
+    @Override
+    public void showItems(Collection<Item> i_Items) {
+
+    }
 
     @Override
     public void setIViewModel(IViewModel i_Vm) {
