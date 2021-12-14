@@ -9,8 +9,8 @@ public class Program {
 
 
         IModel model = null;
-//        try {
-            //model = new DBModel();
+        try {
+            model = new DBModel();
             IViewModel vm = new CostManagerViewModel();
             IView view = new CostMangerGUIView();
             SwingUtilities.invokeLater(new Runnable() {
@@ -23,10 +23,10 @@ public class Program {
             vm.setModel(model);
             vm.setView(view);
             view.setIViewModel(vm);
-//        }
-//        catch (CostMangerException ex) {
-//            ex.printStackTrace();
-//        }
+        }
+        catch (CostMangerException ex) {
+            ex.printStackTrace();
+        }
 
 
 

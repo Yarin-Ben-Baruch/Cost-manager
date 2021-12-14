@@ -198,19 +198,97 @@ public class CostManagerViewModel implements IViewModel {
 
     }
 
+    /**
+     * A method that gets a start-date and end-date and show you by the View the items between those dates.
+     * @param i_StartDate
+     * @param i_EndDate
+     */
     @Override
     public void getDetailedReport(Date i_StartDate, Date i_EndDate) {
+        m_Service.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Collection items = m_Model.getDetailedReport(i_StartDate, i_EndDate);
 
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.showItems(items);
+                        }
+                    });
+                } catch (CostMangerException e) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.showMessage(new Message(e.getMessage()));
+                        }
+                    });
+                }
+            }
+        });
     }
 
+    /**
+     * A method that takes from the class that implements the model, all
+     * the data stored in DB and then passes to the class that implements the view the list.
+     */
     @Override
     public void getAllUsers() {
+        m_Service.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Collection<User> users = m_Model.getAllUsers();
 
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.showUsers(users);
+                        }
+                    });
+                } catch (CostMangerException e) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.showMessage(new Message(e.getMessage()));
+                        }
+                    });
+                }
+
+
+            }
+        });
     }
 
+    /**
+     * A method that takes from the class that implements the model, all
+     * the data stored in DB and then passes to the class that implements the view the list.
+     */
     @Override
     public void getAllCategories() {
+        m_Service.submit(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    Collection<Category> categories = m_Model.getAllCategories();
 
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.ShowCategories(categories);
+                        }
+                    });
+                } catch (CostMangerException e) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.showMessage(new Message(e.getMessage()));
+                        }
+                    });
+                }
+            }
+        });
     }
 
     /**
