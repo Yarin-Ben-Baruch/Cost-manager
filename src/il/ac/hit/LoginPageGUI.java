@@ -1,26 +1,76 @@
 package il.ac.hit;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class LoginPageGUI {
-    private JFrame loginFrame;
-    private JTextField m_UsernameTextField, m_PasswordTextField;
-    private JLabel m_UsernameLabel, m_PasswordLabel;
-    private JButton m_CancelButton,m_LoginButton;
-    private JButton removeItemButton;
-    private JButton removeAllItemsButton;
-    private JTextArea ta;
-    private JPanel panelSouth, panelNorth;
-    private IViewModel vm;
+public class LoginPageGUI extends JFrame implements ActionListener{
 
-    public void init() {
-        loginFrame = new JFrame();
-        m_PasswordLabel = new JLabel("Password: ");
-        m_UsernameLabel = new JLabel("Username: ");
-        m_UsernameTextField = new JTextField(40);
-        m_PasswordTextField = new JTextField(40);
-        m_CancelButton = new JButton("Cancel");
-        m_LoginButton = new JButton("Login");
+    Container container = getContentPane();
+    JLabel userLabel=new JLabel("USERNAME");
+    JLabel passwordLabel=new JLabel("PASSWORD");
+    JTextField userTextField=new JTextField();
+    JPasswordField passwordField=new JPasswordField();
+    JButton loginButton=new JButton("LOGIN");
+    JButton resetButton=new JButton("RESET");
+    JCheckBox showPassword=new JCheckBox("Show Password");
+
+
+    LoginPageGUI()
+    {
+        //Calling methods inside constructor.
+        setLayoutManager();
+        setLocationAndSize();
+        addComponentsToContainer();
 
     }
+    public void setLayoutManager()
+    {
+        container.setLayout(null);
+    }
+    public void setLocationAndSize()
+    {
+        //Setting location and Size of each components using setBounds() method.
+        userLabel.setBounds(50,150,100,30);
+        passwordLabel.setBounds(50,220,100,30);
+        userTextField.setBounds(150,150,150,30);
+        passwordField.setBounds(150,220,150,30);
+        showPassword.setBounds(150,250,150,30);
+        loginButton.setBounds(50,300,100,30);
+        resetButton.setBounds(200,300,100,30);
+
+
+    }
+    public void addComponentsToContainer()
+    {
+        //Adding each components to the Container
+        container.add(userLabel);
+        container.add(passwordLabel);
+        container.add(userTextField);
+        container.add(passwordField);
+        container.add(showPassword);
+        container.add(loginButton);
+        container.add(resetButton);
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+}
+
+class Login {
+
+    public static void main(String[] a){
+        LoginPageGUI frame=new LoginPageGUI();
+        frame.setTitle("Login Form");
+        frame.setVisible(true);
+        frame.setBounds(10,10,370,600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+
+    }
+
 }
