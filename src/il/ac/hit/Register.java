@@ -171,13 +171,13 @@ public class Register extends JFrame implements ActionListener {
 }
 
 // Driver Code
-class Registration {
-
-    public static void main(String[] args) throws Exception {
-        Register f = new Register();
-        f.init();
-        f.start();
-    }
-}
+//class Registration {
+//
+//    public static void main(String[] args) throws Exception {
+//        Register f = new Register();
+//        f.init();
+//        f.start();
+//    }
+//}
 
 
