@@ -273,7 +273,7 @@ public class DBModel implements IModel {
             Collection<Category> allCategories = getAllCategories();
 
             // If the category is not in the list of the categories add the category.
-            if(!allCategories.contains(category)){
+            if(!allCategories.contains(category) && !category.getCategoryName().isEmpty()){
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "insert into categories (category) " +
                                 "values " +
