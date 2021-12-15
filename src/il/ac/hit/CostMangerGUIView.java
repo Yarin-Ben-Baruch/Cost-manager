@@ -62,34 +62,36 @@ public class CostMangerGUIView implements IView {
 
     //Creating login page frame
     private JFrame m_LoginFrame;
-    private Container m_Container;
-    private JLabel m_UserNameLabel, m_PasswordLabel;
-    private JTextField m_UserNameTextField;
-    private JPasswordField m_PasswordField;
-    private JButton m_LoginButton, m_ResetButton, m_RegisterButton;
-    private JCheckBox m_ShowPasswordCheckBox;
+    private Container m_LoginContainer;
+    private JLabel m_LoginUserNameLabel, m_LoginPasswordLabel;
+    private JTextField m_LoginUserNameTextField;
+    private JPasswordField m_LoginPasswordField;
+    private JButton m_LoginButton, m_LoginResetButton, m_LoginRegisterButton;
+    private JCheckBox m_LoginShowPasswordCheckBox;
+
+
 
     @Override
     public void init(){
         m_LoginFrame = new JFrame();
-        m_Container = m_LoginFrame.getContentPane();
-        m_UserNameLabel = new JLabel("USERNAME");
-        m_PasswordLabel = new JLabel("PASSWORD");
-        m_UserNameTextField = new JTextField();
-        m_PasswordField = new JPasswordField();
+        m_LoginContainer = m_LoginFrame.getContentPane();
+        m_LoginUserNameLabel = new JLabel("USERNAME");
+        m_LoginPasswordLabel = new JLabel("PASSWORD");
+        m_LoginUserNameTextField = new JTextField();
+        m_LoginPasswordField = new JPasswordField();
         m_LoginButton = new JButton("Login");
-        m_ResetButton = new JButton("Reset");
-        m_RegisterButton = new JButton("Register");
-        m_ShowPasswordCheckBox = new JCheckBox("Show Password");
+        m_LoginResetButton = new JButton("Reset");
+        m_LoginRegisterButton = new JButton("Register");
+        m_LoginShowPasswordCheckBox = new JCheckBox("Show Password");
     }
 
     @Override
     public void start(){
 
-        setLayoutManager();
-        setLocationAndSize();
-        addComponentsToContainer();
-        addActionEvent();
+        setLoginLayoutManager();
+        setLoginLocationAndSize();
+        addLoginComponentsToContainer();
+        addLoginActionEvents();
 
         m_LoginFrame.setTitle("Login Form");
         m_LoginFrame.setVisible(true);
@@ -99,37 +101,37 @@ public class CostMangerGUIView implements IView {
     }
 
     //Login
-    private void setLayoutManager() {
-        m_Container.setLayout(null);
+    private void setLoginLayoutManager() {
+        m_LoginContainer.setLayout(null);
     }
 
     //Login
-    private void setLocationAndSize() {
+    private void setLoginLocationAndSize() {
 
-        m_UserNameLabel.setBounds(50, 70, 100, 30);
-        m_PasswordLabel.setBounds(50, 120, 100, 30);
-        m_UserNameTextField.setBounds(150, 70, 150, 30);
-        m_PasswordField.setBounds(150, 120, 150, 30);
-        m_ShowPasswordCheckBox.setBounds(150, 150, 150, 30);
+        m_LoginUserNameLabel.setBounds(50, 70, 100, 30);
+        m_LoginPasswordLabel.setBounds(50, 120, 100, 30);
+        m_LoginUserNameTextField.setBounds(150, 70, 150, 30);
+        m_LoginPasswordField.setBounds(150, 120, 150, 30);
+        m_LoginShowPasswordCheckBox.setBounds(150, 150, 150, 30);
         m_LoginButton.setBounds(50, 200, 100, 30);
-        m_ResetButton.setBounds(200, 200, 100, 30);
-        m_RegisterButton.setBounds(125, 250, 100, 30);
+        m_LoginResetButton.setBounds(200, 200, 100, 30);
+        m_LoginRegisterButton.setBounds(125, 250, 100, 30);
     }
 
     //Login
-    private void addComponentsToContainer() {
-        m_Container.add(m_UserNameLabel);
-        m_Container.add(m_PasswordLabel);
-        m_Container.add(m_UserNameTextField);
-        m_Container.add(m_PasswordField);
-        m_Container.add(m_ShowPasswordCheckBox);
-        m_Container.add(m_LoginButton);
-        m_Container.add(m_ResetButton);
-        m_Container.add(m_RegisterButton);
+    private void addLoginComponentsToContainer() {
+        m_LoginContainer.add(m_LoginUserNameLabel);
+        m_LoginContainer.add(m_LoginPasswordLabel);
+        m_LoginContainer.add(m_LoginUserNameTextField);
+        m_LoginContainer.add(m_LoginPasswordField);
+        m_LoginContainer.add(m_LoginShowPasswordCheckBox);
+        m_LoginContainer.add(m_LoginButton);
+        m_LoginContainer.add(m_LoginResetButton);
+        m_LoginContainer.add(m_LoginRegisterButton);
     }
 
     //Login
-    private void addActionEvent() {
+    private void addLoginActionEvents() {
 
         m_LoginButton.addActionListener(new ActionListener() {
             @Override
@@ -138,35 +140,35 @@ public class CostMangerGUIView implements IView {
 
                 String userText;
                 String pwdText;
-                userText = m_UserNameTextField.getText();
-                pwdText = new String(m_PasswordField.getPassword());
+                userText = m_LoginUserNameTextField.getText();
+                pwdText = new String(m_LoginPasswordField.getPassword());
                 User user = new User(userText, pwdText);
                 vm.isUserExists(user);
             }
         });
 
-        m_ResetButton.addActionListener(new ActionListener() {
+        m_LoginResetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Coding Part of RESET button
-                m_UserNameTextField.setText("");
-                m_PasswordField.setText("");
+                m_LoginUserNameTextField.setText("");
+                m_LoginPasswordField.setText("");
             }
         });
 
-        m_ShowPasswordCheckBox.addActionListener(new ActionListener() {
+        m_LoginShowPasswordCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Coding Part of showPassword JCheckBox
-                if (m_ShowPasswordCheckBox.isSelected()) {
-                    m_PasswordField.setEchoChar((char) 0);
+                if (m_LoginShowPasswordCheckBox.isSelected()) {
+                    m_LoginPasswordField.setEchoChar((char) 0);
                 } else {
-                    m_PasswordField.setEchoChar('*');
+                    m_LoginPasswordField.setEchoChar('*');
                 }
             }
         });
 
-        m_RegisterButton.addActionListener(new ActionListener() {
+        m_LoginRegisterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Coding Part of register button
