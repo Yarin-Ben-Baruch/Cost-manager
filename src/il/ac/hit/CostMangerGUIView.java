@@ -14,8 +14,15 @@ public class CostMangerGUIView implements IView {
     private JPanel m_MessagePanel;
     private JTextField m_MessageTextField;
     private JTextArea m_CostInfoTextArea;
-    private JButton m_ShowItemsButton, m_ShowCategoriesButton, m_ShowReportButton;
+    private JButton m_ShowItemsButton, m_ShowCategoriesButton;
 
+    // Show Report Button, TextField, Label and Submit Action.
+    private JPanel m_ShowReportPanel;
+    private JButton m_ShowReportButton,m_ShowReportActionButton;
+    private JLabel m_ShowReportStartDateDayLabel, m_ShowReportStartDateMonthLabel;
+    private JLabel m_ShowReportEndDateDayLabel, m_ShowReportEndDateMonthLabel;
+    private JComboBox m_ShowReportStartDateDayTextField, m_ShowReportStartDateMonthTextField;
+    private JComboBox m_ShowReportEndDateDayTextField, m_ShowReportEndDateMonthTextField;
 
     // Update Item Button, TextField, Label and Submit Action.
     private JPanel m_UpdateItemPanel;
@@ -54,18 +61,39 @@ public class CostMangerGUIView implements IView {
 
     @Override
     public void init() {
+        String[] days = new String[31];
+        for (int i =0 ; i<31 ; i++) {
+            days[i] = (i+1) +"";
+        }
+        String[] months =new String[12];
+        for (int i =0 ; i<12 ; i++) {
+            months[i] = (i+1) +"";
+        }
+
         // Create JFrame
         m_MainFrame = new JFrame();
 
-        // Create all the JPanels
+        // Create all the JPanels.
         m_ButtonsPanel = new JPanel();
         m_MessagePanel = new JPanel();
         m_CostPanel = new JPanel();
 
-        // Create all the show JButtons
+        // Create all the show JButtons.
         m_ShowItemsButton = new JButton("Show Items");
         m_ShowCategoriesButton = new JButton("Show Categories");
+
+        // Creating the detailed report Action.
+        m_ShowReportPanel = new JPanel();
         m_ShowReportButton = new JButton("Show detail report");
+        m_ShowReportStartDateDayLabel = new JLabel("Start day:");
+        m_ShowReportStartDateDayTextField = new JComboBox(days);
+        m_ShowReportStartDateMonthLabel = new JLabel("Start month:");
+        m_ShowReportStartDateMonthTextField = new JComboBox(months);
+        m_ShowReportEndDateDayLabel = new JLabel("End day:");
+        m_ShowReportEndDateDayTextField = new JComboBox(days);
+        m_ShowReportEndDateMonthLabel = new JLabel("End Month");
+        m_ShowReportEndDateMonthTextField = new JComboBox(months);
+        m_ShowReportActionButton = new JButton("Show the report");
 
         // Creating the AddItem Action.
         m_AddItemPanel = new JPanel();
@@ -80,15 +108,6 @@ public class CostMangerGUIView implements IView {
         m_AddItemCategoryTextField = new JTextField(10);
         m_AddItemSumLabel = new JLabel("Sum");
         m_AddItemSumTextField = new JTextField(8);
-        String[] days = new String[31];
-        for (int i =0 ; i<31 ; i++) {
-            days[i] = (i+1) +"";
-        }
-        String[] months =new String[12];
-        for (int i =0 ; i<12 ; i++) {
-            months[i] = (i+1) +"";
-        }
-
         m_AddItemDayLabel = new JLabel("Day:");
         m_AddItemDayComboBox = new JComboBox(days);
         m_AddItemMonthLabel = new JLabel("Month");
@@ -150,6 +169,20 @@ public class CostMangerGUIView implements IView {
         m_ButtonsPanel.add(m_RemoveItemButton);
         m_ButtonsPanel.add(m_UpdateItemButton);
         m_MainFrame.add(m_ButtonsPanel,BorderLayout.CENTER);
+
+        // Creating the detailed report Panel.
+        m_ShowReportPanel.setLayout(new GridLayout(5,2));
+        m_ShowReportPanel.add(m_ShowReportStartDateDayLabel);
+        m_ShowReportPanel.add(m_ShowReportStartDateDayTextField);
+        m_ShowReportPanel.add(m_ShowReportStartDateMonthLabel);
+        m_ShowReportPanel.add(m_ShowReportStartDateMonthTextField);
+        m_ShowReportPanel.add(m_ShowReportEndDateDayLabel);
+        m_ShowReportPanel.add(m_ShowReportEndDateDayTextField);
+        m_ShowReportPanel.add(m_ShowReportEndDateMonthLabel);
+        m_ShowReportPanel.add(m_ShowReportEndDateMonthTextField);
+        m_ShowReportPanel.add(m_ShowReportActionButton);
+        m_ShowReportPanel.setVisible(false);
+        m_MainFrame.add(m_ShowReportPanel,BorderLayout.CENTER);
 
         // Creating the Update Item Panel.
         m_UpdateItemPanel.setLayout(new GridLayout(5,2));
@@ -229,6 +262,27 @@ public class CostMangerGUIView implements IView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vm.getAllCategories();
+            }
+        });
+
+        m_ShowReportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m_ShowReportPanel.setVisible(true);
+                m_ButtonsPanel.setVisible(false);
+            }
+        });
+
+        m_ShowReportActionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vm.getDetailedReport(
+                        java.sql.Date.valueOf("2021-"+m_ShowReportStartDateMonthTextField.getSelectedItem() +"-"+m_ShowReportStartDateDayTextField.getSelectedItem()),
+                        java.sql.Date.valueOf("2021-"+m_ShowReportEndDateMonthTextField.getSelectedItem()+"-"+ m_ShowReportEndDateDayTextField.getSelectedItem()));
+
+                m_ShowReportPanel.setVisible(false);
+                m_ButtonsPanel.setVisible(true);
+
             }
         });
 
