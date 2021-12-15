@@ -11,6 +11,7 @@ public class CostMangerGUIView implements IView {
     private String[] days;
     private String[] months;
     private IViewModel vm;
+    private Collection<User> m_Users;
 
     private JFrame m_MainFrame;
     private JPanel m_CostPanel;
@@ -59,18 +60,128 @@ public class CostMangerGUIView implements IView {
     private JLabel m_AddItemNameLabel, m_AddItemDescribingLabel, m_AddItemCurrencyLabel;
     private JLabel m_AddItemCategoryLabel, m_AddItemSumLabel,m_AddItemDayLabel, m_AddItemMonthLabel;
 
+    //Creating login page frame
+    private JFrame m_LoginFrame;
+    private Container m_Container;
+    private JLabel m_UserNameLabel, m_PasswordLabel;
+    private JTextField m_UserNameTextField;
+    private JPasswordField m_PasswordField;
+    private JButton m_LoginButton, m_ResetButton, m_RegisterButton;
+    private JCheckBox m_ShowPasswordCheckBox;
 
     @Override
-    public void init() {
-
+    public void init(){
+        m_LoginFrame = new JFrame();
+        m_Container = m_LoginFrame.getContentPane();
+        m_UserNameLabel = new JLabel("USERNAME");
+        m_PasswordLabel = new JLabel("PASSWORD");
+        m_UserNameTextField = new JTextField();
+        m_PasswordField = new JPasswordField();
+        m_LoginButton = new JButton("Login");
+        m_ResetButton = new JButton("Reset");
+        m_RegisterButton = new JButton("Register");
+        m_ShowPasswordCheckBox = new JCheckBox("Show Password");
     }
 
     @Override
-    public void start() {
+    public void start(){
 
+        setLayoutManager();
+        setLocationAndSize();
+        addComponentsToContainer();
+        addActionEvent();
+
+        m_LoginFrame.setTitle("Login Form");
+        m_LoginFrame.setVisible(true);
+        m_LoginFrame.setBounds(10, 10, 350, 400);
+        m_LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        m_LoginFrame.setResizable(false);
     }
 
-    private void initApplication() {
+    //Login
+    private void setLayoutManager() {
+        m_Container.setLayout(null);
+    }
+
+    //Login
+    private void setLocationAndSize() {
+
+        m_UserNameLabel.setBounds(50, 70, 100, 30);
+        m_PasswordLabel.setBounds(50, 120, 100, 30);
+        m_UserNameTextField.setBounds(150, 70, 150, 30);
+        m_PasswordField.setBounds(150, 120, 150, 30);
+        m_ShowPasswordCheckBox.setBounds(150, 150, 150, 30);
+        m_LoginButton.setBounds(50, 200, 100, 30);
+        m_ResetButton.setBounds(200, 200, 100, 30);
+        m_RegisterButton.setBounds(125, 250, 100, 30);
+    }
+
+    //Login
+    private void addComponentsToContainer() {
+        m_Container.add(m_UserNameLabel);
+        m_Container.add(m_PasswordLabel);
+        m_Container.add(m_UserNameTextField);
+        m_Container.add(m_PasswordField);
+        m_Container.add(m_ShowPasswordCheckBox);
+        m_Container.add(m_LoginButton);
+        m_Container.add(m_ResetButton);
+        m_Container.add(m_RegisterButton);
+    }
+
+    //Login
+    private void addActionEvent() {
+
+        m_LoginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Coding Part of LOGIN button
+
+                String userText;
+                String pwdText;
+                userText = m_UserNameTextField.getText();
+                pwdText = new String(m_PasswordField.getPassword());
+                User user = new User(userText, pwdText);
+                vm.isUserExists(user);
+            }
+        });
+
+        m_ResetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Coding Part of RESET button
+                m_UserNameTextField.setText("");
+                m_PasswordField.setText("");
+            }
+        });
+
+        m_ShowPasswordCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Coding Part of showPassword JCheckBox
+                if (m_ShowPasswordCheckBox.isSelected()) {
+                    m_PasswordField.setEchoChar((char) 0);
+                } else {
+                    m_PasswordField.setEchoChar('*');
+                }
+            }
+        });
+
+        m_RegisterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Coding Part of register button
+
+                //close this windows
+                m_LoginFrame.dispose();
+                //
+                Register register = new Register();
+                register.init();
+                register.start();
+            }
+        });
+    }
+
+    public void initApplication() {
         // remove to method !
         days = new String[31];
         for (int i =0 ; i<31 ; i++) {
@@ -106,7 +217,7 @@ public class CostMangerGUIView implements IView {
         m_CostInfoTextArea = new JTextArea();
     }
 
-    private void startApplication() {
+    public void startApplication() {
         // Creating the message panel
         m_MessagePanel.setLayout(new FlowLayout());
         m_MessagePanel.add(m_MessageTextField);
@@ -443,11 +554,13 @@ public class CostMangerGUIView implements IView {
      * @param i_Users
      */
     @Override
-    public void showUsers(Collection<User> i_Users) {
-        m_CostInfoTextArea.setText("");
-        for (User user : i_Users) {
-            m_CostInfoTextArea.append(user.toString() + "\n");
-        }
+    public void setUsers(Collection<User> i_Users) {
+        m_Users = i_Users;
+
+//        m_CostInfoTextArea.setText("");
+//        for (User user : i_Users) {
+//            m_CostInfoTextArea.append(user.toString() + "\n");
+//        }
     }
 
     /**
@@ -469,6 +582,14 @@ public class CostMangerGUIView implements IView {
         m_MessageTextField.setText(i_Message.getText());
     }
 
+    public void showInvalidInput(){
+        JOptionPane.showMessageDialog(m_LoginFrame, "Invalid Username or Password");
+    }
 
-
+    public void openApplication(){
+        JOptionPane.showMessageDialog(m_LoginFrame, "Login Successful");
+        m_LoginFrame.dispose();
+        initApplication();
+        startApplication();
+    }
 }

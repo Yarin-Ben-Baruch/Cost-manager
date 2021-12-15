@@ -75,4 +75,6 @@ public interface IModel {
      * @throws CostMangerException
      */
     Collection<Category> getAllCategories() throws CostMangerException;
+
+    void checkIfUserExists(User i_User) throws CostMangerException;
 }

@@ -353,4 +353,32 @@ public class DBModel implements IModel {
 
         return currentItems;
     }
+
+    @Override
+    public void checkIfUserExists(User i_User) throws CostMangerException {
+
+        ResultSet myResult = null;
+        Collection<User> currentItems = new LinkedList<>();
+
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users");
+
+            myResult = preparedStatement.executeQuery();
+
+            // Put all the values form the query in LinkedList.
+            while (myResult.next())
+            {
+                currentItems.add(new User(myResult.getString("userName"),
+                        myResult.getString("password")));
+            }
+
+            if(!currentItems.contains(i_User))
+                throw new CostMangerException("User not Exists!");
+
+        } catch (SQLException e) {
+            throw new CostMangerException("Unable to pull data from DB");
+        }
+
+    }
 }

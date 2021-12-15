@@ -15,4 +15,5 @@ public interface IViewModel {
     void getAllUsers();
     void getAllCategories();
     void getItems();
+    void isUserExists(User i_User);
 }

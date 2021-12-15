@@ -244,7 +244,7 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            m_View.showUsers(users);
+                            m_View.setUsers(users);
                         }
                     });
                 } catch (CostMangerException e) {
@@ -255,8 +255,6 @@ public class CostManagerViewModel implements IViewModel {
                         }
                     });
                 }
-
-
             }
         });
     }
@@ -316,6 +314,32 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             m_View.showMessage(new Message(e.getMessage()));
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    @Override
+    public void isUserExists(User i_User) {
+        m_Service.submit(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    m_Model.checkIfUserExists(i_User);
+
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.openApplication();
+                        }
+                    });
+                } catch (CostMangerException e) {
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            m_View.showInvalidInput();
                         }
                     });
                 }
