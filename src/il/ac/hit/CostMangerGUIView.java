@@ -63,6 +63,14 @@ public class CostMangerGUIView implements IView {
     @Override
     public void init() {
 
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    private void initApplication() {
         // remove to method !
         days = new String[31];
         for (int i =0 ; i<31 ; i++) {
@@ -98,9 +106,7 @@ public class CostMangerGUIView implements IView {
         m_CostInfoTextArea = new JTextArea();
     }
 
-    @Override
-    public void start() {
-
+    private void startApplication() {
         // Creating the message panel
         m_MessagePanel.setLayout(new FlowLayout());
         m_MessagePanel.add(m_MessageTextField);
