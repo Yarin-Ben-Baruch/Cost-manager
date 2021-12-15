@@ -351,7 +351,7 @@ public class CostMangerGUIView implements IView {
         m_AddItemToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Item item = new Item(6,m_AddItemNameTextField.getText(),
+                Item item = new Item(8,m_AddItemNameTextField.getText(),
                         m_AddItemDescribingTextField.getText(),
                         m_AddItemCurrencyTextField.getText(),
                         new Category(m_AddCategoryTextField.getText()),
