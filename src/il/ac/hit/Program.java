@@ -11,7 +11,7 @@ public class Program {
         try {
             model = new DBModel();
             IViewModel vm = new CostManagerViewModel();
-            IView view = new CostMangerGUIView();
+            IView view = new ViewsManager();
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {

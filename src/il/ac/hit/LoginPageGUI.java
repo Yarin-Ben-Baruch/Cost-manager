@@ -55,6 +55,11 @@ public class LoginPageGUI{
         m_LoginFrame.setResizable(false);
     }
 
+    public void OpenAfterRegister() {
+        m_LoginFrame.setVisible(true);
+
+    }
+
     public void Close() {
         m_LoginFrame.dispose();
     }
@@ -132,7 +137,7 @@ public class LoginPageGUI{
             public void actionPerformed(ActionEvent e) {
 
                 //close this windows
-                m_LoginFrame.dispose();
+                m_LoginFrame.setVisible(false);
 
                 // open register window
                 m_RegisterFrame.init();

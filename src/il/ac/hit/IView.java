@@ -14,5 +14,4 @@ public interface IView {
     void start();
     void openApplicationFromLogin();
     void registerSucceeded();
-    void openRegister();
 }

@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public class ViewsManager implements IView{
 
-    RegisterPageGUI m_RegisterPage;
+    //RegisterPageGUI m_RegisterPage;
     LoginPageGUI m_LoginPage;
     ApplicationPageGUI m_ApplicationPage;
     IViewModel m_ViewModel;
@@ -14,7 +14,7 @@ public class ViewsManager implements IView{
     public void init() {
         m_ApplicationPage = new ApplicationPageGUI(m_ViewModel);
         m_LoginPage = new LoginPageGUI(m_ViewModel);
-        m_RegisterPage = new RegisterPageGUI(m_ViewModel);
+        //m_RegisterPage = new RegisterPageGUI(m_ViewModel);
 
         m_LoginPage.init();
     }
@@ -51,24 +51,20 @@ public class ViewsManager implements IView{
 
 
     public void showInvalidInput(){
-        JOptionPane.showMessageDialog(m_MainFrame, "Invalid Username or Password");
+
+        //JOptionPane.showMessageDialog(m_MainFrame, "Invalid Username or Password");
     }
 
     public void openApplicationFromLogin() {
-        JOptionPane.showMessageDialog(m_MainFrame, "Login Successful");
+        //JOptionPane.showMessageDialog(m_MainFrame, "Login Successful");
         m_LoginPage.Close();
-        initApplication();
-        startApplication();
+        m_ApplicationPage.initApplication();
+        m_ApplicationPage.startApplication();
+
     }
 
     public void registerSucceeded() {
-        //JOptionPane.showMessageDialog(m_MainFrame, "Register Successful");
-
-        // Open Login menu again!
+        m_LoginPage.OpenAfterRegister();
     }
 
-    public void openRegister() {
-        m_RegisterPage.init();
-        m_RegisterPage.start();
-    }
 }

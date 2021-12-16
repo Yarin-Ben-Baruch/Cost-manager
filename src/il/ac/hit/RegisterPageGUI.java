@@ -119,18 +119,20 @@ public class RegisterPageGUI {
         m_SubmitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String pwdText = new String(m_PasswordField.getPassword());
                 // Makes sure he has approved the terms, and UserName, password not empty
                 // Fix the deprecated method.
                 if (m_TermCheckBox.isSelected()
                         && m_UsernameTextField.getText().length() != 0
-                        && m_PasswordField.getText().length() != 0) {
+                        && pwdText.length() != 0) {
 
-                    User user = new User(m_UsernameTextField.getText(),m_PasswordField.getPassword().toString());
+                    User user = new User(m_UsernameTextField.getText(),pwdText);
 
                     m_Vm.addNewUser(user);
 
-                    m_ResetJLabel.setText("Registration Successfully..");
+                    JOptionPane.showMessageDialog(m_RegisterFrame,"Register Successful");
+                    m_RegisterFrame.dispose();
+
                 }
                 // If not confirmed
                 else {
