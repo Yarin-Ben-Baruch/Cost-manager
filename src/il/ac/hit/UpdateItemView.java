@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UpdateView {
+public class UpdateItemView {
 
     // Update Item Button, TextField, Label and Submit Action.
     private JFrame m_UpdateFrame;
@@ -16,7 +16,7 @@ public class UpdateView {
     private JTextField m_UpdateItemUsernameTextField, m_UpdateItemCostNumberTextField;
     private IViewModel m_ViewModel;
 
-    public UpdateView(IViewModel m_ViewModel) {
+    public UpdateItemView(IViewModel m_ViewModel) {
         this.m_ViewModel = m_ViewModel;
     }
 
