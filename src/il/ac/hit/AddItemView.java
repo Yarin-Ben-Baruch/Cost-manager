@@ -11,7 +11,7 @@ public class AddItemView {
     private String[] months;
 
     // Add Item Button, TextField, Label and Submit Action.
-    private JFrame m_AddItemPanel;
+    private JFrame m_AddItemFrame;
     private JTextField m_AddItemNameTextField, m_AddItemDescribingTextField, m_AddItemCurrencyTextField;
     private JTextField m_AddItemCategoryTextField, m_AddItemSumTextField;
     private JComboBox m_AddItemDayComboBox, m_AddItemMonthComboBox;
@@ -38,7 +38,7 @@ public class AddItemView {
         }
 
         // Creating the AddItem Action.
-        m_AddItemPanel = new JFrame();
+        m_AddItemFrame = new JFrame();
         m_AddItemNameLabel = new JLabel("Name:");
         m_AddItemNameTextField = new JTextField(10);
         m_AddItemDescribingLabel = new JLabel("Descrption:");
@@ -59,22 +59,25 @@ public class AddItemView {
 
     private void addItemStart() {
         // Creating the Add Item Panel.
-        m_AddItemPanel.setLayout(new GridLayout(5,2));
-        m_AddItemPanel.add(m_AddItemNameLabel);
-        m_AddItemPanel.add(m_AddItemNameTextField);
-        m_AddItemPanel.add(m_AddItemCurrencyLabel);
-        m_AddItemPanel.add(m_AddItemCurrencyTextField);
-        m_AddItemPanel.add(m_AddItemCategoryLabel);
-        m_AddItemPanel.add(m_AddItemCategoryTextField);
-        m_AddItemPanel.add(m_AddItemSumLabel);
-        m_AddItemPanel.add(m_AddItemSumTextField);
-        m_AddItemPanel.add(m_AddItemDayLabel);
-        m_AddItemPanel.add(m_AddItemDayComboBox);
-        m_AddItemPanel.add(m_AddItemMonthLabel);
-        m_AddItemPanel.add(m_AddItemMonthComboBox);
-        m_AddItemPanel.add(m_AddItemDescribingLabel);
-        m_AddItemPanel.add(m_AddItemDescribingTextField);
-        m_AddItemPanel.add(m_AddItemToDBButton);
+        m_AddItemFrame.setLayout(new GridLayout(5,2));
+        m_AddItemFrame.add(m_AddItemNameLabel);
+        m_AddItemFrame.add(m_AddItemNameTextField);
+        m_AddItemFrame.add(m_AddItemCurrencyLabel);
+        m_AddItemFrame.add(m_AddItemCurrencyTextField);
+        m_AddItemFrame.add(m_AddItemCategoryLabel);
+        m_AddItemFrame.add(m_AddItemCategoryTextField);
+        m_AddItemFrame.add(m_AddItemSumLabel);
+        m_AddItemFrame.add(m_AddItemSumTextField);
+        m_AddItemFrame.add(m_AddItemDayLabel);
+        m_AddItemFrame.add(m_AddItemDayComboBox);
+        m_AddItemFrame.add(m_AddItemMonthLabel);
+        m_AddItemFrame.add(m_AddItemMonthComboBox);
+        m_AddItemFrame.add(m_AddItemDescribingLabel);
+        m_AddItemFrame.add(m_AddItemDescribingTextField);
+        m_AddItemFrame.add(m_AddItemToDBButton);
+
+        m_AddItemFrame.setSize(1000,700);
+        m_AddItemFrame.setVisible(true);
 
 
         m_AddItemToDBButton.addActionListener(new ActionListener() {

@@ -18,6 +18,8 @@ public class UpdateItemView {
 
     public UpdateItemView(IViewModel m_ViewModel) {
         this.m_ViewModel = m_ViewModel;
+        updateItemInit();
+        updateItemStart();
     }
 
     private void updateItemInit() {
@@ -50,6 +52,9 @@ public class UpdateItemView {
         m_UpdateFrame.add(m_UpdateItemUsernameLabel);
         m_UpdateFrame.add(m_UpdateItemUsernameTextField);
         m_UpdateFrame.add(m_UpdateItemToDBButton);
+
+        m_UpdateFrame.setSize(1000,700);
+        m_UpdateFrame.setVisible(true);
 
         m_UpdateItemToDBButton.addActionListener(new ActionListener() {
             @Override

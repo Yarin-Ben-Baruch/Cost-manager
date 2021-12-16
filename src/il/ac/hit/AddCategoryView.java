@@ -17,6 +17,7 @@ public class AddCategoryView {
     public AddCategoryView(IViewModel m_ViewModel) {
         this.m_ViewModel = m_ViewModel;
         addCategoryInit();
+        addCategoryStart();
     }
 
     private void addCategoryInit() {
@@ -33,6 +34,9 @@ public class AddCategoryView {
         m_AddCategoryFrame.add(m_AddCategoryLabel);
         m_AddCategoryFrame.add(m_AddCategoryTextField);
         m_AddCategoryFrame.add(m_AddCategoryToDBButton);
+
+        m_AddCategoryFrame.setSize(1000,700);
+        m_AddCategoryFrame.setVisible(true);
 
         m_AddCategoryToDBButton.addActionListener(new ActionListener() {
             @Override

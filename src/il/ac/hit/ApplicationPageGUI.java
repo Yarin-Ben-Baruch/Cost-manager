@@ -30,14 +30,13 @@ public class ApplicationPageGUI {
     private JButton m_AddItemButton;
     //table
     private JTable m_ItemsTable;
-
+    private JScrollPane scrollPanel;
 
     public ApplicationPageGUI(IViewModel i_Vm) {
         m_ViewModel = i_Vm;
     }
 
     public void initApplication() {
-        // remove to method !
 
         // Create JFrame
         m_MainFrame = new JFrame();
@@ -105,10 +104,8 @@ public class ApplicationPageGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new ReportView(m_ViewModel);
-                m_ButtonsPanel.setVisible(false);
             }
         });
-
 
         m_UpdateItemButton.addActionListener(new ActionListener() {
             @Override
@@ -124,8 +121,6 @@ public class ApplicationPageGUI {
             }
         });
 
-
-
         m_AddCategory.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -133,15 +128,12 @@ public class ApplicationPageGUI {
             }
         });
 
-
-
         m_AddItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AddItemView(m_ViewModel);
             }
         });
-
 
     }
 
@@ -190,8 +182,9 @@ public class ApplicationPageGUI {
         m_ItemsTable = new JTable(data, columnNames);
         m_ItemsTable.setBounds(30, 40, 200, 300);
 
-        JScrollPane sp = new JScrollPane(m_ItemsTable);
-        m_MainFrame.add(sp);
+        scrollPanel = new JScrollPane(m_ItemsTable);
+
+        m_MainFrame.add(scrollPanel,BorderLayout.CENTER);
     }
 
     /**

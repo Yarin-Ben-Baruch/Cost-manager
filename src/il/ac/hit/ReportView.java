@@ -59,7 +59,9 @@ public class ReportView {
         ReportFrame.add(m_ShowReportEndDateMonthLabel);
         ReportFrame.add(m_ShowReportEndDateMonthTextField);
         ReportFrame.add(m_ShowReportActionButton);
-        ReportFrame.setVisible(false);
+
+        ReportFrame.setSize(1000,700);
+        ReportFrame.setVisible(true);
 
         m_ShowReportActionButton.addActionListener(new ActionListener() {
             @Override

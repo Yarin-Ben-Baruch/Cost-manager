@@ -38,7 +38,11 @@ public class RemoveItemView {
         m_RemoveItemFrame.add(m_RemoveItemUsernameLabel);
         m_RemoveItemFrame.add(m_RemoveItemUsernameTextField);
         m_RemoveItemFrame.add(m_RemoveItemFromDBButton);
-        m_RemoveItemFrame.setVisible(false);
+
+
+        m_RemoveItemFrame.setSize(1000,700);
+        m_RemoveItemFrame.setVisible(true);
+
 
         m_RemoveItemFromDBButton.addActionListener(new ActionListener() {
             @Override
