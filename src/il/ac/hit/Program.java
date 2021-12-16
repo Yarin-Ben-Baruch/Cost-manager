@@ -1,7 +1,6 @@
 package il.ac.hit;
 
 import javax.swing.*;
-import java.util.Collection;
 
 
 public class Program {

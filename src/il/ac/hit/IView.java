@@ -12,5 +12,7 @@ public interface IView {
     void showInvalidInput();
     void init();
     void start();
-    void openApplication();
+    void openApplicationFromLogin();
+    void registerSucceeded();
+    void openRegister();
 }

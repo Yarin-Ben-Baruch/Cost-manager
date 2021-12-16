@@ -75,10 +75,12 @@ public class CostManagerViewModel implements IViewModel {
             public void run() {
                 try {
                     m_Model.addNewUser(i_User);
+
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            m_View.showMessage(new Message("User was added!"));
+                            // fix ! need close the register and open the login menu again
+                            m_View.registerSucceeded();
                         }
                     });
                 }
@@ -332,7 +334,8 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            m_View.openApplication();
+
+                            m_View.openApplicationFromLogin();
                         }
                     });
                 } catch (CostMangerException e) {
@@ -346,4 +349,6 @@ public class CostManagerViewModel implements IViewModel {
             }
         });
     }
+
+
 }

@@ -6,12 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 
-public class CostMangerGUIView implements IView {
+public class ApplicationPageGUI {
 
     private String[] days;
     private String[] months;
-    private IViewModel vm;
-    private Collection<User> m_Users;
+    private IViewModel m_ViewModel;
 
     private JFrame m_MainFrame;
     private JPanel m_CostPanel;
@@ -60,127 +59,9 @@ public class CostMangerGUIView implements IView {
     private JLabel m_AddItemNameLabel, m_AddItemDescribingLabel, m_AddItemCurrencyLabel;
     private JLabel m_AddItemCategoryLabel, m_AddItemSumLabel,m_AddItemDayLabel, m_AddItemMonthLabel;
 
-    //Creating login page frame
-    private JFrame m_LoginFrame;
-    private Container m_LoginContainer;
-    private JLabel m_LoginUserNameLabel, m_LoginPasswordLabel;
-    private JTextField m_LoginUserNameTextField;
-    private JPasswordField m_LoginPasswordField;
-    private JButton m_LoginButton, m_LoginResetButton, m_LoginRegisterButton;
-    private JCheckBox m_LoginShowPasswordCheckBox;
 
-
-
-    @Override
-    public void init(){
-        m_LoginFrame = new JFrame();
-        m_LoginContainer = m_LoginFrame.getContentPane();
-        m_LoginUserNameLabel = new JLabel("USERNAME");
-        m_LoginPasswordLabel = new JLabel("PASSWORD");
-        m_LoginUserNameTextField = new JTextField();
-        m_LoginPasswordField = new JPasswordField();
-        m_LoginButton = new JButton("Login");
-        m_LoginResetButton = new JButton("Reset");
-        m_LoginRegisterButton = new JButton("Register");
-        m_LoginShowPasswordCheckBox = new JCheckBox("Show Password");
-    }
-
-    @Override
-    public void start(){
-
-        setLoginLayoutManager();
-        setLoginLocationAndSize();
-        addLoginComponentsToContainer();
-        addLoginActionEvents();
-
-        m_LoginFrame.setTitle("Login Form");
-        m_LoginFrame.setVisible(true);
-        m_LoginFrame.setBounds(10, 10, 350, 400);
-        m_LoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        m_LoginFrame.setResizable(false);
-    }
-
-    //Login
-    private void setLoginLayoutManager() {
-        m_LoginContainer.setLayout(null);
-    }
-
-    //Login
-    private void setLoginLocationAndSize() {
-
-        m_LoginUserNameLabel.setBounds(50, 70, 100, 30);
-        m_LoginPasswordLabel.setBounds(50, 120, 100, 30);
-        m_LoginUserNameTextField.setBounds(150, 70, 150, 30);
-        m_LoginPasswordField.setBounds(150, 120, 150, 30);
-        m_LoginShowPasswordCheckBox.setBounds(150, 150, 150, 30);
-        m_LoginButton.setBounds(50, 200, 100, 30);
-        m_LoginResetButton.setBounds(200, 200, 100, 30);
-        m_LoginRegisterButton.setBounds(125, 250, 100, 30);
-    }
-
-    //Login
-    private void addLoginComponentsToContainer() {
-        m_LoginContainer.add(m_LoginUserNameLabel);
-        m_LoginContainer.add(m_LoginPasswordLabel);
-        m_LoginContainer.add(m_LoginUserNameTextField);
-        m_LoginContainer.add(m_LoginPasswordField);
-        m_LoginContainer.add(m_LoginShowPasswordCheckBox);
-        m_LoginContainer.add(m_LoginButton);
-        m_LoginContainer.add(m_LoginResetButton);
-        m_LoginContainer.add(m_LoginRegisterButton);
-    }
-
-    //Login
-    private void addLoginActionEvents() {
-
-        m_LoginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Coding Part of LOGIN button
-
-                String userText;
-                String pwdText;
-                userText = m_LoginUserNameTextField.getText();
-                pwdText = new String(m_LoginPasswordField.getPassword());
-                User user = new User(userText, pwdText);
-                vm.isUserExists(user);
-            }
-        });
-
-        m_LoginResetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Coding Part of RESET button
-                m_LoginUserNameTextField.setText("");
-                m_LoginPasswordField.setText("");
-            }
-        });
-
-        m_LoginShowPasswordCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Coding Part of showPassword JCheckBox
-                if (m_LoginShowPasswordCheckBox.isSelected()) {
-                    m_LoginPasswordField.setEchoChar((char) 0);
-                } else {
-                    m_LoginPasswordField.setEchoChar('*');
-                }
-            }
-        });
-
-        m_LoginRegisterButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Coding Part of register button
-
-                //close this windows
-                m_LoginFrame.dispose();
-                //
-                Register register = new Register();
-                register.init();
-                register.start();
-            }
-        });
+    public ApplicationPageGUI(IViewModel i_Vm) {
+        m_ViewModel = i_Vm;
     }
 
     public void initApplication() {
@@ -243,14 +124,14 @@ public class CostMangerGUIView implements IView {
         m_ShowItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vm.getItems();
+                m_ViewModel.getItems();
             }
         });
 
         m_ShowCategoriesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vm.getAllCategories();
+                m_ViewModel.getAllCategories();
             }
         });
 
@@ -265,7 +146,7 @@ public class CostMangerGUIView implements IView {
         m_ShowReportActionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vm.getDetailedReport(
+                m_ViewModel.getDetailedReport(
                         java.sql.Date.valueOf("2021-"+m_ShowReportStartDateMonthTextField.getSelectedItem() +"-"+m_ShowReportStartDateDayTextField.getSelectedItem()),
                         java.sql.Date.valueOf("2021-"+m_ShowReportEndDateMonthTextField.getSelectedItem()+"-"+ m_ShowReportEndDateDayTextField.getSelectedItem()));
 
@@ -286,7 +167,7 @@ public class CostMangerGUIView implements IView {
         m_UpdateItemToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vm.updateItem(m_UpdateItemColNameTextField.getText(),
+                m_ViewModel.updateItem(m_UpdateItemColNameTextField.getText(),
                         m_UpdateItemDataToSetTextField.getText(),
                         Integer.parseInt(m_UpdateItemCostNumberTextField.getText()),
                         m_UpdateItemUsernameTextField.getText());
@@ -306,7 +187,7 @@ public class CostMangerGUIView implements IView {
         m_RemoveItemFromDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vm.removeItem(Integer.parseInt(m_UpdateItemCostNumberTextField.getText()), m_UpdateItemUsernameTextField.getText());
+                m_ViewModel.removeItem(Integer.parseInt(m_UpdateItemCostNumberTextField.getText()), m_UpdateItemUsernameTextField.getText());
                 m_RemoveItemPanel.setVisible(false);
                 m_ButtonsPanel.setVisible(true);
             }
@@ -323,7 +204,7 @@ public class CostMangerGUIView implements IView {
         m_AddCategoryToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vm.addNewCategoryIfExists(new Category(m_AddCategoryTextField.getText()));
+                m_ViewModel.addNewCategoryIfExists(new Category(m_AddCategoryTextField.getText()));
                 m_AddCategoryPanel.setVisible(false);
                 m_ButtonsPanel.setVisible(true);
             }
@@ -347,7 +228,7 @@ public class CostMangerGUIView implements IView {
                         m_AddItemSumTextField.getText(),
                         java.sql.Date.valueOf("2021-"+m_AddItemMonthComboBox.getSelectedItem()+"-"+m_AddItemDayComboBox.getSelectedItem()),
                         "matan");
-                vm.addItem(item);
+                m_ViewModel.addItem(item);
                 m_AddItemPanel.setVisible(false);
                 m_ButtonsPanel.setVisible(true);
             }
@@ -531,7 +412,6 @@ public class CostMangerGUIView implements IView {
      * A method that gets collection of items and print the items into the TextArea.
      * @param i_Items
      */
-    @Override
     public void showItems(Collection<Item> i_Items) {
         m_CostInfoTextArea.setText("");
         for (Item item : i_Items) {
@@ -543,7 +423,6 @@ public class CostMangerGUIView implements IView {
      * A method that gets collection of categories and print the items into the TextArea.
      * @param i_Categories
      */
-    @Override
     public void ShowCategories(Collection<Category> i_Categories) {
         m_CostInfoTextArea.setText("");
         for (Category category : i_Categories) {
@@ -555,9 +434,8 @@ public class CostMangerGUIView implements IView {
      * A method that gets collection of users and print the items into the TextArea.
      * @param i_Users
      */
-    @Override
     public void setUsers(Collection<User> i_Users) {
-        m_Users = i_Users;
+//        m_Users = i_Users;
 
 //        m_CostInfoTextArea.setText("");
 //        for (User user : i_Users) {
@@ -569,9 +447,8 @@ public class CostMangerGUIView implements IView {
      * A method that set the IViewModel that send to her from the main program.
      * @param i_Vm
      */
-    @Override
     public void setIViewModel(IViewModel i_Vm) {
-        vm = i_Vm;
+        m_ViewModel = i_Vm;
     }
 
     /**
@@ -579,19 +456,9 @@ public class CostMangerGUIView implements IView {
      * Let the user know what action was preformed.
      * @param i_Message
      */
-    @Override
     public void showMessage(Message i_Message) {
         m_MessageTextField.setText(i_Message.getText());
     }
 
-    public void showInvalidInput(){
-        JOptionPane.showMessageDialog(m_LoginFrame, "Invalid Username or Password");
-    }
 
-    public void openApplication(){
-        JOptionPane.showMessageDialog(m_LoginFrame, "Login Successful");
-        m_LoginFrame.dispose();
-        initApplication();
-        startApplication();
-    }
 }

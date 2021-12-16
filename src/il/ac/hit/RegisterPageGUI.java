@@ -4,8 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Register{
+public class RegisterPageGUI {
 
+    private IViewModel m_Vm;
     // Components of the Form
     private JFrame m_RegisterFrame;
     private Container m_RegisterContainer;
@@ -16,8 +17,15 @@ public class Register{
     private JButton m_SubmitButton, m_ResetJButton;
     private JCheckBox m_RegisterShowPasswordCheckBox;
 
+    public RegisterPageGUI(IViewModel i_Vm) {
+        this.m_Vm = i_Vm;
+    }
 
-    public void init(){
+    public void Close() {
+        m_RegisterFrame.dispose();
+    }
+
+    public void init() {
 
         m_RegisterFrame = new JFrame("Registration Form");
         m_TitleLabel = new JLabel("Registration Form");
@@ -113,15 +121,14 @@ public class Register{
             public void actionPerformed(ActionEvent e) {
 
                 // Makes sure he has approved the terms, and UserName, password not empty
+                // Fix the deprecated method.
                 if (m_TermCheckBox.isSelected()
                         && m_UsernameTextField.getText().length() != 0
                         && m_PasswordField.getText().length() != 0) {
 
-                    String data
-                            = "Name : "
-                            + m_UsernameTextField.getText() + "\n"
-                            + "Password : "
-                            + m_PasswordField.getText() + "\n";
+                    User user = new User(m_UsernameTextField.getText(),m_PasswordField.getPassword().toString());
+
+                    m_Vm.addNewUser(user);
 
                     m_ResetJLabel.setText("Registration Successfully..");
                 }
