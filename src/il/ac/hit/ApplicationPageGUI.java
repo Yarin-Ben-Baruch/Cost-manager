@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class ApplicationPageGUI {
     private IViewModel m_ViewModel;
@@ -27,7 +28,8 @@ public class ApplicationPageGUI {
     private JButton m_AddCategory;
     // Add Item Button.
     private JButton m_AddItemButton;
-
+    //table
+    private JTable m_ItemsTable;
 
 
     public ApplicationPageGUI(IViewModel i_Vm) {
@@ -143,7 +145,6 @@ public class ApplicationPageGUI {
 
     }
 
-
     private void creatingButtonsStart() {
         // Creating the Button Panel.
         m_ButtonsPanel.setLayout(new FlowLayout());
@@ -170,10 +171,27 @@ public class ApplicationPageGUI {
      * @param i_Items
      */
     public void showItems(Collection<Item> i_Items) {
-        m_CostInfoTextArea.setText("");
-        for (Item item : i_Items) {
-            m_CostInfoTextArea.append(item.toString() + "\n");
+
+        LinkedList<Item> items = (LinkedList<Item>) i_Items;
+        String[][] data = new String[i_Items.size()][7];
+        String[] columnNames = { "Cost number", "Name", "Description", "Currency", "Category", "Sum", "Date"};
+
+        for(int i = 0 ; i < i_Items.size() ; i++){
+            data[i][0] = String.valueOf(items.get(i).getCostNumber());
+            data[i][1] = items.get(i).getName();
+            data[i][2] = items.get(i).getDescribing();
+            data[i][3] = items.get(i).getCurrency();
+            data[i][4] = items.get(i).getCategory().getCategoryName();
+            data[i][5] = items.get(i).getSum();
+            data[i][6] = items.get(i).getDate().toString();
         }
+
+        // Initializing the JTable
+        m_ItemsTable = new JTable(data, columnNames);
+        m_ItemsTable.setBounds(30, 40, 200, 300);
+
+        JScrollPane sp = new JScrollPane(m_ItemsTable);
+        m_MainFrame.add(sp);
     }
 
     /**
