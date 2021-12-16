@@ -9,6 +9,7 @@ public class LoginPageGUI{
 
     private IViewModel m_Vm;
     private RegisterPageGUI m_RegisterFrame;
+
     //Creating login page frame
     private JFrame m_LoginFrame;
     private Container m_LoginContainer;
@@ -18,11 +19,9 @@ public class LoginPageGUI{
     private JButton m_LoginButton, m_LoginResetButton, m_LoginRegisterButton;
     private JCheckBox m_LoginShowPasswordCheckBox;
 
-
     public LoginPageGUI(IViewModel i_Vm) {
         this.m_Vm = i_Vm;
     }
-
 
     public void init() {
         // Sub menu of Login !
@@ -56,6 +55,7 @@ public class LoginPageGUI{
     }
 
     public void OpenAfterRegister() {
+        m_RegisterFrame.Close();
         m_LoginFrame.setVisible(true);
 
     }
@@ -92,6 +92,14 @@ public class LoginPageGUI{
         m_LoginContainer.add(m_LoginButton);
         m_LoginContainer.add(m_LoginResetButton);
         m_LoginContainer.add(m_LoginRegisterButton);
+    }
+
+    public void showInvalidInputInLogin() {
+        JOptionPane.showMessageDialog(m_LoginFrame, "Invalid Username or Password");
+    }
+
+    public void showInvalidInputInRegister() {
+        m_RegisterFrame.ShowInvalidInputInRegister();
     }
 
     //Login

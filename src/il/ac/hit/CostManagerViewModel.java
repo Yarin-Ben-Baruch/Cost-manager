@@ -88,7 +88,7 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            m_View.showMessage(new Message(e.getMessage()));
+                            m_View.showInvalidInputInRegister();
                         }
                     });
                 }
@@ -342,7 +342,7 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            m_View.showInvalidInput();
+                            m_View.showInvalidInputInLogin();
                         }
                     });
                 }

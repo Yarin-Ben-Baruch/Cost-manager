@@ -9,9 +9,10 @@ public interface IView {
     void setUsers(Collection<User> i_Users);
     void setIViewModel(IViewModel i_Vm);
     void showMessage(Message i_Message);
-    void showInvalidInput();
     void init();
     void start();
     void openApplicationFromLogin();
     void registerSucceeded();
+    void showInvalidInputInLogin();
+    void showInvalidInputInRegister();
 }

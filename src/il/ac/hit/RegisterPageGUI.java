@@ -21,9 +21,6 @@ public class RegisterPageGUI {
         this.m_Vm = i_Vm;
     }
 
-    public void Close() {
-        m_RegisterFrame.dispose();
-    }
 
     public void init() {
 
@@ -115,6 +112,15 @@ public class RegisterPageGUI {
         m_ResetJLabel.setFont(new Font("Arial", Font.PLAIN, 20));
     }
 
+    public void ShowInvalidInputInRegister() {
+        JOptionPane.showMessageDialog(m_RegisterFrame,"Register Failed!");
+    }
+
+    public void Close() {
+        JOptionPane.showMessageDialog(m_RegisterFrame, "Register Success");
+        m_RegisterFrame.dispose();
+    }
+
     private void AddRegisterActionEvent(){
         m_SubmitButton.addActionListener(new ActionListener() {
             @Override
@@ -129,15 +135,10 @@ public class RegisterPageGUI {
                     User user = new User(m_UsernameTextField.getText(),pwdText);
 
                     m_Vm.addNewUser(user);
-
-                    JOptionPane.showMessageDialog(m_RegisterFrame,"Register Successful");
-                    m_RegisterFrame.dispose();
-
                 }
                 // If not confirmed
                 else {
-                    m_ResetJLabel.setText("Please accept the"
-                            + " terms & conditions..");
+                    ShowInvalidInputInRegister();
                 }
             }
         });
@@ -153,7 +154,17 @@ public class RegisterPageGUI {
             }
         });
 
-        //add lisnter to show PSSWORD
+        m_RegisterShowPasswordCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Coding Part of showPassword JCheckBox
+                if (m_RegisterShowPasswordCheckBox.isSelected()) {
+                    m_PasswordField.setEchoChar((char) 0);
+                } else {
+                    m_PasswordField.setEchoChar('*');
+                }
+            }
+        });
     }
 
 }

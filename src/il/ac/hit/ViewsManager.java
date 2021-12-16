@@ -50,9 +50,12 @@ public class ViewsManager implements IView{
     }
 
 
-    public void showInvalidInput(){
+    public void showInvalidInputInLogin(){
+        m_LoginPage.showInvalidInputInLogin();
+    }
 
-        //JOptionPane.showMessageDialog(m_MainFrame, "Invalid Username or Password");
+    public void showInvalidInputInRegister() {
+        m_LoginPage.showInvalidInputInRegister();
     }
 
     public void openApplicationFromLogin() {
