@@ -7,9 +7,6 @@ import java.awt.event.ActionListener;
 import java.util.Collection;
 
 public class ApplicationPageGUI {
-
-    private String[] days;
-    private String[] months;
     private IViewModel m_ViewModel;
 
     private JFrame m_MainFrame;
@@ -20,21 +17,12 @@ public class ApplicationPageGUI {
     private JTextArea m_CostInfoTextArea;
     private JButton m_ShowItemsButton, m_ShowCategoriesButton;
 
-    // Show Report Button, TextField, Label and Submit Action.
-    private JPanel m_ShowReportPanel;
-    private JButton m_ShowReportButton,m_ShowReportActionButton;
-    private JLabel m_ShowReportStartDateDayLabel, m_ShowReportStartDateMonthLabel;
-    private JLabel m_ShowReportEndDateDayLabel, m_ShowReportEndDateMonthLabel;
-    private JComboBox m_ShowReportStartDateDayTextField, m_ShowReportStartDateMonthTextField;
-    private JComboBox m_ShowReportEndDateDayTextField, m_ShowReportEndDateMonthTextField;
+    // Show Report Button
+    private JButton m_ShowReportButton;
+
 
     // Update Item Button, TextField, Label and Submit Action.
-    private JPanel m_UpdateItemPanel;
-    private JButton m_UpdateItemButton , m_UpdateItemToDBButton;
-    private JLabel m_UpdateItemColNameLabel, m_UpdateItemDataToSetLabel;
-    private JTextField m_UpdateItemColNameTextField, m_UpdateItemDataToSetTextField;
-    private JLabel m_UpdateItemCostNumberLabel, m_UpdateItemUsernameLabel;
-    private JTextField m_UpdateItemUsernameTextField, m_UpdateItemCostNumberTextField;
+    private JButton m_UpdateItemButton;
 
     // Remove Item  Button, TextField, Label and Submit Action.
     private JPanel m_RemoveItemPanel;
@@ -66,14 +54,6 @@ public class ApplicationPageGUI {
 
     public void initApplication() {
         // remove to method !
-        days = new String[31];
-        for (int i =0 ; i<31 ; i++) {
-            days[i] = (i+1) +"";
-        }
-        months = new String[12];
-        for (int i =0 ; i<12 ; i++) {
-            months[i] = (i+1) +"";
-        }
 
         // Create JFrame
         m_MainFrame = new JFrame();
@@ -108,8 +88,6 @@ public class ApplicationPageGUI {
         m_MainFrame.add(m_MessagePanel,BorderLayout.NORTH);
 
         creatingButtonsStart();
-        showReportStart();
-        updateItemStart();
         removeItemStart();
         addCategoryStart();
         addItemStart();
@@ -138,41 +116,16 @@ public class ApplicationPageGUI {
         m_ShowReportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m_ShowReportPanel.setVisible(true);
+                new ReportView(m_ViewModel);
                 m_ButtonsPanel.setVisible(false);
             }
         });
 
-        m_ShowReportActionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                m_ViewModel.getDetailedReport(
-                        java.sql.Date.valueOf("2021-"+m_ShowReportStartDateMonthTextField.getSelectedItem() +"-"+m_ShowReportStartDateDayTextField.getSelectedItem()),
-                        java.sql.Date.valueOf("2021-"+m_ShowReportEndDateMonthTextField.getSelectedItem()+"-"+ m_ShowReportEndDateDayTextField.getSelectedItem()));
-
-                m_ShowReportPanel.setVisible(false);
-                m_ButtonsPanel.setVisible(true);
-
-            }
-        });
 
         m_UpdateItemButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m_UpdateItemPanel.setVisible(true);
-                m_ButtonsPanel.setVisible(false);
-            }
-        });
-
-        m_UpdateItemToDBButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                m_ViewModel.updateItem(m_UpdateItemColNameTextField.getText(),
-                        m_UpdateItemDataToSetTextField.getText(),
-                        Integer.parseInt(m_UpdateItemCostNumberTextField.getText()),
-                        m_UpdateItemUsernameTextField.getText());
-                m_UpdateItemPanel.setVisible(false);
-                m_ButtonsPanel.setVisible(true);
+                new UpdateView(m_ViewModel);
             }
         });
 
@@ -187,7 +140,7 @@ public class ApplicationPageGUI {
         m_RemoveItemFromDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m_ViewModel.removeItem(Integer.parseInt(m_UpdateItemCostNumberTextField.getText()), m_UpdateItemUsernameTextField.getText());
+                m_ViewModel.removeItem(Integer.parseInt(m_RemoveItemCostNumberTextField.getText()), m_RemoveItemUsernameTextField.getText());
                 m_RemoveItemPanel.setVisible(false);
                 m_ButtonsPanel.setVisible(true);
             }
@@ -257,18 +210,7 @@ public class ApplicationPageGUI {
     }
 
     private void updateItemInit() {
-        // Creating the UpdateItem Action
-        m_UpdateItemPanel = new JPanel();
         m_UpdateItemButton = new JButton("Update item");
-        m_UpdateItemColNameLabel = new JLabel("Col name to change:");
-        m_UpdateItemColNameTextField = new JTextField(15);
-        m_UpdateItemDataToSetLabel = new JLabel("Date to set:");
-        m_UpdateItemDataToSetTextField = new JTextField(15);
-        m_UpdateItemToDBButton = new JButton("Update item to DB");
-        m_UpdateItemCostNumberLabel = new JLabel("Cost number:");
-        m_UpdateItemCostNumberTextField = new JTextField(10);
-        m_UpdateItemUsernameLabel = new JLabel("Username:");
-        m_UpdateItemUsernameTextField = new JTextField(15);
     }
 
     private void addItemInit() {
@@ -293,55 +235,9 @@ public class ApplicationPageGUI {
     }
 
     private void showReportInit() {
-        // Creating the detailed report Action.
-        m_ShowReportPanel = new JPanel();
         m_ShowReportButton = new JButton("Show detail report");
-        m_ShowReportStartDateDayLabel = new JLabel("Start day:");
-        m_ShowReportStartDateDayTextField = new JComboBox(days);
-        m_ShowReportStartDateMonthLabel = new JLabel("Start month:");
-        m_ShowReportStartDateMonthTextField = new JComboBox(months);
-        m_ShowReportEndDateDayLabel = new JLabel("End day:");
-        m_ShowReportEndDateDayTextField = new JComboBox(days);
-        m_ShowReportEndDateMonthLabel = new JLabel("End Month");
-        m_ShowReportEndDateMonthTextField = new JComboBox(months);
-        m_ShowReportActionButton = new JButton("Show the report");
     }
 
-    private void showReportStart() {
-        // Creating the detailed report Panel.
-        m_ShowReportPanel.setLayout(new GridLayout(5,2));
-        m_ShowReportPanel.add(m_ShowReportStartDateDayLabel);
-        m_ShowReportPanel.add(m_ShowReportStartDateDayTextField);
-        m_ShowReportPanel.add(m_ShowReportStartDateMonthLabel);
-        m_ShowReportPanel.add(m_ShowReportStartDateMonthTextField);
-        m_ShowReportPanel.add(m_ShowReportEndDateDayLabel);
-        m_ShowReportPanel.add(m_ShowReportEndDateDayTextField);
-        m_ShowReportPanel.add(m_ShowReportEndDateMonthLabel);
-        m_ShowReportPanel.add(m_ShowReportEndDateMonthTextField);
-        m_ShowReportPanel.add(m_ShowReportActionButton);
-        m_ShowReportPanel.setVisible(false);
-        m_MainFrame.add(m_ShowReportPanel,BorderLayout.CENTER);
-    }
-
-    private void updateItemStart() {
-        // Creating the Update Item Panel.
-        m_UpdateItemPanel.setLayout(new GridLayout(5,2));
-        m_UpdateItemPanel.add(m_UpdateItemColNameLabel);
-        m_UpdateItemPanel.add(m_UpdateItemColNameTextField);
-        m_UpdateItemPanel.add(m_UpdateItemDataToSetLabel);
-        m_UpdateItemPanel.add(m_UpdateItemDataToSetTextField);
-        m_UpdateItemPanel.add(m_UpdateItemCostNumberLabel);
-        m_UpdateItemPanel.add(m_UpdateItemCostNumberTextField);
-        m_UpdateItemPanel.add(m_UpdateItemUsernameLabel);
-        m_UpdateItemPanel.add(m_UpdateItemUsernameTextField);
-        m_UpdateItemPanel.add(m_UpdateItemCostNumberLabel);
-        m_UpdateItemPanel.add(m_UpdateItemCostNumberTextField);
-        m_UpdateItemPanel.add(m_UpdateItemUsernameLabel);
-        m_UpdateItemPanel.add(m_UpdateItemUsernameTextField);
-        m_UpdateItemPanel.add(m_UpdateItemToDBButton);
-        m_UpdateItemPanel.setVisible(false);
-        m_MainFrame.add(m_UpdateItemPanel,BorderLayout.CENTER);
-    }
 
     private void removeItemStart() {
         // Creating the Remove Item Panel.
@@ -459,6 +355,4 @@ public class ApplicationPageGUI {
     public void showMessage(Message i_Message) {
         m_MessageTextField.setText(i_Message.getText());
     }
-
-
 }
