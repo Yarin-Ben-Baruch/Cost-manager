@@ -12,9 +12,9 @@ import java.util.LinkedList;
  */
 public class DBModel implements IModel {
 
-    private String user = "admin";
-    private String password = "admin";
-    private String dbUrl = "jdbc:mysql://localhost:8889/admin";
+    private String m_User = "admin";
+    private String m_Password = "admin";
+    private String m_DbUrl = "jdbc:mysql://localhost:8889/admin";
 
 
     /*
@@ -29,7 +29,7 @@ public class DBModel implements IModel {
      */
     public DBModel() throws CostMangerException {
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             System.out.println("Connection success !");
         }
         catch (SQLException e) {
@@ -42,29 +42,29 @@ public class DBModel implements IModel {
     /**
      * Add item method adding cost item for the items sql table.
      * Add item method also adding category if not exists to the categories sql table.
-     * @param item
+     * @param i_Item
      * @throws CostMangerException
      */
     @Override
-    public void addItem(Item item) throws CostMangerException {
+    public void addItem(Item i_Item) throws CostMangerException {
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             // if the category is not exists add the category to the categories sql table.
-            addNewCategoryIfExists(item.getCategory());
+            addNewCategoryIfExists(i_Item.getCategory());
 
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into items (costNumber,name,description,currency,category,sum,date,userName) " +
                             "values " +
                             "(?,?,?,?,?,?,?,?)");
 
-            preparedStatement.setInt(1,item.getCostNumber());
-            preparedStatement.setString(2,item.getName());
-            preparedStatement.setString(3,item.getDescribing());
-            preparedStatement.setString(4,item.getCurrency());
-            preparedStatement.setString(5,item.getCategory().getCategoryName());
-            preparedStatement.setString(6, item.getSum());
-            preparedStatement.setDate(7, item.getDate());
-            preparedStatement.setString(8, item.getUserName());
+            preparedStatement.setInt(1, i_Item.getCostNumber());
+            preparedStatement.setString(2, i_Item.getName());
+            preparedStatement.setString(3, i_Item.getDescribing());
+            preparedStatement.setString(4, i_Item.getCurrency());
+            preparedStatement.setString(5, i_Item.getCategory().getCategoryName());
+            preparedStatement.setString(6, i_Item.getSum());
+            preparedStatement.setDate(7, i_Item.getDate());
+            preparedStatement.setString(8, i_Item.getUserName());
 
             // checking if adding user was performed.
             int checkAddItem = preparedStatement.executeUpdate();
@@ -91,7 +91,7 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<Item> currentItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items");
             myResult = preparedStatement.executeQuery();
@@ -114,15 +114,15 @@ public class DBModel implements IModel {
     /**
      * Updating specific data that the user selected, in cost item sql table.
      * @param i_NameColToUpdate
-     * @param dataToSet
+     * @param i_DataToSet
      * @param i_CostNumber
-     * @param userName
+     * @param i_Username
      * @throws CostMangerException
      */
     @Override
-    public void updateItem(String i_NameColToUpdate, String dataToSet, String i_CostNumber, String userName) throws CostMangerException {
+    public void updateItem(String i_NameColToUpdate, String i_DataToSet, String i_CostNumber, String i_Username) throws CostMangerException {
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             int costNumber = Integer.parseInt(i_CostNumber);
 
             // If the user try to change username throw CostMangerException.
@@ -131,18 +131,18 @@ public class DBModel implements IModel {
             }
 
             PreparedStatement preparedStatement = null;
-            Object date = dataToSet;
+            Object date = i_DataToSet;
             StringBuffer queryToExecute = new StringBuffer();
 
             // Work for dates only.
             if(i_NameColToUpdate.equals("date")){
-                queryToExecute.append("UPDATE Items SET " + i_NameColToUpdate + " = " + dataToSet + " WHERE costNumber = "
-                        + costNumber + " and userName = " + "'" + userName + "'");
+                queryToExecute.append("UPDATE Items SET " + i_NameColToUpdate + " = " + i_DataToSet + " WHERE costNumber = "
+                        + costNumber + " and userName = " + "'" + i_Username + "'");
             }
             else {
                 // Work with VARCHAR.
-                queryToExecute.append("UPDATE Items SET " + i_NameColToUpdate + " = " + "'" + dataToSet + "'" + " WHERE costNumber = "
-                        + costNumber + " and userName = " + "'" + userName + "'");
+                queryToExecute.append("UPDATE Items SET " + i_NameColToUpdate + " = " + "'" + i_DataToSet + "'" + " WHERE costNumber = "
+                        + costNumber + " and userName = " + "'" + i_Username + "'");
             }
 
             preparedStatement = connection.prepareStatement(queryToExecute.toString());
@@ -163,19 +163,19 @@ public class DBModel implements IModel {
     /**
      * Remove item from the cost items sql table
      * @param i_CostNumber
-     * @param userName
+     * @param i_Username
      * @throws CostMangerException
      */
     @Override
-    public void removeItem(String i_CostNumber, String userName) throws CostMangerException {
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+    public void removeItem(String i_CostNumber, String i_Username) throws CostMangerException {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             int costNumber = Integer.parseInt(i_CostNumber);
 
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM items WHERE costNumber = ? AND userName = ?");
 
             preparedStatement.setInt(1,costNumber);
-            preparedStatement.setString(2,userName);
+            preparedStatement.setString(2, i_Username);
 
             // Check that the remove item was executed properly.
             int howManyUpdates = preparedStatement.executeUpdate();
@@ -192,23 +192,23 @@ public class DBModel implements IModel {
 
     /**
      * Get Report return collection of all the items in the items sql table that start with the startDate and end with the endDate.
-     * @param startDate
-     * @param endDate
+     * @param i_StartDate
+     * @param i_EndDate
      * @return
      * @throws CostMangerException
      */
     @Override
-    public Collection<Item> getDetailedReport(Date startDate, Date endDate) throws CostMangerException {
+    public Collection<Item> getDetailedReport(Date i_StartDate, Date i_EndDate) throws CostMangerException {
 
         ResultSet myResult = null;
         Collection<Item> reportItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE date >= ? AND date <= ?");
 
-            preparedStatement.setDate(1, startDate);
-            preparedStatement.setDate(2, endDate);
+            preparedStatement.setDate(1, i_StartDate);
+            preparedStatement.setDate(2, i_EndDate);
             myResult = preparedStatement.executeQuery();
 
             // Put all the values form the query in LinkedList.
@@ -231,17 +231,17 @@ public class DBModel implements IModel {
 
     /**
      * Adding new user to the users sql table.
-     * @param user
+     * @param i_User
      * @throws CostMangerException
      */
     @Override
-    public void addNewUser(User user) throws CostMangerException {
-        try ( Connection connection = DriverManager.getConnection(dbUrl, this.user, password)) {
+    public void addNewUser(User i_User) throws CostMangerException {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, this.m_User, m_Password)) {
 
             Collection<User> allUsers = getAllUsers();
 
             // Check if the user is exists in the users sql table. If the user exists throws CostMangerException.
-            if(allUsers.contains(user)) {
+            if(allUsers.contains(i_User)) {
                 throw new CostMangerException("This user is already exists");
             }
 
@@ -250,8 +250,8 @@ public class DBModel implements IModel {
                             "values " +
                             "(?,?)");
 
-            preparedStatement.setString(1, user.getUserName());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(1, i_User.getUserName());
+            preparedStatement.setString(2, i_User.getPassword());
 
             // Check that the add new user was executed properly.
             int howManyAdded = preparedStatement.executeUpdate();
@@ -268,23 +268,23 @@ public class DBModel implements IModel {
 
     /**
      * Adding new category to the categories sql table if the category is not exists.
-     * @param category
+     * @param i_Category
      * @throws CostMangerException
      */
     @Override
-    public void addNewCategoryIfExists(Category category) throws CostMangerException {
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+    public void addNewCategoryIfExists(Category i_Category) throws CostMangerException {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
             Collection<Category> allCategories = getAllCategories();
 
             // If the category is not in the list of the categories add the category.
-            if(!allCategories.contains(category) && !category.getCategoryName().isEmpty()){
+            if(!allCategories.contains(i_Category) && !i_Category.getCategoryName().isEmpty()){
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "insert into categories (category) " +
                                 "values " +
                                 "(?)");
 
-                preparedStatement.setString(1, category.getCategoryName());
+                preparedStatement.setString(1, i_Category.getCategoryName());
 
                 // Check that the add category was executed properly.
                 int howManyAdded = preparedStatement.executeUpdate();
@@ -295,7 +295,7 @@ public class DBModel implements IModel {
                 }
             }
             else{
-                if(category.getCategoryName().isEmpty())
+                if(i_Category.getCategoryName().isEmpty())
                 {
                     throw new CostMangerException("Can't add empty category" );
                 }
@@ -319,7 +319,7 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<User> currentItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users");
 
@@ -349,7 +349,7 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<Category> currentItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from categories");
             myResult = preparedStatement.executeQuery();
@@ -373,7 +373,7 @@ public class DBModel implements IModel {
         ResultSet myResult = null;
         Collection<User> currentItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users");
 

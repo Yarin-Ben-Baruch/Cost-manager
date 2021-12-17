@@ -8,22 +8,22 @@ import java.util.Objects;
 
 public class Category {
 
-    private String categoryName;
+    private String m_CategoryName;
 
     /**
-     * A constructor that updates the category in DB.
-     * @param category
+     * A constructor that updates the i_Category in DB.
+     * @param i_Category
      */
-    public Category(String category) {
-        setCategoryName(category);
+    public Category(String i_Category) {
+        setCategoryName(i_Category);
     }
 
     public String getCategoryName() {
-        return categoryName;
+        return m_CategoryName;
     }
 
-    private void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    private void setCategoryName(String i_CategoryName) {
+        this.m_CategoryName = i_CategoryName;
     }
 
     @Override
@@ -31,18 +31,18 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(categoryName, category.categoryName);
+        return Objects.equals(m_CategoryName, category.m_CategoryName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoryName);
+        return Objects.hash(m_CategoryName);
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "categoryName='" + categoryName + '\'' +
+                "categoryName='" + m_CategoryName + '\'' +
                 '}';
     }
 }

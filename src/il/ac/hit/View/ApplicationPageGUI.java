@@ -102,59 +102,23 @@ public class ApplicationPageGUI {
     }
 
     private void ButtonActionListeners() {
-        m_ShowItemsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                m_ViewModel.getItems();
-            }
-        });
+        m_ShowItemsButton.addActionListener(e -> m_ViewModel.getItems());
 
-        m_ShowCategoriesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                m_ViewModel.getAllCategories();
-            }
-        });
+        m_ShowCategoriesButton.addActionListener(e -> m_ViewModel.getAllCategories());
 
-        m_ShowReportButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ReportView(m_ViewModel);
-            }
-        });
+        m_ShowReportButton.addActionListener(e -> new ReportView(m_ViewModel));
 
-        m_UpdateItemButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new UpdateItemView(m_ViewModel);
-            }
-        });
+        m_UpdateItemButton.addActionListener(e -> new UpdateItemView(m_ViewModel));
 
-        m_RemoveItemButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new RemoveItemView(m_ViewModel);
-            }
-        });
+        m_RemoveItemButton.addActionListener(e -> new RemoveItemView(m_ViewModel));
 
-        m_AddCategory.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddCategoryView(m_ViewModel);
-            }
-        });
+        m_AddCategory.addActionListener(e -> new AddCategoryView(m_ViewModel));
 
-        m_AddItemButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AddItemView(m_ViewModel);
-            }
-        });
+        m_AddItemButton.addActionListener(e -> new AddItemView(m_ViewModel));
     }
 
     /**
      * A method that gets collection of items and print the items into the Table.
-     *
      * @param i_Items
      */
     public void showItems(Collection<Item> i_Items) {
