@@ -1,4 +1,6 @@
-package il.ac.hit;
+package il.ac.hit.Model;
+
+import il.ac.hit.Exception.CostMangerException;
 
 import java.sql.*;
 import java.util.Collection;
@@ -111,19 +113,20 @@ public class DBModel implements IModel {
 
     /**
      * Updating specific data that the user selected, in cost item sql table.
-     * @param nameColToUpdate
+     * @param i_NameColToUpdate
      * @param dataToSet
-     * @param costNumber
+     * @param i_CostNumber
      * @param userName
      * @throws CostMangerException
      */
     @Override
-    public void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException {
+    public void updateItem(String i_NameColToUpdate, String dataToSet, String i_CostNumber, String userName) throws CostMangerException {
 
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+            int costNumber = Integer.parseInt(i_CostNumber);
 
             // If the user try to change username throw CostMangerException.
-            if(nameColToUpdate.equals("userName")){
+            if(i_NameColToUpdate.equals("userName")){
                 throw new CostMangerException("Can't change here userName");
             }
 
@@ -132,13 +135,13 @@ public class DBModel implements IModel {
             StringBuffer queryToExecute = new StringBuffer();
 
             // Work for dates only.
-            if(nameColToUpdate.equals("date")){
-                queryToExecute.append("UPDATE Items SET " + nameColToUpdate + " = " + dataToSet + " WHERE costNumber = "
+            if(i_NameColToUpdate.equals("date")){
+                queryToExecute.append("UPDATE Items SET " + i_NameColToUpdate + " = " + dataToSet + " WHERE costNumber = "
                         + costNumber + " and userName = " + "'" + userName + "'");
             }
             else {
                 // Work with VARCHAR.
-                queryToExecute.append("UPDATE Items SET " + nameColToUpdate + " = " + "'" + dataToSet + "'" + " WHERE costNumber = "
+                queryToExecute.append("UPDATE Items SET " + i_NameColToUpdate + " = " + "'" + dataToSet + "'" + " WHERE costNumber = "
                         + costNumber + " and userName = " + "'" + userName + "'");
             }
 
@@ -151,7 +154,7 @@ public class DBModel implements IModel {
                throw new CostMangerException("Can't update the item !");
            }
         }
-        catch (SQLException e) {
+        catch (SQLException | NumberFormatException e) {
             System.out.println(e.fillInStackTrace());
             throw new CostMangerException("Unable to update data to DB",e);
         }
@@ -159,13 +162,15 @@ public class DBModel implements IModel {
 
     /**
      * Remove item from the cost items sql table
-     * @param costNumber
+     * @param i_CostNumber
      * @param userName
      * @throws CostMangerException
      */
     @Override
-    public void removeItem(int costNumber, String userName) throws CostMangerException {
+    public void removeItem(String i_CostNumber, String userName) throws CostMangerException {
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+            int costNumber = Integer.parseInt(i_CostNumber);
+
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM items WHERE costNumber = ? AND userName = ?");
 
@@ -180,7 +185,7 @@ public class DBModel implements IModel {
                 throw new CostMangerException("Can't remove the Item!");
             }
         }
-        catch (SQLException e) {
+        catch (SQLException | NumberFormatException e) {
             throw new CostMangerException("Unable to update data to DB",e);
         }
     }
@@ -286,9 +291,17 @@ public class DBModel implements IModel {
 
                 // If the add category was not execute properly throw CostMangerException.
                 if(howManyAdded != 1){
-                    throw new CostMangerException("Can't add same category twice!");
+                    throw new CostMangerException("Unable insert the category");
                 }
             }
+            else{
+                if(category.getCategoryName().isEmpty())
+                {
+                    throw new CostMangerException("Can't add empty category" );
+                }
+                throw new CostMangerException("Can't add same category twice!");
+            }
+
         }
         catch (SQLException e) {
             throw new CostMangerException("Unable insert into the DB",e);

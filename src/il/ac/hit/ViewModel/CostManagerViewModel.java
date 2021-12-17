@@ -1,4 +1,12 @@
-package il.ac.hit;
+package il.ac.hit.ViewModel;
+
+import il.ac.hit.*;
+import il.ac.hit.Exception.CostMangerException;
+import il.ac.hit.Model.Category;
+import il.ac.hit.Model.IModel;
+import il.ac.hit.Model.Item;
+import il.ac.hit.Model.User;
+import il.ac.hit.View.IView;
 
 import javax.swing.*;
 import java.sql.Date;
@@ -135,7 +143,7 @@ public class CostManagerViewModel implements IViewModel {
      * @param i_UserName
      */
     @Override
-    public void removeItem(int i_CostNumber, String i_UserName) {
+    public void removeItem(String i_CostNumber, String i_UserName) {
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
@@ -172,7 +180,7 @@ public class CostManagerViewModel implements IViewModel {
      * @param i_UserName
      */
     @Override
-    public void updateItem(String i_NameColToUpdate, String i_DataToSet, int i_CostNumber, String i_UserName) {
+    public void updateItem(String i_NameColToUpdate, String i_DataToSet, String i_CostNumber, String i_UserName) {
         m_Service.submit(new Runnable() {
             @Override
             public void run() {

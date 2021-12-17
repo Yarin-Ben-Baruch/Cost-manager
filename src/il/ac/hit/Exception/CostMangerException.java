@@ -1,4 +1,4 @@
-package il.ac.hit;
+package il.ac.hit.Exception;
 
 public class CostMangerException extends Exception {
 

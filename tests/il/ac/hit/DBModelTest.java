@@ -1,5 +1,9 @@
 package il.ac.hit;
 
+import il.ac.hit.Exception.CostMangerException;
+import il.ac.hit.Model.Category;
+import il.ac.hit.Model.DBModel;
+import il.ac.hit.Model.Item;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,7 +75,7 @@ class DBModelTest {
     @Test
     void updateItem() {
         try {
-            test.updateItem("name", "Yarin", 3, "Danoy");
+            test.updateItem("name", "Yarin", "3", "Danoy");
             Collection<Item> allItems = test.getItems();
             Item searchedItem;
 
@@ -101,7 +105,7 @@ class DBModelTest {
 
             test.addItem(item);
 
-            test.removeItem(99, "Danoy");
+            test.removeItem("99", "Danoy");
 
             Collection<Item> allItemsAfterAddAndRemove = test.getItems();
 

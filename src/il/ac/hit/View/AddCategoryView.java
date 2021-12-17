@@ -1,4 +1,7 @@
-package il.ac.hit;
+package il.ac.hit.View;
+
+import il.ac.hit.Model.Category;
+import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +45,7 @@ public class AddCategoryView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 m_ViewModel.addNewCategoryIfExists(new Category(m_AddCategoryTextField.getText()));
+                m_AddCategoryFrame.dispose();
             }
         });
     }

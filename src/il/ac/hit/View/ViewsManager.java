@@ -1,9 +1,14 @@
-package il.ac.hit;
+package il.ac.hit.View;
 
-import javax.swing.*;
+import il.ac.hit.Message;
+import il.ac.hit.Model.Category;
+import il.ac.hit.Model.Item;
+import il.ac.hit.Model.User;
+import il.ac.hit.ViewModel.IViewModel;
+
 import java.util.Collection;
 
-public class ViewsManager implements IView{
+public class ViewsManager implements IView {
 
     //RegisterPageGUI m_RegisterPage;
     LoginPageGUI m_LoginPage;
@@ -31,7 +36,7 @@ public class ViewsManager implements IView{
 
     @Override
     public void ShowCategories(Collection<Category> i_Categories) {
-
+        m_ApplicationPage.ShowCategories(i_Categories);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class ViewsManager implements IView{
 
     @Override
     public void showMessage(Message i_Message) {
-
+        m_ApplicationPage.showMessage(i_Message);
     }
 
 

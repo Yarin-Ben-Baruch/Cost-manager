@@ -1,4 +1,10 @@
-package il.ac.hit;
+package il.ac.hit.View;
+
+import il.ac.hit.*;
+import il.ac.hit.Model.Category;
+import il.ac.hit.Model.Item;
+import il.ac.hit.Model.User;
+import il.ac.hit.ViewModel.IViewModel;
 
 import java.util.Collection;
 

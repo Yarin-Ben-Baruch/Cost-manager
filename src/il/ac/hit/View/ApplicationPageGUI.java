@@ -1,4 +1,10 @@
-package il.ac.hit;
+package il.ac.hit.View;
+
+import il.ac.hit.*;
+import il.ac.hit.Model.Category;
+import il.ac.hit.Model.Item;
+import il.ac.hit.Model.User;
+import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -159,7 +165,7 @@ public class ApplicationPageGUI {
 
 
     /**
-     * A method that gets collection of items and print the items into the TextArea.
+     * A method that gets collection of items and print the items into the Table.
      * @param i_Items
      */
     public void showItems(Collection<Item> i_Items) {
@@ -185,6 +191,7 @@ public class ApplicationPageGUI {
         scrollPanel = new JScrollPane(m_ItemsTable);
 
         m_MainFrame.add(scrollPanel,BorderLayout.CENTER);
+        m_MainFrame.setVisible(true);
     }
 
     /**
@@ -192,10 +199,24 @@ public class ApplicationPageGUI {
      * @param i_Categories
      */
     public void ShowCategories(Collection<Category> i_Categories) {
-        m_CostInfoTextArea.setText("");
-        for (Category category : i_Categories) {
-            m_CostInfoTextArea.append(category.toString() + "\n");
+
+        LinkedList<Category> categories = (LinkedList<Category>) i_Categories;
+
+        String[][] data = new String[i_Categories.size()][1];
+        String[] columnNames = {"Category"};
+
+        for(int i = 0 ; i < i_Categories.size() ; i++){
+            data[i][0] = String.valueOf(categories.get(i).getCategoryName());
         }
+
+        // Initializing the JTable
+        m_ItemsTable = new JTable(data, columnNames);
+        m_ItemsTable.setBounds(30, 40, 200, 300);
+
+        scrollPanel = new JScrollPane(m_ItemsTable);
+
+        m_MainFrame.add(scrollPanel,BorderLayout.CENTER);
+        m_MainFrame.setVisible(true);
     }
 
     /**
@@ -225,6 +246,6 @@ public class ApplicationPageGUI {
      * @param i_Message
      */
     public void showMessage(Message i_Message) {
-        m_MessageTextField.setText(i_Message.getText());
+        JOptionPane.showMessageDialog(m_MainFrame, i_Message.getText());
     }
 }

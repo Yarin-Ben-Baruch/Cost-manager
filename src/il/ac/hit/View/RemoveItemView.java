@@ -1,4 +1,6 @@
-package il.ac.hit;
+package il.ac.hit.View;
+
+import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,8 +49,8 @@ public class RemoveItemView {
         m_RemoveItemFromDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m_ViewModel.removeItem(Integer.parseInt(m_RemoveItemCostNumberTextField.getText()), m_RemoveItemUsernameTextField.getText());
-
+                m_ViewModel.removeItem(m_RemoveItemCostNumberTextField.getText(), m_RemoveItemUsernameTextField.getText());
+                m_RemoveItemFrame.dispose();
             }
         });
     }

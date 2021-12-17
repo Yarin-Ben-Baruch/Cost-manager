@@ -1,4 +1,6 @@
-package il.ac.hit;
+package il.ac.hit.View;
+
+import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,7 @@ public class ReportView {
     private String[] days;
     private String[] months;
 
-    private JFrame ReportFrame;
+    private JFrame m_ReportFrame;
     private JButton m_ShowReportActionButton;
     private JLabel m_ShowReportStartDateDayLabel, m_ShowReportStartDateMonthLabel;
     private JLabel m_ShowReportEndDateDayLabel, m_ShowReportEndDateMonthLabel;
@@ -35,7 +37,7 @@ public class ReportView {
             months[i] = (i+1) +"";
         }
 
-        ReportFrame = new JFrame();
+        m_ReportFrame = new JFrame();
         m_ShowReportStartDateDayLabel = new JLabel("Start day:");
         m_ShowReportStartDateDayTextField = new JComboBox(days);
         m_ShowReportStartDateMonthLabel = new JLabel("Start month:");
@@ -49,26 +51,30 @@ public class ReportView {
 
     private void showReportStart() {
         // Creating the detailed report Panel.
-        ReportFrame.setLayout(new GridLayout(5,2));
-        ReportFrame.add(m_ShowReportStartDateDayLabel);
-        ReportFrame.add(m_ShowReportStartDateDayTextField);
-        ReportFrame.add(m_ShowReportStartDateMonthLabel);
-        ReportFrame.add(m_ShowReportStartDateMonthTextField);
-        ReportFrame.add(m_ShowReportEndDateDayLabel);
-        ReportFrame.add(m_ShowReportEndDateDayTextField);
-        ReportFrame.add(m_ShowReportEndDateMonthLabel);
-        ReportFrame.add(m_ShowReportEndDateMonthTextField);
-        ReportFrame.add(m_ShowReportActionButton);
+        m_ReportFrame.setLayout(new GridLayout(5,2));
+        m_ReportFrame.add(m_ShowReportStartDateDayLabel);
+        m_ReportFrame.add(m_ShowReportStartDateDayTextField);
+        m_ReportFrame.add(m_ShowReportStartDateMonthLabel);
+        m_ReportFrame.add(m_ShowReportStartDateMonthTextField);
+        m_ReportFrame.add(m_ShowReportEndDateDayLabel);
+        m_ReportFrame.add(m_ShowReportEndDateDayTextField);
+        m_ReportFrame.add(m_ShowReportEndDateMonthLabel);
+        m_ReportFrame.add(m_ShowReportEndDateMonthTextField);
+        m_ReportFrame.add(m_ShowReportActionButton);
 
-        ReportFrame.setSize(1000,700);
-        ReportFrame.setVisible(true);
+        m_ReportFrame.setSize(1000,700);
+        m_ReportFrame.setVisible(true);
 
         m_ShowReportActionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 m_ViewModel.getDetailedReport(
-                        java.sql.Date.valueOf("2021-" + m_ShowReportStartDateMonthTextField.getSelectedItem() + "-" + m_ShowReportStartDateDayTextField.getSelectedItem()),
-                        java.sql.Date.valueOf("2021-" + m_ShowReportEndDateMonthTextField.getSelectedItem() + "-" + m_ShowReportEndDateDayTextField.getSelectedItem()));
+                        java.sql.Date.valueOf("2021-" + m_ShowReportStartDateMonthTextField.getSelectedItem() +
+                                "-" + m_ShowReportStartDateDayTextField.getSelectedItem()),
+                        java.sql.Date.valueOf("2021-" + m_ShowReportEndDateMonthTextField.getSelectedItem() +
+                                "-" + m_ShowReportEndDateDayTextField.getSelectedItem()));
+
+                m_ReportFrame.dispose();
             }
         });
     }

@@ -1,4 +1,4 @@
-package il.ac.hit;
+package il.ac.hit.Model;
 
 import java.util.Objects;
 

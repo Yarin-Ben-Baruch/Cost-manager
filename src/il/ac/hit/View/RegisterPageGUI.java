@@ -1,4 +1,7 @@
-package il.ac.hit;
+package il.ac.hit.View;
+
+import il.ac.hit.Model.User;
+import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
 import java.awt.*;

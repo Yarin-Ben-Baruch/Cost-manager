@@ -1,4 +1,6 @@
-package il.ac.hit;
+package il.ac.hit.View;
+
+import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,8 +63,10 @@ public class UpdateItemView {
             public void actionPerformed(ActionEvent e) {
                 m_ViewModel.updateItem(m_UpdateItemColNameTextField.getText(),
                         m_UpdateItemDataToSetTextField.getText(),
-                        Integer.parseInt(m_UpdateItemCostNumberTextField.getText()),
+                        m_UpdateItemCostNumberTextField.getText(),
                         m_UpdateItemUsernameTextField.getText());
+
+                m_UpdateFrame.dispose();
             }
         });
     }

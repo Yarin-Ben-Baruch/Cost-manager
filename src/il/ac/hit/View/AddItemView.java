@@ -1,4 +1,8 @@
-package il.ac.hit;
+package il.ac.hit.View;
+
+import il.ac.hit.Model.Category;
+import il.ac.hit.ViewModel.IViewModel;
+import il.ac.hit.Model.Item;
 
 import javax.swing.*;
 import java.awt.*;
@@ -79,11 +83,12 @@ public class AddItemView {
         m_AddItemFrame.setSize(1000,700);
         m_AddItemFrame.setVisible(true);
 
-
+        //can't add from here Category
         m_AddItemToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Item item = new Item(8,m_AddItemNameTextField.getText(),
+                //למחוק את ה -8
+                Item item = new Item(9,m_AddItemNameTextField.getText(),
                         m_AddItemDescribingTextField.getText(),
                         m_AddItemCurrencyTextField.getText(),
                         new Category(m_AddItemCategoryTextField.getText()),
@@ -92,7 +97,7 @@ public class AddItemView {
                         "matan");
 
                 m_ViewModel.addItem(item);
-
+                m_AddItemFrame.dispose();
             }
         });
     }

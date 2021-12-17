@@ -1,4 +1,6 @@
-package il.ac.hit;
+package il.ac.hit.Model;
+
+import il.ac.hit.Exception.CostMangerException;
 
 import java.sql.Date;
 import java.util.Collection;
@@ -52,7 +54,7 @@ public interface IModel {
      * @param userName
      * @throws CostMangerException
      */
-    void updateItem(String nameColToUpdate, String dataToSet, int costNumber, String userName) throws CostMangerException;
+    void updateItem(String nameColToUpdate, String dataToSet, String costNumber, String userName) throws CostMangerException;
 
     /**
      * remove item from the items sql table.
@@ -60,7 +62,7 @@ public interface IModel {
      * @param userName
      * @throws CostMangerException
      */
-    void removeItem(int costNumber, String userName) throws CostMangerException;
+    void removeItem(String costNumber, String userName) throws CostMangerException;
 
     /**
      * Get users return collection with all the users in the users sql table.
