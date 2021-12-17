@@ -51,7 +51,7 @@ public class ReportView {
 
     private void showReportStart() {
         // Creating the detailed report Panel.
-        m_ReportFrame.setLayout(new GridLayout(5,2));
+        m_ReportFrame.setLayout(null);
         m_ReportFrame.add(m_ShowReportStartDateDayLabel);
         m_ReportFrame.add(m_ShowReportStartDateDayTextField);
         m_ReportFrame.add(m_ShowReportStartDateMonthLabel);
@@ -62,7 +62,21 @@ public class ReportView {
         m_ReportFrame.add(m_ShowReportEndDateMonthTextField);
         m_ReportFrame.add(m_ShowReportActionButton);
 
-        m_ReportFrame.setSize(1000,700);
+        m_ReportFrame.setTitle("Detailed Report");
+        m_ReportFrame.setSize(400,350);
+
+        m_ShowReportStartDateDayLabel.setBounds(50, 30, 150, 30);
+        m_ShowReportStartDateMonthLabel.setBounds(m_ShowReportStartDateDayLabel.getX(),m_ShowReportStartDateDayLabel.getY()+50, 100, 30);
+        m_ShowReportEndDateDayLabel.setBounds(m_ShowReportStartDateDayLabel.getX(),m_ShowReportStartDateMonthLabel.getY()+50, 100, 30);
+        m_ShowReportEndDateMonthLabel.setBounds(m_ShowReportStartDateDayLabel.getX(),m_ShowReportEndDateDayLabel.getY() + 50, 100, 30);
+
+        m_ShowReportStartDateDayTextField.setBounds(m_ShowReportStartDateDayLabel.getWidth() + m_ShowReportStartDateDayLabel.getX(), m_ShowReportStartDateDayLabel.getY(), 150, 30);
+        m_ShowReportStartDateMonthTextField.setBounds(m_ShowReportStartDateDayTextField.getX(), m_ShowReportStartDateMonthLabel.getY(), 150, 30);
+        m_ShowReportEndDateDayTextField.setBounds(m_ShowReportStartDateDayTextField.getX(), m_ShowReportEndDateDayLabel.getY(), 150, 30);
+        m_ShowReportEndDateMonthTextField.setBounds(m_ShowReportStartDateDayTextField.getX(), m_ShowReportEndDateMonthLabel.getY(), 150, 30);
+        m_ShowReportActionButton.setSize(150,30);
+        m_ShowReportActionButton.setLocation((m_ReportFrame.getWidth()-m_ShowReportActionButton.getWidth())/2 , m_ShowReportEndDateMonthTextField.getY() + m_ShowReportEndDateMonthTextField.getHeight()+30);
+
         m_ReportFrame.setVisible(true);
 
         m_ShowReportActionButton.addActionListener(new ActionListener() {

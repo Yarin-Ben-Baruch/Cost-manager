@@ -17,11 +17,7 @@ public class ApplicationPageGUI {
     private IViewModel m_ViewModel;
 
     private JFrame m_MainFrame;
-    private JPanel m_CostPanel;
     private JPanel m_ButtonsPanel;
-    private JPanel m_MessagePanel;
-    private JTextField m_MessageTextField;
-    private JTextArea m_CostInfoTextArea;
     private JButton m_ShowItemsButton, m_ShowCategoriesButton;
 
     // Show Report Button
@@ -44,54 +40,63 @@ public class ApplicationPageGUI {
 
     public void initApplication() {
 
-        // Create JFrame
+        // Create the Main JFrame
         m_MainFrame = new JFrame();
 
         // Create JPanels.
         m_ButtonsPanel = new JPanel();
-        m_MessagePanel = new JPanel();
-        m_CostPanel = new JPanel();
 
         // Create all the show JButtons.
         m_ShowItemsButton = new JButton("Show Items");
         m_ShowCategoriesButton = new JButton("Show Categories");
 
-        // Creating the RemoveItem Action
+        // Creating the RemoveItem Button.
         m_RemoveItemButton = new JButton("Remove item");
-        // Creating the AddCategory Action.
+        // Creating the AddCategory Button.
         m_AddCategory = new JButton("Add category");
-        // Creating the UpdateItem Action
+        // Creating the UpdateItem Button
         m_UpdateItemButton = new JButton("Update item");
-        // Creating the AddItem Action.
+        // Creating the AddItem Button.
         m_AddItemButton = new JButton("Add item");
-        // Creating the ShowReport Action
+        // Creating the ShowReport Button.
         m_ShowReportButton = new JButton("Show detail report");
 
 
-
-        // Create Message TextField.
-        m_MessageTextField = new JTextField(40);
-
-        // Creating the List of costs TextArea.
-        m_CostInfoTextArea = new JTextArea();
     }
 
     public void startApplication() {
-        // Creating the message panel
-        m_MessagePanel.setLayout(new FlowLayout());
-        m_MessagePanel.add(m_MessageTextField);
-        // Add the message panel to the main frame
-        m_MainFrame.add(m_MessagePanel,BorderLayout.NORTH);
 
         creatingButtonsStart();
-        creatingCostAreaStart();
+
+//        MenuBar menuBar = new MenuBar();
+//        Menu menu = new Menu("User");
+//        menu.add("Logout");
+//        menuBar.add(menu);
+//        m_MainFrame.setMenuBar(menuBar);
 
         // Setting the MainFrame Layout
         m_MainFrame.setLayout(new FlowLayout());
+        m_MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         m_MainFrame.setSize(1000,700);
         m_MainFrame.setVisible(true);
 
-        // Listeners ...
+        ButtonActionListeners();
+    }
+
+    private void creatingButtonsStart() {
+        // Creating the Button Panel.
+        m_ButtonsPanel.setLayout(new FlowLayout());
+        m_ButtonsPanel.add(m_ShowItemsButton);
+        m_ButtonsPanel.add(m_ShowCategoriesButton);
+        m_ButtonsPanel.add(m_ShowReportButton);
+        m_ButtonsPanel.add(m_AddItemButton);
+        m_ButtonsPanel.add(m_AddCategory);
+        m_ButtonsPanel.add(m_RemoveItemButton);
+        m_ButtonsPanel.add(m_UpdateItemButton);
+        m_MainFrame.add(m_ButtonsPanel,BorderLayout.CENTER);
+    }
+
+    private void ButtonActionListeners() {
         m_ShowItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -140,29 +145,7 @@ public class ApplicationPageGUI {
                 new AddItemView(m_ViewModel);
             }
         });
-
     }
-
-    private void creatingButtonsStart() {
-        // Creating the Button Panel.
-        m_ButtonsPanel.setLayout(new FlowLayout());
-        m_ButtonsPanel.add(m_ShowItemsButton);
-        m_ButtonsPanel.add(m_ShowCategoriesButton);
-        m_ButtonsPanel.add(m_ShowReportButton);
-        m_ButtonsPanel.add(m_AddItemButton);
-        m_ButtonsPanel.add(m_AddCategory);
-        m_ButtonsPanel.add(m_RemoveItemButton);
-        m_ButtonsPanel.add(m_UpdateItemButton);
-        m_MainFrame.add(m_ButtonsPanel,BorderLayout.CENTER);
-    }
-
-    private void creatingCostAreaStart() {
-        // Creating the cost Area.
-        m_CostPanel.setLayout(new FlowLayout());
-        m_CostPanel.add(m_CostInfoTextArea);
-        m_MainFrame.add(m_CostPanel,BorderLayout.SOUTH);
-    }
-
 
     /**
      * A method that gets collection of items and print the items into the Table.
@@ -217,19 +200,6 @@ public class ApplicationPageGUI {
 
         m_MainFrame.add(scrollPanel,BorderLayout.CENTER);
         m_MainFrame.setVisible(true);
-    }
-
-    /**
-     * A method that gets collection of users and print the items into the TextArea.
-     * @param i_Users
-     */
-    public void setUsers(Collection<User> i_Users) {
-//        m_Users = i_Users;
-
-//        m_CostInfoTextArea.setText("");
-//        for (User user : i_Users) {
-//            m_CostInfoTextArea.append(user.toString() + "\n");
-//        }
     }
 
     /**

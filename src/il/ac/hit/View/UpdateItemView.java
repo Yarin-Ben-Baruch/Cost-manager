@@ -40,7 +40,7 @@ public class UpdateItemView {
 
     private void updateItemStart() {
         // Creating the Update Item Panel.
-        m_UpdateFrame.setLayout(new GridLayout(5,2));
+        m_UpdateFrame.setLayout(null);
         m_UpdateFrame.add(m_UpdateItemColNameLabel);
         m_UpdateFrame.add(m_UpdateItemColNameTextField);
         m_UpdateFrame.add(m_UpdateItemDataToSetLabel);
@@ -55,7 +55,22 @@ public class UpdateItemView {
         m_UpdateFrame.add(m_UpdateItemUsernameTextField);
         m_UpdateFrame.add(m_UpdateItemToDBButton);
 
-        m_UpdateFrame.setSize(1000,700);
+        m_UpdateFrame.setTitle("Update Cost");
+        m_UpdateFrame.setSize(400,350);
+
+        m_UpdateItemColNameLabel.setBounds(50, 30, 150, 30);
+        m_UpdateItemDataToSetLabel.setBounds(m_UpdateItemColNameLabel.getX(),m_UpdateItemColNameLabel.getY()+50, 100, 30);
+        m_UpdateItemCostNumberLabel.setBounds(m_UpdateItemColNameLabel.getX(),m_UpdateItemDataToSetLabel.getY()+50, 100, 30);
+        m_UpdateItemUsernameLabel.setBounds(m_UpdateItemColNameLabel.getX(),m_UpdateItemCostNumberLabel.getY() + 50, 100, 30);
+
+        m_UpdateItemColNameTextField.setBounds(m_UpdateItemColNameLabel.getWidth() + m_UpdateItemColNameLabel.getX(), m_UpdateItemColNameLabel.getY(), 150, 30);
+        m_UpdateItemDataToSetTextField.setBounds(m_UpdateItemColNameTextField.getX(), m_UpdateItemDataToSetLabel.getY(), 150, 30);
+        m_UpdateItemCostNumberTextField.setBounds(m_UpdateItemColNameTextField.getX(), m_UpdateItemCostNumberLabel.getY(), 150, 30);
+        m_UpdateItemUsernameTextField.setBounds(m_UpdateItemColNameTextField.getX(), m_UpdateItemUsernameLabel.getY(), 150, 30);
+        m_UpdateItemToDBButton.setSize(150,30);
+        m_UpdateItemToDBButton.setLocation((m_UpdateFrame.getWidth()-m_UpdateItemToDBButton.getWidth())/2 , m_UpdateItemUsernameTextField.getY() + m_UpdateItemUsernameTextField.getHeight()+30);
+
+
         m_UpdateFrame.setVisible(true);
 
         m_UpdateItemToDBButton.addActionListener(new ActionListener() {

@@ -63,7 +63,7 @@ public class AddItemView {
 
     private void addItemStart() {
         // Creating the Add Item Panel.
-        m_AddItemFrame.setLayout(new GridLayout(5,2));
+        m_AddItemFrame.setLayout(null);
         m_AddItemFrame.add(m_AddItemNameLabel);
         m_AddItemFrame.add(m_AddItemNameTextField);
         m_AddItemFrame.add(m_AddItemCurrencyLabel);
@@ -80,13 +80,36 @@ public class AddItemView {
         m_AddItemFrame.add(m_AddItemDescribingTextField);
         m_AddItemFrame.add(m_AddItemToDBButton);
 
-        m_AddItemFrame.setSize(1000,700);
+        m_AddItemFrame.setTitle("Add Cost");
+        m_AddItemFrame.setSize(350,475);
+
+        m_AddItemNameLabel.setBounds(50, 30, 100, 30);
+        m_AddItemCurrencyLabel.setBounds(m_AddItemNameLabel.getX(),m_AddItemNameLabel.getY()+50, 100, 30);
+        m_AddItemCategoryLabel.setBounds(m_AddItemNameLabel.getX(),m_AddItemCurrencyLabel.getY()+50, 100, 30);
+        m_AddItemSumLabel.setBounds(m_AddItemNameLabel.getX(),m_AddItemCategoryLabel.getY() + 50, 100, 30);
+        m_AddItemDayLabel.setBounds(m_AddItemNameLabel.getX(),m_AddItemSumLabel.getY()+50, 100, 30);
+        m_AddItemMonthLabel.setBounds(m_AddItemNameLabel.getX(),m_AddItemDayLabel.getY()+50, 100, 30);
+        m_AddItemDescribingLabel.setBounds(m_AddItemNameLabel.getX(),m_AddItemMonthLabel.getY() + 50, 100, 30);
+
+        m_AddItemNameTextField.setBounds(m_AddItemNameLabel.getWidth() + m_AddItemNameLabel.getX(), m_AddItemNameLabel.getY(), 150, 30);
+        m_AddItemCurrencyTextField.setBounds(m_AddItemNameTextField.getX(), m_AddItemCurrencyLabel.getY(), 150, 30);
+        m_AddItemCategoryTextField.setBounds(m_AddItemNameTextField.getX(), m_AddItemCategoryLabel.getY(), 150, 30);
+        m_AddItemSumTextField.setBounds(m_AddItemNameTextField.getX(), m_AddItemSumLabel.getY(), 150, 30);
+        m_AddItemDayComboBox.setBounds(m_AddItemNameTextField.getX(), m_AddItemDayLabel.getY(), 150, 30);
+        m_AddItemMonthComboBox.setBounds(m_AddItemNameTextField.getX(), m_AddItemMonthLabel.getY(), 150, 30);
+        m_AddItemDescribingTextField.setBounds(m_AddItemNameTextField.getX(), m_AddItemDescribingLabel.getY(), 150, 30);
+
+        m_AddItemToDBButton.setSize(150,30);
+        m_AddItemToDBButton.setLocation((m_AddItemFrame.getWidth()-m_AddItemToDBButton.getWidth())/2 , m_AddItemDescribingTextField.getY() + m_AddItemDescribingTextField.getHeight()+30);
+
         m_AddItemFrame.setVisible(true);
 
         //can't add from here Category
         m_AddItemToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //m_ViewModel.getAllUsers();
+
                 //למחוק את ה -8
                 Item item = new Item(9,m_AddItemNameTextField.getText(),
                         m_AddItemDescribingTextField.getText(),

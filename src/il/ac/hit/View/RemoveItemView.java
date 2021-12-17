@@ -34,17 +34,24 @@ public class RemoveItemView {
 
     private void removeItemStart() {
         // Creating the Remove Item Panel.
-        m_RemoveItemFrame.setLayout(new GridLayout(4,2));
         m_RemoveItemFrame.add(m_RemoveItemCostNumberLabel);
         m_RemoveItemFrame.add(m_RemoveItemCostNumberTextField);
         m_RemoveItemFrame.add(m_RemoveItemUsernameLabel);
         m_RemoveItemFrame.add(m_RemoveItemUsernameTextField);
         m_RemoveItemFrame.add(m_RemoveItemFromDBButton);
 
+        m_RemoveItemFrame.setLayout(null);
+        m_RemoveItemFrame.setTitle("Remove Cost");
+        m_RemoveItemFrame.setSize(400,250);
 
-        m_RemoveItemFrame.setSize(1000,700);
+        m_RemoveItemCostNumberLabel.setBounds(50, 30, 100, 30);
+        m_RemoveItemUsernameLabel.setBounds(m_RemoveItemCostNumberLabel.getX(),m_RemoveItemCostNumberLabel.getY()+50, 100, 30);
+        m_RemoveItemCostNumberTextField.setBounds(m_RemoveItemCostNumberLabel.getWidth() + m_RemoveItemCostNumberLabel.getX(), m_RemoveItemCostNumberLabel.getY(), 150, 30);
+        m_RemoveItemUsernameTextField.setBounds(m_RemoveItemUsernameLabel.getWidth() + m_RemoveItemUsernameLabel.getX(), m_RemoveItemUsernameLabel.getY(), 150, 30);
+        m_RemoveItemFromDBButton.setSize(200,30);
+        m_RemoveItemFromDBButton.setLocation((m_RemoveItemFrame.getWidth()-m_RemoveItemFromDBButton.getWidth())/2 , m_RemoveItemUsernameTextField.getY() + m_RemoveItemUsernameTextField.getHeight()+30);
+
         m_RemoveItemFrame.setVisible(true);
-
 
         m_RemoveItemFromDBButton.addActionListener(new ActionListener() {
             @Override

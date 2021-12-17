@@ -87,7 +87,6 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            // fix ! need close the register and open the login menu again
                             m_View.registerSucceeded();
                         }
                     });
