@@ -97,6 +97,7 @@ public class AddItemView {
         m_AddItemFrame.add(m_AddItemToDBButton);
 
         m_AddItemFrame.setTitle("Add Cost");
+
         setComponentsLocationAndSize();
         m_AddItemFrame.setVisible(true);
 
@@ -124,7 +125,7 @@ public class AddItemView {
 
     private void setComponentsLocationAndSize() {
         m_AddItemFrame.setSize(480,475);
-
+        m_AddItemFrame.setResizable(false);
         m_AddItemNameLabel.setBounds(50, 30, 80, 30);
         m_AddItemCurrencyLabel.setBounds(m_AddItemNameLabel.getX(),m_AddItemNameLabel.getY()+50, 80, 30);
         m_AddItemCategoryLabel.setBounds(m_AddItemNameLabel.getX(),m_AddItemCurrencyLabel.getY()+50, 80, 30);

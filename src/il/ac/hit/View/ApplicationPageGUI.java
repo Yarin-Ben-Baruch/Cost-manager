@@ -119,6 +119,7 @@ public class ApplicationPageGUI {
         m_MainFrame.setLayout(new FlowLayout());
         m_MainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         m_MainFrame.setSize(1000,700);
+        m_MainFrame.setResizable(false);
         m_MainFrame.setVisible(true);
 
         // Setting the action listeners for the buttons

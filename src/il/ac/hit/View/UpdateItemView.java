@@ -74,7 +74,7 @@ public class UpdateItemView {
 
     private void setComponentsSizeAndLocation() {
         m_UpdateFrame.setSize(400,300);
-
+        m_UpdateFrame.setResizable(false);
         m_UpdateItemColNameLabel.setBounds(50, 30, 150, 30);
         m_UpdateItemDataToSetLabel.setBounds(m_UpdateItemColNameLabel.getX(),m_UpdateItemColNameLabel.getY()+50, 100, 30);
         m_UpdateItemCostNumberLabel.setBounds(m_UpdateItemColNameLabel.getX(),m_UpdateItemDataToSetLabel.getY()+50, 100, 30);

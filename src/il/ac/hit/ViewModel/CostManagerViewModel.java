@@ -333,34 +333,5 @@ public class CostManagerViewModel implements IViewModel {
         this.m_Model = i_Model;
     }
 
-    /**
-     * A method that takes from the class that implements the model, all
-     * the data stored in DB and then passes to the class that implements the view the list.
-     */
-//    @Override
-//    public void getAllUsers() {
-//        m_Service.submit(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Collection<User> users = m_Model.getAllUsers();
-//
-//                    SwingUtilities.invokeLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            m_View.setUsers(users);
-//                        }
-//                    });
-//                } catch (CostMangerException e) {
-//                    SwingUtilities.invokeLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            m_View.showMessage(new Message(e.getMessage()));
-//                        }
-//                    });
-//                }
-//            }
-//        });
-//    }
 
 }

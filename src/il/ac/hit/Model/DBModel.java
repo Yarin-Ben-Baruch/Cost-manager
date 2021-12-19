@@ -184,11 +184,21 @@ public class DBModel implements IModel {
             if(howManyUpdates != 1){
                 throw new CostMangerException("Can't remove the Item!");
             }
+
         }
         catch (SQLException | NumberFormatException e) {
             throw new CostMangerException("Unable to remove data from DB",e);
         }
     }
+
+//    public void updateIndexAfterRemove(int i_NumberOfRows) throws CostMangerException {
+//
+//        for (int i = 0 ; i< i_NumberOfRows ; i++) {
+//            updateItem("costNumber", i+1, i_CostNumber, i_UserName);
+//
+//        }
+//
+//    }
 
     /**
      * Get Report return collection of all the items in the items sql table that start with the startDate and end with the endDate.
