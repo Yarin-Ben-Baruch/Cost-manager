@@ -43,7 +43,7 @@ class DBModelTest {
                     new Category("Car"),"1000",
                     java.sql.Date.valueOf("2015-09-09"), "Danoy"));
 
-            Collection<Item> report = test.getDetailedReport(java.sql.Date.valueOf("2015-08-08"), java.sql.Date.valueOf("2015-09-09"));
+            Collection<Item> report = test.getDetailedReport(java.sql.Date.valueOf("2015-08-08"), java.sql.Date.valueOf("2015-09-09"),"Danoy");
             LinkedList<Item> items = (LinkedList<Item>) report;
 
             Item item = new Item(3, "Dani",

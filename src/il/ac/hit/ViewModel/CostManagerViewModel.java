@@ -204,12 +204,12 @@ public class CostManagerViewModel implements IViewModel {
      * @param i_EndDate
      */
     @Override
-    public void getDetailedReport(Date i_StartDate, Date i_EndDate) {
+    public void getDetailedReport(Date i_StartDate, Date i_EndDate, String i_Username) {
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Collection items = m_Model.getDetailedReport(i_StartDate, i_EndDate);
+                    Collection items = m_Model.getDetailedReport(i_StartDate, i_EndDate, i_Username);
 
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override

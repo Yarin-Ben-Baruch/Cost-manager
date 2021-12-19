@@ -37,7 +37,7 @@ public interface IModel {
      * @return
      * @throws CostMangerException
      */
-    Collection<Item> getDetailedReport(Date i_StartDate, Date i_EndDate) throws CostMangerException;
+    Collection<Item> getDetailedReport(Date i_StartDate, Date i_EndDate, String i_Username) throws CostMangerException;
 
     /**
      * Get items return collection with all the cost items in the items sql table.

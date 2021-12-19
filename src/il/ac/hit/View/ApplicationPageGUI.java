@@ -251,7 +251,7 @@ public class ApplicationPageGUI {
 
         m_ShowCategoriesButton.addActionListener(e -> m_ViewModel.getAllCategories());
 
-        m_ShowReportButton.addActionListener(e -> new ReportView(m_ViewModel));
+        m_ShowReportButton.addActionListener(e -> new ReportView(m_ViewModel,m_Username));
 
         m_UpdateItemButton.addActionListener(e -> new UpdateItemView(m_ViewModel));
 

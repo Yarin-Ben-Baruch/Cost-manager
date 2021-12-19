@@ -17,7 +17,7 @@ public interface IViewModel {
     void addNewCategoryIfExists(Category i_Category);
     void removeItem(String i_CostNumber, String i_UserName);
     void updateItem(String i_NameColToUpdate, String i_DataToSet, String i_CostNumber, String i_UserName);
-    void getDetailedReport(Date i_StartDate, Date i_EndDate);
+    void getDetailedReport(Date i_StartDate, Date i_EndDate, String i_Username);
 //    void getAllUsers();
     void getAllCategories();
     void getItems(String i_Username);

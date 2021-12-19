@@ -38,7 +38,6 @@ public class DBModel implements IModel {
 
     }
 
-
     /**
      * Add item method adding cost item for the items sql table.
      * Add item method also adding category if not exists to the categories sql table.
@@ -199,17 +198,19 @@ public class DBModel implements IModel {
      * @throws CostMangerException
      */
     @Override
-    public Collection<Item> getDetailedReport(Date i_StartDate, Date i_EndDate) throws CostMangerException {
+    public Collection<Item> getDetailedReport(Date i_StartDate, Date i_EndDate, String i_Username) throws CostMangerException {
 
         ResultSet myResult = null;
         Collection<Item> reportItems = new LinkedList<>();
 
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE date >= ? AND date <= ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE date >= ? AND date <= ? AND userName = ?");
 
             preparedStatement.setDate(1, i_StartDate);
             preparedStatement.setDate(2, i_EndDate);
+            preparedStatement.setString(3, i_Username);
+
             myResult = preparedStatement.executeQuery();
 
             // Put all the values form the query in LinkedList.

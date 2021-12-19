@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 public class ReportView {
     private IViewModel m_ViewModel;
+    private String m_Username;
     private String[] days;
     private String[] months;
     private String[] years;
@@ -22,8 +23,9 @@ public class ReportView {
      * The ctor call the init and start methods to start and initialized the report view.
      * @param i_Vm
      */
-    public ReportView(IViewModel i_Vm) {
+    public ReportView(IViewModel i_Vm, String i_Username) {
         m_ViewModel = i_Vm;
+        m_Username = i_Username;
         showReportInit();
         showReportStart();
     }
@@ -81,7 +83,8 @@ public class ReportView {
                                 "-" + m_ShowReportStartDateDayComboBox.getSelectedItem()),
                         java.sql.Date.valueOf(m_ShowReportEndDateYearComboBox.getSelectedItem() + "-" +
                                 m_ShowReportEndDateMonthComboBox.getSelectedItem() +
-                                "-" + m_ShowReportEndDateDayComboBox.getSelectedItem()));
+                                "-" + m_ShowReportEndDateDayComboBox.getSelectedItem()),
+                        m_Username);
 
                 m_ReportFrame.dispose();
             }
