@@ -46,7 +46,7 @@ public class RegisterPageGUI {
         m_ResetJLabel = new JLabel("");
         m_RegisterShowPasswordCheckBox = new JCheckBox("Show Password");
 
-        RegisterSetFont();
+        registerSetFont();
     }
 
     /**
@@ -62,10 +62,10 @@ public class RegisterPageGUI {
         m_RegisterContainer.setLayout(null);
         m_RegisterContainer.setBackground(Color.getColor("50",Color.lightGray));
 
-        RegisterSetLocations();
-        RegisterSetSize();
-        RegisterAddToContainer();
-        AddRegisterActionEvent();
+        registerSetLocations();
+        registerSetSize();
+        registerAddToContainer();
+        addRegisterActionEvent();
 
         m_RegisterFrame.setVisible(true);
 
@@ -75,19 +75,19 @@ public class RegisterPageGUI {
     /**
      * This method show messageDialog if invalid input is entered.
      */
-    public void ShowInvalidInputInRegister() {
+    public void showInvalidInputInRegister() {
         JOptionPane.showMessageDialog(m_RegisterFrame,"Register Failed!");
     }
 
     /**
      * This method close the register page gui.
      */
-    public void Close() {
+    public void close() {
         JOptionPane.showMessageDialog(m_RegisterFrame, "Register Success");
         m_RegisterFrame.dispose();
     }
 
-    private void RegisterSetLocations(){
+    private void registerSetLocations(){
         m_TitleLabel.setLocation(150, 30);
         m_UserNameLabel.setLocation(100, 100);
         m_UsernameTextField.setLocation(200, 100);
@@ -100,7 +100,7 @@ public class RegisterPageGUI {
         m_ResetJLabel.setLocation(100, 500);
     }
 
-    private void AddRegisterActionEvent() {
+    private void addRegisterActionEvent() {
         m_SubmitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,7 +116,7 @@ public class RegisterPageGUI {
                 }
                 // If not confirmed
                 else {
-                    ShowInvalidInputInRegister();
+                    showInvalidInputInRegister();
                 }
             }
         });
@@ -145,7 +145,7 @@ public class RegisterPageGUI {
         });
     }
 
-    private void RegisterSetSize(){
+    private void registerSetSize(){
         m_TitleLabel.setSize(300, 30);
         m_UserNameLabel.setSize(100, 20);
         m_UsernameTextField.setSize(190, 20);
@@ -158,7 +158,7 @@ public class RegisterPageGUI {
         m_ResetJLabel.setSize(500, 25);
     }
 
-    private void RegisterAddToContainer(){
+    private void registerAddToContainer(){
         m_RegisterContainer.add(m_TitleLabel);
         m_RegisterContainer.add(m_UserNameLabel);
         m_RegisterContainer.add(m_UsernameTextField);
@@ -174,7 +174,7 @@ public class RegisterPageGUI {
 
     }
 
-    private void RegisterSetFont(){
+    private void registerSetFont(){
         m_TitleLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         m_UserNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         m_UsernameTextField.setFont(new Font("Arial", Font.PLAIN, 15));

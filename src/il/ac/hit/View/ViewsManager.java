@@ -3,7 +3,6 @@ package il.ac.hit.View;
 import il.ac.hit.Message;
 import il.ac.hit.Model.Category;
 import il.ac.hit.Model.Item;
-import il.ac.hit.Model.User;
 import il.ac.hit.ViewModel.IViewModel;
 
 import java.util.Collection;
@@ -54,8 +53,8 @@ public class ViewsManager implements IView {
      * @param i_Categories
      */
     @Override
-    public void ShowCategories(Collection<Category> i_Categories) {
-        m_ApplicationPage.ShowCategories(i_Categories);
+    public void showCategories(Collection<Category> i_Categories) {
+        m_ApplicationPage.showCategories(i_Categories);
     }
 
     /**
@@ -90,7 +89,7 @@ public class ViewsManager implements IView {
      * Set the username that entered to the application.
      */
     public void openApplicationFromLogin() {
-        String username =  m_LoginPage.Close();
+        String username =  m_LoginPage.close();
         m_ApplicationPage.setUsername(username);
         m_ApplicationPage.initApplication();
         m_ApplicationPage.startApplication();
@@ -102,7 +101,7 @@ public class ViewsManager implements IView {
      * The method open the login page again after register.
      */
     public void registerSucceeded() {
-        m_LoginPage.OpenAfterRegister();
+        m_LoginPage.openAfterRegister();
     }
 
     @Override

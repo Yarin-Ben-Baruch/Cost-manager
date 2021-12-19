@@ -5,9 +5,6 @@ import il.ac.hit.Exception.CostMangerException;
 import java.sql.Date;
 import java.util.Collection;
 
-/**
- *  NEED TO WRITE HERE !
- */
 public interface IModel {
     /**
      * Add new cost i_Item to the items sql table.

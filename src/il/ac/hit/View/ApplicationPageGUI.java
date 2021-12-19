@@ -122,7 +122,7 @@ public class ApplicationPageGUI {
         m_MainFrame.setVisible(true);
 
         // Setting the action listeners for the buttons
-        ButtonActionListeners();
+        buttonActionListeners();
 
         // Do click to show the costs and categories in the table
         m_ShowItemsButton.doClick();
@@ -161,7 +161,7 @@ public class ApplicationPageGUI {
      *
      * @param i_Categories
      */
-    public void ShowCategories(Collection<Category> i_Categories) {
+    public void showCategories(Collection<Category> i_Categories) {
         LinkedList<Category> categories = (LinkedList<Category>) i_Categories;
         int sizeOfOldTable = m_CategoryTableModel.getRowCount();
 
@@ -243,7 +243,7 @@ public class ApplicationPageGUI {
         m_CategoryScrollPanel.setSize( 50, 200);
     }
 
-    private void ButtonActionListeners() {
+    private void buttonActionListeners() {
         m_ShowItemsButton.addActionListener(e -> m_ViewModel.getItems(m_Username));
 
         m_ShowCategoriesButton.addActionListener(e -> m_ViewModel.getAllCategories());
@@ -252,7 +252,7 @@ public class ApplicationPageGUI {
 
         m_UpdateItemButton.addActionListener(e -> new UpdateItemView(m_ViewModel, m_Username));
 
-        m_RemoveItemButton.addActionListener(e -> new RemoveItemView(m_ViewModel));
+        m_RemoveItemButton.addActionListener(e -> new RemoveItemView(m_ViewModel, m_Username));
 
         m_AddCategory.addActionListener(e -> new AddCategoryView(m_ViewModel));
 

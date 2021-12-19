@@ -244,7 +244,7 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            m_View.ShowCategories(categories);
+                            m_View.showCategories(categories);
                         }
                     });
                 } catch (CostMangerException e) {

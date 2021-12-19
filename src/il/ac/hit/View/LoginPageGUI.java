@@ -69,8 +69,8 @@ public class LoginPageGUI{
     /**
      * This method open the login page again after register to the application.
      */
-    public void OpenAfterRegister() {
-        m_RegisterFrame.Close();
+    public void openAfterRegister() {
+        m_RegisterFrame.close();
         m_LoginFrame.setVisible(true);
 
     }
@@ -79,7 +79,7 @@ public class LoginPageGUI{
      * This method close the login page and return the username field.
      * @return
      */
-    public String Close() {
+    public String close() {
         m_LoginFrame.dispose();
 
         return m_LoginUserNameTextField.getText();
@@ -95,7 +95,7 @@ public class LoginPageGUI{
      * This method open messageDialog that show invalid input in Register.
      */
     public void showInvalidInputInRegister() {
-        m_RegisterFrame.ShowInvalidInputInRegister();
+        m_RegisterFrame.showInvalidInputInRegister();
     }
 
     // Set the layout null to set the size and the location by myself.
