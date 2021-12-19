@@ -63,8 +63,10 @@ public class LoginPageGUI{
 
     }
 
-    public void Close() {
+    public String Close() {
         m_LoginFrame.dispose();
+
+        return m_LoginUserNameTextField.getText();
     }
 
     //Login

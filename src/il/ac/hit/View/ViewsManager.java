@@ -15,6 +15,7 @@ public class ViewsManager implements IView {
     ApplicationPageGUI m_ApplicationPage;
     IViewModel m_ViewModel;
 
+
     @Override
     public void init() {
         m_ApplicationPage = new ApplicationPageGUI(m_ViewModel);
@@ -54,7 +55,6 @@ public class ViewsManager implements IView {
         m_ApplicationPage.showMessage(i_Message);
     }
 
-
     public void showInvalidInputInLogin(){
         m_LoginPage.showInvalidInputInLogin();
     }
@@ -65,7 +65,8 @@ public class ViewsManager implements IView {
 
     public void openApplicationFromLogin() {
         //JOptionPane.showMessageDialog(m_MainFrame, "Login Successful");
-        m_LoginPage.Close();
+        String username =  m_LoginPage.Close();
+        m_ApplicationPage.setUsername(username);
         m_ApplicationPage.initApplication();
         m_ApplicationPage.startApplication();
 

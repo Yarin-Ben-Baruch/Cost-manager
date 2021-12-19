@@ -7,11 +7,11 @@ import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Vector;
 
 public class ApplicationPageGUI {
     private IViewModel m_ViewModel;
@@ -32,14 +32,21 @@ public class ApplicationPageGUI {
     private JButton m_AddCategory;
     // Add Item Button.
     private JButton m_AddItemButton;
-    //table
+    // Cost table
     private JTable m_ItemsTable;
     private JScrollPane scrollPanel;
+    DefaultTableModel m_TableModel;
+
+    String m_Username;
 
     public ApplicationPageGUI(IViewModel i_Vm) {
         m_ViewModel = i_Vm;
         isCostsAppears = false;
         isCategoriesAppears = false;
+    }
+
+    public void setUsername(String m_Username) {
+        this.m_Username = m_Username;
     }
 
     public void initApplication() {
@@ -66,11 +73,16 @@ public class ApplicationPageGUI {
         m_ShowReportButton = new JButton("Show detail report");
 
 
+        m_TableModel = new DefaultTableModel(buildCostColumnsName(),0);
+        m_ItemsTable = new JTable(m_TableModel);
+        scrollPanel = new JScrollPane(m_ItemsTable);
+
     }
 
     public void startApplication() {
 
         creatingButtonsStart();
+        buildCostColumnsName();
 
 //        MenuBar menuBar = new MenuBar();
 //        Menu menu = new Menu("User");
@@ -85,7 +97,23 @@ public class ApplicationPageGUI {
         m_MainFrame.setSize(1000,700);
         m_MainFrame.setVisible(true);
 
+
         ButtonActionListeners();
+    }
+
+    private Vector<String> buildCostColumnsName(){
+
+        Vector<String> addColToTable = new Vector<>();
+
+        addColToTable.add("Cost number");
+        addColToTable.add("Name");
+        addColToTable.add("Description");
+        addColToTable.add("Currency");
+        addColToTable.add("Category");
+        addColToTable.add("Sum");
+        addColToTable.add("Date");
+
+        return addColToTable;
     }
 
     private void creatingButtonsStart() {
@@ -98,7 +126,11 @@ public class ApplicationPageGUI {
         m_ButtonsPanel.add(m_AddCategory);
         m_ButtonsPanel.add(m_RemoveItemButton);
         m_ButtonsPanel.add(m_UpdateItemButton);
-        m_MainFrame.add(m_ButtonsPanel,BorderLayout.CENTER);
+        m_MainFrame.add(m_ButtonsPanel,BorderLayout.NORTH);
+
+        m_ItemsTable.setBounds(30, 40, 200, 300);
+        m_MainFrame.add(scrollPanel, BorderLayout.CENTER);
+
     }
 
     private void ButtonActionListeners() {
@@ -114,7 +146,7 @@ public class ApplicationPageGUI {
 
         m_AddCategory.addActionListener(e -> new AddCategoryView(m_ViewModel));
 
-        m_AddItemButton.addActionListener(e -> new AddItemView(m_ViewModel));
+        m_AddItemButton.addActionListener(e -> new AddItemView(m_ViewModel, m_Username));
     }
 
     /**
@@ -123,33 +155,35 @@ public class ApplicationPageGUI {
      */
     public void showItems(Collection<Item> i_Items) {
 
-//        isCostsAppears = !isCostsAppears;
-//        DefaultTableModel model = (DefaultTableModel) m_ItemsTable.getModel();
-//        model.removeRow();
-
+//        Vector<String> addRowToTable = new Vector<>();
         LinkedList<Item> items = (LinkedList<Item>) i_Items;
-        String[][] data = new String[i_Items.size()][7];
-        String[] columnNames = {"Cost number", "Name", "Description", "Currency", "Category", "Sum", "Date"};
+        int sizeOfOldTable = m_TableModel.getRowCount();
 
-        for (int i = 0; i < i_Items.size(); i++) {
-//                model.addRow(data);
-            data[i][0] = String.valueOf(items.get(i).getCostNumber());
-            data[i][1] = items.get(i).getName();
-            data[i][2] = items.get(i).getDescribing();
-            data[i][3] = items.get(i).getCurrency();
-            data[i][4] = items.get(i).getCategory().getCategoryName();
-            data[i][5] = items.get(i).getSum();
-            data[i][6] = items.get(i).getDate().toString();
+        for(int i = 0; i < sizeOfOldTable; i++) {
+            m_TableModel.removeRow(0);
         }
 
-        // Initializing the JTable
-        m_ItemsTable = new JTable(data, columnNames);
-        m_ItemsTable.setBounds(30, 40, 200, 300);
+        for (int i = 0; i < i_Items.size(); i++) {
+            Vector<String> addRowToTable = new Vector<>();
 
-        scrollPanel = new JScrollPane(m_ItemsTable);
+            addRowToTable.add(String.valueOf(items.get(i).getCostNumber()));
+            addRowToTable.add(items.get(i).getName());
+            addRowToTable.add(items.get(i).getDescribing());
+            addRowToTable.add(items.get(i).getCurrency());
+            addRowToTable.add(items.get(i).getCategory().getCategoryName());
+            addRowToTable.add(items.get(i).getSum());
+            addRowToTable.add(items.get(i).getDate().toString());
+            m_TableModel.addRow(addRowToTable);
 
-        m_MainFrame.add(scrollPanel, BorderLayout.CENTER);
-        m_MainFrame.setVisible(true);
+
+//            m_TableCostData[i][0] = String.valueOf(items.get(i).getCostNumber());
+//            m_TableCostData[i][1] = items.get(i).getName();
+//            m_TableCostData[i][2] = items.get(i).getDescribing();
+//            m_TableCostData[i][3] = items.get(i).getCurrency();
+//            m_TableCostData[i][4] = items.get(i).getCategory().getCategoryName();
+//            m_TableCostData[i][5] = items.get(i).getSum();
+//            m_TableCostData[i][6] = items.get(i).getDate().toString();
+        }
 
     }
 
@@ -159,8 +193,6 @@ public class ApplicationPageGUI {
      * @param i_Categories
      */
     public void ShowCategories(Collection<Category> i_Categories) {
-
-
         LinkedList<Category> categories = (LinkedList<Category>) i_Categories;
 
         String[][] data = new String[i_Categories.size()][1];

@@ -23,9 +23,11 @@ public class AddItemView {
     private JLabel m_AddItemNameLabel, m_AddItemDescribingLabel, m_AddItemCurrencyLabel;
     private JLabel m_AddItemCategoryLabel, m_AddItemSumLabel,m_AddItemDayLabel, m_AddItemMonthLabel;
     IViewModel m_ViewModel;
+    String m_Username;
 
-    public AddItemView(IViewModel m_ViewModel) {
-        this.m_ViewModel = m_ViewModel;
+    public AddItemView(IViewModel i_ViewModel, String i_Username) {
+        this.m_ViewModel = i_ViewModel;
+        this.m_Username = i_Username;
         addItemInit();
         addItemStart();
     }
@@ -59,7 +61,6 @@ public class AddItemView {
         m_AddItemMonthComboBox = new JComboBox(months);
         m_AddItemToDBButton = new JButton("Add cost to the list");
     }
-
 
     private void addItemStart() {
         // Creating the Add Item Panel.
@@ -116,17 +117,13 @@ public class AddItemView {
                         m_AddItemCurrencyTextField.getText(),
                         new Category(m_AddItemCategoryTextField.getText()),
                         m_AddItemSumTextField.getText(),
-                        java.sql.Date.valueOf("2021-"+m_AddItemMonthComboBox.getSelectedItem()+"-"+m_AddItemDayComboBox.getSelectedItem()),
-                        "matan");
+                        java.sql.Date.valueOf("2021-" + m_AddItemMonthComboBox.getSelectedItem() + "-" + m_AddItemDayComboBox.getSelectedItem()),
+                        m_Username);
 
                 m_ViewModel.addItem(item);
                 m_AddItemFrame.dispose();
             }
         });
     }
-
-
-
-
 
 }
