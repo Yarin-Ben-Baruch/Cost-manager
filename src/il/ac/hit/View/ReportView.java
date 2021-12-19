@@ -11,13 +11,15 @@ public class ReportView {
 
     private String[] days;
     private String[] months;
+    private String[] years;
 
     private JFrame m_ReportFrame;
     private JButton m_ShowReportActionButton;
     private JLabel m_ShowReportStartDateDayLabel, m_ShowReportStartDateMonthLabel;
     private JLabel m_ShowReportEndDateDayLabel, m_ShowReportEndDateMonthLabel;
-    private JComboBox m_ShowReportStartDateDayTextField, m_ShowReportStartDateMonthTextField;
-    private JComboBox m_ShowReportEndDateDayTextField, m_ShowReportEndDateMonthTextField;
+    private JComboBox m_ShowReportStartDateDayTextField, m_ShowReportStartDateMonthTextField,m_ShowReportStartDateYearTextField;
+    private JComboBox m_ShowReportEndDateDayTextField, m_ShowReportEndDateMonthTextField,m_ShowReportEndDateYearTextField;
+
     private IViewModel m_ViewModel;
 
     public ReportView(IViewModel i_Vm) {
@@ -30,37 +32,52 @@ public class ReportView {
         // Creating the detailed report Action.
         days = new String[31];
         for (int i =0 ; i<31 ; i++) {
-            days[i] = (i+1) +"";
+            days[i] = String.valueOf(i+1);
         }
         months = new String[12];
         for (int i =0 ; i<12 ; i++) {
-            months[i] = (i+1) +"";
+            months[i] = String.valueOf(i+1);
+        }
+        years = new String[15];
+        for (int i =0 ; i <15 ; i++) {
+            years[i] = String.valueOf(i+2010);
         }
 
         m_ReportFrame = new JFrame();
-        m_ShowReportStartDateDayLabel = new JLabel("Start day:");
+        m_ShowReportStartDateDayLabel = new JLabel("Start date:");
         m_ShowReportStartDateDayTextField = new JComboBox(days);
-        m_ShowReportStartDateMonthLabel = new JLabel("Start month:");
         m_ShowReportStartDateMonthTextField = new JComboBox(months);
-        m_ShowReportEndDateDayLabel = new JLabel("End day:");
+        m_ShowReportStartDateYearTextField = new JComboBox(years);
+
+//        m_ShowReportStartDateMonthLabel = new JLabel("Start month:");
+//        m_ShowReportEndDateMonthLabel = new JLabel("End Month");
+
+        m_ShowReportEndDateDayLabel = new JLabel("End date:");
         m_ShowReportEndDateDayTextField = new JComboBox(days);
-        m_ShowReportEndDateMonthLabel = new JLabel("End Month");
         m_ShowReportEndDateMonthTextField = new JComboBox(months);
+        m_ShowReportEndDateYearTextField = new JComboBox(years);
+
         m_ShowReportActionButton = new JButton("Show the report");
     }
 
     private void showReportStart() {
         // Creating the detailed report Panel.
+
         m_ReportFrame.setLayout(null);
         m_ReportFrame.add(m_ShowReportStartDateDayLabel);
         m_ReportFrame.add(m_ShowReportStartDateDayTextField);
-        m_ReportFrame.add(m_ShowReportStartDateMonthLabel);
         m_ReportFrame.add(m_ShowReportStartDateMonthTextField);
+        m_ReportFrame.add(m_ShowReportStartDateYearTextField);
+
         m_ReportFrame.add(m_ShowReportEndDateDayLabel);
         m_ReportFrame.add(m_ShowReportEndDateDayTextField);
-        m_ReportFrame.add(m_ShowReportEndDateMonthLabel);
         m_ReportFrame.add(m_ShowReportEndDateMonthTextField);
+        m_ReportFrame.add(m_ShowReportEndDateYearTextField);
+
         m_ReportFrame.add(m_ShowReportActionButton);
+
+//        m_ReportFrame.add(m_ShowReportStartDateMonthLabel);
+// m_ReportFrame.add(m_ShowReportEndDateMonthLabel);
 
         m_ReportFrame.setTitle("Detailed Report");
         m_ReportFrame.setSize(400,350);

@@ -18,7 +18,7 @@ public class ViewsManager implements IView {
 
     @Override
     public void init() {
-        m_ApplicationPage = new ApplicationPageGUI(m_ViewModel);
+        m_ApplicationPage = new ApplicationPageGUI(m_ViewModel,this);
         m_LoginPage = new LoginPageGUI(m_ViewModel);
         //m_RegisterPage = new RegisterPageGUI(m_ViewModel);
 
@@ -27,6 +27,13 @@ public class ViewsManager implements IView {
 
     @Override
     public void start() {
+        m_LoginPage.start();
+
+    }
+
+    @Override
+    public void openLogin() {
+        m_LoginPage.init();
         m_LoginPage.start();
     }
 

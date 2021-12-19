@@ -22,12 +22,14 @@ public class AddItemView {
     private JButton m_AddItemToDBButton;
     private JLabel m_AddItemNameLabel, m_AddItemDescribingLabel, m_AddItemCurrencyLabel;
     private JLabel m_AddItemCategoryLabel, m_AddItemSumLabel,m_AddItemDayLabel, m_AddItemMonthLabel;
-    IViewModel m_ViewModel;
-    String m_Username;
+    private IViewModel m_ViewModel;
+    private String m_Username;
+    private int m_CurrentTableSize;
 
-    public AddItemView(IViewModel i_ViewModel, String i_Username) {
+    public AddItemView(IViewModel i_ViewModel, String i_Username, int i_CurrentTableSize) {
         this.m_ViewModel = i_ViewModel;
         this.m_Username = i_Username;
+        this.m_CurrentTableSize = i_CurrentTableSize;
         addItemInit();
         addItemStart();
     }
@@ -111,8 +113,7 @@ public class AddItemView {
             public void actionPerformed(ActionEvent e) {
                 //m_ViewModel.getAllUsers();
 
-                //למחוק את ה -8
-                Item item = new Item(9,m_AddItemNameTextField.getText(),
+                Item item = new Item(++m_CurrentTableSize,m_AddItemNameTextField.getText(),
                         m_AddItemDescribingTextField.getText(),
                         m_AddItemCurrencyTextField.getText(),
                         new Category(m_AddItemCategoryTextField.getText()),

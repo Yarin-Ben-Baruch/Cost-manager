@@ -9,14 +9,15 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Vector;
 
 public class ApplicationPageGUI {
     private IViewModel m_ViewModel;
-    private boolean isCostsAppears;
-    private boolean isCategoriesAppears;
+    private ViewsManager m_ViewsManager;
 
     private JFrame m_MainFrame;
     private JPanel m_ButtonsPanel;
@@ -43,12 +44,14 @@ public class ApplicationPageGUI {
     private JScrollPane m_CategoryScrollPanel;
     private DefaultTableModel m_CategoryTableModel;
 
+    // Creating menu
+    MenuBar menuBar;
+    Menu menu;
     String m_Username;
 
-    public ApplicationPageGUI(IViewModel i_Vm) {
+    public ApplicationPageGUI(IViewModel i_Vm, ViewsManager i_ViewsManager) {
         m_ViewModel = i_Vm;
-        isCostsAppears = false;
-        isCategoriesAppears = false;
+        m_ViewsManager = i_ViewsManager;
     }
 
     public void setUsername(String m_Username) {
@@ -87,6 +90,10 @@ public class ApplicationPageGUI {
         m_CategoryTableModel = new DefaultTableModel(buildCategoryColumnsName(),0);
         m_CategoryTable = new JTable(m_CategoryTableModel);
         m_CategoryScrollPanel = new JScrollPane(m_CategoryTable);
+
+        //Creating Menu bar
+        menuBar = new MenuBar();
+        menu = new Menu("Options");
     }
 
     public void startApplication() {
@@ -95,11 +102,10 @@ public class ApplicationPageGUI {
         buildCostColumnsName();
         buildCategoryColumnsName();
 
-//        MenuBar menuBar = new MenuBar();
-//        Menu menu = new Menu("User");
-//        menu.add("Logout");
-//        menuBar.add(menu);
-//        m_MainFrame.setMenuBar(menuBar);
+        // Setting the menu bar
+        menu.add("Logout");
+        menuBar.add(menu);
+        m_MainFrame.setMenuBar(menuBar);
 
 
         // Setting the MainFrame Layout
@@ -108,8 +114,10 @@ public class ApplicationPageGUI {
         m_MainFrame.setSize(1000,700);
         m_MainFrame.setVisible(true);
 
-
         ButtonActionListeners();
+
+        m_ShowItemsButton.doClick();
+        m_ShowCategoriesButton.doClick();
     }
 
     private Vector<String> buildCostColumnsName(){
@@ -169,7 +177,12 @@ public class ApplicationPageGUI {
 
         m_AddCategory.addActionListener(e -> new AddCategoryView(m_ViewModel));
 
-        m_AddItemButton.addActionListener(e -> new AddItemView(m_ViewModel, m_Username));
+        m_AddItemButton.addActionListener(e -> new AddItemView(m_ViewModel, m_Username, m_CostTableModel.getRowCount()));
+
+        menu.addActionListener(e -> {
+            m_MainFrame.dispose();
+            m_ViewsManager.openLogin();
+        });
     }
 
     /**

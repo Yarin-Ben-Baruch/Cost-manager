@@ -50,7 +50,7 @@ public class DBModel implements IModel {
 
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             // if the category is not exists add the category to the categories sql table.
-            addNewCategoryIfExists(i_Item.getCategory());
+            addCategoryInAddItem(i_Item.getCategory());
 
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "insert into items (costNumber,name,description,currency,category,sum,date,userName) " +
@@ -394,5 +394,34 @@ public class DBModel implements IModel {
             throw new CostMangerException("Unable to pull data from DB");
         }
 
+    }
+
+
+    private void addCategoryInAddItem(Category i_Category) throws CostMangerException{
+        try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
+
+            Collection<Category> allCategories = getAllCategories();
+
+            // If the category is not in the list of the categories add the category.
+            if(!allCategories.contains(i_Category) && !i_Category.getCategoryName().isEmpty()){
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "insert into categories (category) " +
+                                "values " +
+                                "(?)");
+
+                preparedStatement.setString(1, i_Category.getCategoryName());
+
+                // Check that the add category was executed properly.
+                int howManyAdded = preparedStatement.executeUpdate();
+
+                // If the add category was not execute properly throw CostMangerException.
+                if(howManyAdded != 1){
+                    throw new CostMangerException("Unable insert the category");
+                }
+            }
+        }
+        catch (SQLException e) {
+            throw new CostMangerException("Unable insert into the DB",e);
+        }
     }
 }

@@ -21,4 +21,5 @@ public interface IView {
     void registerSucceeded();
     void showInvalidInputInLogin();
     void showInvalidInputInRegister();
+    void openLogin();
 }

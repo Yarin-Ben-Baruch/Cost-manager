@@ -53,6 +53,7 @@ public class CostManagerViewModel implements IViewModel {
                 try {
                     m_Model.addItem(i_Item);
                     Collection<Item> items = m_Model.getItems(i_Item.getUserName());
+
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
