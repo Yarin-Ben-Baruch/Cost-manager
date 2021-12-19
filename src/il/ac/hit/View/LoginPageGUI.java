@@ -22,12 +22,19 @@ public class LoginPageGUI{
     private JButton m_LoginButton, m_LoginResetButton, m_LoginRegisterButton;
     private JCheckBox m_LoginShowPasswordCheckBox;
 
+    /**
+     *  C'tor of the login page gui
+     * @param i_Vm
+     */
     public LoginPageGUI(IViewModel i_Vm) {
         this.m_Vm = i_Vm;
     }
 
+    /**
+     * This method Initializing the Login page gui
+     */
     public void init() {
-        // Sub menu of Login !
+        // Sub menu of Login.
         m_RegisterFrame = new RegisterPageGUI(m_Vm);
 
         m_LoginFrame = new JFrame();
@@ -42,7 +49,9 @@ public class LoginPageGUI{
         m_LoginShowPasswordCheckBox = new JCheckBox("Show Password");
     }
 
-
+    /**
+     * This method starting the Login page gui.
+     */
     public void start(){
 
         setLoginLayoutManager();
@@ -57,24 +66,44 @@ public class LoginPageGUI{
         m_LoginFrame.setResizable(false);
     }
 
+    /**
+     * This method open the login page again after register to the application.
+     */
     public void OpenAfterRegister() {
         m_RegisterFrame.Close();
         m_LoginFrame.setVisible(true);
 
     }
 
+    /**
+     * This method close the login page and return the username field.
+     * @return
+     */
     public String Close() {
         m_LoginFrame.dispose();
 
         return m_LoginUserNameTextField.getText();
     }
 
-    //Login
+    /**
+     * This method open messageDialog that show invalid input in login.
+     */
+    public void showInvalidInputInLogin() {
+        JOptionPane.showMessageDialog(m_LoginFrame, "Invalid Username or Password");
+    }
+    /**
+     * This method open messageDialog that show invalid input in Register.
+     */
+    public void showInvalidInputInRegister() {
+        m_RegisterFrame.ShowInvalidInputInRegister();
+    }
+
+    // Set the layout null to set the size and the location by myself.
     private void setLoginLayoutManager() {
         m_LoginContainer.setLayout(null);
     }
 
-    //Login
+    // Set size and locations of the Components.
     private void setLoginLocationAndSize() {
 
         m_LoginUserNameLabel.setBounds(50, 70, 100, 30);
@@ -87,7 +116,6 @@ public class LoginPageGUI{
         m_LoginRegisterButton.setBounds(125, 250, 100, 30);
     }
 
-    //Login
     private void addLoginComponentsToContainer() {
         m_LoginContainer.add(m_LoginUserNameLabel);
         m_LoginContainer.add(m_LoginPasswordLabel);
@@ -99,22 +127,11 @@ public class LoginPageGUI{
         m_LoginContainer.add(m_LoginRegisterButton);
     }
 
-    public void showInvalidInputInLogin() {
-        JOptionPane.showMessageDialog(m_LoginFrame, "Invalid Username or Password");
-    }
-
-    public void showInvalidInputInRegister() {
-        m_RegisterFrame.ShowInvalidInputInRegister();
-    }
-
-    //Login
     private void addLoginActionEvents() {
 
         m_LoginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Coding Part of LOGIN button
-
                 String userText;
                 String pwdText;
                 userText = m_LoginUserNameTextField.getText();
@@ -127,7 +144,6 @@ public class LoginPageGUI{
         m_LoginResetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Coding Part of RESET button
                 m_LoginUserNameTextField.setText("");
                 m_LoginPasswordField.setText("");
             }
@@ -136,7 +152,7 @@ public class LoginPageGUI{
         m_LoginShowPasswordCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Coding Part of showPassword JCheckBox
+                // Do visible and invisible password in the password field.
                 if (m_LoginShowPasswordCheckBox.isSelected()) {
                     m_LoginPasswordField.setEchoChar((char) 0);
                 } else {

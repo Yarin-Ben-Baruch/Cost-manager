@@ -18,6 +18,10 @@ public class UpdateItemView {
     private JTextField m_UpdateItemUsernameTextField, m_UpdateItemCostNumberTextField;
     private IViewModel m_ViewModel;
 
+    /**
+     * The ctor call the init and start methods to start and initialized the update view.
+     * @param m_ViewModel
+     */
     public UpdateItemView(IViewModel m_ViewModel) {
         this.m_ViewModel = m_ViewModel;
         updateItemInit();
@@ -25,10 +29,9 @@ public class UpdateItemView {
     }
 
     private void updateItemInit() {
-        // Creating the UpdateItem Action
         m_UpdateItemColNameLabel = new JLabel("Col name to change:");
         m_UpdateItemColNameTextField = new JTextField(15);
-        m_UpdateItemDataToSetLabel = new JLabel("Date to set:");
+        m_UpdateItemDataToSetLabel = new JLabel("Data to set:");
         m_UpdateItemDataToSetTextField = new JTextField(15);
         m_UpdateItemToDBButton = new JButton("Update item to DB");
         m_UpdateItemCostNumberLabel = new JLabel("Cost number:");
@@ -39,7 +42,6 @@ public class UpdateItemView {
     }
 
     private void updateItemStart() {
-        // Creating the Update Item Panel.
         m_UpdateFrame.setLayout(null);
         m_UpdateFrame.add(m_UpdateItemColNameLabel);
         m_UpdateFrame.add(m_UpdateItemColNameTextField);
@@ -56,6 +58,23 @@ public class UpdateItemView {
         m_UpdateFrame.add(m_UpdateItemToDBButton);
 
         m_UpdateFrame.setTitle("Update Cost");
+        setComponentsSizeAndLocation();
+        m_UpdateFrame.setVisible(true);
+
+        m_UpdateItemToDBButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                m_ViewModel.updateItem(m_UpdateItemColNameTextField.getText(),
+                        m_UpdateItemDataToSetTextField.getText(),
+                        m_UpdateItemCostNumberTextField.getText(),
+                        m_UpdateItemUsernameTextField.getText());
+
+                m_UpdateFrame.dispose();
+            }
+        });
+    }
+
+    private void setComponentsSizeAndLocation() {
         m_UpdateFrame.setSize(400,350);
 
         m_UpdateItemColNameLabel.setBounds(50, 30, 150, 30);
@@ -70,20 +89,6 @@ public class UpdateItemView {
         m_UpdateItemToDBButton.setSize(150,30);
         m_UpdateItemToDBButton.setLocation((m_UpdateFrame.getWidth()-m_UpdateItemToDBButton.getWidth())/2 , m_UpdateItemUsernameTextField.getY() + m_UpdateItemUsernameTextField.getHeight()+30);
 
-
-        m_UpdateFrame.setVisible(true);
-
-        m_UpdateItemToDBButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                m_ViewModel.updateItem(m_UpdateItemColNameTextField.getText(),
-                        m_UpdateItemDataToSetTextField.getText(),
-                        m_UpdateItemCostNumberTextField.getText(),
-                        m_UpdateItemUsernameTextField.getText());
-
-                m_UpdateFrame.dispose();
-            }
-        });
     }
 
 }

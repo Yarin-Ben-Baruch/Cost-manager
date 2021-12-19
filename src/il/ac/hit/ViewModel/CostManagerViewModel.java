@@ -31,16 +31,6 @@ public class CostManagerViewModel implements IViewModel {
         this.m_Service = Executors.newFixedThreadPool(3);
     }
 
-    @Override
-    public void setView(IView i_View) {
-        this.m_View = i_View;
-    }
-
-    @Override
-    public void setModel(IModel i_Model) {
-        this.m_Model = i_Model;
-    }
-
     /**
      * A method that receives an object from the item class and takes care of connecting it to the view.
      * @param i_Item
@@ -244,36 +234,6 @@ public class CostManagerViewModel implements IViewModel {
      * the data stored in DB and then passes to the class that implements the view the list.
      */
     @Override
-    public void getAllUsers() {
-        m_Service.submit(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Collection<User> users = m_Model.getAllUsers();
-
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            m_View.setUsers(users);
-                        }
-                    });
-                } catch (CostMangerException e) {
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            m_View.showMessage(new Message(e.getMessage()));
-                        }
-                    });
-                }
-            }
-        });
-    }
-
-    /**
-     * A method that takes from the class that implements the model, all
-     * the data stored in DB and then passes to the class that implements the view the list.
-     */
-    @Override
     public void getAllCategories() {
         m_Service.submit(new Runnable() {
             @Override
@@ -332,6 +292,11 @@ public class CostManagerViewModel implements IViewModel {
         });
     }
 
+    /**
+     * A method that takes from the class that implements the model, all
+     * the data stored in DB and then open the application after successful login.
+     * @param i_User
+     */
     @Override
     public void isUserExists(User i_User) {
         m_Service.submit(new Runnable() {
@@ -343,7 +308,6 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-
                             m_View.openApplicationFromLogin();
                         }
                     });
@@ -359,5 +323,44 @@ public class CostManagerViewModel implements IViewModel {
         });
     }
 
+    @Override
+    public void setView(IView i_View) {
+        this.m_View = i_View;
+    }
+
+    @Override
+    public void setModel(IModel i_Model) {
+        this.m_Model = i_Model;
+    }
+
+    /**
+     * A method that takes from the class that implements the model, all
+     * the data stored in DB and then passes to the class that implements the view the list.
+     */
+//    @Override
+//    public void getAllUsers() {
+//        m_Service.submit(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Collection<User> users = m_Model.getAllUsers();
+//
+//                    SwingUtilities.invokeLater(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            m_View.setUsers(users);
+//                        }
+//                    });
+//                } catch (CostMangerException e) {
+//                    SwingUtilities.invokeLater(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            m_View.showMessage(new Message(e.getMessage()));
+//                        }
+//                    });
+//                }
+//            }
+//        });
+//    }
 
 }

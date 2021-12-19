@@ -187,7 +187,7 @@ public class DBModel implements IModel {
             }
         }
         catch (SQLException | NumberFormatException e) {
-            throw new CostMangerException("Unable to update data to DB",e);
+            throw new CostMangerException("Unable to remove data from DB",e);
         }
     }
 
@@ -368,6 +368,11 @@ public class DBModel implements IModel {
         return currentItems;
     }
 
+    /**
+     *  This method is checking if the user that she get is inside the DB.
+     * @param i_User
+     * @throws CostMangerException
+     */
     @Override
     public void checkIfUserExists(User i_User) throws CostMangerException {
 
@@ -396,7 +401,9 @@ public class DBModel implements IModel {
 
     }
 
-
+    // This method check if the category is inside the categories list
+    // if the category is inside the method do nothing.
+    // and if the category is not inside she put the category inside the list.
     private void addCategoryInAddItem(Category i_Category) throws CostMangerException{
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 

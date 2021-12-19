@@ -18,7 +18,7 @@ public interface IViewModel {
     void removeItem(String i_CostNumber, String i_UserName);
     void updateItem(String i_NameColToUpdate, String i_DataToSet, String i_CostNumber, String i_UserName);
     void getDetailedReport(Date i_StartDate, Date i_EndDate);
-    void getAllUsers();
+//    void getAllUsers();
     void getAllCategories();
     void getItems(String i_Username);
     void isUserExists(User i_User);

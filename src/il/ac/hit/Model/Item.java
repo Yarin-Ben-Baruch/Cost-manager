@@ -39,15 +39,6 @@ public class Item {
         setUserName(i_Username);
     }
 
-    public Item(String i_Name, String i_Describing, String i_Currency, Category i_Category, String i_Sum, Date i_Date, String i_Username) {
-        setName(i_Name);
-        setDescribing(i_Describing);
-        setCurrency(i_Currency);
-        setCategory( i_Category);
-        setSum(i_Sum);
-        setDate(i_Date);
-        setUserName(i_Username);
-    }
 
     public int getCostNumber() {
         return m_CostNumber;

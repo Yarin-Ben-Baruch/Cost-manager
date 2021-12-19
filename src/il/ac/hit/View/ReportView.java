@@ -3,25 +3,25 @@ package il.ac.hit.View;
 import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ReportView {
-
+    private IViewModel m_ViewModel;
     private String[] days;
     private String[] months;
     private String[] years;
-
     private JFrame m_ReportFrame;
     private JButton m_ShowReportActionButton;
-    private JLabel m_ShowReportStartDateDayLabel, m_ShowReportStartDateMonthLabel;
-    private JLabel m_ShowReportEndDateDayLabel, m_ShowReportEndDateMonthLabel;
-    private JComboBox m_ShowReportStartDateDayTextField, m_ShowReportStartDateMonthTextField,m_ShowReportStartDateYearTextField;
-    private JComboBox m_ShowReportEndDateDayTextField, m_ShowReportEndDateMonthTextField,m_ShowReportEndDateYearTextField;
+    private JLabel m_ShowReportStartDateLabel;
+    private JLabel m_ShowReportEndDateLabel;
+    private JComboBox m_ShowReportStartDateDayComboBox, m_ShowReportStartDateMonthComboBox, m_ShowReportStartDateYearComboBox;
+    private JComboBox m_ShowReportEndDateDayComboBox, m_ShowReportEndDateMonthComboBox, m_ShowReportEndDateYearComboBox;
 
-    private IViewModel m_ViewModel;
-
+    /**
+     * The ctor call the init and start methods to start and initialized the report view.
+     * @param i_Vm
+     */
     public ReportView(IViewModel i_Vm) {
         m_ViewModel = i_Vm;
         showReportInit();
@@ -29,7 +29,6 @@ public class ReportView {
     }
 
     private void showReportInit() {
-        // Creating the detailed report Action.
         days = new String[31];
         for (int i =0 ; i<31 ; i++) {
             days[i] = String.valueOf(i+1);
@@ -38,76 +37,75 @@ public class ReportView {
         for (int i =0 ; i<12 ; i++) {
             months[i] = String.valueOf(i+1);
         }
-        years = new String[15];
-        for (int i =0 ; i <15 ; i++) {
+        years = new String[16];
+        for (int i =0 ; i <16 ; i++) {
             years[i] = String.valueOf(i+2010);
         }
 
         m_ReportFrame = new JFrame();
-        m_ShowReportStartDateDayLabel = new JLabel("Start date:");
-        m_ShowReportStartDateDayTextField = new JComboBox(days);
-        m_ShowReportStartDateMonthTextField = new JComboBox(months);
-        m_ShowReportStartDateYearTextField = new JComboBox(years);
+        m_ShowReportStartDateLabel = new JLabel("Start date:");
+        m_ShowReportStartDateDayComboBox = new JComboBox(days);
+        m_ShowReportStartDateMonthComboBox = new JComboBox(months);
+        m_ShowReportStartDateYearComboBox = new JComboBox(years);
 
-//        m_ShowReportStartDateMonthLabel = new JLabel("Start month:");
-//        m_ShowReportEndDateMonthLabel = new JLabel("End Month");
-
-        m_ShowReportEndDateDayLabel = new JLabel("End date:");
-        m_ShowReportEndDateDayTextField = new JComboBox(days);
-        m_ShowReportEndDateMonthTextField = new JComboBox(months);
-        m_ShowReportEndDateYearTextField = new JComboBox(years);
+        m_ShowReportEndDateLabel = new JLabel("End date:");
+        m_ShowReportEndDateDayComboBox = new JComboBox(days);
+        m_ShowReportEndDateMonthComboBox = new JComboBox(months);
+        m_ShowReportEndDateYearComboBox = new JComboBox(years);
 
         m_ShowReportActionButton = new JButton("Show the report");
     }
 
     private void showReportStart() {
-        // Creating the detailed report Panel.
-
         m_ReportFrame.setLayout(null);
-        m_ReportFrame.add(m_ShowReportStartDateDayLabel);
-        m_ReportFrame.add(m_ShowReportStartDateDayTextField);
-        m_ReportFrame.add(m_ShowReportStartDateMonthTextField);
-        m_ReportFrame.add(m_ShowReportStartDateYearTextField);
-
-        m_ReportFrame.add(m_ShowReportEndDateDayLabel);
-        m_ReportFrame.add(m_ShowReportEndDateDayTextField);
-        m_ReportFrame.add(m_ShowReportEndDateMonthTextField);
-        m_ReportFrame.add(m_ShowReportEndDateYearTextField);
-
+        m_ReportFrame.add(m_ShowReportStartDateLabel);
+        m_ReportFrame.add(m_ShowReportStartDateDayComboBox);
+        m_ReportFrame.add(m_ShowReportStartDateMonthComboBox);
+        m_ReportFrame.add(m_ShowReportStartDateYearComboBox);
+        m_ReportFrame.add(m_ShowReportEndDateLabel);
+        m_ReportFrame.add(m_ShowReportEndDateDayComboBox);
+        m_ReportFrame.add(m_ShowReportEndDateMonthComboBox);
+        m_ReportFrame.add(m_ShowReportEndDateYearComboBox);
         m_ReportFrame.add(m_ShowReportActionButton);
 
-//        m_ReportFrame.add(m_ShowReportStartDateMonthLabel);
-// m_ReportFrame.add(m_ShowReportEndDateMonthLabel);
-
         m_ReportFrame.setTitle("Detailed Report");
-        m_ReportFrame.setSize(400,350);
-
-        m_ShowReportStartDateDayLabel.setBounds(50, 30, 150, 30);
-        m_ShowReportStartDateMonthLabel.setBounds(m_ShowReportStartDateDayLabel.getX(),m_ShowReportStartDateDayLabel.getY()+50, 100, 30);
-        m_ShowReportEndDateDayLabel.setBounds(m_ShowReportStartDateDayLabel.getX(),m_ShowReportStartDateMonthLabel.getY()+50, 100, 30);
-        m_ShowReportEndDateMonthLabel.setBounds(m_ShowReportStartDateDayLabel.getX(),m_ShowReportEndDateDayLabel.getY() + 50, 100, 30);
-
-        m_ShowReportStartDateDayTextField.setBounds(m_ShowReportStartDateDayLabel.getWidth() + m_ShowReportStartDateDayLabel.getX(), m_ShowReportStartDateDayLabel.getY(), 150, 30);
-        m_ShowReportStartDateMonthTextField.setBounds(m_ShowReportStartDateDayTextField.getX(), m_ShowReportStartDateMonthLabel.getY(), 150, 30);
-        m_ShowReportEndDateDayTextField.setBounds(m_ShowReportStartDateDayTextField.getX(), m_ShowReportEndDateDayLabel.getY(), 150, 30);
-        m_ShowReportEndDateMonthTextField.setBounds(m_ShowReportStartDateDayTextField.getX(), m_ShowReportEndDateMonthLabel.getY(), 150, 30);
-        m_ShowReportActionButton.setSize(150,30);
-        m_ShowReportActionButton.setLocation((m_ReportFrame.getWidth()-m_ShowReportActionButton.getWidth())/2 , m_ShowReportEndDateMonthTextField.getY() + m_ShowReportEndDateMonthTextField.getHeight()+30);
-
+        setComponentsSizeAndLocation();
         m_ReportFrame.setVisible(true);
 
         m_ShowReportActionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 m_ViewModel.getDetailedReport(
-                        java.sql.Date.valueOf("2021-" + m_ShowReportStartDateMonthTextField.getSelectedItem() +
-                                "-" + m_ShowReportStartDateDayTextField.getSelectedItem()),
-                        java.sql.Date.valueOf("2021-" + m_ShowReportEndDateMonthTextField.getSelectedItem() +
-                                "-" + m_ShowReportEndDateDayTextField.getSelectedItem()));
+                        java.sql.Date.valueOf(m_ShowReportStartDateYearComboBox.getSelectedItem()+ "-" +
+                                m_ShowReportStartDateMonthComboBox.getSelectedItem() +
+                                "-" + m_ShowReportStartDateDayComboBox.getSelectedItem()),
+                        java.sql.Date.valueOf(m_ShowReportEndDateYearComboBox.getSelectedItem() + "-" +
+                                m_ShowReportEndDateMonthComboBox.getSelectedItem() +
+                                "-" + m_ShowReportEndDateDayComboBox.getSelectedItem()));
 
                 m_ReportFrame.dispose();
             }
         });
+    }
+
+    private void setComponentsSizeAndLocation() {
+        m_ReportFrame.setSize(480,220);
+        m_ReportFrame.setResizable(false);
+
+        m_ShowReportStartDateLabel.setBounds(50, 30, 80, 30);
+        m_ShowReportEndDateLabel.setBounds(m_ShowReportStartDateLabel.getX(), m_ShowReportStartDateLabel.getY()+50, 80, 30);
+
+        m_ShowReportStartDateDayComboBox.setBounds(m_ShowReportStartDateLabel.getWidth() + m_ShowReportStartDateLabel.getX(), m_ShowReportStartDateLabel.getY(), 100, 30);
+        m_ShowReportStartDateMonthComboBox.setBounds(m_ShowReportStartDateDayComboBox.getX()+ m_ShowReportStartDateDayComboBox.getWidth() , m_ShowReportStartDateDayComboBox.getY(), 100, 30);
+        m_ShowReportStartDateYearComboBox.setBounds(m_ShowReportStartDateMonthComboBox.getX() + m_ShowReportStartDateMonthComboBox.getWidth(), m_ShowReportStartDateDayComboBox.getY(),100,30);
+
+        m_ShowReportEndDateDayComboBox.setBounds(m_ShowReportStartDateDayComboBox.getX(), m_ShowReportEndDateLabel.getY(), 100, 30);
+        m_ShowReportEndDateMonthComboBox.setBounds(m_ShowReportStartDateMonthComboBox.getX(), m_ShowReportEndDateLabel.getY(), 100, 30);
+        m_ShowReportEndDateYearComboBox.setBounds(m_ShowReportStartDateYearComboBox.getX(), m_ShowReportEndDateLabel.getY(),100,30);
+
+        m_ShowReportActionButton.setSize(150,30);
+        m_ShowReportActionButton.setLocation((m_ReportFrame.getWidth()-m_ShowReportActionButton.getWidth())/2 , m_ShowReportEndDateMonthComboBox.getY() + m_ShowReportEndDateMonthComboBox.getHeight()+30);
+
     }
 
 }

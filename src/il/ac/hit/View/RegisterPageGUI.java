@@ -10,7 +10,8 @@ import java.awt.event.*;
 public class RegisterPageGUI {
 
     private IViewModel m_Vm;
-    // Components of the Form
+
+    // Components of the Register Page Gui.
     private JFrame m_RegisterFrame;
     private Container m_RegisterContainer;
     private JLabel m_TitleLabel, m_UserNameLabel, m_PasswordLabel, m_ResetJLabel;
@@ -20,11 +21,17 @@ public class RegisterPageGUI {
     private JButton m_SubmitButton, m_ResetJButton;
     private JCheckBox m_RegisterShowPasswordCheckBox;
 
+    /**
+     * This is the C'tor of the Register page gui.
+     * @param i_Vm
+     */
     public RegisterPageGUI(IViewModel i_Vm) {
         this.m_Vm = i_Vm;
     }
 
-
+    /**
+     * This method initializing the Register page gui.
+     */
     public void init() {
 
         m_RegisterFrame = new JFrame("Registration Form");
@@ -42,6 +49,9 @@ public class RegisterPageGUI {
         RegisterSetFont();
     }
 
+    /**
+     * This method starting the Register page gui.
+     */
     public void start(){
 
         m_RegisterFrame.setTitle("Registration Form");
@@ -61,6 +71,22 @@ public class RegisterPageGUI {
 
     }
 
+
+    /**
+     * This method show messageDialog if invalid input is entered.
+     */
+    public void ShowInvalidInputInRegister() {
+        JOptionPane.showMessageDialog(m_RegisterFrame,"Register Failed!");
+    }
+
+    /**
+     * This method close the register page gui.
+     */
+    public void Close() {
+        JOptionPane.showMessageDialog(m_RegisterFrame, "Register Success");
+        m_RegisterFrame.dispose();
+    }
+
     private void RegisterSetLocations(){
         m_TitleLabel.setLocation(150, 30);
         m_UserNameLabel.setLocation(100, 100);
@@ -72,6 +98,51 @@ public class RegisterPageGUI {
         m_SubmitButton.setLocation(150, 300);
         m_ResetJButton.setLocation(270, 300);
         m_ResetJLabel.setLocation(100, 500);
+    }
+
+    private void AddRegisterActionEvent() {
+        m_SubmitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String pwdText = new String(m_PasswordField.getPassword());
+                // Makes sure he has approved the terms, and UserName, password not empty.
+                if (m_TermCheckBox.isSelected()
+                        && m_UsernameTextField.getText().length() != 0
+                        && pwdText.length() != 0) {
+
+                    User user = new User(m_UsernameTextField.getText(),pwdText);
+
+                    m_Vm.addNewUser(user);
+                }
+                // If not confirmed
+                else {
+                    ShowInvalidInputInRegister();
+                }
+            }
+        });
+
+        m_ResetJButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String def = "";
+                m_UsernameTextField.setText(def);
+                m_PasswordField.setText(def);
+                m_ResetJLabel.setText(def);
+                m_TermCheckBox.setSelected(false);
+            }
+        });
+
+        m_RegisterShowPasswordCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Do the password field visible and invisible.
+                if (m_RegisterShowPasswordCheckBox.isSelected()) {
+                    m_PasswordField.setEchoChar((char) 0);
+                } else {
+                    m_PasswordField.setEchoChar('*');
+                }
+            }
+        });
     }
 
     private void RegisterSetSize(){
@@ -113,61 +184,6 @@ public class RegisterPageGUI {
         m_SubmitButton.setFont(new Font("Arial", Font.PLAIN, 15));
         m_ResetJButton.setFont(new Font("Arial", Font.PLAIN, 15));
         m_ResetJLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-    }
-
-    public void ShowInvalidInputInRegister() {
-        JOptionPane.showMessageDialog(m_RegisterFrame,"Register Failed!");
-    }
-
-    public void Close() {
-        JOptionPane.showMessageDialog(m_RegisterFrame, "Register Success");
-        m_RegisterFrame.dispose();
-    }
-
-    private void AddRegisterActionEvent(){
-        m_SubmitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String pwdText = new String(m_PasswordField.getPassword());
-                // Makes sure he has approved the terms, and UserName, password not empty
-                // Fix the deprecated method.
-                if (m_TermCheckBox.isSelected()
-                        && m_UsernameTextField.getText().length() != 0
-                        && pwdText.length() != 0) {
-
-                    User user = new User(m_UsernameTextField.getText(),pwdText);
-
-                    m_Vm.addNewUser(user);
-                }
-                // If not confirmed
-                else {
-                    ShowInvalidInputInRegister();
-                }
-            }
-        });
-
-        m_ResetJButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String def = "";
-                m_UsernameTextField.setText(def);
-                m_PasswordField.setText(def);
-                m_ResetJLabel.setText(def);
-                m_TermCheckBox.setSelected(false);
-            }
-        });
-
-        m_RegisterShowPasswordCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Coding Part of showPassword JCheckBox
-                if (m_RegisterShowPasswordCheckBox.isSelected()) {
-                    m_PasswordField.setEchoChar((char) 0);
-                } else {
-                    m_PasswordField.setEchoChar('*');
-                }
-            }
-        });
     }
 
 }

@@ -18,6 +18,10 @@ public class AddCategoryView {
     private JButton m_AddCategoryToDBButton;
     IViewModel m_ViewModel;
 
+    /**
+     * Ctor that contain the init and start CategoryView
+     * @param m_ViewModel
+     */
     public AddCategoryView(IViewModel m_ViewModel) {
         this.m_ViewModel = m_ViewModel;
         addCategoryInit();
