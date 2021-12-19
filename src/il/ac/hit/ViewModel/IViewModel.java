@@ -20,6 +20,6 @@ public interface IViewModel {
     void getDetailedReport(Date i_StartDate, Date i_EndDate);
     void getAllUsers();
     void getAllCategories();
-    void getItems();
+    void getItems(String i_Username);
     void isUserExists(User i_User);
 }

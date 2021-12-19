@@ -41,10 +41,11 @@ public interface IModel {
 
     /**
      * Get items return collection with all the cost items in the items sql table.
+     * @param i_Username
      * @return
      * @throws CostMangerException
      */
-    Collection<Item> getItems() throws CostMangerException;
+    Collection<Item> getItems(String i_Username) throws CostMangerException;
 
     /**
      * Update item change specific info in a cost item.

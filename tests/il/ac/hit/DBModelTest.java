@@ -61,8 +61,8 @@ class DBModelTest {
     @Test
     void getItems() {
         try {
-            Collection<Item> allItems = test.getItems();
-            Collection<Item> allItems2 = test.getItems();
+            Collection<Item> allItems = test.getItems("Danoy");
+            Collection<Item> allItems2 = test.getItems("Danoy");
 
             assertEquals(allItems,allItems2);
 
@@ -76,7 +76,7 @@ class DBModelTest {
     void updateItem() {
         try {
             test.updateItem("name", "Yarin", "3", "Danoy");
-            Collection<Item> allItems = test.getItems();
+            Collection<Item> allItems = test.getItems("Danoy");
             Item searchedItem;
 
             for (Item item : allItems) {
@@ -96,7 +96,7 @@ class DBModelTest {
     @Test
     void removeItem() {
         try {
-            Collection<Item> allItemsBeforeEdit = test.getItems();
+            Collection<Item> allItemsBeforeEdit = test.getItems("Danoy");
 
             Item item =  new Item(99, "Dani",
                     "buy new car","nis",
@@ -107,7 +107,7 @@ class DBModelTest {
 
             test.removeItem("99", "Danoy");
 
-            Collection<Item> allItemsAfterAddAndRemove = test.getItems();
+            Collection<Item> allItemsAfterAddAndRemove = test.getItems("Danoy");
 
             assertEquals(allItemsBeforeEdit,allItemsAfterAddAndRemove);
 

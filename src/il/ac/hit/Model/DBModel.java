@@ -86,14 +86,15 @@ public class DBModel implements IModel {
      * @throws CostMangerException
      */
     @Override
-    public Collection<Item> getItems() throws CostMangerException {
+    public Collection<Item> getItems(String i_Username) throws CostMangerException {
 
         ResultSet myResult = null;
         Collection<Item> currentItems = new LinkedList<>();
 
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE userName = " +" ? ");
+            preparedStatement.setString(1,i_Username);
             myResult = preparedStatement.executeQuery();
 
             // Put all the values form the query in LinkedList.

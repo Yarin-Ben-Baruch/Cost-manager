@@ -157,7 +157,7 @@ public class ApplicationPageGUI {
     }
 
     private void ButtonActionListeners() {
-        m_ShowItemsButton.addActionListener(e -> m_ViewModel.getItems());
+        m_ShowItemsButton.addActionListener(e -> m_ViewModel.getItems(m_Username));
 
         m_ShowCategoriesButton.addActionListener(e -> m_ViewModel.getAllCategories());
 

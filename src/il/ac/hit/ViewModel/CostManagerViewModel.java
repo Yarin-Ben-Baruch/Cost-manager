@@ -52,7 +52,7 @@ public class CostManagerViewModel implements IViewModel {
             public void run() {
                 try {
                     m_Model.addItem(i_Item);
-                    Collection<Item> items = m_Model.getItems();
+                    Collection<Item> items = m_Model.getItems(i_Item.getUserName());
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -148,7 +148,7 @@ public class CostManagerViewModel implements IViewModel {
             public void run() {
                 try {
                     m_Model.removeItem(i_CostNumber, i_UserName);
-                    Collection<Item> items = m_Model.getItems();
+                    Collection<Item> items = m_Model.getItems(i_UserName);
 
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
@@ -185,7 +185,7 @@ public class CostManagerViewModel implements IViewModel {
             public void run() {
                 try {
                     m_Model.updateItem(i_NameColToUpdate, i_DataToSet, i_CostNumber, i_UserName);
-                    Collection<Item> items = m_Model.getItems();
+                    Collection<Item> items = m_Model.getItems(i_UserName);
 
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
@@ -299,17 +299,18 @@ public class CostManagerViewModel implements IViewModel {
     }
 
     /**
-     * A method that takes from the class that implements the model, all
-     * the data stored in DB and then passes to the class that implements the view the list.
+    * A method that takes from the class that implements the model, all
+    * the data stored in DB and then passes to the class that implements the view the list.
+     * @param i_Username
      */
     @Override
-    public void getItems() {
+    public void getItems(String i_Username) {
 
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Collection<Item> items =  m_Model.getItems();
+                    Collection<Item> items =  m_Model.getItems(i_Username);
 
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
