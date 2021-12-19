@@ -31,7 +31,7 @@ public class UpdateItemView {
     }
 
     private void updateItemInit() {
-        m_ColumnsToUpdate = new String[]{"name", "description", "currency", "category", "sum"};
+        m_ColumnsToUpdate = new String[]{"name", "description", "category", "sum"};
 
         m_UpdateItemColNameLabel = new JLabel("Col name to change:");
         m_UpdateItemColNameComboBox = new JComboBox(m_ColumnsToUpdate);
