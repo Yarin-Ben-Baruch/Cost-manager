@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ReportView {
+public class DetailedReportView {
     private IViewModel m_ViewModel;
     private String m_Username;
     private String[] days;
@@ -23,7 +23,7 @@ public class ReportView {
      * The ctor call the init and start methods to start and initialized the report view.
      * @param i_Vm
      */
-    public ReportView(IViewModel i_Vm, String i_Username) {
+    public DetailedReportView(IViewModel i_Vm, String i_Username) {
         m_ViewModel = i_Vm;
         m_Username = i_Username;
         showReportInit();

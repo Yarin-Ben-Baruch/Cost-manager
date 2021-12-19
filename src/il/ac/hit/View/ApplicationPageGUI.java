@@ -7,10 +7,7 @@ import il.ac.hit.ViewModel.IViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Vector;
@@ -251,9 +248,9 @@ public class ApplicationPageGUI {
 
         m_ShowCategoriesButton.addActionListener(e -> m_ViewModel.getAllCategories());
 
-        m_ShowReportButton.addActionListener(e -> new ReportView(m_ViewModel,m_Username));
+        m_ShowReportButton.addActionListener(e -> new DetailedReportView(m_ViewModel,m_Username));
 
-        m_UpdateItemButton.addActionListener(e -> new UpdateItemView(m_ViewModel));
+        m_UpdateItemButton.addActionListener(e -> new UpdateItemView(m_ViewModel, m_Username));
 
         m_RemoveItemButton.addActionListener(e -> new RemoveItemView(m_ViewModel));
 
