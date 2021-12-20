@@ -41,7 +41,7 @@ public class RemoveItemView {
         removeItemFrame.add(removeItemCostNumberTextField);
         removeItemFrame.add(removeItemFromDBButton);
 
-        removeItemFrame.setLayout(new FlowLayout());
+        removeItemFrame.setLayout(new BorderLayout());
         removeItemFrame.setTitle("Remove Cost");
         setComponentsSizeAndLocations();
         removeItemFrame.setVisible(true);

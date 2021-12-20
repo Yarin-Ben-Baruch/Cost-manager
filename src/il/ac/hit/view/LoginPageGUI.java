@@ -16,9 +16,10 @@ public class LoginPageGUI{
 
     //Creating login page frame
     private JFrame loginFrame;
-    private Container loginContainer;
+//    private Container loginContainer;
     private JLabel loginUserNameLabel, loginPasswordLabel;
     private JTextField loginUserNameTextField;
+    private JLabel temp = new JLabel();
     private JPasswordField loginPasswordField;
     private JButton loginButton, loginResetButton, loginRegisterButton;
     private JCheckBox loginShowPasswordCheckBox;
@@ -39,7 +40,7 @@ public class LoginPageGUI{
         registerFrame = new RegisterPageGUI(viewModel);
 
         loginFrame = new JFrame();
-        loginContainer = loginFrame.getContentPane();
+//        loginContainer = loginFrame.getContentPane();
         loginUserNameLabel = new JLabel("USERNAME");
         loginPasswordLabel = new JLabel("PASSWORD");
         loginUserNameTextField = new JTextField(15);
@@ -56,15 +57,16 @@ public class LoginPageGUI{
     public void start(){
 
         setLoginLayoutManager();
-        setLoginLocationAndSize();
         addLoginComponentsToContainer();
+//        setLoginLocationAndSize();
         addLoginActionEvents();
 
         loginFrame.setTitle("Login Form");
-        loginFrame.setVisible(true);
-        loginFrame.setBounds(10, 10, 350, 400);
+        loginFrame.setSize(350,400);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setResizable(false);
+        setLoginLocationAndSize();
+        loginFrame.setVisible(true);
     }
 
     /**
@@ -101,7 +103,7 @@ public class LoginPageGUI{
 
     // Set the layout null to set the size and the location by myself.
     private void setLoginLayoutManager() {
-        loginContainer.setLayout(new FlowLayout());
+            loginFrame.setLayout(new BorderLayout());
     }
 
     // Set size and locations of the Components.
@@ -114,42 +116,34 @@ public class LoginPageGUI{
         loginShowPasswordCheckBox.setBounds(150, 150, 150, 30);
         loginButton.setBounds(50, 200, 100, 30);
         loginResetButton.setBounds(200, 200, 100, 30);
-        loginRegisterButton.setBounds(125, 250, 100, 30);
+        loginRegisterButton.setBounds(125, loginResetButton.getY()+50, 100, 30);
     }
 
     private void addLoginComponentsToContainer() {
-        loginContainer.add(loginUserNameLabel);
-        loginContainer.add(loginPasswordLabel);
-        loginContainer.add(loginUserNameTextField);
-        loginContainer.add(loginPasswordField);
-        loginContainer.add(loginShowPasswordCheckBox);
-        loginContainer.add(loginButton);
-        loginContainer.add(loginResetButton);
-        loginContainer.add(loginRegisterButton);
+        loginFrame.add(loginUserNameLabel);
+        loginFrame.add(loginUserNameTextField);
+        loginFrame.add(loginPasswordLabel);
+        loginFrame.add(loginPasswordField);
+        loginFrame.add(loginShowPasswordCheckBox);
+        loginFrame.add(loginButton);
+        loginFrame.add(loginResetButton);
+        loginFrame.add(loginRegisterButton);
+        loginFrame.add(temp);
     }
 
     private void addLoginActionEvents() {
 
-        loginButton.addActionListener((e -> {
-            String userText;
-            String pwdText;
-            userText = loginUserNameTextField.getText();
-            pwdText = new String(loginPasswordField.getPassword());
-            User user = new User(userText, pwdText);
-            viewModel.isUserExists(user);
-        }));
-
-//        m_LoginButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                String userText;
-//                String pwdText;
-//                userText = m_LoginUserNameTextField.getText();
-//                pwdText = new String(m_LoginPasswordField.getPassword());
-//                User user = new User(userText, pwdText);
-//                m_Vm.isUserExists(user);
-//            }
-//        });
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String userText;
+                String pwdText;
+                userText = loginUserNameTextField.getText();
+                pwdText = new String(loginPasswordField.getPassword());
+                User user = new User(userText, pwdText);
+                viewModel.isUserExists(user);
+            }
+        });
 
         loginResetButton.addActionListener(new ActionListener() {
             @Override

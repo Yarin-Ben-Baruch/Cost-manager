@@ -13,7 +13,7 @@ public class RegisterPageGUI {
 
     // Components of the Register Page Gui.
     private JFrame registerFrame;
-    private Container registerContainer;
+    //private Container registerContainer;
     private JLabel titleLabel, userNameLabel, passwordLabel, resetJLabel;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
@@ -58,9 +58,9 @@ public class RegisterPageGUI {
         registerFrame.setBounds(300, 90, 500, 450);
         registerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registerFrame.setResizable(false);
-        registerContainer = registerFrame.getContentPane();
-        registerContainer.setLayout(new FlowLayout());
-        registerContainer.setBackground(Color.getColor("50",Color.lightGray));
+//        registerContainer = registerFrame.getContentPane();
+        registerFrame.setLayout(new BorderLayout());
+        registerFrame.setBackground(Color.getColor("50",Color.lightGray));
 
         registerSetLocations();
         registerSetSize();
@@ -70,7 +70,6 @@ public class RegisterPageGUI {
         registerFrame.setVisible(true);
 
     }
-
 
     /**
      * This method show messageDialog if invalid input is entered.
@@ -159,18 +158,18 @@ public class RegisterPageGUI {
     }
 
     private void registerAddToContainer(){
-        registerContainer.add(titleLabel);
-        registerContainer.add(userNameLabel);
-        registerContainer.add(usernameTextField);
-        registerContainer.add(passwordLabel);
-        registerContainer.add(passwordField);
-        registerContainer.add(registerShowPasswordCheckBox);
-        registerContainer.add(termCheckBox);
-        registerContainer.add(submitButton);
-        registerContainer.add(resetJButton);
+        registerFrame.add(titleLabel);
+        registerFrame.add(userNameLabel);
+        registerFrame.add(usernameTextField);
+        registerFrame.add(passwordLabel);
+        registerFrame.add(passwordField);
+        registerFrame.add(registerShowPasswordCheckBox);
+        registerFrame.add(termCheckBox);
+        registerFrame.add(submitButton);
+        registerFrame.add(resetJButton);
 
         // Clearing the information
-        registerContainer.add(resetJLabel);
+        registerFrame.add(resetJLabel);
 
     }
 

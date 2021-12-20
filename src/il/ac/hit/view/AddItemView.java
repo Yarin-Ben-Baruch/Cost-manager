@@ -77,7 +77,7 @@ public class AddItemView {
 
     private void addItemStart() {
         // Creating the Add Item Panel.
-        addItemFrame.setLayout(new FlowLayout());
+        addItemFrame.setLayout(new BorderLayout());
         addItemFrame.add(addItemNameLabel);
         addItemFrame.add(addItemNameTextField);
         addItemFrame.add(addItemCurrencyLabel);

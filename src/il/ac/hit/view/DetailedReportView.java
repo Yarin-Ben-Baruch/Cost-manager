@@ -59,7 +59,7 @@ public class DetailedReportView {
     }
 
     private void showReportStart() {
-        reportFrame.setLayout(new FlowLayout());
+        reportFrame.setLayout(new BorderLayout());
         reportFrame.add(showReportStartDateLabel);
         reportFrame.add(showReportStartDateDayComboBox);
         reportFrame.add(showReportStartDateMonthComboBox);

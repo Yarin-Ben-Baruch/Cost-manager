@@ -43,7 +43,7 @@ public class UpdateItemView {
     }
 
     private void updateItemStart() {
-        updateFrame.setLayout(new FlowLayout());
+        updateFrame.setLayout(new BorderLayout());
         updateFrame.add(updateItemColNameLabel);
         updateFrame.add(updateItemColNameComboBox);
         updateFrame.add(updateItemDataToSetLabel);
