@@ -1,6 +1,4 @@
-package il.ac.hit.Model;
-
-import il.ac.hit.Exception.CostMangerException;
+package il.ac.hit.model;
 
 import java.sql.*;
 import java.util.Collection;
@@ -25,15 +23,15 @@ public class DBModel implements IModel {
 
     /**
      *  C'tor that set the connection and the statement.
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
-    public DBModel() throws CostMangerException {
+    public DBModel() throws CostManagerException {
 
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             System.out.println("Connection success !");
         }
         catch (SQLException e) {
-            throw new CostMangerException("Connection failed!",e);
+            throw new CostManagerException("Connection failed!",e);
         }
 
     }
@@ -42,10 +40,10 @@ public class DBModel implements IModel {
      * Add item method adding cost item for the items sql table.
      * Add item method also adding category if not exists to the categories sql table.
      * @param i_Item
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public void addItem(Item i_Item) throws CostMangerException {
+    public void addItem(Item i_Item) throws CostManagerException {
 
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             // if the category is not exists add the category to the categories sql table.
@@ -70,22 +68,22 @@ public class DBModel implements IModel {
 
             // if the add user not performed throws CostMangerException.
             if(checkAddItem != 1)
-                throw new CostMangerException("Adding was not executed!");
+                throw new CostManagerException("Adding was not executed!");
 
         }
         catch (SQLException e) {
             System.out.println(e.fillInStackTrace());
-            throw new CostMangerException("Unable insert into the DB",e);
+            throw new CostManagerException("Unable insert into the DB",e);
         }
     }
 
     /**
      * Get all the items in the cost items sql table.
      * @return
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public Collection<Item> getItems(String i_Username) throws CostMangerException {
+    public Collection<Item> getItems(String i_Username) throws CostManagerException {
 
         ResultSet myResult = null;
         Collection<Item> currentItems = new LinkedList<>();
@@ -105,7 +103,7 @@ public class DBModel implements IModel {
                         myResult.getDate("date"), myResult.getString("userName")));
             }
         } catch (SQLException e) {
-            throw new CostMangerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB");
         }
 
         return currentItems;
@@ -117,17 +115,17 @@ public class DBModel implements IModel {
      * @param i_DataToSet
      * @param i_CostNumber
      * @param i_Username
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public void updateItem(String i_NameColToUpdate, String i_DataToSet, String i_CostNumber, String i_Username) throws CostMangerException {
+    public void updateItem(String i_NameColToUpdate, String i_DataToSet, String i_CostNumber, String i_Username) throws CostManagerException {
 
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             int costNumber = Integer.parseInt(i_CostNumber);
 
             // If the user try to change username throw CostMangerException.
             if(i_NameColToUpdate.equals("userName")){
-                throw new CostMangerException("Can't change here userName");
+                throw new CostManagerException("Can't change here userName");
             }
 
             PreparedStatement preparedStatement = null;
@@ -151,12 +149,12 @@ public class DBModel implements IModel {
 
             // If the update not execute properly throw CostMangerException.
            if(howManyUpdates != 1){
-               throw new CostMangerException("Can't update the item !");
+               throw new CostManagerException("Can't update the item !");
            }
         }
         catch (SQLException | NumberFormatException e) {
             System.out.println(e.fillInStackTrace());
-            throw new CostMangerException("Unable to update data to DB",e);
+            throw new CostManagerException("Unable to update data to DB",e);
         }
     }
 
@@ -164,10 +162,10 @@ public class DBModel implements IModel {
      * Remove item from the cost items sql table
      * @param i_CostNumber
      * @param i_Username
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public void removeItem(String i_CostNumber, String i_Username) throws CostMangerException {
+    public void removeItem(String i_CostNumber, String i_Username) throws CostManagerException {
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
             int costNumber = Integer.parseInt(i_CostNumber);
 
@@ -182,12 +180,12 @@ public class DBModel implements IModel {
 
             // If the remove item not execute properly throw CostMangerException.
             if(howManyUpdates != 1){
-                throw new CostMangerException("Can't remove the Item!");
+                throw new CostManagerException("Can't remove the Item!");
             }
 
         }
         catch (SQLException | NumberFormatException e) {
-            throw new CostMangerException("Unable to remove data from DB",e);
+            throw new CostManagerException("Unable to remove data from DB",e);
         }
     }
 
@@ -205,10 +203,10 @@ public class DBModel implements IModel {
      * @param i_StartDate
      * @param i_EndDate
      * @return
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public Collection<Item> getDetailedReport(Date i_StartDate, Date i_EndDate, String i_Username) throws CostMangerException {
+    public Collection<Item> getDetailedReport(Date i_StartDate, Date i_EndDate, String i_Username) throws CostManagerException {
 
         ResultSet myResult = null;
         Collection<Item> reportItems = new LinkedList<>();
@@ -235,7 +233,7 @@ public class DBModel implements IModel {
 
             }
         } catch (SQLException e) {
-            throw new CostMangerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB");
         }
 
         return reportItems;
@@ -244,17 +242,17 @@ public class DBModel implements IModel {
     /**
      * Adding new user to the users sql table.
      * @param i_User
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public void addNewUser(User i_User) throws CostMangerException {
+    public void addNewUser(User i_User) throws CostManagerException {
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, this.m_User, m_Password)) {
 
             Collection<User> allUsers = getAllUsers();
 
             // Check if the user is exists in the users sql table. If the user exists throws CostMangerException.
             if(allUsers.contains(i_User)) {
-                throw new CostMangerException("This user is already exists");
+                throw new CostManagerException("This user is already exists");
             }
 
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -270,21 +268,21 @@ public class DBModel implements IModel {
 
             // If the add user not execute properly throw CostMangerException.
             if(howManyAdded != 1) {
-                throw new CostMangerException("Can't add same user twice!");
+                throw new CostManagerException("Can't add same user twice!");
             }
         }
         catch (SQLException e) {
-            throw new CostMangerException("Unable insert into the DB",e);
+            throw new CostManagerException("Unable insert into the DB",e);
         }
     }
 
     /**
      * Adding new category to the categories sql table if the category is not exists.
      * @param i_Category
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public void addNewCategoryIfExists(Category i_Category) throws CostMangerException {
+    public void addNewCategoryIfExists(Category i_Category) throws CostManagerException {
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
             Collection<Category> allCategories = getAllCategories();
@@ -303,30 +301,30 @@ public class DBModel implements IModel {
 
                 // If the add category was not execute properly throw CostMangerException.
                 if(howManyAdded != 1){
-                    throw new CostMangerException("Unable insert the category");
+                    throw new CostManagerException("Unable insert the category");
                 }
             }
             else{
                 if(i_Category.getCategoryName().isEmpty())
                 {
-                    throw new CostMangerException("Can't add empty category" );
+                    throw new CostManagerException("Can't add empty category" );
                 }
-                throw new CostMangerException("Can't add same category twice!");
+                throw new CostManagerException("Can't add same category twice!");
             }
 
         }
         catch (SQLException e) {
-            throw new CostMangerException("Unable insert into the DB",e);
+            throw new CostManagerException("Unable insert into the DB",e);
         }
     }
 
     /**
      * Get all the users in the users sql table.
      * @return
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public Collection<User> getAllUsers() throws CostMangerException {
+    public Collection<User> getAllUsers() throws CostManagerException {
 
         ResultSet myResult = null;
         Collection<User> currentItems = new LinkedList<>();
@@ -344,7 +342,7 @@ public class DBModel implements IModel {
                         myResult.getString("password")));
             }
         } catch (SQLException e) {
-            throw new CostMangerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB");
         }
 
         return currentItems;
@@ -353,10 +351,10 @@ public class DBModel implements IModel {
     /**
      * Get all the categories in the categories sql table.
      * @return
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public Collection<Category> getAllCategories() throws CostMangerException {
+    public Collection<Category> getAllCategories() throws CostManagerException {
 
         ResultSet myResult = null;
         Collection<Category> currentItems = new LinkedList<>();
@@ -373,7 +371,7 @@ public class DBModel implements IModel {
             }
 
         } catch (SQLException e) {
-            throw new CostMangerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB");
         }
 
         return currentItems;
@@ -382,10 +380,10 @@ public class DBModel implements IModel {
     /**
      *  This method is checking if the user that she get is inside the DB.
      * @param i_User
-     * @throws CostMangerException
+     * @throws CostManagerException
      */
     @Override
-    public void checkIfUserExists(User i_User) throws CostMangerException {
+    public void checkIfUserExists(User i_User) throws CostManagerException {
 
         ResultSet myResult = null;
         Collection<User> currentItems = new LinkedList<>();
@@ -404,10 +402,10 @@ public class DBModel implements IModel {
             }
 
             if(!currentItems.contains(i_User))
-                throw new CostMangerException("User not Exists!");
+                throw new CostManagerException("User not Exists!");
 
         } catch (SQLException e) {
-            throw new CostMangerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB");
         }
 
     }
@@ -415,7 +413,7 @@ public class DBModel implements IModel {
     // This method check if the category is inside the categories list
     // if the category is inside the method do nothing.
     // and if the category is not inside she put the category inside the list.
-    private void addCategoryInAddItem(Category i_Category) throws CostMangerException{
+    private void addCategoryInAddItem(Category i_Category) throws CostManagerException {
         try ( Connection connection = DriverManager.getConnection(m_DbUrl, m_User, m_Password)) {
 
             Collection<Category> allCategories = getAllCategories();
@@ -434,12 +432,12 @@ public class DBModel implements IModel {
 
                 // If the add category was not execute properly throw CostMangerException.
                 if(howManyAdded != 1){
-                    throw new CostMangerException("Unable insert the category");
+                    throw new CostManagerException("Unable insert the category");
                 }
             }
         }
         catch (SQLException e) {
-            throw new CostMangerException("Unable insert into the DB",e);
+            throw new CostManagerException("Unable insert into the DB",e);
         }
     }
 }

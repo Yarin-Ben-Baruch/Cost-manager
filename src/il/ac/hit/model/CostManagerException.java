@@ -1,12 +1,12 @@
-package il.ac.hit.Exception;
+package il.ac.hit.model;
 
-public class CostMangerException extends Exception {
+public class CostManagerException extends Exception {
 
     /**
      * Exception C'tor that contain message.
      * @param message
      */
-    public CostMangerException(String message) {
+    public CostManagerException(String message) {
         super(message);
     }
 
@@ -15,7 +15,7 @@ public class CostMangerException extends Exception {
      * @param message
      * @param cause
      */
-    public CostMangerException(String message, Throwable cause) {
+    public CostManagerException(String message, Throwable cause) {
         super(message, cause);
     }
 

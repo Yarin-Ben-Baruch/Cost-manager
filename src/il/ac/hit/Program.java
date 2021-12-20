@@ -1,19 +1,18 @@
 package il.ac.hit;
 
-import il.ac.hit.Exception.CostMangerException;
-import il.ac.hit.Model.DBModel;
-import il.ac.hit.Model.IModel;
-import il.ac.hit.View.IView;
-import il.ac.hit.View.ViewsManager;
-import il.ac.hit.ViewModel.CostManagerViewModel;
-import il.ac.hit.ViewModel.IViewModel;
+import il.ac.hit.model.CostManagerException;
+import il.ac.hit.model.DBModel;
+import il.ac.hit.model.IModel;
+import il.ac.hit.view.IView;
+import il.ac.hit.view.ViewsManager;
+import il.ac.hit.viewmodel.CostManagerViewModel;
+import il.ac.hit.viewmodel.IViewModel;
 
 import javax.swing.*;
 
 
 public class Program {
     public static void main(String[] args) {
-
 
         IModel model = null;
         try {
@@ -31,7 +30,7 @@ public class Program {
             vm.setView(view);
             view.setIViewModel(vm);
         }
-        catch (CostMangerException ex) {
+        catch (CostManagerException ex) {
             ex.printStackTrace();
         }
 

@@ -1,9 +1,9 @@
 package il.ac.hit;
 
-import il.ac.hit.Exception.CostMangerException;
-import il.ac.hit.Model.Category;
-import il.ac.hit.Model.DBModel;
-import il.ac.hit.Model.Item;
+import il.ac.hit.model.CostManagerException;
+import il.ac.hit.model.Category;
+import il.ac.hit.model.DBModel;
+import il.ac.hit.model.Item;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ class DBModelTest {
 
         try {
             test = new DBModel();
-        } catch (CostMangerException e) {
+        } catch (CostManagerException e) {
             e.printStackTrace();
         }
 
@@ -53,7 +53,7 @@ class DBModelTest {
 
             assertEquals(item,items.get(0));
 
-        } catch (CostMangerException e) {
+        } catch (CostManagerException e) {
             e.printStackTrace();
         }
     }
@@ -66,7 +66,7 @@ class DBModelTest {
 
             assertEquals(allItems,allItems2);
 
-        } catch (CostMangerException e) {
+        } catch (CostManagerException e) {
             e.printStackTrace();
         }
 
@@ -87,7 +87,7 @@ class DBModelTest {
                 }
             }
 
-        } catch (CostMangerException e) {
+        } catch (CostManagerException e) {
             e.printStackTrace();
         }
 
@@ -112,7 +112,7 @@ class DBModelTest {
             assertEquals(allItemsBeforeEdit,allItemsAfterAddAndRemove);
 
 
-        } catch (CostMangerException e) {
+        } catch (CostManagerException e) {
             e.printStackTrace();
         }
     }

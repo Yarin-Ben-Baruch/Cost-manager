@@ -1,10 +1,9 @@
-package il.ac.hit.View;
+package il.ac.hit.view;
 
 import il.ac.hit.*;
-import il.ac.hit.Model.Category;
-import il.ac.hit.Model.Item;
-import il.ac.hit.Model.User;
-import il.ac.hit.ViewModel.IViewModel;
+import il.ac.hit.model.Category;
+import il.ac.hit.model.Item;
+import il.ac.hit.viewmodel.IViewModel;
 
 import java.util.Collection;
 
@@ -12,21 +11,21 @@ public interface IView {
 
     /**
      * A method that introduces to the system all the existing items in the system.
-     * @param i_Items
+     * @param items
      */
-    void showItems(Collection<Item> i_Items);
+    void showItems(Collection<Item> items);
 
     /**
      * A method that introduces to the system all the existing categories in the system.
-     * @param i_Categories
+     * @param categories
      */
-    void showCategories(Collection<Category> i_Categories);
+    void showCategories(Collection<Category> categories);
 
     /**
      * A method that presents a message to the system, obtained from the model.
-     * @param i_Message
+     * @param message
      */
-    void showMessage(Message i_Message);
+    void showMessage(Message message);
 
     /**
      * A method that initializes each class variable.
@@ -63,6 +62,6 @@ public interface IView {
      */
     void openLogin();
 
-    void setIViewModel(IViewModel i_Vm);
+    void setIViewModel(IViewModel vm);
 
 }

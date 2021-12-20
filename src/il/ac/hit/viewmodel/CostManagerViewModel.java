@@ -1,12 +1,12 @@
-package il.ac.hit.ViewModel;
+package il.ac.hit.viewmodel;
 
 import il.ac.hit.*;
-import il.ac.hit.Exception.CostMangerException;
-import il.ac.hit.Model.Category;
-import il.ac.hit.Model.IModel;
-import il.ac.hit.Model.Item;
-import il.ac.hit.Model.User;
-import il.ac.hit.View.IView;
+import il.ac.hit.model.CostManagerException;
+import il.ac.hit.model.Category;
+import il.ac.hit.model.IModel;
+import il.ac.hit.model.Item;
+import il.ac.hit.model.User;
+import il.ac.hit.view.IView;
 
 import javax.swing.*;
 import java.sql.Date;
@@ -51,7 +51,7 @@ public class CostManagerViewModel implements IViewModel {
                             m_View.showItems(items);
                         }
                     });
-                } catch(CostMangerException e) {
+                } catch(CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -82,7 +82,7 @@ public class CostManagerViewModel implements IViewModel {
                         }
                     });
                 }
-                catch (CostMangerException e) {
+                catch (CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -113,7 +113,7 @@ public class CostManagerViewModel implements IViewModel {
                         }
                     });
                 }
-                catch (CostMangerException e) {
+                catch (CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -148,7 +148,7 @@ public class CostManagerViewModel implements IViewModel {
                         }
                     });
                 }
-                catch (CostMangerException e) {
+                catch (CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -185,7 +185,7 @@ public class CostManagerViewModel implements IViewModel {
                         }
                     });
                 }
-                catch (CostMangerException e) {
+                catch (CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -217,7 +217,7 @@ public class CostManagerViewModel implements IViewModel {
                             m_View.showItems(items);
                         }
                     });
-                } catch (CostMangerException e) {
+                } catch (CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -247,7 +247,7 @@ public class CostManagerViewModel implements IViewModel {
                             m_View.showCategories(categories);
                         }
                     });
-                } catch (CostMangerException e) {
+                } catch (CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -280,7 +280,7 @@ public class CostManagerViewModel implements IViewModel {
                         }
                     });
                 }
-                catch (CostMangerException e) {
+                catch (CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -311,7 +311,7 @@ public class CostManagerViewModel implements IViewModel {
                             m_View.openApplicationFromLogin();
                         }
                     });
-                } catch (CostMangerException e) {
+                } catch (CostManagerException e) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {

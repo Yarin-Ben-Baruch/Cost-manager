@@ -1,4 +1,4 @@
-package il.ac.hit.Model;
+package il.ac.hit.model;
 
 import java.sql.Date;
 import java.util.Objects;

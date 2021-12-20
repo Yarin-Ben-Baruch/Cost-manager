@@ -1,33 +1,34 @@
-package il.ac.hit.View;
+package il.ac.hit.view;
 
 import il.ac.hit.Message;
-import il.ac.hit.Model.Category;
-import il.ac.hit.Model.Item;
-import il.ac.hit.ViewModel.IViewModel;
+import il.ac.hit.model.Category;
+import il.ac.hit.model.Item;
+import il.ac.hit.viewmodel.IViewModel;
 
 import java.util.Collection;
 
+
 public class ViewsManager implements IView {
 
-    LoginPageGUI m_LoginPage;
-    ApplicationPageGUI m_ApplicationPage;
-    IViewModel m_ViewModel;
+    private LoginPageGUI loginPage;
+    private ApplicationPageGUI applicationPage;
+    private IViewModel viewModel;
 
     /**
      * This method Initialized the Application and start with the login screen page.
      */
     @Override
     public void init() {
-        m_ApplicationPage = new ApplicationPageGUI(m_ViewModel,this);
-        m_LoginPage = new LoginPageGUI(m_ViewModel);
-        m_LoginPage.init();
+        applicationPage = new ApplicationPageGUI(viewModel,this);
+        loginPage = new LoginPageGUI(viewModel);
+        loginPage.init();
     }
     /**
      * This method Start the Application and start with the login screen page.
      */
     @Override
     public void start() {
-        m_LoginPage.start();
+        loginPage.start();
     }
 
     /**
@@ -35,36 +36,36 @@ public class ViewsManager implements IView {
      */
     @Override
     public void openLogin() {
-        m_LoginPage.init();
-        m_LoginPage.start();
+        loginPage.init();
+        loginPage.start();
     }
 
     /**
      * This method show the items in the cost table.
-     * @param i_Items
+     * @param items
      */
     @Override
-    public void showItems(Collection<Item> i_Items) {
-        m_ApplicationPage.showItems(i_Items);
+    public void showItems(Collection<Item> items) {
+        applicationPage.showItems(items);
     }
 
     /**
-     * This method show the categoris in the category table.
-     * @param i_Categories
+     * This method show the categories in the category table.
+     * @param categories
      */
     @Override
-    public void showCategories(Collection<Category> i_Categories) {
-        m_ApplicationPage.showCategories(i_Categories);
+    public void showCategories(Collection<Category> categories) {
+        applicationPage.showCategories(categories);
     }
 
     /**
      * This method called the application page showMessage method.
      * Inorder to show the message that she get from the ViewModel.
-     * @param i_Message
+     * @param message
      */
     @Override
-    public void showMessage(Message i_Message) {
-        m_ApplicationPage.showMessage(i_Message);
+    public void showMessage(Message message) {
+        applicationPage.showMessage(message);
     }
 
     /**
@@ -72,7 +73,7 @@ public class ViewsManager implements IView {
      * Inorder to show the message of invalid input that she get from the ViewModel.
      */
     public void showInvalidInputInLogin(){
-        m_LoginPage.showInvalidInputInLogin();
+        loginPage.showInvalidInputInLogin();
     }
 
     /**
@@ -80,7 +81,7 @@ public class ViewsManager implements IView {
      * Inorder to show the message of invalid input that she get from the ViewModel.
      */
     public void showInvalidInputInRegister() {
-        m_LoginPage.showInvalidInputInRegister();
+        loginPage.showInvalidInputInRegister();
     }
 
     /**
@@ -89,10 +90,10 @@ public class ViewsManager implements IView {
      * Set the username that entered to the application.
      */
     public void openApplicationFromLogin() {
-        String username =  m_LoginPage.close();
-        m_ApplicationPage.setUsername(username);
-        m_ApplicationPage.initApplication();
-        m_ApplicationPage.startApplication();
+        String username =  loginPage.close();
+        applicationPage.setUsername(username);
+        applicationPage.initApplication();
+        applicationPage.startApplication();
 
     }
 
@@ -101,12 +102,12 @@ public class ViewsManager implements IView {
      * The method open the login page again after register.
      */
     public void registerSucceeded() {
-        m_LoginPage.openAfterRegister();
+        loginPage.openAfterRegister();
     }
 
     @Override
-    public void setIViewModel(IViewModel i_Vm) {
-        m_ViewModel = i_Vm;
+    public void setIViewModel(IViewModel vm) {
+        viewModel = vm;
     }
 
 }

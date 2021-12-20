@@ -1,10 +1,10 @@
-package il.ac.hit.ViewModel;
+package il.ac.hit.viewmodel;
 
-import il.ac.hit.Model.Category;
-import il.ac.hit.Model.IModel;
-import il.ac.hit.Model.Item;
-import il.ac.hit.Model.User;
-import il.ac.hit.View.IView;
+import il.ac.hit.model.Category;
+import il.ac.hit.model.IModel;
+import il.ac.hit.model.Item;
+import il.ac.hit.model.User;
+import il.ac.hit.view.IView;
 
 import java.sql.Date;
 
