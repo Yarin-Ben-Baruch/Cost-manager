@@ -37,9 +37,9 @@ public class RegisterPageGUI {
         registerFrame = new JFrame("Registration Form");
         titleLabel = new JLabel("Registration Form");
         userNameLabel = new JLabel("UserName");
-        usernameTextField = new JTextField();
+        usernameTextField = new JTextField(15);
         passwordLabel = new JLabel("Password");
-        passwordField = new JPasswordField();
+        passwordField = new JPasswordField(15);
         termCheckBox = new JCheckBox("Accept Terms And Conditions.");
         submitButton = new JButton("Submit");
         resetJButton = new JButton("Reset");
@@ -59,7 +59,7 @@ public class RegisterPageGUI {
         registerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registerFrame.setResizable(false);
         registerContainer = registerFrame.getContentPane();
-        registerContainer.setLayout(null);
+        registerContainer.setLayout(new FlowLayout());
         registerContainer.setBackground(Color.getColor("50",Color.lightGray));
 
         registerSetLocations();

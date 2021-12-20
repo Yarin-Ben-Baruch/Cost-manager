@@ -2,6 +2,7 @@ package il.ac.hit.view;
 
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
+import java.awt.*;
 
 
 public class DetailedReportView {
@@ -58,7 +59,7 @@ public class DetailedReportView {
     }
 
     private void showReportStart() {
-        reportFrame.setLayout(null);
+        reportFrame.setLayout(new FlowLayout());
         reportFrame.add(showReportStartDateLabel);
         reportFrame.add(showReportStartDateDayComboBox);
         reportFrame.add(showReportStartDateMonthComboBox);

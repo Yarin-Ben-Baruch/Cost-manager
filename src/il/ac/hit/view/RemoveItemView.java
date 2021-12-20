@@ -3,6 +3,7 @@ package il.ac.hit.view;
 import il.ac.hit.viewmodel.IViewModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,7 +41,7 @@ public class RemoveItemView {
         removeItemFrame.add(removeItemCostNumberTextField);
         removeItemFrame.add(removeItemFromDBButton);
 
-        removeItemFrame.setLayout(null);
+        removeItemFrame.setLayout(new FlowLayout());
         removeItemFrame.setTitle("Remove Cost");
         setComponentsSizeAndLocations();
         removeItemFrame.setVisible(true);

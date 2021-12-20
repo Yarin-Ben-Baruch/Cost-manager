@@ -4,6 +4,7 @@ import il.ac.hit.model.Category;
 import il.ac.hit.viewmodel.IViewModel;
 import il.ac.hit.model.Item;
 import javax.swing.*;
+import java.awt.*;
 
 public class AddItemView {
 
@@ -76,7 +77,7 @@ public class AddItemView {
 
     private void addItemStart() {
         // Creating the Add Item Panel.
-        addItemFrame.setLayout(null);
+        addItemFrame.setLayout(new FlowLayout());
         addItemFrame.add(addItemNameLabel);
         addItemFrame.add(addItemNameTextField);
         addItemFrame.add(addItemCurrencyLabel);

@@ -2,6 +2,7 @@ package il.ac.hit.view;
 
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,7 +43,7 @@ public class UpdateItemView {
     }
 
     private void updateItemStart() {
-        updateFrame.setLayout(null);
+        updateFrame.setLayout(new FlowLayout());
         updateFrame.add(updateItemColNameLabel);
         updateFrame.add(updateItemColNameComboBox);
         updateFrame.add(updateItemDataToSetLabel);

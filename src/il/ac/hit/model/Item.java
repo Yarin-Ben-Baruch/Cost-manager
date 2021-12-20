@@ -39,7 +39,6 @@ public class Item {
         setUserName(i_Username);
     }
 
-
     public int getCostNumber() {
         return m_CostNumber;
     }

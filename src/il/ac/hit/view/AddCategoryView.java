@@ -38,7 +38,7 @@ public class AddCategoryView {
         addCategoryFrame.add(addCategoryTextField,BorderLayout.CENTER);
         addCategoryFrame.add(addCategoryToDBButton,BorderLayout.PAGE_END);
 
-        addCategoryFrame.setLayout(null);
+        addCategoryFrame.setLayout(new FlowLayout());
         addCategoryFrame.setTitle("Add Category");
         addCategoryFrame.setSize(400,150);
         addCategoryFrame.setResizable(false);
