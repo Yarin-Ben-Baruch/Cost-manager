@@ -7,33 +7,33 @@ import java.util.Objects;
  */
 public class User {
 
-    private String m_Username;
-    private String m_Password;
+    private String userName;
+    private String password;
 
     /**
      * A constructor that updates the user's name and i_Password User expense information.
-     * @param i_Username
-     * @param i_Password
+     * @param userName
+     * @param password
      */
-    public User(String i_Username, String i_Password) {
-        setUserName(i_Username);
-        setPassword(i_Password);
+    public User(String userName, String password) {
+        setUserName(userName);
+        setPassword(password);
     }
 
     public String getUserName() {
-        return m_Username;
+        return userName;
     }
 
     public String getPassword() {
-        return m_Password;
+        return password;
     }
 
-    private void setUserName(String i_Username) {
-        this.m_Username = i_Username;
+    private void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    private void setPassword(String i_Password) {
-        this.m_Password = i_Password;
+    private void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -41,19 +41,19 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(m_Username, user.m_Username) && Objects.equals(m_Password, user.m_Password);
+        return Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(m_Username, m_Password);
+        return Objects.hash(userName, password);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + m_Username + '\'' +
-                ", password='" + m_Password + '\'' +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

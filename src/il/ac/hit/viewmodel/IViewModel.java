@@ -10,50 +10,50 @@ import java.sql.Date;
 
 public interface IViewModel {
 
-    void setView(IView i_View);
-    void setModel(IModel i_Model);
+    void setView(IView view);
+    void setModel(IModel model);
 
     /**
      * A method that adds an item to DB.
-     * @param i_Item
+     * @param item
      */
-    void addItem(Item i_Item);
+    void addItem(Item item);
 
     /**
      * A method that adds a new user to DB.
-     * @param i_User
+     * @param user
      */
-    void addNewUser(User i_User);
+    void addNewUser(User user);
 
     /**
      * A method that adds a new category to DB if there is no such category.
-     * @param i_Category
+     * @param category
      */
-    void addNewCategoryIfExists(Category i_Category);
+    void addNewCategoryIfExists(Category category);
 
     /**
      * A method that deletes an item from DB.
-     * @param i_CostNumber
-     * @param i_UserName
+     * @param costNumber
+     * @param userName
      */
-    void removeItem(String i_CostNumber, String i_UserName);
+    void removeItem(String costNumber, String userName);
 
     /**
      * A method that updates a specific item from DB.
-     * @param i_NameColToUpdate
-     * @param i_DataToSet
-     * @param i_CostNumber
-     * @param i_UserName
+     * @param nameColToUpdate
+     * @param dataToSet
+     * @param costNumber
+     * @param userName
      */
-    void updateItem(String i_NameColToUpdate, String i_DataToSet, String i_CostNumber, String i_UserName);
+    void updateItem(String nameColToUpdate, String dataToSet, String costNumber, String userName);
 
     /**
      * A method that returns a detailed statement of expenses in a date range.
-     * @param i_StartDate
-     * @param i_EndDate
-     * @param i_Username
+     * @param startDate
+     * @param endDate
+     * @param username
      */
-    void getDetailedReport(Date i_StartDate, Date i_EndDate, String i_Username);
+    void getDetailedReport(Date startDate, Date endDate, String username);
 
     /**
      * A method that returns all existing categories, to all users.
@@ -62,13 +62,13 @@ public interface IViewModel {
 
     /**
      * A method that returns all existing items, with the user connected.
-     * @param i_Username
+     * @param username
      */
-    void getItems(String i_Username);
+    void getItems(String username);
 
     /**
      * A method that checks whether such a user exists in the system.
-     * @param i_User
+     * @param user
      */
-    void isUserExists(User i_User);
+    void isUserExists(User user);
 }

@@ -26,7 +26,7 @@ public class LoginPageGUI{
 
     /**
      *  Ctor of the login page gui
-     * @param vm
+     * @param vm An object that holds the link to the viewModel class
      */
     public LoginPageGUI(IViewModel vm) {
         this.viewModel = vm;
@@ -80,7 +80,7 @@ public class LoginPageGUI{
 
     /**
      * This method close the login page and return the username field.
-     * @return
+     * @return Returns the login username
      */
     public String close() {
         loginFrame.dispose();

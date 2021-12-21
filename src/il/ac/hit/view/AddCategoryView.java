@@ -4,6 +4,8 @@ import il.ac.hit.model.Category;
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddCategoryView {
 
@@ -12,11 +14,11 @@ public class AddCategoryView {
     private JTextField addCategoryTextField;
     private JLabel addCategoryLabel;
     private JButton addCategoryToDBButton;
-    private IViewModel viewModel;
+    private final IViewModel viewModel;
 
     /**
      * Ctor that contain the init and start CategoryView
-     * @param m_ViewModel
+     * @param m_ViewModel An object that holds the link to the viewModel class
      */
     public AddCategoryView(IViewModel m_ViewModel) {
         this.viewModel = m_ViewModel;
@@ -49,17 +51,12 @@ public class AddCategoryView {
 
         addCategoryFrame.setVisible(true);
 
-        addCategoryToDBButton.addActionListener((e -> {
-            viewModel.addNewCategoryIfExists(new Category(addCategoryTextField.getText()));
-            addCategoryFrame.dispose();
-        }));
-
-//        m_AddCategoryToDBButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                m_ViewModel.addNewCategoryIfExists(new Category(m_AddCategoryTextField.getText()));
-//                m_AddCategoryFrame.dispose();
-//            }
-//        });
+        addCategoryToDBButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewModel.addNewCategoryIfExists(new Category(addCategoryTextField.getText()));
+                addCategoryFrame.dispose();
+            }
+        });
     }
 }

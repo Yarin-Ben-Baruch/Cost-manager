@@ -3,6 +3,8 @@ package il.ac.hit.view;
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class DetailedReportView {
@@ -12,12 +14,16 @@ public class DetailedReportView {
     private JButton showReportActionButton;
     private JLabel showReportStartDateLabel;
     private JLabel showReportEndDateLabel;
-    private JComboBox showReportStartDateDayComboBox, showReportStartDateMonthComboBox, showReportStartDateYearComboBox;
-    private JComboBox showReportEndDateDayComboBox, showReportEndDateMonthComboBox, showReportEndDateYearComboBox;
+    private JComboBox<String> showReportStartDateDayComboBox;
+    private JComboBox<String> showReportStartDateMonthComboBox;
+    private JComboBox<String> showReportStartDateYearComboBox;
+    private JComboBox<String> showReportEndDateDayComboBox;
+    private JComboBox<String> showReportEndDateMonthComboBox;
+    private JComboBox<String> showReportEndDateYearComboBox;
 
     /**
      * The ctor call the init and start methods to start and initialized the report view.
-     * @param vm
+     * @param vm  An object that holds the link to the viewModel class
      */
     public DetailedReportView(IViewModel vm, String userName) {
         viewModel = vm;
@@ -46,14 +52,14 @@ public class DetailedReportView {
 
         reportFrame = new JFrame();
         showReportStartDateLabel = new JLabel("Start date:");
-        showReportStartDateDayComboBox = new JComboBox(days);
-        showReportStartDateMonthComboBox = new JComboBox(months);
-        showReportStartDateYearComboBox = new JComboBox(years);
+        showReportStartDateDayComboBox = new JComboBox<>(days);
+        showReportStartDateMonthComboBox = new JComboBox<>(months);
+        showReportStartDateYearComboBox = new JComboBox<>(years);
 
         showReportEndDateLabel = new JLabel("End date:");
-        showReportEndDateDayComboBox = new JComboBox(days);
-        showReportEndDateMonthComboBox = new JComboBox(months);
-        showReportEndDateYearComboBox = new JComboBox(years);
+        showReportEndDateDayComboBox = new JComboBox<>(days);
+        showReportEndDateMonthComboBox = new JComboBox<>(months);
+        showReportEndDateYearComboBox = new JComboBox<>(years);
 
         showReportActionButton = new JButton("Show the report");
     }
@@ -74,34 +80,22 @@ public class DetailedReportView {
         setComponentsSizeAndLocation();
         reportFrame.setVisible(true);
 
-        showReportActionButton.addActionListener((e -> {
-            viewModel.getDetailedReport(
-                    java.sql.Date.valueOf(showReportStartDateYearComboBox.getSelectedItem()+ "-" +
-                            showReportStartDateMonthComboBox.getSelectedItem() +
-                            "-" + showReportStartDateDayComboBox.getSelectedItem()),
-                    java.sql.Date.valueOf(showReportEndDateYearComboBox.getSelectedItem() + "-" +
-                            showReportEndDateMonthComboBox.getSelectedItem() +
-                            "-" + showReportEndDateDayComboBox.getSelectedItem()),
-                    userName);
 
-            reportFrame.dispose();
-        }));
+        showReportActionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewModel.getDetailedReport(
+                        java.sql.Date.valueOf(showReportStartDateYearComboBox.getSelectedItem()+ "-" +
+                                showReportStartDateMonthComboBox.getSelectedItem() +
+                                "-" + showReportStartDateDayComboBox.getSelectedItem()),
+                        java.sql.Date.valueOf(showReportEndDateYearComboBox.getSelectedItem() + "-" +
+                                showReportEndDateMonthComboBox.getSelectedItem() +
+                                "-" + showReportEndDateDayComboBox.getSelectedItem()),
+                        userName);
 
-//        m_ShowReportActionButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                m_ViewModel.getDetailedReport(
-//                        java.sql.Date.valueOf(m_ShowReportStartDateYearComboBox.getSelectedItem()+ "-" +
-//                                m_ShowReportStartDateMonthComboBox.getSelectedItem() +
-//                                "-" + m_ShowReportStartDateDayComboBox.getSelectedItem()),
-//                        java.sql.Date.valueOf(m_ShowReportEndDateYearComboBox.getSelectedItem() + "-" +
-//                                m_ShowReportEndDateMonthComboBox.getSelectedItem() +
-//                                "-" + m_ShowReportEndDateDayComboBox.getSelectedItem()),
-//                        m_Username);
-//
-//                m_ReportFrame.dispose();
-//            }
-//        });
+                reportFrame.dispose();
+            }
+        });
     }
 
     private void setComponentsSizeAndLocation() {

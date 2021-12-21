@@ -7,12 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UpdateItemView {
-    private String[] m_ColumnsToUpdate;
     // Update Item Button, TextField, Label and Submit Action.
     private JFrame updateFrame;
     private JButton updateItemToDBButton;
     private JLabel updateItemColNameLabel, updateItemDataToSetLabel;
-    private JComboBox updateItemColNameComboBox;
+    private JComboBox<String> updateItemColNameComboBox;
     private JLabel updateItemCostNumberLabel;
     private JTextField updateItemDataToSetTextField, updateItemCostNumberTextField;
     private final IViewModel viewModel;
@@ -20,7 +19,7 @@ public class UpdateItemView {
 
     /**
      * The ctor call the init and start methods to start and initialized the update view.
-     * @param vm
+     * @param vm An object that holds the link to the viewModel class
      */
     public UpdateItemView(IViewModel vm,String userName) {
         this.viewModel = vm;
@@ -30,10 +29,11 @@ public class UpdateItemView {
     }
 
     private void updateItemInit() {
-        m_ColumnsToUpdate = new String[]{"name", "description", "category", "sum"};
+        String[] columnsToUpdate;
+        columnsToUpdate = new String[]{"name", "description", "category", "sum"};
 
         updateItemColNameLabel = new JLabel("Col name to change:");
-        updateItemColNameComboBox = new JComboBox(m_ColumnsToUpdate);
+        updateItemColNameComboBox = new JComboBox<>(columnsToUpdate);
         updateItemDataToSetLabel = new JLabel("Data to set:");
         updateItemDataToSetTextField = new JTextField();
         updateItemToDBButton = new JButton("Update item to DB");
@@ -84,5 +84,4 @@ public class UpdateItemView {
         updateItemToDBButton.setLocation((updateFrame.getWidth()- updateItemToDBButton.getWidth())/2 , updateItemCostNumberTextField.getY() + updateItemCostNumberTextField.getHeight()+30);
 
     }
-
 }

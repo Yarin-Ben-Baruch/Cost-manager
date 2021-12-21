@@ -42,7 +42,7 @@ public class ViewsManager implements IView {
 
     /**
      * This method show the items in the cost table.
-     * @param items
+     * @param items  A list of items that list all the column types in the expense table
      */
     @Override
     public void showItems(Collection<Item> items) {
@@ -51,7 +51,7 @@ public class ViewsManager implements IView {
 
     /**
      * This method show the categories in the category table.
-     * @param categories
+     * @param categories A list of items that list all the types of categories there are
      */
     @Override
     public void showCategories(Collection<Category> categories) {
@@ -61,7 +61,7 @@ public class ViewsManager implements IView {
     /**
      * This method called the application page showMessage method.
      * Inorder to show the message that she get from the ViewModel.
-     * @param message
+     * @param message A message-type object that conveys a message to the user
      */
     @Override
     public void showMessage(Message message) {

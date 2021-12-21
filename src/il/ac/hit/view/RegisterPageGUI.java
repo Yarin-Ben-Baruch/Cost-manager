@@ -23,7 +23,7 @@ public class RegisterPageGUI {
 
     /**
      * This is the Ctor of the Register page gui.
-     * @param vm
+     * @param vm An object that holds the link to the viewModel class
      */
     public RegisterPageGUI(IViewModel vm) {
         this.viewModel = vm;

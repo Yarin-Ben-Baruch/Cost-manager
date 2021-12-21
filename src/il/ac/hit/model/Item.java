@@ -8,104 +8,104 @@ import java.util.Objects;
  */
 public class Item {
 
-    private int m_CostNumber;
-    private String m_Name;
-    private String m_Describing;
-    private String m_Currency;
-    private Category m_Category;
-    private String m_Sum;
-    private java.sql.Date m_Date;
-    private String m_Username;
+    private int costNumber;
+    private String name;
+    private String description;
+    private String currency;
+    private Category category;
+    private String sum;
+    private java.sql.Date date;
+    private String username;
 
     /**
      * A constructor that updates the user expense information.
-     * @param i_CostNumber
-     * @param i_Name
-     * @param i_Describing
-     * @param i_Currency
-     * @param i_Category
-     * @param i_Sum
-     * @param i_Date
-     * @param i_Username
+     * @param costNumber
+     * @param name
+     * @param description
+     * @param currency
+     * @param category
+     * @param sum
+     * @param date
+     * @param userName
      */
-    public Item(int i_CostNumber, String i_Name, String i_Describing, String i_Currency, Category i_Category, String i_Sum, Date i_Date, String i_Username) {
-        setCostNumber(i_CostNumber);
-        setName(i_Name);
-        setDescribing(i_Describing);
-        setCurrency(i_Currency);
-        setCategory( i_Category);
-        setSum(i_Sum);
-        setDate(i_Date);
-        setUserName(i_Username);
+    public Item(int costNumber, String name, String description, String currency, Category category, String sum, Date date, String userName) {
+        setCostNumber(costNumber);
+        setName(name);
+        setDescription(description);
+        setCurrency(currency);
+        setCategory( category);
+        setSum(sum);
+        setDate(date);
+        setUsername(userName);
     }
 
     public int getCostNumber() {
-        return m_CostNumber;
+        return costNumber;
     }
 
     public String getName() {
-        return m_Name;
+        return name;
     }
 
     public String getDescribing() {
-        return m_Describing;
+        return description;
     }
 
     public String getCurrency() {
-        return m_Currency;
+        return currency;
     }
 
     public Category getCategory() {
-        return m_Category;
+        return category;
     }
 
     public String getSum() {
-        return m_Sum;
+        return sum;
     }
 
     public Date getDate() {
-        return m_Date;
+        return date;
     }
 
     public String getUserName() {
-        return m_Username;
+        return username;
     }
 
     private void setCostNumber(int i_CostNumber) {
-        this.m_CostNumber = i_CostNumber;
+        this.costNumber = i_CostNumber;
     }
 
-    private void setName(String i_Name) {
-        this.m_Name = i_Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    private void setDescribing(String i_Describing) {
-        this.m_Describing = i_Describing;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    private void setCurrency(String i_Currency) {
-        this.m_Currency = i_Currency;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
-    private void setCategory(Category i_Category) {
-        this.m_Category = i_Category;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    private void setSum(String i_Sum) {
-        this.m_Sum = i_Sum;
+    public void setSum(String sum) {
+        this.sum = sum;
     }
 
-    private void setDate(Date i_Date) {
-        this.m_Date = i_Date;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    private void setUserName(String i_Username) {
-        this.m_Username = i_Username;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(m_CostNumber, m_Name, m_Describing, m_Currency, m_Category, m_Sum, m_Date, m_Username);
+        return Objects.hash(costNumber, name, description, currency, category, sum, date, username);
     }
 
     @Override
@@ -113,20 +113,20 @@ public class Item {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Item item = (Item) o;
-        return m_CostNumber == item.m_CostNumber && Objects.equals(m_Name, item.m_Name) && Objects.equals(m_Describing, item.m_Describing) &&
-                Objects.equals(m_Currency, item.m_Currency) && Objects.equals(m_Category, item.m_Category) && Objects.equals(m_Sum, item.m_Sum) &&
-                Objects.equals(m_Date, item.m_Date) && Objects.equals(m_Username, item.m_Username);
+        return costNumber == item.costNumber && Objects.equals(name, item.name) && Objects.equals(description, item.description) &&
+                Objects.equals(currency, item.currency) && Objects.equals(category, item.category) && Objects.equals(sum, item.sum) &&
+                Objects.equals(date, item.date) && Objects.equals(username, item.username);
     }
 
     @Override
     public String toString() {
-        return m_CostNumber +
-                "." + m_Name +
-                "\ndescribing: " + m_Describing +
-                "\ncost: " + m_Sum +
-                " " + m_Currency +
-                " category= " + m_Category.getCategoryName() +
-                " date=" + m_Date +
-                " userName=" + m_Username;
+        return costNumber +
+                "." + name +
+                "\ndescribing: " + description +
+                "\ncost: " + sum +
+                " " + currency +
+                " category= " + category.getCategoryName() +
+                " date=" + date +
+                " userName=" + username;
     }
 }

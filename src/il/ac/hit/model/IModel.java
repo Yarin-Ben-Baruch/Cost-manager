@@ -6,71 +6,71 @@ import java.util.Collection;
 public interface IModel {
     /**
      * Add new cost i_Item to the items sql table.
-     * @param i_Item
-     * @throws CostManagerException
+     * @param item
+     * @throws CostManagerException A class wraps up the problems of the program
      */
-    void addItem(Item i_Item) throws CostManagerException;
+    void addItem(Item item) throws CostManagerException;
 
     /**
      * Add new i_User for the users sql table.
-     * @param i_User
-     * @throws CostManagerException
+     * @param user
+     * @throws CostManagerException A class wraps up the problems of the program
      */
-    void addNewUser(User i_User) throws CostManagerException;
+    void addNewUser(User user) throws CostManagerException;
 
     /**
      * Add new i_Category for the categories sql table.
-     * @param i_Category
-     * @throws CostManagerException
+     * @param category
+     * @throws CostManagerException A class wraps up the problems of the program
      */
-    void addNewCategoryIfExists(Category i_Category) throws CostManagerException;
+    void addNewCategoryIfExists(Category category) throws CostManagerException;
 
     /**
      * Get report return collection with all the costs from start date to the end date.
-     * @param i_StartDate
-     * @param i_EndDate
-     * @return
-     * @throws CostManagerException
+     * @param startDate
+     * @param endDate
+     * @return Returns Item collection
+     * @throws CostManagerException A class wraps up the problems of the program
      */
-    Collection<Item> getDetailedReport(Date i_StartDate, Date i_EndDate, String i_Username) throws CostManagerException;
+    Collection<Item> getDetailedReport(Date startDate, Date endDate, String userName) throws CostManagerException;
 
     /**
      * Get items return collection with all the cost items in the items sql table.
-     * @param i_Username
-     * @return
-     * @throws CostManagerException
+     * @param userName
+     * @return Returns Item collection
+     * @throws CostManagerException A class wraps up the problems of the program
      */
-    Collection<Item> getItems(String i_Username) throws CostManagerException;
+    Collection<Item> getItems(String userName) throws CostManagerException;
 
     /**
      * Update item change specific info in a cost item.
-     * @param i_NameColToUpdate
-     * @param i_DataToSet
-     * @param i_CostNumber
-     * @param i_Username
-     * @throws CostManagerException
+     * @param nameColToUpdate
+     * @param dataToSet
+     * @param costNumber
+     * @param userName
+     * @throws CostManagerException A class wraps up the problems of the program
      */
-    void updateItem(String i_NameColToUpdate, String i_DataToSet, String i_CostNumber, String i_Username) throws CostManagerException;
+    void updateItem(String nameColToUpdate, String dataToSet, String costNumber, String userName) throws CostManagerException;
 
     /**
      * remove item from the items sql table.
-     * @param i_CostNumber
-     * @param i_Username
-     * @throws CostManagerException
+     * @param costNumber
+     * @param userName
+     * @throws CostManagerException A class wraps up the problems of the program
      */
-    void removeItem(String i_CostNumber, String i_Username) throws CostManagerException;
+    void removeItem(String costNumber, String userName) throws CostManagerException;
 
     /**
      * Get users return collection with all the users in the users sql table.
-     * @return
-     * @throws CostManagerException
+     * @return Returns a User collection
+     * @throws CostManagerException A class wraps up the problems of the program
      */
     Collection<User> getAllUsers() throws CostManagerException;
 
     /**
      * Get category return collection with all the categories in the categories sql table.
-     * @return
-     * @throws CostManagerException
+     * @return Returns a category collection
+     * @throws CostManagerException A class wraps up the problems of the program
      */
     Collection<Category> getAllCategories() throws CostManagerException;
 

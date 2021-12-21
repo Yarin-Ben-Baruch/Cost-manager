@@ -47,8 +47,8 @@ public class ApplicationPageGUI {
 
     /**
      * Ctor of application page GUI.
-     * @param vm
-     * @param viewsManager
+     * @param vm An object that holds the link to the viewModel class
+     * @param viewsManager An object of the person who manages the screens
      */
     public ApplicationPageGUI(IViewModel vm, ViewsManager viewsManager) {
         viewModel = vm;
@@ -132,7 +132,7 @@ public class ApplicationPageGUI {
 
     /**
      * A method that gets collection of items and print the items into the Table.
-     * @param items
+     * @param items  A list of items that list all the column types in the expense table
      */
     public void showItems(Collection<Item> items) {
 
@@ -160,7 +160,7 @@ public class ApplicationPageGUI {
     /**
      * A method that gets collection of categories and print the items into the TextArea.
      *
-     * @param categories
+     * @param categories A list of items that list all the types of categories there are
      */
     public void showCategories(Collection<Category> categories) {
         LinkedList<Category> categoriesList = (LinkedList<Category>) categories;
@@ -181,7 +181,7 @@ public class ApplicationPageGUI {
 
     /**
      * A method that set the IViewModel that send to her from the main program.
-     * @param vm
+     * @param vm An object that holds the link to the viewModel class
      */
     public void setIViewModel(IViewModel vm) {
         viewModel = vm;
@@ -190,7 +190,7 @@ public class ApplicationPageGUI {
     /**
      * A method that get message from the ViewModel and put it in the TextView.
      * Let the user know what action was preformed.
-     * @param message
+     * @param message A message-type object that conveys a message to the user
      */
     public void showMessage(Message message) {
         JOptionPane.showMessageDialog(mainFrame, message.getText());

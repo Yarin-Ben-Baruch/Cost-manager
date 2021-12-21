@@ -11,19 +11,19 @@ public interface IView {
 
     /**
      * A method that introduces to the system all the existing items in the system.
-     * @param items
+     * @param items A list of items that list all the column types in the expense table
      */
     void showItems(Collection<Item> items);
 
     /**
      * A method that introduces to the system all the existing categories in the system.
-     * @param categories
+     * @param categories A list of items that list all the types of categories there are
      */
     void showCategories(Collection<Category> categories);
 
     /**
      * A method that presents a message to the system, obtained from the model.
-     * @param message
+     * @param message A message-type object that conveys a message to the user
      */
     void showMessage(Message message);
 

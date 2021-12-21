@@ -5,6 +5,8 @@ import il.ac.hit.viewmodel.IViewModel;
 import il.ac.hit.model.Item;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddItemView {
 
@@ -12,7 +14,10 @@ public class AddItemView {
     private JFrame addItemFrame;
     private JTextField addItemNameTextField, addItemDescribingTextField;
     private JTextField addItemCategoryTextField, addItemSumTextField;
-    private JComboBox addItemDayComboBox, addItemMonthComboBox, addItemYearComboBox, addItemCurrencyComboBox;
+    private JComboBox<String> addItemDayComboBox;
+    private JComboBox<String> addItemMonthComboBox;
+    private JComboBox<String> addItemYearComboBox;
+    private JComboBox<String> addItemCurrencyComboBox;
     private JButton addItemToDBButton;
     private JLabel addItemNameLabel, addItemDescribingLabel, addItemCurrencyLabel;
     private JLabel addItemCategoryLabel, addItemSumLabel, addItemDateLabel;
@@ -22,9 +27,9 @@ public class AddItemView {
 
     /**
      * Ctor that contain the init and start CategoryView
-     * @param viewModel
-     * @param userName
-     * @param currentTableSize
+     * @param viewModel An object that holds the link to the viewModel class
+     * @param userName Username of the person who is connected to the app
+     * @param currentTableSize The current size of the expense table
      */
     public AddItemView(IViewModel viewModel, String userName, int currentTableSize) {
         this.viewModel = viewModel;
@@ -63,15 +68,15 @@ public class AddItemView {
         addItemDescribingLabel = new JLabel("Description:");
         addItemDescribingTextField = new JTextField();
         addItemCurrencyLabel = new JLabel("Currency:");
-        addItemCurrencyComboBox = new JComboBox(currencies);
+        addItemCurrencyComboBox = new JComboBox<>(currencies);
         addItemCategoryLabel = new JLabel("Category:");
         addItemCategoryTextField = new JTextField();
         addItemSumLabel = new JLabel("Sum");
         addItemSumTextField = new JTextField();
         addItemDateLabel = new JLabel("Date:");
-        addItemDayComboBox = new JComboBox(days);
-        addItemMonthComboBox = new JComboBox(months);
-        addItemYearComboBox = new JComboBox(years);
+        addItemDayComboBox = new JComboBox<>(days);
+        addItemMonthComboBox = new JComboBox<>(months);
+        addItemYearComboBox = new JComboBox<>(years);
         addItemToDBButton = new JButton("Add cost to the list");
     }
 
@@ -99,42 +104,27 @@ public class AddItemView {
         setComponentsLocationAndSize();
         addItemFrame.setVisible(true);
 
-        addItemToDBButton.addActionListener((e -> {
-            Item item = new Item(++currentTableSize,
-                    addItemNameTextField.getText(),
-                    addItemDescribingTextField.getText(),
-                    (String) addItemCurrencyComboBox.getSelectedItem(),
-                    new Category(addItemCategoryTextField.getText()),
-                    addItemSumTextField.getText(),
-                    java.sql.Date.valueOf(addItemYearComboBox.getSelectedItem()+"-" +
-                            addItemMonthComboBox.getSelectedItem() + "-" +
-                            addItemDayComboBox.getSelectedItem()),
-                    userName);
 
-            viewModel.addItem(item);
-            addItemFrame.dispose();
-        }));
+        addItemToDBButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //m_ViewModel.getAllUsers();
 
-//        m_AddItemToDBButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                //m_ViewModel.getAllUsers();
-//
-//                Item item = new Item(++m_CurrentTableSize,
-//                        m_AddItemNameTextField.getText(),
-//                        m_AddItemDescribingTextField.getText(),
-//                        (String)m_AddItemCurrencyComboBox.getSelectedItem(),
-//                        new Category(m_AddItemCategoryTextField.getText()),
-//                        m_AddItemSumTextField.getText(),
-//                        java.sql.Date.valueOf(m_AddItemYearComboBox.getSelectedItem()+"-" +
-//                                m_AddItemMonthComboBox.getSelectedItem() + "-" +
-//                                m_AddItemDayComboBox.getSelectedItem()),
-//                        m_Username);
-//
-//                m_ViewModel.addItem(item);
-//                m_AddItemFrame.dispose();
-//            }
-//        });
+                Item item = new Item(++currentTableSize,
+                        addItemNameTextField.getText(),
+                        addItemDescribingTextField.getText(),
+                        (String)addItemCurrencyComboBox.getSelectedItem(),
+                        new Category(addItemCategoryTextField.getText()),
+                        addItemSumTextField.getText(),
+                        java.sql.Date.valueOf(addItemYearComboBox.getSelectedItem()+"-" +
+                                addItemMonthComboBox.getSelectedItem() + "-" +
+                                addItemDayComboBox.getSelectedItem()),
+                        userName);
+
+                viewModel.addItem(item);
+                addItemFrame.dispose();
+            }
+        });
     }
 
     private void setComponentsLocationAndSize() {

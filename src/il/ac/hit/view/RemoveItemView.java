@@ -19,8 +19,8 @@ public class RemoveItemView {
 
     /**
      * The ctor call the init and start methods.
-     * @param vm
-     * @param userName
+     * @param vm An object that holds the link to the viewModel class
+     * @param userName Username of the person who is connected to the app
      */
     public RemoveItemView(IViewModel vm, String userName) {
         viewModel = vm;

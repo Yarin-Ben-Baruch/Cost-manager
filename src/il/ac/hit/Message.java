@@ -2,14 +2,14 @@ package il.ac.hit;
 
 public class Message {
 
-    private String m_Content;
+    private final String content;
 
     public Message(String content) {
-        this.m_Content = content;
+        this.content = content;
     }
 
     public String getText() {
-        return m_Content;
+        return content;
     }
 
 }

@@ -14,7 +14,7 @@ import javax.swing.*;
 public class Program {
     public static void main(String[] args) {
 
-        IModel model = null;
+        IModel model;
         try {
             model = new DBModel();
             IViewModel vm = new CostManagerViewModel();
