@@ -39,6 +39,7 @@ public class AddItemView {
         addItemStart();
     }
 
+    // init the frame
     private void addItemInit() {
         String[] days;
         String[] months;
@@ -59,6 +60,7 @@ public class AddItemView {
             years[i] = String.valueOf(i+2021);
         }
 
+        // currencies we support.
         currencies = new String[]{"ILS", "USD", "EUR", "GBP", "TRY"};
 
         // Creating the AddItem Action.
@@ -79,7 +81,7 @@ public class AddItemView {
         addItemYearComboBox = new JComboBox<>(years);
         addItemToDBButton = new JButton("Add cost to the list");
     }
-
+    // start the frame
     private void addItemStart() {
         // Creating the Add Item Panel.
         addItemFrame.add(addItemNameLabel);
@@ -111,8 +113,6 @@ public class AddItemView {
         addItemToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //m_ViewModel.getAllUsers();
-
                 Item item = new Item(++currentTableSize,
                         addItemNameTextField.getText(),
                         addItemDescribingTextField.getText(),
@@ -129,7 +129,7 @@ public class AddItemView {
             }
         });
     }
-
+    // setting the size and location of the components in the frame.
     private void setComponentsLocationAndSize() {
 
         addItemNameLabel.setBounds(50, 30, 80, 30);

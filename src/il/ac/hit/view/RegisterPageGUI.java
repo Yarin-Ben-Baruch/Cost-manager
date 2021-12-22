@@ -13,7 +13,6 @@ public class RegisterPageGUI {
 
     // Components of the Register Page Gui.
     private JFrame registerFrame;
-    //private Container registerContainer;
     private JLabel titleLabel, userNameLabel, passwordLabel, resetJLabel;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
@@ -60,15 +59,11 @@ public class RegisterPageGUI {
         registerFrame.setResizable(false);
         registerFrame.setLayout(new BorderLayout());
         registerFrame.setBackground(Color.getColor("50",Color.lightGray));
-
         registerSetLocations();
         registerSetSize();
-
         registerFrame.setVisible(true);
 
         addRegisterActionEvent();
-
-
     }
 
     /**
@@ -123,6 +118,7 @@ public class RegisterPageGUI {
         resetJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // restarting all the button to none.
                 String def = "";
                 usernameTextField.setText(def);
                 passwordField.setText(def);
@@ -134,7 +130,7 @@ public class RegisterPageGUI {
         registerShowPasswordCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Do the password field visible and invisible.
+                // Do the password field visible and invisible.
                 if (registerShowPasswordCheckBox.isSelected()) {
                     passwordField.setEchoChar((char) 0);
                 } else {

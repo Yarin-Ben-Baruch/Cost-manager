@@ -53,7 +53,6 @@ public class UpdateItemView {
         updateFrame.add(updateItemCostNumberTextField);
         updateFrame.add(updateItemToDBButton);
 
-
         updateFrame.setLayout(new BorderLayout());
         updateFrame.setTitle("Update Cost");
         setComponentsSizeAndLocation();

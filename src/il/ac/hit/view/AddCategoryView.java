@@ -25,7 +25,7 @@ public class AddCategoryView {
         addCategoryInit();
         addCategoryStart();
     }
-
+    // init the frame
     private void addCategoryInit() {
         // Creating the AddCategory Action.
         addCategoryFrame = new JFrame();
@@ -33,7 +33,7 @@ public class AddCategoryView {
         addCategoryTextField = new JTextField(20);
         addCategoryToDBButton = new JButton("Add category to the list");
     }
-
+    // start the frame
     private void addCategoryStart() {
         // Creating the Add Category Panel.
         addCategoryFrame.add(addCategoryLabel,BorderLayout.LINE_START);

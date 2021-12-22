@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class DetailedReportView {
     private final IViewModel viewModel;
     private final String userName;
@@ -33,6 +32,7 @@ public class DetailedReportView {
     }
 
     private void showReportInit() {
+        // Creating Arrays of the days months and years we support.
         String[] days;
         String[] months;
         String[] years;

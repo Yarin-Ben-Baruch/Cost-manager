@@ -20,7 +20,7 @@ public class DBModel implements IModel {
      * @throws CostManagerException A class wraps up the problems of the program.
      */
     public DBModel() throws CostManagerException {
-        //Already creating an object from the class, we want to know if there is a connection problem,
+        // Creating an object from the class, we want to know if there is a connection problem,
         // so the connection remains
         try (Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
             System.out.println("Connection success !");
@@ -123,15 +123,7 @@ public class DBModel implements IModel {
 
             PreparedStatement preparedStatement;
             StringBuilder queryToExecute = new StringBuilder();
-
-            // Work for dates only.
-            if(nameColToUpdate.equals("date")){
-                queryToExecute.append("UPDATE Items SET ").append(nameColToUpdate).append(" = ").append(dataToSet).append(" WHERE costNumber = ").append(currentCostNumber).append(" and userName = ").append("'").append(userName).append("'");
-            }
-            else {
-                // Work with VARCHAR.
-                queryToExecute.append("UPDATE Items SET ").append(nameColToUpdate).append(" = ").append("'").append(dataToSet).append("'").append(" WHERE costNumber = ").append(currentCostNumber).append(" and userName = ").append("'").append(userName).append("'");
-            }
+            queryToExecute.append("UPDATE Items SET ").append(nameColToUpdate).append(" = ").append("'").append(dataToSet).append("'").append(" WHERE costNumber = ").append(currentCostNumber).append(" and userName = ").append("'").append(userName).append("'");
 
             preparedStatement = connection.prepareStatement(queryToExecute.toString());
             // Check that the update execute properly.
@@ -156,6 +148,8 @@ public class DBModel implements IModel {
     @Override
     public void removeItem(String costNumber, String userName) throws CostManagerException {
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
+            // parsing the string costNumber to int for the table.
             int currentCostNumber = Integer.parseInt(costNumber);
 
             PreparedStatement preparedStatement = connection.prepareStatement(
@@ -178,7 +172,6 @@ public class DBModel implements IModel {
         }
     }
 
-
     /**
      * Get Report return collection of all the items in the items sql table that start with the startDate and end with the endDate.
      * @param startDate Date from which you want to receive data.
@@ -188,7 +181,7 @@ public class DBModel implements IModel {
      */
     @Override
     public Collection<Item> getDetailedReport(Date startDate, Date endDate, String userName) throws CostManagerException {
-
+        // report collection to the items the user asked for.
         ResultSet myResult;
         Collection<Item> reportItems = new LinkedList<>();
 

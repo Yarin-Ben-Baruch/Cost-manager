@@ -15,12 +15,12 @@ import java.util.Vector;
 public class ApplicationPageGUI {
     private IViewModel viewModel;
     private final ViewsManager viewsManager;
-
+    // frame panel and show buttons.
     private JFrame mainFrame;
     private JPanel buttonsPanel;
     private JButton showItemsButton, showCategoriesButton;
 
-    // Show Report Button
+    // Show Report Button.
     private JButton showReportButton;
     // Update Item Button.
     private JButton updateItemButton;
@@ -31,16 +31,16 @@ public class ApplicationPageGUI {
     // Add Item Button.
     private JButton addItemButton;
 
-    // Cost table
+    // Cost table.
     private JTable costItemsTable;
     private JScrollPane costScrollPanel;
     private DefaultTableModel costTableModel;
 
-    // Category table
+    // Category table.
     private JScrollPane categoryScrollPanel;
     private DefaultTableModel categoryTableModel;
 
-    // Creating menu
+    // Creating menu.
     private MenuBar menuBar;
     private Menu menu;
     private String m_Username;
@@ -91,7 +91,6 @@ public class ApplicationPageGUI {
         costScrollPanel = new JScrollPane(costItemsTable);
 
         // Creating Category table.
-
         categoryTableModel = new DefaultTableModel(buildCategoryColumnsName(),0);
         JTable categoryTable = new JTable(categoryTableModel);
         categoryScrollPanel = new JScrollPane(categoryTable);
@@ -105,9 +104,11 @@ public class ApplicationPageGUI {
      * This method Starting the application page.
      */
     public void startApplication() {
-
+        // Method that start add the button to the frame.
         creatingButtonsStart();
+        // Method that build the cost table.
         buildCostColumnsName();
+        // Method that build the category table.
         buildCategoryColumnsName();
 
         // Setting the menu bar.
@@ -136,13 +137,17 @@ public class ApplicationPageGUI {
      */
     public void showItems(Collection<Item> items) {
 
+        // converting the list of items to linkedList to get to the 'i' item.
         LinkedList<Item> itemsList = (LinkedList<Item>) items;
+        // get the size of the table.
         int sizeOfOldTable = costTableModel.getRowCount();
 
+        // removing the old rows from the table.
         for(int i = 0; i < sizeOfOldTable; i++) {
             costTableModel.removeRow(0);
         }
 
+        // adding the new items to the cost table.
         for (int i = 0; i < items.size(); i++) {
             Vector<String> addRowToTable = new Vector<>();
 
@@ -163,13 +168,17 @@ public class ApplicationPageGUI {
      * @param categories A list of items that list all the types of categories there are
      */
     public void showCategories(Collection<Category> categories) {
+        // converting the list of categories to linkedList to get to the 'i' category.
         LinkedList<Category> categoriesList = (LinkedList<Category>) categories;
+        // get the size of the table.
         int sizeOfOldTable = categoryTableModel.getRowCount();
 
+        // removing the old rows from the table.
         for(int i = 0; i < sizeOfOldTable; i++) {
             categoryTableModel.removeRow(0);
         }
 
+        // adding the new categories to the category table.
         for (int i = 0; i < categories.size(); i++) {
             Vector<String> addRowToTable = new Vector<>();
             addRowToTable.add(String.valueOf(i + 1));
@@ -200,6 +209,7 @@ public class ApplicationPageGUI {
         this.m_Username = userName;
     }
 
+    // Building Vector that contain the names of the columns in table.
     private Vector<String> buildCostColumnsName(){
 
         Vector<String> addColToTable = new Vector<>();
@@ -215,6 +225,7 @@ public class ApplicationPageGUI {
         return addColToTable;
     }
 
+    // Building Vector that contain the names of the columns in table.
     private Vector<String> buildCategoryColumnsName(){
         Vector<String> addColToTable = new Vector<>();
 

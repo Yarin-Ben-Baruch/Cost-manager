@@ -267,7 +267,6 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void getItems(String username) {
-
         m_Service.submit(new Runnable() {
             @Override
             public void run() {

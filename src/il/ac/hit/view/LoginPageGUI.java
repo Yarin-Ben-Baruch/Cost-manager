@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//new FlowLayout() לא שיניתי
 public class LoginPageGUI{
 
     private final IViewModel viewModel;
@@ -38,7 +37,6 @@ public class LoginPageGUI{
         registerFrame = new RegisterPageGUI(viewModel);
 
         loginFrame = new JFrame();
-//        loginContainer = loginFrame.getContentPane();
         loginUserNameLabel = new JLabel("USERNAME");
         loginPasswordLabel = new JLabel("PASSWORD");
         loginUserNameTextField = new JTextField(15);
@@ -56,9 +54,7 @@ public class LoginPageGUI{
 
         addLoginComponentsToFrame();
 
-        // Set the layout null to set the size and the location by myself.
         loginFrame.setLayout(new BorderLayout());
-
         loginFrame.setTitle("Login Form");
         loginFrame.setSize(350,400);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,7 +80,6 @@ public class LoginPageGUI{
      */
     public String close() {
         loginFrame.dispose();
-
         return loginUserNameTextField.getText();
     }
 
@@ -114,6 +109,7 @@ public class LoginPageGUI{
         loginRegisterButton.setBounds(125, loginResetButton.getY()+50, 100, 30);
     }
 
+    // Adding all the components to the frame.
     private void addLoginComponentsToFrame() {
         loginFrame.add(loginUserNameLabel);
         loginFrame.add(loginUserNameTextField);
