@@ -8,6 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A button inside the app. The button represents adding a new record to the expense table.
+ * When you press the button from the app, the object opens.
+ */
 public class AddItemView {
 
     // Add Item Button, TextField, Label and Submit Action.
@@ -26,10 +30,10 @@ public class AddItemView {
     private int currentTableSize;
 
     /**
-     * Ctor that contain the init and start CategoryView
-     * @param viewModel An object that holds the link to the viewModel class
-     * @param userName Username of the person who is connected to the app
-     * @param currentTableSize The current size of the expense table
+     * Ctor that contain the init and start CategoryView.
+     * @param viewModel An object that holds the link to the viewModel class.
+     * @param userName Username of the person who is connected to the app.
+     * @param currentTableSize The current size of the expense table.
      */
     public AddItemView(IViewModel viewModel, String userName, int currentTableSize) {
         this.viewModel = viewModel;
@@ -81,6 +85,7 @@ public class AddItemView {
         addItemYearComboBox = new JComboBox<>(years);
         addItemToDBButton = new JButton("Add cost to the list");
     }
+
     // start the frame
     private void addItemStart() {
         // Creating the Add Item Panel.
@@ -129,6 +134,7 @@ public class AddItemView {
             }
         });
     }
+
     // setting the size and location of the components in the frame.
     private void setComponentsLocationAndSize() {
 

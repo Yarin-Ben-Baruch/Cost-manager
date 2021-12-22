@@ -7,6 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A class that represents delete Information button in the app.
+ * Inside the department there is data about what happens after the click of a button and what the display is.
+ */
 public class RemoveItemView {
 
     // Remove Item  Button, TextField, Label and Submit Action.

@@ -6,7 +6,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A class representing the Receive Information button in the app.
+ * Within the department there is a view of selecting dates for the display from a specific date to an end date.
+ */
 public class DetailedReportView {
+
     private final IViewModel viewModel;
     private final String userName;
     private JFrame reportFrame;

@@ -4,13 +4,18 @@ import il.ac.hit.*;
 import il.ac.hit.model.Category;
 import il.ac.hit.model.Item;
 import il.ac.hit.viewmodel.IViewModel;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Vector;
+
+/**
+ * A class representing the app.
+ * The department manages all the sub-buttons that are inside it.
+ * Each button in the class represents another object that is opened when you click on it.
+ */
 
 public class ApplicationPageGUI {
     private IViewModel viewModel;

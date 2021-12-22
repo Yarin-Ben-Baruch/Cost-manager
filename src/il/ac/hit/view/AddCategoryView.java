@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A button inside the app. The button represents adding a new category to the category table.
+ * When you press the button from the app, the object opens.
+ */
+
 public class AddCategoryView {
 
     // Add Category Button, TextField, Label and Submit Action.
@@ -25,6 +30,7 @@ public class AddCategoryView {
         addCategoryInit();
         addCategoryStart();
     }
+
     // init the frame
     private void addCategoryInit() {
         // Creating the AddCategory Action.
@@ -33,6 +39,7 @@ public class AddCategoryView {
         addCategoryTextField = new JTextField(20);
         addCategoryToDBButton = new JButton("Add category to the list");
     }
+
     // start the frame
     private void addCategoryStart() {
         // Creating the Add Category Panel.

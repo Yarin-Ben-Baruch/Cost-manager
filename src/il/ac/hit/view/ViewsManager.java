@@ -8,7 +8,9 @@ import il.ac.hit.viewmodel.IViewModel;
 import java.util.Collection;
 
 /**
- * An object that implements the view and manages all the windows in the application
+ * An object that implements the view and manages all the windows in the application.
+ * The object manages all the methods that need to be implemented from the view class,
+ * and receives the relevant information from the objects relevant to that function.
  */
 
 public class ViewsManager implements IView {
@@ -49,7 +51,7 @@ public class ViewsManager implements IView {
     /**
      * This method show the items in the cost table.
      * Make sure you invoke this method during the execution of the AWT Event thread.
-     * @param items  A list of items that list all the column types in the expense table
+     * @param items  A list of items that list all the column types in the expense table.
      */
     @Override
     public void showItems(Collection<Item> items) {
@@ -59,7 +61,7 @@ public class ViewsManager implements IView {
     /**
      * This method show the categories in the category table.
      * Make sure you invoke this method during the execution of the AWT Event thread.
-     * @param categories A list of items that list all the types of categories there are
+     * @param categories A list of items that list all the types of categories there are.
      */
     @Override
     public void showCategories(Collection<Category> categories) {
@@ -70,7 +72,7 @@ public class ViewsManager implements IView {
      * This method called the application page showMessage method.
      * Inorder to show the message that she get from the ViewModel.
      * Make sure you invoke this method during the execution of the AWT Event thread.
-     * @param message A message-type object that conveys a message to the user
+     * @param message A message-type object that conveys a message to the user.
      */
     @Override
     public void showMessage(Message message) {

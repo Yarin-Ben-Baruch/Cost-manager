@@ -7,6 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * A class representing the sign-up button.
+ * Inside the department there is data about what happens after
+ * the registration button is clicked and what opens after it closes.
+ */
 public class RegisterPageGUI {
 
     private final IViewModel viewModel;

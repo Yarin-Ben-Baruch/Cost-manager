@@ -2,11 +2,16 @@ package il.ac.hit.view;
 
 import il.ac.hit.model.User;
 import il.ac.hit.viewmodel.IViewModel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * A class that represents the login button for the app.
+ * Inside the department there is data about what happens after clicking the login button,
+ * and in addition. Option to click the register button.
+ */
 
 public class LoginPageGUI{
 
@@ -30,7 +35,7 @@ public class LoginPageGUI{
     }
 
     /**
-     * This method Initializing the Login page gui
+     * This method Initializing the Login page gui.
      */
     public void init() {
         // Sub menu of Login.
@@ -76,7 +81,7 @@ public class LoginPageGUI{
 
     /**
      * This method close the login page and return the username field.
-     * @return Returns the login username
+     * @return Returns the login username.
      */
     public String close() {
         loginFrame.dispose();
