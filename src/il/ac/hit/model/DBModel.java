@@ -8,6 +8,7 @@ import java.util.LinkedList;
  * DBModel class contact with the sql DB.
  * This class implements the IModel.
  */
+
 public class DBModel implements IModel {
 
     private final String user = "admin";
@@ -16,24 +17,24 @@ public class DBModel implements IModel {
 
     /**
      *  Ctor that set the connection and the statement.
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     public DBModel() throws CostManagerException {
-
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        //Already creating an object from the class, we want to know if there is a connection problem,
+        // so the connection remains
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
             System.out.println("Connection success !");
         }
         catch (SQLException e) {
             throw new CostManagerException("Connection failed!",e);
         }
-
     }
 
     /**
      * Add item method adding cost item for the items sql table.
      * Add item method also adding category if not exists to the categories sql table.
-     * @param item An object that stores all types of data in the expense table
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @param item An object that stores all types of data in the expense table.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public void addItem(Item item) throws CostManagerException {
@@ -71,8 +72,8 @@ public class DBModel implements IModel {
 
     /**
      * Get all the items in the cost items sql table.
-     * @return Return list of all items in the database
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @return Return list of all items in the database.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public Collection<Item> getItems(String userName) throws CostManagerException {
@@ -103,11 +104,11 @@ public class DBModel implements IModel {
 
     /**
      * Updating specific data that the user selected, in cost item sql table.
-     * @param nameColToUpdate The name of the column you want to change
-     * @param dataToSet The information you want to update
-     * @param costNumber In what row is it in the table
-     * @param userName The username is online
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @param nameColToUpdate The name of the column you want to change.
+     * @param dataToSet The information you want to update.
+     * @param costNumber In what row is it in the table.
+     * @param userName The username is online.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, String costNumber, String userName) throws CostManagerException {
@@ -147,10 +148,10 @@ public class DBModel implements IModel {
     }
 
     /**
-     * Remove item from the cost items sql table
-     * @param costNumber In what row is it in the table
-     * @param userName The username is online
-     * @throws CostManagerException A class wraps up the problems of the program
+     * Remove item from the cost items sql table.
+     * @param costNumber In what row is it in the table.
+     * @param userName The username is online.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public void removeItem(String costNumber, String userName) throws CostManagerException {
@@ -180,10 +181,10 @@ public class DBModel implements IModel {
 
     /**
      * Get Report return collection of all the items in the items sql table that start with the startDate and end with the endDate.
-     * @param startDate Date from which you want to receive data
-     * @param endDate Date by which you want to receive data
-     * @return Return list of all items in the database
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @param startDate Date from which you want to receive data.
+     * @param endDate Date by which you want to receive data.
+     * @return Return list of all items in the database.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public Collection<Item> getDetailedReport(Date startDate, Date endDate, String userName) throws CostManagerException {
@@ -221,8 +222,8 @@ public class DBModel implements IModel {
 
     /**
      * Adding new user to the users sql table.
-     * @param user The username is online
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @param user The username is online.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public void addNewUser(User user) throws CostManagerException {
@@ -258,8 +259,8 @@ public class DBModel implements IModel {
 
     /**
      * Adding new category to the categories sql table if the category is not exists.
-     * @param category Category you want to add to the database
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @param category Category you want to add to the database.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public void addNewCategoryIfExists(Category category) throws CostManagerException {
@@ -300,8 +301,8 @@ public class DBModel implements IModel {
 
     /**
      * Get all the users in the users sql table.
-     * @return Returns a list of all registered users in the system
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @return Returns a list of all registered users in the system.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public Collection<User> getAllUsers() throws CostManagerException {
@@ -330,8 +331,8 @@ public class DBModel implements IModel {
 
     /**
      * Get all the categories in the categories sql table.
-     * @return Returns a list of all categories for all users
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @return Returns a list of all categories for all users.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public Collection<Category> getAllCategories() throws CostManagerException {
@@ -359,8 +360,8 @@ public class DBModel implements IModel {
 
     /**
      *  This method is checking if the user that she get is inside the DB.
-     * @param user The username is online
-     * @throws CostManagerException A class wraps up the problems of the program
+     * @param user The username is online.
+     * @throws CostManagerException A class wraps up the problems of the program.
      */
     @Override
     public void checkIfUserExists(User user) throws CostManagerException {

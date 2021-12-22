@@ -19,14 +19,14 @@ public class Item {
 
     /**
      * A constructor that updates the user expense information.
-     * @param costNumber In what row is it in the table
-     * @param name Name of the person who added the record
-     * @param description
-     * @param currency
-     * @param category
-     * @param sum
-     * @param date
-     * @param userName
+     * @param costNumber In what row is it in the table.
+     * @param name Name of the person who added the record.
+     * @param description Expenditure description.
+     * @param currency In what currency the expenditure was made.
+     * @param category To which category does the expense belong.
+     * @param sum What is the amount of expenditure.
+     * @param date On what date was the expenditure.
+     * @param userName In which user the spend was made.
      */
     public Item(int costNumber, String name, String description, String currency, Category category, String sum, Date date, String userName) {
         setCostNumber(costNumber);

@@ -5,7 +5,6 @@ import java.util.Objects;
 /**
  * A class that maintains the existing categories in the expense tracking software.
  */
-
 public class Category {
 
     private String categoryName;

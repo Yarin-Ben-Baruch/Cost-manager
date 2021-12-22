@@ -33,7 +33,7 @@ public class CostManagerViewModel implements IViewModel {
 
     /**
      * A method that receives an object from the item class and takes care of connecting it to the view.
-     * @param item
+     * @param item An object that stores all types of data in the expense table.
      */
     @Override
     public void addItem(Item item) {
@@ -65,7 +65,7 @@ public class CostManagerViewModel implements IViewModel {
 
     /**
      * A method that receives an object from the User class and takes care of connecting it to the view
-     * @param user
+     * @param user The username is online.
      */
     @Override
     public void addNewUser(User user) {
@@ -96,7 +96,7 @@ public class CostManagerViewModel implements IViewModel {
 
     /**
      * A method that receives an object from the Category class and takes care of connecting it to the view
-     * @param category
+     * @param category Category you want to add to the database.
      */
     @Override
     public void addNewCategoryIfExists(Category category) {
@@ -129,8 +129,8 @@ public class CostManagerViewModel implements IViewModel {
     /**
      * A method that receives a record number and username, and
      * takes care of deleting it from the DB and then presenting the updated data to view.
-     * @param costNumber
-     * @param userName
+     * @param costNumber In what row is it in the table.
+     * @param userName The username is online.
      */
     @Override
     public void removeItem(String costNumber, String userName) {
@@ -164,10 +164,10 @@ public class CostManagerViewModel implements IViewModel {
      * A method that gets a column name that you want to change, which value to put in place of the existing value and
      * uses the record number and username of the person who is connected to the application, and
      * takes care of updating it in DB and then displaying the updated data.
-     * @param nameColToUpdate
-     * @param dataToSet
-     * @param costNumber
-     * @param userName
+     * @param nameColToUpdate The name of the column you want to change.
+     * @param dataToSet The information you want to update.
+     * @param costNumber In what row is it in the table.
+     * @param userName The username is online.
      */
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, String costNumber, String userName) {
@@ -200,8 +200,9 @@ public class CostManagerViewModel implements IViewModel {
 
     /**
      * A method that gets a start-date and end-date and show you by the View the items between those dates.
-     * @param startDate
-     * @param endDate
+     * @param startDate Date from which you want to receive data.
+     * @param endDate Date by which you want to receive data.
+     * @param username The username is online.
      */
     @Override
     public void getDetailedReport(Date startDate, Date endDate, String username) {
@@ -260,9 +261,9 @@ public class CostManagerViewModel implements IViewModel {
     }
 
     /**
-    * A method that takes from the class that implements the model, all
-    * the data stored in DB and then passes to the class that implements the view the list.
-     * @param username
+     * A method that takes from the class that implements the model, all
+     * The data stored in DB and then passes to the class that implements the view the list.
+     * @param username The username is online.
      */
     @Override
     public void getItems(String username) {
@@ -294,8 +295,8 @@ public class CostManagerViewModel implements IViewModel {
 
     /**
      * A method that takes from the class that implements the model, all
-     * the data stored in DB and then open the application after successful login.
-     * @param user
+     * The data stored in DB and then open the application after successful login.
+     * @param user The username is online.
      */
     @Override
     public void isUserExists(User user) {
@@ -332,6 +333,4 @@ public class CostManagerViewModel implements IViewModel {
     public void setModel(IModel model) {
         this.m_Model = model;
     }
-
-
 }

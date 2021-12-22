@@ -7,6 +7,9 @@ import il.ac.hit.viewmodel.IViewModel;
 
 import java.util.Collection;
 
+/**
+ * An object that implements the view and manages all the windows in the application
+ */
 
 public class ViewsManager implements IView {
 
@@ -16,6 +19,7 @@ public class ViewsManager implements IView {
 
     /**
      * This method Initialized the Application and start with the login screen page.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      */
     @Override
     public void init() {
@@ -25,6 +29,7 @@ public class ViewsManager implements IView {
     }
     /**
      * This method Start the Application and start with the login screen page.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      */
     @Override
     public void start() {
@@ -33,6 +38,7 @@ public class ViewsManager implements IView {
 
     /**
      * This method init and start the login page.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      */
     @Override
     public void openLogin() {
@@ -42,6 +48,7 @@ public class ViewsManager implements IView {
 
     /**
      * This method show the items in the cost table.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      * @param items  A list of items that list all the column types in the expense table
      */
     @Override
@@ -51,6 +58,7 @@ public class ViewsManager implements IView {
 
     /**
      * This method show the categories in the category table.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      * @param categories A list of items that list all the types of categories there are
      */
     @Override
@@ -61,6 +69,7 @@ public class ViewsManager implements IView {
     /**
      * This method called the application page showMessage method.
      * Inorder to show the message that she get from the ViewModel.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      * @param message A message-type object that conveys a message to the user
      */
     @Override
@@ -71,6 +80,7 @@ public class ViewsManager implements IView {
     /**
      * This method call the login page method showInvalidInputInLogin.
      * Inorder to show the message of invalid input that she get from the ViewModel.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      */
     public void showInvalidInputInLogin(){
         loginPage.showInvalidInputInLogin();
@@ -79,6 +89,7 @@ public class ViewsManager implements IView {
     /**
      * This method call the login page method showInvalidInputInRegister.
      * Inorder to show the message of invalid input that she get from the ViewModel.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      */
     public void showInvalidInputInRegister() {
         loginPage.showInvalidInputInRegister();
@@ -88,6 +99,7 @@ public class ViewsManager implements IView {
      * This method open the application page gui.
      * Close that login page gui.
      * Set the username that entered to the application.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      */
     public void openApplicationFromLogin() {
         String username =  loginPage.close();
@@ -100,6 +112,7 @@ public class ViewsManager implements IView {
     /**
      * This method call the login method OpenAfterRegister.
      * The method open the login page again after register.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
      */
     public void registerSucceeded() {
         loginPage.openAfterRegister();
@@ -109,5 +122,4 @@ public class ViewsManager implements IView {
     public void setIViewModel(IViewModel vm) {
         viewModel = vm;
     }
-
 }

@@ -12,8 +12,8 @@ public class User {
 
     /**
      * A constructor that updates the user's name and i_Password User expense information.
-     * @param userName
-     * @param password
+     * @param userName New username.
+     * @param password The password of the registered user.
      */
     public User(String userName, String password) {
         setUserName(userName);
