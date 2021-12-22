@@ -71,7 +71,7 @@ public class DBModel implements IModel {
 
     /**
      * Get all the items in the cost items sql table.
-     * @return
+     * @return Return list of all items in the database
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override
@@ -103,10 +103,10 @@ public class DBModel implements IModel {
 
     /**
      * Updating specific data that the user selected, in cost item sql table.
-     * @param nameColToUpdate
-     * @param dataToSet
-     * @param costNumber
-     * @param userName
+     * @param nameColToUpdate The name of the column you want to change
+     * @param dataToSet The information you want to update
+     * @param costNumber In what row is it in the table
+     * @param userName The username is online
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override
@@ -148,8 +148,8 @@ public class DBModel implements IModel {
 
     /**
      * Remove item from the cost items sql table
-     * @param costNumber
-     * @param userName
+     * @param costNumber In what row is it in the table
+     * @param userName The username is online
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override
@@ -179,15 +179,15 @@ public class DBModel implements IModel {
 
     /**
      * Get Report return collection of all the items in the items sql table that start with the startDate and end with the endDate.
-     * @param startDate
-     * @param endDate
-     * @return
+     * @param startDate Date from which you want to receive data
+     * @param endDate Date by which you want to receive data
+     * @return Return list of all items in the database
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override
     public Collection<Item> getDetailedReport(Date startDate, Date endDate, String userName) throws CostManagerException {
 
-        ResultSet myResult = null;
+        ResultSet myResult;
         Collection<Item> reportItems = new LinkedList<>();
 
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
@@ -220,7 +220,7 @@ public class DBModel implements IModel {
 
     /**
      * Adding new user to the users sql table.
-     * @param user
+     * @param user The username is online
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override
@@ -257,7 +257,7 @@ public class DBModel implements IModel {
 
     /**
      * Adding new category to the categories sql table if the category is not exists.
-     * @param category
+     * @param category Category you want to add to the database
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override
@@ -299,7 +299,7 @@ public class DBModel implements IModel {
 
     /**
      * Get all the users in the users sql table.
-     * @return
+     * @return Returns a list of all registered users in the system
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override
@@ -329,7 +329,7 @@ public class DBModel implements IModel {
 
     /**
      * Get all the categories in the categories sql table.
-     * @return
+     * @return Returns a list of all categories for all users
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override
@@ -358,7 +358,7 @@ public class DBModel implements IModel {
 
     /**
      *  This method is checking if the user that she get is inside the DB.
-     * @param user
+     * @param user The username is online
      * @throws CostManagerException A class wraps up the problems of the program
      */
     @Override

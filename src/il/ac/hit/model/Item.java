@@ -19,8 +19,8 @@ public class Item {
 
     /**
      * A constructor that updates the user expense information.
-     * @param costNumber
-     * @param name
+     * @param costNumber In what row is it in the table
+     * @param name Name of the person who added the record
      * @param description
      * @param currency
      * @param category
