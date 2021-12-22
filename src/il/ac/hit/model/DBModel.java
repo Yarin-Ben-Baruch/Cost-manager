@@ -177,6 +177,7 @@ public class DBModel implements IModel {
         }
     }
 
+
     /**
      * Get Report return collection of all the items in the items sql table that start with the startDate and end with the endDate.
      * @param startDate Date from which you want to receive data

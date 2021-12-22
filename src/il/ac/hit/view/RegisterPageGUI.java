@@ -53,21 +53,21 @@ public class RegisterPageGUI {
      * This method starting the Register page gui.
      */
     public void start(){
-
+        registerAddToFrame();
         registerFrame.setTitle("Registration Form");
         registerFrame.setBounds(300, 90, 500, 450);
         registerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registerFrame.setResizable(false);
-//        registerContainer = registerFrame.getContentPane();
         registerFrame.setLayout(new BorderLayout());
         registerFrame.setBackground(Color.getColor("50",Color.lightGray));
 
         registerSetLocations();
         registerSetSize();
-        registerAddToContainer();
-        addRegisterActionEvent();
 
         registerFrame.setVisible(true);
+
+        addRegisterActionEvent();
+
 
     }
 
@@ -157,7 +157,7 @@ public class RegisterPageGUI {
         resetJLabel.setSize(500, 25);
     }
 
-    private void registerAddToContainer(){
+    private void registerAddToFrame(){
         registerFrame.add(titleLabel);
         registerFrame.add(userNameLabel);
         registerFrame.add(usernameTextField);

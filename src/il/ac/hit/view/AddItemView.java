@@ -82,7 +82,6 @@ public class AddItemView {
 
     private void addItemStart() {
         // Creating the Add Item Panel.
-        addItemFrame.setLayout(new BorderLayout());
         addItemFrame.add(addItemNameLabel);
         addItemFrame.add(addItemNameTextField);
         addItemFrame.add(addItemCurrencyLabel);
@@ -99,9 +98,13 @@ public class AddItemView {
         addItemFrame.add(addItemDescribingTextField);
         addItemFrame.add(addItemToDBButton);
 
+        addItemFrame.setLayout(new BorderLayout());
         addItemFrame.setTitle("Add Cost");
+        addItemFrame.setSize(480,475);
+        addItemFrame.setResizable(false);
 
         setComponentsLocationAndSize();
+
         addItemFrame.setVisible(true);
 
 
@@ -128,8 +131,7 @@ public class AddItemView {
     }
 
     private void setComponentsLocationAndSize() {
-        addItemFrame.setSize(480,475);
-        addItemFrame.setResizable(false);
+
         addItemNameLabel.setBounds(50, 30, 80, 30);
         addItemCurrencyLabel.setBounds(addItemNameLabel.getX(), addItemNameLabel.getY()+50, 80, 30);
         addItemCategoryLabel.setBounds(addItemNameLabel.getX(), addItemCurrencyLabel.getY()+50, 80, 30);

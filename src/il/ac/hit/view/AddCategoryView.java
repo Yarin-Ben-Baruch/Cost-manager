@@ -44,6 +44,7 @@ public class AddCategoryView {
         addCategoryFrame.setTitle("Add Category");
         addCategoryFrame.setSize(400,150);
         addCategoryFrame.setResizable(false);
+
         addCategoryLabel.setBounds(65, 20, 100, 30);
         addCategoryTextField.setBounds(addCategoryLabel.getX()+ addCategoryLabel.getWidth()+10, addCategoryLabel.getY(), 160, 30);
         addCategoryToDBButton.setSize(250, 30);

@@ -43,7 +43,6 @@ public class UpdateItemView {
     }
 
     private void updateItemStart() {
-        updateFrame.setLayout(new BorderLayout());
         updateFrame.add(updateItemColNameLabel);
         updateFrame.add(updateItemColNameComboBox);
         updateFrame.add(updateItemDataToSetLabel);
@@ -54,6 +53,8 @@ public class UpdateItemView {
         updateFrame.add(updateItemCostNumberTextField);
         updateFrame.add(updateItemToDBButton);
 
+
+        updateFrame.setLayout(new BorderLayout());
         updateFrame.setTitle("Update Cost");
         setComponentsSizeAndLocation();
         updateFrame.setVisible(true);

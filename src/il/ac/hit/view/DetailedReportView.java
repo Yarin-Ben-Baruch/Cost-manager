@@ -65,7 +65,6 @@ public class DetailedReportView {
     }
 
     private void showReportStart() {
-        reportFrame.setLayout(new BorderLayout());
         reportFrame.add(showReportStartDateLabel);
         reportFrame.add(showReportStartDateDayComboBox);
         reportFrame.add(showReportStartDateMonthComboBox);
@@ -76,7 +75,10 @@ public class DetailedReportView {
         reportFrame.add(showReportEndDateYearComboBox);
         reportFrame.add(showReportActionButton);
 
+        reportFrame.setLayout(new BorderLayout());
         reportFrame.setTitle("Detailed Report");
+        reportFrame.setSize(480,220);
+        reportFrame.setResizable(false);
         setComponentsSizeAndLocation();
         reportFrame.setVisible(true);
 
@@ -99,8 +101,6 @@ public class DetailedReportView {
     }
 
     private void setComponentsSizeAndLocation() {
-        reportFrame.setSize(480,220);
-        reportFrame.setResizable(false);
 
         showReportStartDateLabel.setBounds(50, 30, 80, 30);
         showReportEndDateLabel.setBounds(showReportStartDateLabel.getX(), showReportStartDateLabel.getY()+50, 80, 30);

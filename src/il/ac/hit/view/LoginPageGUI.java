@@ -16,10 +16,8 @@ public class LoginPageGUI{
 
     //Creating login page frame
     private JFrame loginFrame;
-//    private Container loginContainer;
     private JLabel loginUserNameLabel, loginPasswordLabel;
     private JTextField loginUserNameTextField;
-    private JLabel temp = new JLabel();
     private JPasswordField loginPasswordField;
     private JButton loginButton, loginResetButton, loginRegisterButton;
     private JCheckBox loginShowPasswordCheckBox;
@@ -54,12 +52,12 @@ public class LoginPageGUI{
     /**
      * This method starting the Login page gui.
      */
-    public void start(){
+    public void start() {
 
-        setLoginLayoutManager();
-        addLoginComponentsToContainer();
-//        setLoginLocationAndSize();
-        addLoginActionEvents();
+        addLoginComponentsToFrame();
+
+        // Set the layout null to set the size and the location by myself.
+        loginFrame.setLayout(new BorderLayout());
 
         loginFrame.setTitle("Login Form");
         loginFrame.setSize(350,400);
@@ -67,6 +65,8 @@ public class LoginPageGUI{
         loginFrame.setResizable(false);
         setLoginLocationAndSize();
         loginFrame.setVisible(true);
+
+        addLoginActionEvents();
     }
 
     /**
@@ -101,11 +101,6 @@ public class LoginPageGUI{
         registerFrame.showInvalidInputInRegister();
     }
 
-    // Set the layout null to set the size and the location by myself.
-    private void setLoginLayoutManager() {
-            loginFrame.setLayout(new BorderLayout());
-    }
-
     // Set size and locations of the Components.
     private void setLoginLocationAndSize() {
 
@@ -119,7 +114,7 @@ public class LoginPageGUI{
         loginRegisterButton.setBounds(125, loginResetButton.getY()+50, 100, 30);
     }
 
-    private void addLoginComponentsToContainer() {
+    private void addLoginComponentsToFrame() {
         loginFrame.add(loginUserNameLabel);
         loginFrame.add(loginUserNameTextField);
         loginFrame.add(loginPasswordLabel);
@@ -128,7 +123,6 @@ public class LoginPageGUI{
         loginFrame.add(loginButton);
         loginFrame.add(loginResetButton);
         loginFrame.add(loginRegisterButton);
-        loginFrame.add(temp);
     }
 
     private void addLoginActionEvents() {
