@@ -37,24 +37,31 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void addItem(Item item) {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Go to the add item in the model.
                     m_Model.addItem(item);
+                    // Get the items from the method get items in the model.
                     Collection<Item> items = m_Model.getItems(item.getUserName());
-
+                    // avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message in the view manager.
                             m_View.showMessage(new Message("Item was added!"));
+                            // Calling the show items to show all the costs in the DB.
                             m_View.showItems(items);
                         }
                     });
                 } catch(CostManagerException e) {
+                    // avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showMessage(new Message(e.getMessage()));
                         }
                     });
@@ -69,23 +76,28 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void addNewUser(User user) {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Calling the add new user method in the model.
                     m_Model.addNewUser(user);
-
+                    // Avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the registerSucceeded method in the view manager.
                             m_View.registerSucceeded();
                         }
                     });
                 }
                 catch (CostManagerException e) {
+                    // Avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showInvalidInputInRegister();
                         }
                     });
@@ -100,23 +112,29 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void addNewCategoryIfExists(Category category) {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Calling the addNewCategoryIfExists in the model to add the category if
+                    // the category is not exists.
                     m_Model.addNewCategoryIfExists(category);
-
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Call the show message in the view manager.
                             m_View.showMessage(new Message( "Category was added!"));
                         }
                     });
                 }
                 catch (CostManagerException e) {
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showMessage(new Message(e.getMessage()));
                         }
                     });
@@ -134,24 +152,30 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void removeItem(String costNumber, String userName) {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Calling the removeItem method in the model to remove the cost.
                     m_Model.removeItem(costNumber, userName);
+                    // Getting all the costs after the remove from the DB.
                     Collection<Item> items = m_Model.getItems(userName);
-
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show item method in the view manager.
                             m_View.showItems(items);
                         }
                     });
                 }
                 catch (CostManagerException e) {
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showMessage(new Message(e.getMessage()));
                         }
                     });
@@ -171,24 +195,30 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void updateItem(String nameColToUpdate, String dataToSet, String costNumber, String userName) {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Calling the updateItem method in the model to update the data in the DB.
                     m_Model.updateItem(nameColToUpdate, dataToSet, costNumber, userName);
+                    // Get the update item from the DB .
                     Collection<Item> items = m_Model.getItems(userName);
-
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show item method in the view to show the costs.
                             m_View.showItems(items);
                         }
                     });
                 }
                 catch (CostManagerException e) {
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showMessage(new Message(e.getMessage()));
                         }
                     });
@@ -206,22 +236,27 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void getDetailedReport(Date startDate, Date endDate, String username) {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Calling the get detailed report in the model to get the specific information the user wants.
                     Collection<Item> items = m_Model.getDetailedReport(startDate, endDate, username);
-
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show item method in the view to show the update items.
                             m_View.showItems(items);
                         }
                     });
                 } catch (CostManagerException e) {
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showMessage(new Message(e.getMessage()));
                         }
                     });
@@ -236,22 +271,28 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void getAllCategories() {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try{
+                    // Calling the get all categories in the model to get the
+                    // current categories from the DB.
                     Collection<Category> categories = m_Model.getAllCategories();
-
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show categories method in the view manager.
                             m_View.showCategories(categories);
                         }
                     });
                 } catch (CostManagerException e) {
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showMessage(new Message(e.getMessage()));
                         }
                     });
@@ -267,23 +308,29 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void getItems(String username) {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Calling the get items method in the model to get the current costs
+                    // from the DB.
                     Collection<Item> items =  m_Model.getItems(username);
-
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling show items in the view manager.
                             m_View.showItems(items);
                         }
                     });
                 }
                 catch (CostManagerException e) {
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showMessage(new Message(e.getMessage()));
                         }
                     });
@@ -299,22 +346,28 @@ public class CostManagerViewModel implements IViewModel {
      */
     @Override
     public void isUserExists(User user) {
+        // Using the thread pull.
         m_Service.submit(new Runnable() {
             @Override
             public void run() {
                 try {
+                    // Calling the checkIfUserExists method in the model
+                    // to check if the user is exists in the DB.
                     m_Model.checkIfUserExists(user);
-
+                    // Using to avoid deadlock in GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the open application from login in the view manager.
                             m_View.openApplicationFromLogin();
                         }
                     });
                 } catch (CostManagerException e) {
+                    // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            // Calling the show message method in the view manager to show the error.
                             m_View.showInvalidInputInLogin();
                         }
                     });

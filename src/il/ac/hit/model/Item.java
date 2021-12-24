@@ -75,7 +75,7 @@ public class Item {
         this.costNumber = i_CostNumber;
     }
 
-    public void setName(String name) {
+    public void setName(String name)  {
         this.name = name;
     }
 
