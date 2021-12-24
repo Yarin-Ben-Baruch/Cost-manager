@@ -141,6 +141,7 @@ public class ApplicationPageGUI {
         // Do click to show the costs and categories in the table
         showItemsButton.doClick();
         showCategoriesButton.doClick();
+
     }
 
     /**
