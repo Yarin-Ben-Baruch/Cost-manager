@@ -4,9 +4,13 @@ import il.ac.hit.*;
 import il.ac.hit.model.Category;
 import il.ac.hit.model.Item;
 import il.ac.hit.viewmodel.IViewModel;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Vector;
@@ -105,10 +109,13 @@ public class ApplicationPageGUI {
         menu = new Menu("Options");
     }
 
+
     /**
      * This method Starting the application page.
      */
     public void startApplication() {
+
+        mainFrame.setContentPane(new JLabel(new ImageIcon("src/images/Application background.jpg")));
         // Method that start add the button to the frame.
         creatingButtonsStart();
         // Method that build the cost table.

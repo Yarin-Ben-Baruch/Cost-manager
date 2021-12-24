@@ -57,6 +57,8 @@ public class RegisterPageGUI {
      * This method starting the Register page gui.
      */
     public void start(){
+        registerFrame.setContentPane(new JLabel(new ImageIcon("src/images/Register background.jpg")));
+
         registerAddToFrame();
         registerFrame.setTitle("Registration Form");
         registerFrame.setBounds(300, 90, 500, 450);

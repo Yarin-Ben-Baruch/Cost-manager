@@ -56,6 +56,7 @@ public class LoginPageGUI{
      * This method starting the Login page gui.
      */
     public void start() {
+        loginFrame.setContentPane(new JLabel(new ImageIcon("src/images/Login background.jpg")));
 
         addLoginComponentsToFrame();
 
