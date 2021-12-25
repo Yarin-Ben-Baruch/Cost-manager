@@ -62,7 +62,7 @@ public class LoginPageGUI{
 
         loginFrame.setLayout(new BorderLayout());
         loginFrame.setTitle("Login Form");
-        loginFrame.setSize(350,400);
+        loginFrame.setSize(350,350);
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setResizable(false);
         setLoginLocationAndSize();

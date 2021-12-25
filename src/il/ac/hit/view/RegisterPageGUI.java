@@ -61,7 +61,7 @@ public class RegisterPageGUI {
 
         registerAddToFrame();
         registerFrame.setTitle("Registration Form");
-        registerFrame.setBounds(300, 90, 500, 450);
+        registerFrame.setBounds(300, 90, 630, 450);
         registerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registerFrame.setResizable(false);
         registerFrame.setLayout(new BorderLayout());
