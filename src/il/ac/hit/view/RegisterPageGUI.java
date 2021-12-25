@@ -18,7 +18,7 @@ public class RegisterPageGUI {
 
     // Components of the Register Page Gui.
     private JFrame registerFrame;
-    private JLabel titleLabel, userNameLabel, passwordLabel, resetJLabel;
+    private JLabel titleLabel, userNameLabel, passwordLabel;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
     private JCheckBox termCheckBox;
@@ -47,7 +47,6 @@ public class RegisterPageGUI {
         termCheckBox = new JCheckBox("Accept Terms And Conditions.");
         submitButton = new JButton("Submit");
         resetJButton = new JButton("Reset");
-        resetJLabel = new JLabel("");
         registerShowPasswordCheckBox = new JCheckBox("Show Password");
 
         registerSetFont();
@@ -57,11 +56,14 @@ public class RegisterPageGUI {
      * This method starting the Register page gui.
      */
     public void start(){
+
+        // this will center the frame
+        registerFrame.setLocationRelativeTo(null);
         registerFrame.setContentPane(new JLabel(new ImageIcon("src/images/Register background.jpg")));
 
         registerAddToFrame();
-        registerFrame.setTitle("Registration Form");
-        registerFrame.setBounds(300, 90, 630, 450);
+        //registerFrame.setTitle("Registration");
+        registerFrame.setBounds(300, 90, 500, 450);
         registerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         registerFrame.setResizable(false);
         registerFrame.setLayout(new BorderLayout());
@@ -89,7 +91,7 @@ public class RegisterPageGUI {
     }
 
     private void registerSetLocations(){
-        titleLabel.setLocation(150, 30);
+        //titleLabel.setLocation(150, 30);
         userNameLabel.setLocation(100, 100);
         usernameTextField.setLocation(200, 100);
         passwordLabel.setLocation(100, 150);
@@ -98,7 +100,6 @@ public class RegisterPageGUI {
         termCheckBox.setLocation(150, 250);
         submitButton.setLocation(150, 300);
         resetJButton.setLocation(270, 300);
-        resetJLabel.setLocation(100, 500);
     }
 
     private void addRegisterActionEvent() {
@@ -129,7 +130,6 @@ public class RegisterPageGUI {
                 String def = "";
                 usernameTextField.setText(def);
                 passwordField.setText(def);
-                resetJLabel.setText(def);
                 termCheckBox.setSelected(false);
             }
         });
@@ -148,7 +148,7 @@ public class RegisterPageGUI {
     }
 
     private void registerSetSize(){
-        titleLabel.setSize(300, 30);
+        //titleLabel.setSize(300, 30);
         userNameLabel.setSize(100, 20);
         usernameTextField.setSize(190, 20);
         passwordLabel.setSize(100, 20);
@@ -157,11 +157,11 @@ public class RegisterPageGUI {
         termCheckBox.setSize(250, 20);
         submitButton.setSize(100, 20);
         resetJButton.setSize(100, 20);
-        resetJLabel.setSize(500, 25);
     }
 
     private void registerAddToFrame(){
-        registerFrame.add(titleLabel);
+        setColorToLabel();
+        //registerFrame.add(titleLabel);
         registerFrame.add(userNameLabel);
         registerFrame.add(usernameTextField);
         registerFrame.add(passwordLabel);
@@ -171,13 +171,18 @@ public class RegisterPageGUI {
         registerFrame.add(submitButton);
         registerFrame.add(resetJButton);
 
-        // Clearing the information
-        registerFrame.add(resetJLabel);
 
     }
 
+    private void setColorToLabel(){
+        userNameLabel.setForeground(Color.WHITE);
+        passwordLabel.setForeground(Color.WHITE);
+        registerShowPasswordCheckBox.setForeground(Color.WHITE);
+        termCheckBox.setForeground(Color.WHITE);
+    }
+
     private void registerSetFont(){
-        titleLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+        //titleLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         userNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         usernameTextField.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -185,7 +190,6 @@ public class RegisterPageGUI {
         termCheckBox.setFont(new Font("Arial", Font.PLAIN, 15));
         submitButton.setFont(new Font("Arial", Font.PLAIN, 15));
         resetJButton.setFont(new Font("Arial", Font.PLAIN, 15));
-        resetJLabel.setFont(new Font("Arial", Font.PLAIN, 20));
     }
 
 }

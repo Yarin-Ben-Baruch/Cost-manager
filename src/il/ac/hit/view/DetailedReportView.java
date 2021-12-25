@@ -70,6 +70,14 @@ public class DetailedReportView {
     }
 
     private void showReportStart() {
+        setColorToLabel();
+
+        // this will center the frame
+        reportFrame.setLocationRelativeTo(null);
+        // options 2
+        //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        //this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+
         reportFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
 
         reportFrame.add(showReportStartDateLabel);
@@ -123,5 +131,10 @@ public class DetailedReportView {
         showReportActionButton.setSize(150,30);
         showReportActionButton.setLocation((reportFrame.getWidth()- showReportActionButton.getWidth())/2 , showReportEndDateMonthComboBox.getY() + showReportEndDateMonthComboBox.getHeight()+30);
 
+    }
+
+    private void setColorToLabel(){
+        showReportStartDateLabel.setForeground(Color.WHITE);
+        showReportEndDateLabel.setForeground(Color.WHITE);
     }
 }

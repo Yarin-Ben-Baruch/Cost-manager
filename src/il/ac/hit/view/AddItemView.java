@@ -102,10 +102,13 @@ public class AddItemView {
 
     // start the frame
     private void addItemStart() {
+        setColorToLabel();
+
+        // this will center the frame
+        addItemFrame.setLocationRelativeTo(null);
 
         // background image
         addItemFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
-
         // Creating the Add Item Panel.
         addItemFrame.add(addItemNameLabel);
         addItemFrame.add(addItemNameTextField);
@@ -123,6 +126,7 @@ public class AddItemView {
         addItemFrame.add(addItemDescribingTextField);
         addItemFrame.add(addItemToDBButton);
 
+        // set layout manager
         addItemFrame.setLayout(new BorderLayout());
         addItemFrame.setTitle("Add Cost");
         addItemFrame.setSize(480,475);
@@ -179,4 +183,14 @@ public class AddItemView {
         addItemToDBButton.setLocation((addItemFrame.getWidth()- addItemToDBButton.getWidth())/2 , addItemDescribingTextField.getY() + addItemDescribingTextField.getHeight()+30);
 
     }
+
+    private void setColorToLabel(){
+            addItemDescribingLabel.setForeground(Color.WHITE);
+            addItemNameLabel.setForeground(Color.WHITE);
+            addItemCurrencyLabel.setForeground(Color.WHITE);
+            addItemCategoryLabel.setForeground(Color.WHITE);
+            addItemSumLabel.setForeground(Color.WHITE);
+            addItemDateLabel.setForeground(Color.WHITE);
+
+        }
 }

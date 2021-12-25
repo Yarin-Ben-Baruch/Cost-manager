@@ -113,6 +113,9 @@ public class ApplicationPageGUI {
      */
     public void startApplication() {
 
+        // this will center the frame
+        mainFrame.setLocationRelativeTo(null);
+
         mainFrame.setContentPane(new JLabel(new ImageIcon("src/images/Application background.jpg")));
         // Method that start add the button to the frame.
         creatingButtonsStart();

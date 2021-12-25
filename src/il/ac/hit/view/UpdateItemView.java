@@ -48,6 +48,12 @@ public class UpdateItemView {
     }
 
     private void updateItemStart() {
+
+        setColorToLabel();
+
+        // this will center the frame
+        updateFrame.setLocationRelativeTo(null);
+
         updateFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
 
 
@@ -55,8 +61,6 @@ public class UpdateItemView {
         updateFrame.add(updateItemColNameComboBox);
         updateFrame.add(updateItemDataToSetLabel);
         updateFrame.add(updateItemDataToSetTextField);
-        updateFrame.add(updateItemCostNumberLabel);
-        updateFrame.add(updateItemCostNumberTextField);
         updateFrame.add(updateItemCostNumberLabel);
         updateFrame.add(updateItemCostNumberTextField);
         updateFrame.add(updateItemToDBButton);
@@ -90,6 +94,14 @@ public class UpdateItemView {
         updateItemCostNumberTextField.setBounds(updateItemColNameComboBox.getX(), updateItemCostNumberLabel.getY(), 150, 30);
         updateItemToDBButton.setSize(150,30);
         updateItemToDBButton.setLocation((updateFrame.getWidth()- updateItemToDBButton.getWidth())/2 , updateItemCostNumberTextField.getY() + updateItemCostNumberTextField.getHeight()+30);
+
+    }
+
+
+    private void setColorToLabel(){
+        updateItemColNameLabel.setForeground(Color.WHITE);
+        updateItemDataToSetLabel.setForeground(Color.WHITE);
+        updateItemCostNumberLabel.setForeground(Color.WHITE);
 
     }
 }

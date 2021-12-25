@@ -43,6 +43,11 @@ public class AddCategoryView {
     // start the frame
     private void addCategoryStart() {
         // Creating the Add Category Panel.
+        addCategoryLabel.setForeground(Color.WHITE);
+
+        // this will center the frame
+        addCategoryFrame.setLocationRelativeTo(null);
+
         addCategoryFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
         addCategoryFrame.add(addCategoryLabel,BorderLayout.LINE_START);
         addCategoryFrame.add(addCategoryTextField,BorderLayout.CENTER);
@@ -68,4 +73,5 @@ public class AddCategoryView {
             }
         });
     }
+
 }

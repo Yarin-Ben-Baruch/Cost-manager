@@ -56,6 +56,10 @@ public class LoginPageGUI{
      * This method starting the Login page gui.
      */
     public void start() {
+
+        // this will center the frame
+        loginFrame.setLocationRelativeTo(null);
+
         loginFrame.setContentPane(new JLabel(new ImageIcon("src/images/Login background.jpg")));
 
         addLoginComponentsToFrame();
@@ -117,6 +121,7 @@ public class LoginPageGUI{
 
     // Adding all the components to the frame.
     private void addLoginComponentsToFrame() {
+        setColorToLabel();
         loginFrame.add(loginUserNameLabel);
         loginFrame.add(loginUserNameTextField);
         loginFrame.add(loginPasswordLabel);
@@ -125,6 +130,12 @@ public class LoginPageGUI{
         loginFrame.add(loginButton);
         loginFrame.add(loginResetButton);
         loginFrame.add(loginRegisterButton);
+    }
+
+    private void setColorToLabel(){
+        loginUserNameLabel.setForeground(Color.WHITE);
+        loginPasswordLabel.setForeground(Color.WHITE);
+        loginShowPasswordCheckBox.setForeground(Color.WHITE);
     }
 
     private void addLoginActionEvents() {

@@ -42,6 +42,11 @@ public class RemoveItemView {
 
     private void removeItemStart() {
 
+        removeItemCostNumberLabel.setForeground(Color.WHITE);
+
+        // this will center the frame
+        removeItemFrame.setLocationRelativeTo(null);
+
         removeItemFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
 
 
