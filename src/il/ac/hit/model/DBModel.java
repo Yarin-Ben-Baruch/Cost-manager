@@ -1,6 +1,7 @@
 package il.ac.hit.model;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -40,6 +41,9 @@ public class DBModel implements IModel {
     public void addItem(Item item) throws CostManagerException {
 
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+            // if some columns empty
+            item.isItemEmpty();
+
             // if the category is not exists add the category to the categories sql table.
             addCategoryInAddItem(item.getCategory());
 
@@ -165,7 +169,7 @@ public class DBModel implements IModel {
             if(howManyUpdates != 1){
                 throw new CostManagerException("Can't remove the Item!");
             }
-
+            updateCostNumberAfterRemove(userName);
         }
         catch (SQLException | NumberFormatException e) {
             throw new CostManagerException("Unable to remove data from DB",e);
@@ -258,11 +262,13 @@ public class DBModel implements IModel {
     @Override
     public void addNewCategoryIfExists(Category category) throws CostManagerException {
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+            // if category empty
+            category.isCategoryEmpty();
 
             Collection<Category> allCategories = getAllCategories();
 
             // If the category is not in the list of the categories add the category.
-            if(!allCategories.contains(category) && !category.getCategoryName().isEmpty()){
+            if(!allCategories.contains(category)){
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "insert into categories (category) " +
                                 "values " +
@@ -279,10 +285,7 @@ public class DBModel implements IModel {
                 }
             }
             else{
-                if(category.getCategoryName().isEmpty())
-                {
-                    throw new CostManagerException("Can't add empty category" );
-                }
+
                 throw new CostManagerException("Can't add same category twice!");
             }
 
@@ -412,6 +415,23 @@ public class DBModel implements IModel {
         }
         catch (SQLException e) {
             throw new CostManagerException("Unable insert into the DB",e);
+        }
+    }
+
+    private void updateCostNumberAfterRemove(String userName) throws CostManagerException {
+
+        try {
+            LinkedList<Item> allItems = (LinkedList)getItems(userName);
+            String costNumber;
+
+            for(int i = 0 ; i < allItems.size(); i++){
+                costNumber = String.valueOf(allItems.get(i).getCostNumber());
+                updateItem("costNumber", String.valueOf(i+1), costNumber, userName);
+            }
+
+        }
+        catch (CostManagerException e) {
+            throw new CostManagerException("Problem with removing process",e);
         }
     }
 }

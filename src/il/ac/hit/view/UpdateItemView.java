@@ -48,6 +48,9 @@ public class UpdateItemView {
     }
 
     private void updateItemStart() {
+        updateFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
+
+
         updateFrame.add(updateItemColNameLabel);
         updateFrame.add(updateItemColNameComboBox);
         updateFrame.add(updateItemDataToSetLabel);

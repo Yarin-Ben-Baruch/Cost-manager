@@ -70,6 +70,8 @@ public class DetailedReportView {
     }
 
     private void showReportStart() {
+        reportFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
+
         reportFrame.add(showReportStartDateLabel);
         reportFrame.add(showReportStartDateDayComboBox);
         reportFrame.add(showReportStartDateMonthComboBox);

@@ -1,11 +1,6 @@
 package il.ac.hit.viewmodel;
 
-import il.ac.hit.*;
-import il.ac.hit.model.CostManagerException;
-import il.ac.hit.model.Category;
-import il.ac.hit.model.IModel;
-import il.ac.hit.model.Item;
-import il.ac.hit.model.User;
+import il.ac.hit.model.*;
 import il.ac.hit.view.IView;
 
 import javax.swing.*;
@@ -120,12 +115,15 @@ public class CostManagerViewModel implements IViewModel {
                     // Calling the addNewCategoryIfExists in the model to add the category if
                     // the category is not exists.
                     m_Model.addNewCategoryIfExists(category);
+                    // Get the category from the method getAllCategories in the model.
+                    Collection<Category> categories = m_Model.getAllCategories();
                     // Using to avoid deadlock in the GUI.
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
                             // Call the show message in the view manager.
                             m_View.showMessage(new Message( "Category was added!"));
+                            m_View.showCategories(categories);
                         }
                     });
                 }

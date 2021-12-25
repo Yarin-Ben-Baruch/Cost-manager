@@ -1,16 +1,13 @@
 package il.ac.hit.view;
 
-import il.ac.hit.*;
 import il.ac.hit.model.Category;
 import il.ac.hit.model.Item;
+import il.ac.hit.model.Message;
 import il.ac.hit.viewmodel.IViewModel;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Vector;
@@ -48,11 +45,13 @@ public class ApplicationPageGUI {
     // Category table.
     private JScrollPane categoryScrollPanel;
     private DefaultTableModel categoryTableModel;
+    private LinkedList<Category> categoriesList;
 
     // Creating menu.
     private MenuBar menuBar;
     private Menu menu;
     private String m_Username;
+
 
     /**
      * Ctor of application page GUI.
@@ -109,7 +108,6 @@ public class ApplicationPageGUI {
         menu = new Menu("Options");
     }
 
-
     /**
      * This method Starting the application page.
      */
@@ -141,7 +139,6 @@ public class ApplicationPageGUI {
         // Do click to show the costs and categories in the table
         showItemsButton.doClick();
         showCategoriesButton.doClick();
-
     }
 
     /**
@@ -182,7 +179,7 @@ public class ApplicationPageGUI {
      */
     public void showCategories(Collection<Category> categories) {
         // converting the list of categories to linkedList to get to the 'i' category.
-        LinkedList<Category> categoriesList = (LinkedList<Category>) categories;
+        categoriesList = (LinkedList<Category>) categories;
         // get the size of the table.
         int sizeOfOldTable = categoryTableModel.getRowCount();
 
@@ -281,7 +278,7 @@ public class ApplicationPageGUI {
 
         addCategory.addActionListener(e -> new AddCategoryView(viewModel));
 
-        addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount()));
+        addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount(), categoriesList));
 
         menu.addActionListener(e -> {
             mainFrame.dispose();

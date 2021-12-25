@@ -44,4 +44,12 @@ public class Category {
                 "categoryName='" + categoryName + '\'' +
                 '}';
     }
+
+    public void isCategoryEmpty() throws CostManagerException {
+
+        if(this.categoryName.isEmpty())
+        {
+            throw new CostManagerException("Can't add empty category" );
+        }
+    }
 }

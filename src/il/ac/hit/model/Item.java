@@ -129,4 +129,17 @@ public class Item {
                 " date=" + date +
                 " userName=" + username;
     }
+
+    public void isItemEmpty() throws CostManagerException {
+
+        if(this.name.isEmpty()){
+            throw new CostManagerException("Can't add with empty name");
+        }
+        else if(this.description.isEmpty()){
+            throw new CostManagerException("Can't add with empty description");
+        }
+        else if(this.sum.isEmpty()){
+            throw new CostManagerException("Can't add with empty sum");
+        }
+    }
 }

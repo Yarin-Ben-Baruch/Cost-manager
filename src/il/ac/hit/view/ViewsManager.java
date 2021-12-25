@@ -1,6 +1,6 @@
 package il.ac.hit.view;
 
-import il.ac.hit.Message;
+import il.ac.hit.model.Message;
 import il.ac.hit.model.Category;
 import il.ac.hit.model.Item;
 import il.ac.hit.viewmodel.IViewModel;

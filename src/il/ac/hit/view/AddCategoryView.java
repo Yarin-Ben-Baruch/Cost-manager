@@ -43,6 +43,7 @@ public class AddCategoryView {
     // start the frame
     private void addCategoryStart() {
         // Creating the Add Category Panel.
+        addCategoryFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
         addCategoryFrame.add(addCategoryLabel,BorderLayout.LINE_START);
         addCategoryFrame.add(addCategoryTextField,BorderLayout.CENTER);
         addCategoryFrame.add(addCategoryToDBButton,BorderLayout.PAGE_END);
