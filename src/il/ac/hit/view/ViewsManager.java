@@ -84,6 +84,7 @@ public class ViewsManager implements IView {
      * Inorder to show the message of invalid input that she get from the ViewModel.
      * Make sure you invoke this method during the execution of the AWT Event thread.
      */
+    @Override
     public void showInvalidInputInLogin(){
         loginPage.showInvalidInputInLogin();
     }
@@ -93,6 +94,7 @@ public class ViewsManager implements IView {
      * Inorder to show the message of invalid input that she get from the ViewModel.
      * Make sure you invoke this method during the execution of the AWT Event thread.
      */
+    @Override
     public void showInvalidInputInRegister() {
         loginPage.showInvalidInputInRegister();
     }
@@ -103,6 +105,7 @@ public class ViewsManager implements IView {
      * Set the username that entered to the application.
      * Make sure you invoke this method during the execution of the AWT Event thread.
      */
+    @Override
     public void openApplicationFromLogin() {
         String username =  loginPage.close();
         applicationPage.setUsername(username);
@@ -116,6 +119,7 @@ public class ViewsManager implements IView {
      * The method open the login page again after register.
      * Make sure you invoke this method during the execution of the AWT Event thread.
      */
+    @Override
     public void registerSucceeded() {
         loginPage.openAfterRegister();
     }

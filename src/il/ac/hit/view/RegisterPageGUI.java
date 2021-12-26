@@ -79,7 +79,7 @@ public class RegisterPageGUI {
      * This method show messageDialog if invalid input is entered.
      */
     public void showInvalidInputInRegister() {
-        JOptionPane.showMessageDialog(registerFrame,"Register Failed!");
+        JOptionPane.showMessageDialog(registerFrame,"Register Failed!","Error",JOptionPane.ERROR_MESSAGE);
     }
 
     /**
@@ -142,6 +142,22 @@ public class RegisterPageGUI {
                     passwordField.setEchoChar((char) 0);
                 } else {
                     passwordField.setEchoChar('*');
+                }
+            }
+        });
+
+        termCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (termCheckBox.isSelected()){
+
+                    StringBuilder termMessage = new StringBuilder();
+                    termMessage.append("1. In case of loss of information, the responsibility is on the user.\n");
+                    termMessage.append("2. In case of hacking to the user, the responsibility is on the user.\n");
+                    termMessage.append("3. There is no commitment of app availability on a regular basis.\n");
+                    termMessage.append("4. All information stored in the app, can be used by the owners of the app for self-research.\n");
+
+                    JOptionPane.showMessageDialog(registerFrame, termMessage.toString(), "Terms", JOptionPane.UNDEFINED_CONDITION);
                 }
             }
         });

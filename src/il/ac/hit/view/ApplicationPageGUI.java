@@ -4,7 +4,6 @@ import il.ac.hit.model.Category;
 import il.ac.hit.model.Item;
 import il.ac.hit.model.Message;
 import il.ac.hit.viewmodel.IViewModel;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -215,7 +214,7 @@ public class ApplicationPageGUI {
      * @param message A message-type object that conveys a message to the user
      */
     public void showMessage(Message message) {
-        JOptionPane.showMessageDialog(mainFrame, message.getText());
+        JOptionPane.showMessageDialog(mainFrame, message.getText(),"Error",JOptionPane.ERROR_MESSAGE);
     }
 
     public void setUsername(String userName) {
@@ -260,12 +259,12 @@ public class ApplicationPageGUI {
         buttonsPanel.add(updateItemButton);
         mainFrame.add(buttonsPanel,BorderLayout.NORTH);
 
-        costItemsTable.setBounds(30, 40, 200, 300);
+        //costItemsTable.setBounds(30, 40, 200, 300);
         mainFrame.add(costScrollPanel, BorderLayout.CENTER);
 
         // להקטין את הטבלה
         mainFrame.add(categoryScrollPanel, BorderLayout.CENTER);
-        categoryScrollPanel.setSize( 50, 200);
+        //categoryScrollPanel.setSize( 50, 200);
     }
 
     private void buttonActionListeners() {

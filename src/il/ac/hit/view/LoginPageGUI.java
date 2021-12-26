@@ -59,6 +59,8 @@ public class LoginPageGUI{
 
         // this will center the frame
         loginFrame.setLocationRelativeTo(null);
+        //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        //loginFrame.setLocation(dim.width/2-loginFrame.getSize().width/2, dim.height/2-loginFrame.getSize().height/2);
 
         loginFrame.setContentPane(new JLabel(new ImageIcon("src/images/Login background.jpg")));
 
@@ -97,7 +99,7 @@ public class LoginPageGUI{
      * This method open messageDialog that show invalid input in login.
      */
     public void showInvalidInputInLogin() {
-        JOptionPane.showMessageDialog(loginFrame, "Invalid Username or Password");
+        JOptionPane.showMessageDialog(loginFrame, "Invalid Username or Password","Error",JOptionPane.ERROR_MESSAGE);
     }
     /**
      * This method open messageDialog that show invalid input in Register.
