@@ -74,20 +74,20 @@ public class ApplicationPageGUI {
         buttonsPanel = new JPanel();
 
         // Create all the show Buttons.
-        showItemsButton = new JButton("Show Items");
+        showItemsButton = new JButton("Show costs");
         showCategoriesButton = new JButton("Show Categories");
 
         // Creating the RemoveItem Button.
-        removeItemButton = new JButton("Remove item");
+        removeItemButton = new JButton("Remove cost");
 
         // Creating the AddCategory Button.
         addCategory = new JButton("Add category");
 
         // Creating the UpdateItem Button
-        updateItemButton = new JButton("Update item");
+        updateItemButton = new JButton("Update cost");
 
         // Creating the AddItem Button.
-        addItemButton = new JButton("Add item");
+        addItemButton = new JButton("Add cost");
 
         // Creating the ShowReport Button.
         showReportButton = new JButton("Show detail report");
