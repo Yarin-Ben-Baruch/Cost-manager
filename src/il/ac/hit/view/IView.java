@@ -22,10 +22,16 @@ public interface IView {
     void showCategories(Collection<Category> categories);
 
     /**
-     * A method that presents a message to the system, obtained from the model.
+     * A method that presents a message to the system when error occurred, obtained from the model.
      * @param message A message-type object that conveys a message to the user
      */
-    void showMessage(Message message);
+    void showErrorMessage(Message message);
+
+    /**
+     * A method that presents a message to the system when the action succeed, obtained from the model.
+     * @param message A message-type object that conveys a message to the user
+     */
+    void showSuccessMessage(Message message);
 
     /**
      * A method that initializes each class variable.

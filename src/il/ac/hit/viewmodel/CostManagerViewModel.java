@@ -46,7 +46,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Calling the show message in the view manager.
-                            m_View.showMessage(new Message("Item was added!"));
+                            m_View.showSuccessMessage(new Message("Item was added!"));
                             // Calling the show items to show all the costs in the DB.
                             m_View.showItems(items);
                         }
@@ -57,7 +57,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Calling the show message method in the view manager to show the error.
-                            m_View.showMessage(new Message(e.getMessage()));
+                            m_View.showErrorMessage(new Message(e.getMessage()));
                         }
                     });
                 }
@@ -122,7 +122,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Call the show message in the view manager.
-                            m_View.showMessage(new Message( "Category was added!"));
+                            m_View.showSuccessMessage(new Message( "Category was added!"));
                             m_View.showCategories(categories);
                         }
                     });
@@ -133,7 +133,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Calling the show message method in the view manager to show the error.
-                            m_View.showMessage(new Message(e.getMessage()));
+                            m_View.showErrorMessage(new Message(e.getMessage()));
                         }
                     });
                 }
@@ -163,6 +163,7 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            m_View.showSuccessMessage(new Message( "The item was removed!"));
                             // Calling the show item method in the view manager.
                             m_View.showItems(items);
                         }
@@ -174,7 +175,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Calling the show message method in the view manager to show the error.
-                            m_View.showMessage(new Message(e.getMessage()));
+                            m_View.showErrorMessage(new Message(e.getMessage()));
                         }
                     });
                 }
@@ -206,6 +207,7 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            m_View.showSuccessMessage(new Message( "The item was updated!"));
                             // Calling the show item method in the view to show the costs.
                             m_View.showItems(items);
                         }
@@ -217,7 +219,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Calling the show message method in the view manager to show the error.
-                            m_View.showMessage(new Message(e.getMessage()));
+                            m_View.showErrorMessage(new Message(e.getMessage()));
                         }
                     });
                 }
@@ -245,6 +247,7 @@ public class CostManagerViewModel implements IViewModel {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
+                            m_View.showSuccessMessage(new Message( "The Report is in the cost table!"));
                             // Calling the show item method in the view to show the update items.
                             m_View.showItems(items);
                         }
@@ -255,7 +258,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Calling the show message method in the view manager to show the error.
-                            m_View.showMessage(new Message(e.getMessage()));
+                            m_View.showErrorMessage(new Message(e.getMessage()));
                         }
                     });
                 }
@@ -291,7 +294,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Calling the show message method in the view manager to show the error.
-                            m_View.showMessage(new Message(e.getMessage()));
+                            m_View.showErrorMessage(new Message(e.getMessage()));
                         }
                     });
                 }
@@ -329,7 +332,7 @@ public class CostManagerViewModel implements IViewModel {
                         @Override
                         public void run() {
                             // Calling the show message method in the view manager to show the error.
-                            m_View.showMessage(new Message(e.getMessage()));
+                            m_View.showErrorMessage(new Message(e.getMessage()));
                         }
                     });
                 }

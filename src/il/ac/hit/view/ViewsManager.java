@@ -68,15 +68,27 @@ public class ViewsManager implements IView {
         applicationPage.showCategories(categories);
     }
 
+
     /**
      * This method called the application page showMessage method.
-     * Inorder to show the message that she get from the ViewModel.
+     * Inorder to show the error message that she get from the ViewModel.
      * Make sure you invoke this method during the execution of the AWT Event thread.
      * @param message A message-type object that conveys a message to the user.
      */
     @Override
-    public void showMessage(Message message) {
-        applicationPage.showMessage(message);
+    public void showErrorMessage(Message message) {
+        applicationPage.showErrorMessage(message);
+    }
+
+    /**
+     * This method called the application page showMessage method.
+     * Inorder to show the success message that she get from the ViewModel.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
+     * @param message A message-type object that conveys a message to the user.
+     */
+    @Override
+    public void showSuccessMessage(Message message) {
+        applicationPage.showSuccessMessage(message);
     }
 
     /**

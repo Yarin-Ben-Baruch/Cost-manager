@@ -213,9 +213,19 @@ public class ApplicationPageGUI {
      * Let the user know what action was preformed.
      * @param message A message-type object that conveys a message to the user
      */
-    public void showMessage(Message message) {
+    public void showErrorMessage(Message message) {
         JOptionPane.showMessageDialog(mainFrame, message.getText(),"Error",JOptionPane.ERROR_MESSAGE);
     }
+
+    /**
+     * A method that get message from the ViewModel and put it in the TextView.
+     * Let the user know what action was preformed.
+     * @param message A message-type object that conveys a message to the user
+     */
+    public void showSuccessMessage(Message message) {
+        JOptionPane.showMessageDialog(mainFrame, message.getText(),"Success",JOptionPane.INFORMATION_MESSAGE);
+    }
+
 
     public void setUsername(String userName) {
         this.m_Username = userName;
