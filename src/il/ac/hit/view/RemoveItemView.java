@@ -49,7 +49,6 @@ public class RemoveItemView {
 
         removeItemFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
 
-
         removeItemFrame.add(removeItemCostNumberLabel);
         removeItemFrame.add(removeItemCostNumberTextField);
         removeItemFrame.add(removeItemFromDBButton);

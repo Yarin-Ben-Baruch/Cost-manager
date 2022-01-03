@@ -95,8 +95,7 @@ public class UpdateItemView {
         updateItemToDBButton.setLocation((updateFrame.getWidth()- updateItemToDBButton.getWidth())/2 , updateItemCostNumberTextField.getY() + updateItemCostNumberTextField.getHeight()+30);
 
     }
-
-
+    
     private void setColorToLabel(){
         updateItemColNameLabel.setForeground(Color.WHITE);
         updateItemDataToSetLabel.setForeground(Color.WHITE);

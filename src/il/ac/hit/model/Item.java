@@ -28,7 +28,7 @@ public class Item {
      * @param date On what date was the expenditure.
      * @param userName In which user the spend was made.
      */
-    public Item(int costNumber, String name, String description, String currency, Category category, String sum, Date date, String userName) {
+    public Item(int costNumber, String name, String description, String currency, Category category, String sum, Date date, String userName) throws CostManagerException {
         setCostNumber(costNumber);
         setName(name);
         setDescription(description);
@@ -75,12 +75,23 @@ public class Item {
         this.costNumber = i_CostNumber;
     }
 
-    public void setName(String name)  {
-        this.name = name;
+    public void setName(String name) throws CostManagerException {
+        if(this.name.isEmpty()){
+            throw new CostManagerException("Can't add with empty name");
+        }
+        else {
+            this.name = name;
+        }
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String description) throws CostManagerException {
+
+        if(this.description.isEmpty()){
+            throw new CostManagerException("Can't add with empty description");
+        }
+        else {
+            this.description = description;
+        }
     }
 
     public void setCurrency(String currency) {
@@ -91,8 +102,13 @@ public class Item {
         this.category = category;
     }
 
-    public void setSum(String sum) {
-        this.sum = sum;
+    public void setSum(String sum) throws CostManagerException {
+        if(this.sum.isEmpty()){
+            throw new CostManagerException("Can't add with empty sum");
+        }
+        else {
+            this.sum = sum;
+        }
     }
 
     public void setDate(Date date) {
@@ -128,18 +144,5 @@ public class Item {
                 " category= " + category.getCategoryName() +
                 " date=" + date +
                 " userName=" + username;
-    }
-
-    public void isItemEmpty() throws CostManagerException {
-
-        if(this.name.isEmpty()){
-            throw new CostManagerException("Can't add with empty name");
-        }
-        else if(this.description.isEmpty()){
-            throw new CostManagerException("Can't add with empty description");
-        }
-        else if(this.sum.isEmpty()){
-            throw new CostManagerException("Can't add with empty sum");
-        }
     }
 }

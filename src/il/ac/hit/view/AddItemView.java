@@ -1,6 +1,8 @@
 package il.ac.hit.view;
 
 import il.ac.hit.model.Category;
+import il.ac.hit.model.CostManagerException;
+import il.ac.hit.model.Message;
 import il.ac.hit.viewmodel.IViewModel;
 import il.ac.hit.model.Item;
 import javax.swing.*;
@@ -29,19 +31,24 @@ public class AddItemView {
     private final String userName;
     private int currentTableSize;
     private LinkedList<Category> categoriesList;
+    private final ApplicationPageGUI applicationPageGUI;
 
 
     /**
+     /**
      * Ctor that contain the init and start CategoryView.
      * @param viewModel An object that holds the link to the viewModel class.
      * @param userName Username of the person who is connected to the app.
      * @param currentTableSize The current size of the expense table.
+     * @param categoriesList list of all category that the application have.
+     * @param applicationPageGUI member to the "father" for up alert when create item failed.
      */
-    public AddItemView(IViewModel viewModel, String userName, int currentTableSize, LinkedList<Category> categoriesList) {
+    public AddItemView(IViewModel viewModel, String userName, int currentTableSize, LinkedList<Category> categoriesList, ApplicationPageGUI applicationPageGUI) {
         this.viewModel = viewModel;
         this.userName = userName;
         this.currentTableSize = currentTableSize;
         this.categoriesList = categoriesList;
+        this.applicationPageGUI = applicationPageGUI;
         addItemInit();
         addItemStart();
     }
@@ -140,16 +147,22 @@ public class AddItemView {
         addItemToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Item item = new Item(++currentTableSize,
-                        addItemNameTextField.getText(),
-                        addItemDescribingTextField.getText(),
-                        String.valueOf(addItemCurrencyComboBox.getSelectedItem()),
-                        new Category(String.valueOf(addItemCategoryComboBox.getSelectedItem())),
-                        addItemSumTextField.getText(),
-                        java.sql.Date.valueOf(addItemYearComboBox.getSelectedItem()+"-" +
-                                addItemMonthComboBox.getSelectedItem() + "-" +
-                                addItemDayComboBox.getSelectedItem()),
-                        userName);
+
+                Item item = null;
+                try {
+                    item = new Item(++currentTableSize,
+                            addItemNameTextField.getText(),
+                            addItemDescribingTextField.getText(),
+                            String.valueOf(addItemCurrencyComboBox.getSelectedItem()),
+                            new Category(String.valueOf(addItemCategoryComboBox.getSelectedItem())),
+                            addItemSumTextField.getText(),
+                            java.sql.Date.valueOf(addItemYearComboBox.getSelectedItem()+"-" +
+                                    addItemMonthComboBox.getSelectedItem() + "-" +
+                                    addItemDayComboBox.getSelectedItem()),
+                            userName);
+                } catch (CostManagerException ex) {
+                    applicationPageGUI.showErrorMessage(new Message(ex.getMessage()));
+                }
 
                 viewModel.addItem(item);
                 addItemFrame.dispose();
@@ -191,6 +204,5 @@ public class AddItemView {
             addItemCategoryLabel.setForeground(Color.WHITE);
             addItemSumLabel.setForeground(Color.WHITE);
             addItemDateLabel.setForeground(Color.WHITE);
-
         }
 }

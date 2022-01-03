@@ -74,9 +74,6 @@ public class DetailedReportView {
 
         // this will center the frame
         reportFrame.setLocationRelativeTo(null);
-        // options 2
-        //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        //this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 
         reportFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
 

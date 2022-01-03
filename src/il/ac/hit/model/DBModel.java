@@ -40,8 +40,6 @@ public class DBModel implements IModel {
     public void addItem(Item item) throws CostManagerException {
 
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
-            // if some columns empty
-            item.isItemEmpty();
 
             // if the category is not exists add the category to the categories sql table.
             addCategoryInAddItem(item.getCategory());

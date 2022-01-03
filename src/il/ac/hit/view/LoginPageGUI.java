@@ -59,8 +59,6 @@ public class LoginPageGUI{
 
         // this will center the frame
         loginFrame.setLocationRelativeTo(null);
-//        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-//        loginFrame.setLocation(dim.width/2-loginFrame.getSize().width/2, dim.height/2-loginFrame.getSize().height/2);
 
         loginFrame.setContentPane(new JLabel(new ImageIcon("src/images/Login background.jpg")));
 
