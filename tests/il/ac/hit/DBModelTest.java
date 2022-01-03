@@ -20,11 +20,7 @@ class DBModelTest {
     @BeforeEach
     void setUp() {
 
-        try {
-            test = new DBModel();
-        } catch (CostManagerException e) {
-            e.printStackTrace();
-        }
+        test = new DBModel();
 
     }
 

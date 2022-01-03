@@ -13,23 +13,18 @@ public class Program {
     public static void main(String[] args) {
 
         IModel model;
-        try {
-            model = new DBModel();
-            IViewModel vm = new CostManagerViewModel();
-            IView view = new ViewsManager();
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    view.init();
-                    view.start();
-                }
-            });
-            vm.setModel(model);
-            vm.setView(view);
-            view.setIViewModel(vm);
-        }
-        catch (CostManagerException ex) {
-            ex.printStackTrace();
-        }
+        model = new DBModel();
+        IViewModel vm = new CostManagerViewModel();
+        IView view = new ViewsManager();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                view.init();
+                view.start();
+            }
+        });
+        vm.setModel(model);
+        vm.setView(view);
+        view.setIViewModel(vm);
     }
 }
