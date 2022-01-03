@@ -18,7 +18,7 @@ public class RegisterPageGUI {
 
     // Components of the Register Page Gui.
     private JFrame registerFrame;
-    private JLabel titleLabel, userNameLabel, passwordLabel;
+    private JLabel userNameLabel, passwordLabel;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
     private JCheckBox termCheckBox;
@@ -39,7 +39,6 @@ public class RegisterPageGUI {
     public void init() {
 
         registerFrame = new JFrame("Registration Form");
-        titleLabel = new JLabel("Registration Form");
         userNameLabel = new JLabel("UserName");
         usernameTextField = new JTextField(15);
         passwordLabel = new JLabel("Password");
