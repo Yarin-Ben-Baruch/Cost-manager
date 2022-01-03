@@ -5,7 +5,6 @@ import il.ac.hit.model.Item;
 import il.ac.hit.model.Message;
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Collection;
@@ -124,37 +123,8 @@ public class ApplicationPageGUI {
         buildCostColumnsName();
         // Method that build the category table.
         buildCategoryColumnsName();
-
-        buttonsPanel.setLayout(new GridLayout(1,7));
-        // set the background of the panel transparent.
-        buttonsPanel.setOpaque(false);
-        tablesPanel.setLayout(new GridBagLayout());
-        // set the background of the panel transparent.
-        tablesPanel.setOpaque(false);
-
-
-        buttonsPanel.add(showItemsButton);
-        buttonsPanel.add(showCategoriesButton);
-        buttonsPanel.add(showReportButton);
-        buttonsPanel.add(addItemButton);
-        buttonsPanel.add(addCategory);
-        buttonsPanel.add(removeItemButton);
-        buttonsPanel.add(updateItemButton);
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.9;
-        c.ipady = 80;
-        c.insets = new Insets(10,10,10,10);  //top padding
-        tablesPanel.add(costScrollPanel,c);
-        c.weightx = 0.1;
-        tablesPanel.add(categoryScrollPanel,c);
-
-        mainFrame.add(tablesPanel,BorderLayout.SOUTH);
-        mainFrame.add(buttonsPanel,BorderLayout.NORTH);
-
-
-        // Method that start add the button to the frame.
-        //creatingButtonsStart();
+        // Method that adding the buttons to the frame.
+        addingComponentsStart();
 
         // Setting the menu bar.
         menu.add("Logout");
@@ -170,12 +140,6 @@ public class ApplicationPageGUI {
         // Do click to show the costs and categories in the table
         showItemsButton.doClick();
         showCategoriesButton.doClick();
-    }
-
-
-    private void creatingButtonsStart() {
-        // Creating the Button Panel.
-
     }
 
     /**
@@ -289,6 +253,47 @@ public class ApplicationPageGUI {
         addColToTable.add("Category");
 
         return addColToTable;
+    }
+
+    private void addingComponentsStart() {
+        // setting the layout to be GridLayout.
+        buttonsPanel.setLayout(new GridLayout(1,7));
+        // set the background of the panel transparent.
+        buttonsPanel.setOpaque(false);
+        // setting the layout to be GridBagLayout.
+        tablesPanel.setLayout(new GridBagLayout());
+        // set the background of the panel transparent.
+        tablesPanel.setOpaque(false);
+
+        // adding the buttons to the buttons panel.
+        buttonsPanel.add(showItemsButton);
+        buttonsPanel.add(showCategoriesButton);
+        buttonsPanel.add(showReportButton);
+        buttonsPanel.add(addItemButton);
+        buttonsPanel.add(addCategory);
+        buttonsPanel.add(removeItemButton);
+        buttonsPanel.add(updateItemButton);
+
+        // setting the table size and padding from the window.
+        GridBagConstraints setCompSizeAndPadding = new GridBagConstraints();
+        // setting the table to be horizontal.
+        setCompSizeAndPadding.fill = GridBagConstraints.HORIZONTAL;
+        // setting that the cost table to be 90% of the size.
+        setCompSizeAndPadding.weightx = 0.9;
+        // setting the height of the table when the window shrinks.
+        setCompSizeAndPadding.ipady = 80;
+        // setting padding from the top left bottom and right for 10.
+        setCompSizeAndPadding.insets = new Insets(10,10,10,10);
+        // adding the cost table to the panel with the settings.
+        tablesPanel.add(costScrollPanel,setCompSizeAndPadding);
+        // changing the category table to be 10% of the size.
+        setCompSizeAndPadding.weightx = 0.1;
+        // adding the category table to the panel with the settings.
+        tablesPanel.add(categoryScrollPanel,setCompSizeAndPadding);
+        // adding the tables panel to the frame in the south.
+        mainFrame.add(tablesPanel,BorderLayout.SOUTH);
+        // adding the table panel to the frame in the north.
+        mainFrame.add(buttonsPanel,BorderLayout.NORTH);
     }
 
     private void buttonActionListeners() {
