@@ -5,6 +5,7 @@ import il.ac.hit.model.Item;
 import il.ac.hit.model.Message;
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Collection;
@@ -23,6 +24,7 @@ public class ApplicationPageGUI {
     // frame panel and show buttons.
     private JFrame mainFrame;
     private JPanel buttonsPanel;
+    private JPanel tablesPanel;
     private JButton showItemsButton, showCategoriesButton;
 
     // Show Report Button.
@@ -72,7 +74,7 @@ public class ApplicationPageGUI {
 
         // Create JPanels.
         buttonsPanel = new JPanel();
-
+        tablesPanel = new JPanel();
         // Create all the show Buttons.
         showItemsButton = new JButton("Show costs");
         showCategoriesButton = new JButton("Show Categories");
@@ -111,36 +113,69 @@ public class ApplicationPageGUI {
      * This method Starting the application page.
      */
     public void startApplication() {
-
+        mainFrame.setContentPane(new JLabel(new ImageIcon("src/images/Application background.jpg")));
+        // Setting the MainFrame Layout.
+        mainFrame.setLayout(new BorderLayout());
         // this will center the frame
         mainFrame.setLocationRelativeTo(null);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        mainFrame.setContentPane(new JLabel(new ImageIcon("src/images/Application background.jpg")));
-        // Method that start add the button to the frame.
-        creatingButtonsStart();
         // Method that build the cost table.
         buildCostColumnsName();
         // Method that build the category table.
         buildCategoryColumnsName();
+
+        buttonsPanel.setLayout(new GridLayout(1,7));
+        // set the background of the panel transparent.
+        buttonsPanel.setOpaque(false);
+        tablesPanel.setLayout(new GridBagLayout());
+        // set the background of the panel transparent.
+        tablesPanel.setOpaque(false);
+
+
+        buttonsPanel.add(showItemsButton);
+        buttonsPanel.add(showCategoriesButton);
+        buttonsPanel.add(showReportButton);
+        buttonsPanel.add(addItemButton);
+        buttonsPanel.add(addCategory);
+        buttonsPanel.add(removeItemButton);
+        buttonsPanel.add(updateItemButton);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.9;
+
+        tablesPanel.add(costScrollPanel,c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 0.1;
+        tablesPanel.add(categoryScrollPanel,c);
+
+        mainFrame.add(tablesPanel,BorderLayout.SOUTH);
+        mainFrame.add(buttonsPanel,BorderLayout.NORTH);
+
+
+        // Method that start add the button to the frame.
+        //creatingButtonsStart();
 
         // Setting the menu bar.
         menu.add("Logout");
         menuBar.add(menu);
         mainFrame.setMenuBar(menuBar);
 
-        // Setting the MainFrame Layout.
-        mainFrame.setLayout(new FlowLayout());
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setSize(1000,700);
-        mainFrame.setResizable(true);
-        mainFrame.setVisible(true);
-
         // Setting the action listeners for the buttons
         buttonActionListeners();
+
+        mainFrame.setSize(1000,700);
+        mainFrame.setVisible(true);
 
         // Do click to show the costs and categories in the table
         showItemsButton.doClick();
         showCategoriesButton.doClick();
+    }
+
+
+    private void creatingButtonsStart() {
+        // Creating the Button Panel.
+
     }
 
     /**
@@ -226,7 +261,6 @@ public class ApplicationPageGUI {
         JOptionPane.showMessageDialog(mainFrame, message.getText(),"Success",JOptionPane.INFORMATION_MESSAGE);
     }
 
-
     public void setUsername(String userName) {
         this.m_Username = userName;
     }
@@ -257,26 +291,6 @@ public class ApplicationPageGUI {
         return addColToTable;
     }
 
-    private void creatingButtonsStart() {
-        // Creating the Button Panel.
-        buttonsPanel.setLayout(new FlowLayout());
-        buttonsPanel.add(showItemsButton);
-        buttonsPanel.add(showCategoriesButton);
-        buttonsPanel.add(showReportButton);
-        buttonsPanel.add(addItemButton);
-        buttonsPanel.add(addCategory);
-        buttonsPanel.add(removeItemButton);
-        buttonsPanel.add(updateItemButton);
-        mainFrame.add(buttonsPanel,BorderLayout.NORTH);
-
-        //costItemsTable.setBounds(30, 40, 200, 300);
-        mainFrame.add(costScrollPanel, BorderLayout.CENTER);
-
-        // להקטין את הטבלה
-        mainFrame.add(categoryScrollPanel, BorderLayout.CENTER);
-        //categoryScrollPanel.setSize( 50, 200);
-    }
-
     private void buttonActionListeners() {
         showItemsButton.addActionListener(e -> viewModel.getItems(m_Username));
 
@@ -290,7 +304,7 @@ public class ApplicationPageGUI {
 
         addCategory.addActionListener(e -> new AddCategoryView(viewModel));
 
-        addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount(), categoriesList));
+        addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount(), categoriesList,this));
 
         menu.addActionListener(e -> {
             mainFrame.dispose();
