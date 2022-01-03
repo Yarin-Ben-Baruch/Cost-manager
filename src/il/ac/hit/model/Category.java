@@ -8,12 +8,11 @@ import java.util.Objects;
 public class Category {
 
     private String categoryName;
-
     /**
      * A constructor that updates the i_Category in DB.
      * @param category Category reboot the constructor
      */
-    public Category(String category) {
+    public Category(String category) throws CostManagerException {
         setCategoryName(category);
     }
 
@@ -21,8 +20,14 @@ public class Category {
         return categoryName;
     }
 
-    private void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    private void setCategoryName(String categoryName) throws CostManagerException {
+        if(categoryName.isEmpty())
+        {
+            throw new CostManagerException("Can't add empty category" );
+        }
+        else {
+            this.categoryName = categoryName.toLowerCase();
+        }
     }
 
     @Override
@@ -43,13 +48,5 @@ public class Category {
         return "Category{" +
                 "categoryName='" + categoryName + '\'' +
                 '}';
-    }
-
-    public void isCategoryEmpty() throws CostManagerException {
-
-        if(this.categoryName.isEmpty())
-        {
-            throw new CostManagerException("Can't add empty category" );
-        }
     }
 }

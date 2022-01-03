@@ -307,7 +307,7 @@ public class ApplicationPageGUI {
 
         removeItemButton.addActionListener(e -> new RemoveItemView(viewModel, m_Username));
 
-        addCategory.addActionListener(e -> new AddCategoryView(viewModel));
+        addCategory.addActionListener(e -> new AddCategoryView(viewModel, this));
 
         addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount(), categoriesList,this));
 

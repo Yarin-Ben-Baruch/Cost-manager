@@ -1,6 +1,8 @@
 package il.ac.hit.view;
 
 import il.ac.hit.model.Category;
+import il.ac.hit.model.CostManagerException;
+import il.ac.hit.model.Message;
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
 import java.awt.*;
@@ -20,13 +22,16 @@ public class AddCategoryView {
     private JLabel addCategoryLabel;
     private JButton addCategoryToDBButton;
     private final IViewModel viewModel;
+    private final ApplicationPageGUI applicationPageGUI;
 
     /**
      * Ctor that contain the init and start CategoryView
      * @param m_ViewModel An object that holds the link to the viewModel class
+     * @param applicationPageGUI member to the "father" for up alert when create item failed.
      */
-    public AddCategoryView(IViewModel m_ViewModel) {
+    public AddCategoryView(IViewModel m_ViewModel, ApplicationPageGUI applicationPageGUI) {
         this.viewModel = m_ViewModel;
+        this.applicationPageGUI = applicationPageGUI;
         addCategoryInit();
         addCategoryStart();
     }
@@ -68,7 +73,11 @@ public class AddCategoryView {
         addCategoryToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                viewModel.addNewCategoryIfExists(new Category(addCategoryTextField.getText()));
+                try {
+                    viewModel.addNewCategoryIfExists(new Category(addCategoryTextField.getText()));
+                } catch (CostManagerException ex) {
+                    applicationPageGUI.showErrorMessage(new Message(ex.getMessage()));
+                }
                 addCategoryFrame.dispose();
             }
         });

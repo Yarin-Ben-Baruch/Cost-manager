@@ -15,20 +15,6 @@ public class DBModel implements IModel {
     private final String password = "admin";
     private final String dbUrl = "jdbc:mysql://localhost:8889/admin";
 
-    /**
-     *  Ctor that set the connection and the statement.
-     * @throws CostManagerException A class wraps up the problems of the program.
-     */
-    public DBModel() throws CostManagerException {
-        // Creating an object from the class, we want to know if there is a connection problem,
-        // so the connection remains
-        try (Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
-            System.out.println("Connection success !");
-        }
-        catch (SQLException e) {
-            throw new CostManagerException("Connection failed!",e);
-        }
-    }
 
     /**
      * Add item method adding cost item for the items sql table.
@@ -260,7 +246,6 @@ public class DBModel implements IModel {
     public void addNewCategoryIfExists(Category category) throws CostManagerException {
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
             // if category empty
-            category.isCategoryEmpty();
 
             Collection<Category> allCategories = getAllCategories();
 
@@ -418,7 +403,8 @@ public class DBModel implements IModel {
     private void updateCostNumberAfterRemove(String userName) throws CostManagerException {
 
         try {
-            LinkedList<Item> allItems = (LinkedList)getItems(userName);
+            LinkedList<Item> allItems;
+            allItems = (LinkedList<Item>)getItems(userName);
             String costNumber;
 
             for(int i = 0 ; i < allItems.size(); i++){
