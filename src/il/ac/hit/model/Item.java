@@ -76,7 +76,7 @@ public class Item {
     }
 
     public void setName(String name) throws CostManagerException {
-        if(this.name.isEmpty()){
+        if(name.isEmpty()){
             throw new CostManagerException("Can't add with empty name");
         }
         else {
@@ -86,7 +86,7 @@ public class Item {
 
     public void setDescription(String description) throws CostManagerException {
 
-        if(this.description.isEmpty()){
+        if(description.isEmpty()){
             throw new CostManagerException("Can't add with empty description");
         }
         else {
@@ -103,7 +103,7 @@ public class Item {
     }
 
     public void setSum(String sum) throws CostManagerException {
-        if(this.sum.isEmpty()){
+        if(sum.isEmpty()){
             throw new CostManagerException("Can't add with empty sum");
         }
         else {

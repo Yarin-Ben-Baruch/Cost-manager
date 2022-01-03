@@ -143,9 +143,9 @@ public class ApplicationPageGUI {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.9;
-
+        c.ipady = 80;
+        c.insets = new Insets(10,10,10,10);  //top padding
         tablesPanel.add(costScrollPanel,c);
-        c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.1;
         tablesPanel.add(categoryScrollPanel,c);
 
