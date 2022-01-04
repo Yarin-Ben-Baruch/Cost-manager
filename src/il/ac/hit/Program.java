@@ -1,6 +1,4 @@
 package il.ac.hit;
-
-import il.ac.hit.model.CostManagerException;
 import il.ac.hit.model.DBModel;
 import il.ac.hit.model.IModel;
 import il.ac.hit.view.IView;

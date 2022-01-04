@@ -69,7 +69,7 @@ public class ApplicationPageGUI {
     public void initApplication() {
 
         // Create the Main JFrame
-        mainFrame = new JFrame();
+        mainFrame = new JFrame("Cost Manager");
 
         // Create JPanels.
         buttonsPanel = new JPanel();
@@ -278,16 +278,16 @@ public class ApplicationPageGUI {
         GridBagConstraints setCompSizeAndPadding = new GridBagConstraints();
         // setting the table to be horizontal.
         setCompSizeAndPadding.fill = GridBagConstraints.HORIZONTAL;
-        // setting that the cost table to be 90% of the size.
-        setCompSizeAndPadding.weightx = 0.9;
+        // setting that the cost table to be 80% of the size.
+        setCompSizeAndPadding.weightx = 0.8;
         // setting the height of the table when the window shrinks.
         setCompSizeAndPadding.ipady = 80;
         // setting padding from the top left bottom and right for 10.
         setCompSizeAndPadding.insets = new Insets(10,10,10,10);
         // adding the cost table to the panel with the settings.
         tablesPanel.add(costScrollPanel,setCompSizeAndPadding);
-        // changing the category table to be 10% of the size.
-        setCompSizeAndPadding.weightx = 0.1;
+        // changing the category table to be 20% of the size.
+        setCompSizeAndPadding.weightx = 0.2;
         // adding the category table to the panel with the settings.
         tablesPanel.add(categoryScrollPanel,setCompSizeAndPadding);
         // adding the tables panel to the frame in the south.
