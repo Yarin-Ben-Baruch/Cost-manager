@@ -6,11 +6,8 @@ import il.ac.hit.model.Item;
 import il.ac.hit.model.Message;
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -256,7 +253,7 @@ public class ApplicationPageGUI {
         UIManager.put("Panel.background", Color.BLACK);
         UIManager.put("OptionPane.messageForeground", Color.white);
 
-        JOptionPane.showMessageDialog(mainFrame,currencyMessage.toString(),"Currencies",JOptionPane.UNDEFINED_CONDITION);
+        JOptionPane.showMessageDialog(mainFrame,currencyMessage.toString(),"Currencies", JOptionPane.UNDEFINED_CONDITION);
     }
 
     public void setUsername(String userName) {

@@ -13,7 +13,6 @@ import java.util.concurrent.Executors;
 /**
  * A class that implements the interface of the view model.
  */
-
 public class CostManagerViewModel implements IViewModel {
 
     private IModel m_Model;
