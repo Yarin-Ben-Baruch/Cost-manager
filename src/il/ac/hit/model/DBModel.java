@@ -387,22 +387,26 @@ public class DBModel implements IModel {
 
         try {
             List<Currency> result = new LinkedList<>();
-
+            // Building http client.
             HttpClient client = HttpClient.newBuilder().build();
+            // Building http request.
             HttpRequest request =
                     HttpRequest.
                             newBuilder().
                             uri(URI.create("http://localhost:8080")).
                             GET().
                             build();
+
+            // getting the response from the http request.
             HttpResponse<String> response = client.send(
                     request, HttpResponse.BodyHandlers.ofString());
-
+            // getting the text from the response body.
             String text = response.body();
-
+            // creating the json arr.
             JSONArray arrayList = new JSONArray(text);
             int numOfObjects = arrayList.length();
 
+            // parsing the json to currencies array.
             for(int i = 0; i < numOfObjects; i++) {
                 JSONObject currency = arrayList.getJSONObject(i);
                 result.add(new Currency(currency.getString("symbol"), currency.getDouble("rate")));

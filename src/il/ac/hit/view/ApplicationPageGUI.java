@@ -167,18 +167,19 @@ public class ApplicationPageGUI {
         }
 
         // adding the new items to the cost table.
-        for (int i = 0; i < items.size(); i++) {
+        for(Item item : itemsList){
             Vector<String> addRowToTable = new Vector<>();
 
-            addRowToTable.add(String.valueOf(itemsList.get(i).getCostNumber()));
-            addRowToTable.add(itemsList.get(i).getName());
-            addRowToTable.add(itemsList.get(i).getDescribing());
-            addRowToTable.add(itemsList.get(i).getCurrency());
-            addRowToTable.add(itemsList.get(i).getCategory().getCategoryName());
-            addRowToTable.add(itemsList.get(i).getSum());
-            addRowToTable.add(itemsList.get(i).getDate().toString());
+            addRowToTable.add(String.valueOf(item.getCostNumber()));
+            addRowToTable.add(item.getName());
+            addRowToTable.add(item.getDescribing());
+            addRowToTable.add(item.getCurrency());
+            addRowToTable.add(item.getCategory().getCategoryName());
+            addRowToTable.add(item.getSum());
+            addRowToTable.add(item.getDate().toString());
             costTableModel.addRow(addRowToTable);
         }
+
     }
 
     /**
@@ -198,12 +199,14 @@ public class ApplicationPageGUI {
         }
 
         // adding the new categories to the category table.
-        for (int i = 0; i < categories.size(); i++) {
+        int index = 1;
+        for(Category category : categoriesList){
             Vector<String> addRowToTable = new Vector<>();
-            addRowToTable.add(String.valueOf(i + 1));
-            addRowToTable.add(String.valueOf(categoriesList.get(i).getCategoryName()));
+            addRowToTable.add(String.valueOf(index));
+            addRowToTable.add(String.valueOf(category.getCategoryName()));
 
             categoryTableModel.addRow(addRowToTable);
+            index++;
         }
     }
 
