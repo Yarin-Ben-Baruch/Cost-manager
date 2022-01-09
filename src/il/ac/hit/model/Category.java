@@ -10,7 +10,7 @@ public class Category {
     private String categoryName;
     /**
      * A constructor that updates the i_Category in DB.
-     * @param category Category reboot the constructor
+     * @param category the category name.
      */
     public Category(String category) throws CostManagerException {
         setCategoryName(category);

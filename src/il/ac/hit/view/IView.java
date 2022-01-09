@@ -66,11 +66,15 @@ public interface IView {
     void showInvalidInputInRegister();
 
     /**
+     * A method that displays a message in the application window that show the currencies.
+     */
+    void showCurrencies(List<Currency> currencies);
+
+    /**
      * A method that opens the login window
      */
     void openLogin();
 
     void setIViewModel(IViewModel vm);
 
-    void showCurrencies(List<Currency> currencies);
 }

@@ -236,6 +236,29 @@ public class ApplicationPageGUI {
         JOptionPane.showMessageDialog(mainFrame, message.getText(),"Success",JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * A method that get list from the ViewModel and put it in the TextView.
+     * This method parse the json file and translate it to text.
+     * Let the user know what is the currencies change rates.
+     * @param currencies list of the currencies.
+     */
+    public void showCurrencies(List<Currency> currencies) {
+        // The text from the json will be here.
+        StringBuilder currencyMessage = new StringBuilder();
+
+        // Translate the json to text.
+        for(Currency currency : currencies) {
+            currencyMessage.append(currency.getSymbol()).append(" : ").append(currency.getRate()).append("\n");
+        }
+
+        // Setting the color of the pop window.
+        UIManager.put("OptionPane.background", Color.BLACK);
+        UIManager.put("Panel.background", Color.BLACK);
+        UIManager.put("OptionPane.messageForeground", Color.white);
+
+        JOptionPane.showMessageDialog(mainFrame,currencyMessage.toString(),"Currencies",JOptionPane.UNDEFINED_CONDITION);
+    }
+
     public void setUsername(String userName) {
         this.m_Username = userName;
     }
@@ -332,18 +355,6 @@ public class ApplicationPageGUI {
         });
     }
 
-    public void showCurrencies(List<Currency> currencies) {
-        StringBuilder currencyMessage = new StringBuilder();
 
-        for(Currency currency : currencies) {
-            currencyMessage.append(currency.getSymbol()).append(" : ").append(currency.getRate()).append("\n");
-        }
-
-        UIManager.put("OptionPane.background", Color.BLACK);
-        UIManager.put("Panel.background", Color.BLACK);
-        UIManager.put("OptionPane.messageForeground", Color.white);
-
-        JOptionPane.showMessageDialog(mainFrame,currencyMessage.toString(),"Currencies",JOptionPane.UNDEFINED_CONDITION);
-    }
 
 }

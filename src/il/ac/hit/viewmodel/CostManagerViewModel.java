@@ -378,6 +378,10 @@ public class CostManagerViewModel implements IViewModel {
         });
     }
 
+    /**
+     * A method that takes from the class that implements the model, all
+     * the data stored in localhost and then passes to the class that implements the view the list.
+     */
     @Override
     public void getCurrencies() {
         // Using the thread pull.

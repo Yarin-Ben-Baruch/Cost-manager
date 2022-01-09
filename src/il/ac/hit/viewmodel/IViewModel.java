@@ -81,5 +81,8 @@ public interface IViewModel {
      */
     void isUserExists(User user);
 
+    /**
+     * A method that returns all currencies from the localhost.
+     */
     void getCurrencies();
 }

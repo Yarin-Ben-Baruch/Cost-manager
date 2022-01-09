@@ -138,6 +138,12 @@ public class ViewsManager implements IView {
         loginPage.openAfterRegister();
     }
 
+    /**
+     * This method called the application page showCurrencies method.
+     * Inorder to show the currencies that she get from the ViewModel.
+     * Make sure you invoke this method during the execution of the AWT Event thread.
+     * @param currencies A list of all the currencies from the ViewModel.
+     */
     @Override
     public void showCurrencies(List<Currency> currencies) {
         applicationPage.showCurrencies(currencies);
