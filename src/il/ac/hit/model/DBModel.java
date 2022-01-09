@@ -1,8 +1,16 @@
 package il.ac.hit.model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.sql.*;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * DBModel class contact with the sql DB.
@@ -367,6 +375,40 @@ public class DBModel implements IModel {
             throw new CostManagerException("Unable to pull data from DB");
         }
 
+    }
+
+
+    @Override
+    public List<Currency> getCurrencies() throws CostManagerException {
+
+        try {
+            List<Currency> result = new LinkedList<>();
+
+            HttpClient client = HttpClient.newBuilder().build();
+            HttpRequest request =
+                    HttpRequest.
+                            newBuilder().
+                            uri(URI.create("http://localhost:8080")).
+                            GET().
+                            build();
+            HttpResponse<String> response = client.send(
+                    request, HttpResponse.BodyHandlers.ofString());
+
+            String text = response.body();
+
+            JSONArray arrayList = new JSONArray(text);
+            int numOfObjects = arrayList.length();
+
+            for(int i = 0; i < numOfObjects; i++) {
+                JSONObject currency = arrayList.getJSONObject(i);
+                result.add(new Currency(currency.getString("symbol"), currency.getDouble("rate")));
+            }
+
+            return result;
+        }
+        catch(java.io.IOException | java.lang.InterruptedException e) {
+            throw new CostManagerException("problem with getting currencies exchange rates");
+        }
     }
 
     // This method check if the category is inside the categories list

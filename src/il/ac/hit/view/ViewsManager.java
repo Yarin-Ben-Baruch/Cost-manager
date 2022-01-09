@@ -1,11 +1,13 @@
 package il.ac.hit.view;
 
+import il.ac.hit.model.Currency;
 import il.ac.hit.model.Message;
 import il.ac.hit.model.Category;
 import il.ac.hit.model.Item;
 import il.ac.hit.viewmodel.IViewModel;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * An object that implements the view and manages all the windows in the application.
@@ -134,6 +136,11 @@ public class ViewsManager implements IView {
     @Override
     public void registerSucceeded() {
         loginPage.openAfterRegister();
+    }
+
+    @Override
+    public void showCurrencies(List<Currency> currencies) {
+        applicationPage.showCurrencies(currencies);
     }
 
     @Override

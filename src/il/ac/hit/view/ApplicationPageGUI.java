@@ -1,14 +1,19 @@
 package il.ac.hit.view;
 
 import il.ac.hit.model.Category;
+import il.ac.hit.model.Currency;
 import il.ac.hit.model.Item;
 import il.ac.hit.model.Message;
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -36,6 +41,8 @@ public class ApplicationPageGUI {
     private JButton addCategory;
     // Add Item Button.
     private JButton addItemButton;
+    // Show currencies Button.
+    private JButton showCurrencies;
 
     // Cost table.
     private JTable costItemsTable;
@@ -93,6 +100,10 @@ public class ApplicationPageGUI {
         // Creating the ShowReport Button.
         showReportButton = new JButton("Show detail report");
 
+        // Creating the showCurrencies Button.
+        showCurrencies = new JButton("Show currencies");
+
+
         // Creating the Cost table.
         costTableModel = new DefaultTableModel(buildCostColumnsName(),0);
         costItemsTable = new JTable(costTableModel);
@@ -134,7 +145,7 @@ public class ApplicationPageGUI {
         // Setting the action listeners for the buttons
         buttonActionListeners();
 
-        mainFrame.setSize(1000,700);
+        mainFrame.setSize(1050,700);
         mainFrame.setVisible(true);
 
         // Do click to show the costs and categories in the table
@@ -257,7 +268,7 @@ public class ApplicationPageGUI {
 
     private void addingComponentsStart() {
         // setting the layout to be GridLayout.
-        buttonsPanel.setLayout(new GridLayout(1,7));
+        buttonsPanel.setLayout(new GridLayout(1,8));
         // set the background of the panel transparent.
         buttonsPanel.setOpaque(false);
         // setting the layout to be GridBagLayout.
@@ -273,6 +284,8 @@ public class ApplicationPageGUI {
         buttonsPanel.add(addCategory);
         buttonsPanel.add(removeItemButton);
         buttonsPanel.add(updateItemButton);
+        buttonsPanel.add(showCurrencies);
+
 
         // setting the table size and padding from the window.
         GridBagConstraints setCompSizeAndPadding = new GridBagConstraints();
@@ -311,9 +324,26 @@ public class ApplicationPageGUI {
 
         addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount(), categoriesList,this));
 
+        showCurrencies.addActionListener(e -> viewModel.getCurrencies());
+
         menu.addActionListener(e -> {
             mainFrame.dispose();
             viewsManager.openLogin();
         });
     }
+
+    public void showCurrencies(List<Currency> currencies) {
+        StringBuilder currencyMessage = new StringBuilder();
+
+        for(Currency currency : currencies) {
+            currencyMessage.append(currency.getSymbol()).append(" : ").append(currency.getRate()).append("\n");
+        }
+
+        UIManager.put("OptionPane.background", Color.BLACK);
+        UIManager.put("Panel.background", Color.BLACK);
+        UIManager.put("OptionPane.messageForeground", Color.white);
+
+        JOptionPane.showMessageDialog(mainFrame,currencyMessage.toString(),"Currencies",JOptionPane.UNDEFINED_CONDITION);
+    }
+
 }

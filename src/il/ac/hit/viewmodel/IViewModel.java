@@ -1,12 +1,17 @@
 package il.ac.hit.viewmodel;
 
-import il.ac.hit.model.Category;
-import il.ac.hit.model.IModel;
-import il.ac.hit.model.Item;
-import il.ac.hit.model.User;
+import il.ac.hit.model.*;
 import il.ac.hit.view.IView;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * An interface that includes all the actions between the model and view.
@@ -75,4 +80,6 @@ public interface IViewModel {
      * @param user The username is online.
      */
     void isUserExists(User user);
+
+    void getCurrencies();
 }

@@ -6,6 +6,7 @@ import il.ac.hit.view.IView;
 import javax.swing.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -370,6 +371,38 @@ public class CostManagerViewModel implements IViewModel {
                         public void run() {
                             // Calling the show message method in the view manager to show the error.
                             m_View.showInvalidInputInLogin();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getCurrencies() {
+        // Using the thread pull.
+        m_Service.submit(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    // Calling the get all currencies in the model to get the
+                    // current currencies from the DB.
+                    List<Currency> currencies = m_Model.getCurrencies();
+                    // Using to avoid deadlock in the GUI.
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Calling the show currencies method in the view manager.
+                            m_View.showCurrencies(currencies);
+                        }
+                    });
+                } catch (CostManagerException e) {
+                    // Using to avoid deadlock in the GUI.
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Calling the show message method in the view manager to show the error.
+                            m_View.showErrorMessage(new Message(e.getMessage()));
                         }
                     });
                 }

@@ -2,6 +2,7 @@ package il.ac.hit.model;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * An interface that includes all the actions that can be taken in an expense management app.
@@ -78,5 +79,12 @@ public interface IModel {
      */
     Collection<Category> getAllCategories() throws CostManagerException;
 
-    void checkIfUserExists(User i_User) throws CostManagerException;
+    /**
+     *  This method is checking if the user that she get is inside the DB.
+     * @param user The username is online.
+     * @throws CostManagerException A class wraps up the problems of the program.
+     */
+    void checkIfUserExists(User user) throws CostManagerException;
+
+    List<Currency> getCurrencies() throws CostManagerException;
 }
