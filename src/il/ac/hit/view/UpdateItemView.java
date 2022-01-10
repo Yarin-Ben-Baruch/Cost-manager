@@ -1,5 +1,4 @@
 package il.ac.hit.view;
-
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
 import java.awt.*;
@@ -92,13 +91,19 @@ public class UpdateItemView {
         updateFrame.setSize(400,300);
         updateFrame.setResizable(false);
         updateItemColNameLabel.setBounds(50, 30, 150, 30);
-        updateItemDataToSetLabel.setBounds(updateItemColNameLabel.getX(), updateItemColNameLabel.getY()+50, 100, 30);
-        updateItemCostNumberLabel.setBounds(updateItemColNameLabel.getX(), updateItemDataToSetLabel.getY()+50, 100, 30);
-        updateItemColNameComboBox.setBounds(updateItemColNameLabel.getWidth() + updateItemColNameLabel.getX(), updateItemColNameLabel.getY(), 150, 30);
-        updateItemDataToSetTextField.setBounds(updateItemColNameComboBox.getX(), updateItemDataToSetLabel.getY(), 150, 30);
-        updateItemCostNumberTextField.setBounds(updateItemColNameComboBox.getX(), updateItemCostNumberLabel.getY(), 150, 30);
+        updateItemDataToSetLabel.setBounds(updateItemColNameLabel.getX(), updateItemColNameLabel.getY()+50,
+                100, 30);
+        updateItemCostNumberLabel.setBounds(updateItemColNameLabel.getX(), updateItemDataToSetLabel.getY()+50,
+                100, 30);
+        updateItemColNameComboBox.setBounds(updateItemColNameLabel.getWidth() + updateItemColNameLabel.getX(),
+                updateItemColNameLabel.getY(), 150, 30);
+        updateItemDataToSetTextField.setBounds(updateItemColNameComboBox.getX(), updateItemDataToSetLabel.getY(),
+                150, 30);
+        updateItemCostNumberTextField.setBounds(updateItemColNameComboBox.getX(), updateItemCostNumberLabel.getY(),
+                150, 30);
         updateItemToDBButton.setSize(150,30);
-        updateItemToDBButton.setLocation((updateFrame.getWidth()- updateItemToDBButton.getWidth())/2 , updateItemCostNumberTextField.getY() + updateItemCostNumberTextField.getHeight()+30);
+        updateItemToDBButton.setLocation((updateFrame.getWidth()- updateItemToDBButton.getWidth())/2 ,
+                updateItemCostNumberTextField.getY() + updateItemCostNumberTextField.getHeight()+30);
 
     }
 

@@ -123,18 +123,26 @@ public class DetailedReportView {
     private void setComponentsSizeAndLocation() {
 
         showReportStartDateLabel.setBounds(50, 30, 80, 30);
-        showReportEndDateLabel.setBounds(showReportStartDateLabel.getX(), showReportStartDateLabel.getY()+50, 80, 30);
+        showReportEndDateLabel.setBounds(showReportStartDateLabel.getX(), showReportStartDateLabel.getY()+50,
+                80, 30);
 
-        showReportStartDateDayComboBox.setBounds(showReportStartDateLabel.getWidth() + showReportStartDateLabel.getX(), showReportStartDateLabel.getY(), 100, 30);
-        showReportStartDateMonthComboBox.setBounds(showReportStartDateDayComboBox.getX()+ showReportStartDateDayComboBox.getWidth() , showReportStartDateDayComboBox.getY(), 100, 30);
-        showReportStartDateYearComboBox.setBounds(showReportStartDateMonthComboBox.getX() + showReportStartDateMonthComboBox.getWidth(), showReportStartDateDayComboBox.getY(),100,30);
+        showReportStartDateDayComboBox.setBounds(showReportStartDateLabel.getWidth() + showReportStartDateLabel.getX(),
+                showReportStartDateLabel.getY(), 100, 30);
+        showReportStartDateMonthComboBox.setBounds(showReportStartDateDayComboBox.getX() +
+                showReportStartDateDayComboBox.getWidth() , showReportStartDateDayComboBox.getY(), 100, 30);
+        showReportStartDateYearComboBox.setBounds(showReportStartDateMonthComboBox.getX() +
+                showReportStartDateMonthComboBox.getWidth(), showReportStartDateDayComboBox.getY(),100,30);
 
-        showReportEndDateDayComboBox.setBounds(showReportStartDateDayComboBox.getX(), showReportEndDateLabel.getY(), 100, 30);
-        showReportEndDateMonthComboBox.setBounds(showReportStartDateMonthComboBox.getX(), showReportEndDateLabel.getY(), 100, 30);
-        showReportEndDateYearComboBox.setBounds(showReportStartDateYearComboBox.getX(), showReportEndDateLabel.getY(),100,30);
+        showReportEndDateDayComboBox.setBounds(showReportStartDateDayComboBox.getX(),
+                showReportEndDateLabel.getY(), 100, 30);
+        showReportEndDateMonthComboBox.setBounds(showReportStartDateMonthComboBox.getX(),
+                showReportEndDateLabel.getY(), 100, 30);
+        showReportEndDateYearComboBox.setBounds(showReportStartDateYearComboBox.getX(),
+                showReportEndDateLabel.getY(),100,30);
 
         showReportActionButton.setSize(150,30);
-        showReportActionButton.setLocation((reportFrame.getWidth()- showReportActionButton.getWidth())/2 , showReportEndDateMonthComboBox.getY() + showReportEndDateMonthComboBox.getHeight()+30);
+        showReportActionButton.setLocation((reportFrame.getWidth()- showReportActionButton.getWidth())/2 ,
+                showReportEndDateMonthComboBox.getY() + showReportEndDateMonthComboBox.getHeight()+30);
 
     }
 

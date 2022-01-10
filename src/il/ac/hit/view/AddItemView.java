@@ -1,5 +1,4 @@
 package il.ac.hit.view;
-
 import il.ac.hit.model.Category;
 import il.ac.hit.model.CostManagerException;
 import il.ac.hit.model.Message;
@@ -16,7 +15,6 @@ import java.util.LinkedList;
  * When you press the button from the app, the object opens.
  */
 public class AddItemView {
-
     // Add Item Button, TextField, Label and Submit Action.
     private JFrame addItemFrame;
     private JTextField addItemNameTextField, addItemDescribingTextField;
@@ -186,20 +184,25 @@ public class AddItemView {
         addItemDescribingLabel.setBounds(addItemNameLabel.getX(), addItemDateLabel.getY() + 50, 80, 30);
 
         // Set bounds to item name and item sum.
-        addItemNameTextField.setBounds(addItemNameLabel.getWidth() + addItemNameLabel.getX(), addItemNameLabel.getY(), 150, 30);
+        addItemNameTextField.setBounds(addItemNameLabel.getWidth() + addItemNameLabel.getX(), addItemNameLabel.getY(),
+                150, 30);
         addItemCurrencyComboBox.setBounds(addItemNameTextField.getX(), addItemCurrencyLabel.getY(), 150, 30);
         addItemCategoryComboBox.setBounds(addItemNameTextField.getX(), addItemCategoryLabel.getY(), 150, 30);
         addItemSumTextField.setBounds(addItemNameTextField.getX(), addItemSumLabel.getY(), 100, 30);
 
         // Set bounds to Date ComboBox.
-        addItemDayComboBox.setBounds(addItemSumTextField.getX()+ addItemDayComboBox.getWidth(), addItemDateLabel.getY(), 100, 30);
-        addItemMonthComboBox.setBounds(addItemDayComboBox.getX()+ addItemDayComboBox.getWidth(), addItemDateLabel.getY(), 100, 30);
-        addItemYearComboBox.setBounds(addItemMonthComboBox.getX()+ addItemMonthComboBox.getWidth(), addItemDateLabel.getY(), 100, 30);
+        addItemDayComboBox.setBounds(addItemSumTextField.getX()+ addItemDayComboBox.getWidth(), addItemDateLabel.getY(),
+                100, 30);
+        addItemMonthComboBox.setBounds(addItemDayComboBox.getX()+ addItemDayComboBox.getWidth(), addItemDateLabel.getY(),
+                100, 30);
+        addItemYearComboBox.setBounds(addItemMonthComboBox.getX()+ addItemMonthComboBox.getWidth(), addItemDateLabel.getY(),
+                100, 30);
 
         addItemDescribingTextField.setBounds(addItemNameTextField.getX(), addItemDescribingLabel.getY(), 150, 30);
 
         addItemToDBButton.setSize(150,30);
-        addItemToDBButton.setLocation((addItemFrame.getWidth()- addItemToDBButton.getWidth())/2 , addItemDescribingTextField.getY() + addItemDescribingTextField.getHeight()+30);
+        addItemToDBButton.setLocation((addItemFrame.getWidth()- addItemToDBButton.getWidth())/2 ,
+                addItemDescribingTextField.getY() + addItemDescribingTextField.getHeight()+30);
 
     }
 

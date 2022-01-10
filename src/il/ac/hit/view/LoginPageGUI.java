@@ -1,5 +1,4 @@
 package il.ac.hit.view;
-
 import il.ac.hit.model.User;
 import il.ac.hit.viewmodel.IViewModel;
 import javax.swing.*;
@@ -97,7 +96,8 @@ public class LoginPageGUI{
      * This method open messageDialog that show invalid input in login.
      */
     public void showInvalidInputInLogin() {
-        JOptionPane.showMessageDialog(loginFrame, "Invalid Username or Password","Error",JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(loginFrame, "Invalid Username or Password","Error",
+                JOptionPane.ERROR_MESSAGE);
     }
     /**
      * This method open messageDialog that show invalid input in Register.

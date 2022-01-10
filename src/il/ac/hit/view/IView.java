@@ -1,5 +1,4 @@
 package il.ac.hit.view;
-
 import il.ac.hit.model.Category;
 import il.ac.hit.model.Currency;
 import il.ac.hit.model.Item;

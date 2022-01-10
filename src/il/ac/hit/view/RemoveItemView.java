@@ -1,7 +1,5 @@
 package il.ac.hit.view;
-
 import il.ac.hit.viewmodel.IViewModel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -77,9 +75,11 @@ public class RemoveItemView {
         removeItemFrame.setSize(400,200);
         removeItemFrame.setResizable(false);
         removeItemCostNumberLabel.setBounds(50, 30, 100, 30);
-        removeItemCostNumberTextField.setBounds(removeItemCostNumberLabel.getWidth() + removeItemCostNumberLabel.getX(), removeItemCostNumberLabel.getY(), 150, 30);
+        removeItemCostNumberTextField.setBounds(removeItemCostNumberLabel.getWidth() +
+                removeItemCostNumberLabel.getX(), removeItemCostNumberLabel.getY(), 150, 30);
         removeItemFromDBButton.setSize(200,30);
-        removeItemFromDBButton.setLocation((removeItemFrame.getWidth()- removeItemFromDBButton.getWidth())/2 , removeItemCostNumberTextField.getY() + removeItemCostNumberTextField.getHeight()+30);
+        removeItemFromDBButton.setLocation((removeItemFrame.getWidth()- removeItemFromDBButton.getWidth())/2 ,
+                removeItemCostNumberTextField.getY() + removeItemCostNumberTextField.getHeight()+30);
 
     }
 }

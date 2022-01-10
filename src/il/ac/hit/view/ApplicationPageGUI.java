@@ -1,5 +1,4 @@
 package il.ac.hit.view;
-
 import il.ac.hit.model.Category;
 import il.ac.hit.model.Currency;
 import il.ac.hit.model.Item;
@@ -355,7 +354,8 @@ public class ApplicationPageGUI {
         addCategory.addActionListener(e -> new AddCategoryView(viewModel, this));
 
         // Action lister for the add item.
-        addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount(), categoriesList,this));
+        addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount(),
+                categoriesList,this));
 
         // Action lister for the get current currencies.
         showCurrencies.addActionListener(e -> viewModel.getCurrencies());

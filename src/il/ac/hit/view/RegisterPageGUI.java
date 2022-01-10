@@ -1,8 +1,6 @@
 package il.ac.hit.view;
-
 import il.ac.hit.model.User;
 import il.ac.hit.viewmodel.IViewModel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -157,9 +155,11 @@ public class RegisterPageGUI {
                     termMessage.append("1. In case of loss of information, the responsibility is on the user.\n");
                     termMessage.append("2. In case of hacking to the user, the responsibility is on the user.\n");
                     termMessage.append("3. There is no commitment of app availability on a regular basis.\n");
-                    termMessage.append("4. All information stored in the app, can be used by the owners of the app for self-research.\n");
+                    termMessage.append(
+                     "4. All information stored in the app, can be used by the owners of the app for self-research.\n");
 
-                    JOptionPane.showMessageDialog(registerFrame, termMessage.toString(), "Terms", JOptionPane.UNDEFINED_CONDITION);
+                    JOptionPane.showMessageDialog(registerFrame, termMessage.toString(), "Terms",
+                            JOptionPane.UNDEFINED_CONDITION);
                 }
             }
         });
@@ -188,8 +188,6 @@ public class RegisterPageGUI {
         registerFrame.add(termCheckBox);
         registerFrame.add(submitButton);
         registerFrame.add(resetJButton);
-
-
     }
 
     // Set colors.
