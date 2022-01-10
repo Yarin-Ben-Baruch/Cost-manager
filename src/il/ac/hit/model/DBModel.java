@@ -16,8 +16,12 @@ import java.util.List;
  * DBModel class contact with the sql DB.
  * This class implements the IModel.
  */
-
 public class DBModel implements IModel {
+
+    /*
+    This class implements the DAO design pattern.
+
+     */
 
     private final String user = "admin";
     private final String password = "admin";
@@ -401,7 +405,7 @@ public class DBModel implements IModel {
             HttpResponse<String> response = client.send(
                     request, HttpResponse.BodyHandlers.ofString());
             // getting the text from the response body.
-            String text = response.body();
+            String text = response.body(); // [{"symbol":"usd","rate":3.1},{"symbol":"cad","rate":3.21},{"symbol":"euro","rate":3.6}]
             // creating the json arr.
             JSONArray arrayList = new JSONArray(text);
             int numOfObjects = arrayList.length();

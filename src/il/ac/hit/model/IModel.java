@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * An interface that includes all the actions that can be taken in an expense management app.
  */
-
 public interface IModel {
     /**
      * Add new cost i_Item to the items sql table.

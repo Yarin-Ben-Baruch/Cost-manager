@@ -3,7 +3,6 @@ package il.ac.hit.model;
 /**
  * A class that wraps all the existing problems in the model.
  */
-
 public class CostManagerException extends Exception {
 
     /**
