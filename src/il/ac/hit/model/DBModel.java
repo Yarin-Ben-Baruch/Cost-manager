@@ -134,7 +134,11 @@ public class DBModel implements IModel {
 
             PreparedStatement preparedStatement;
             StringBuilder queryToExecute = new StringBuilder();
-            queryToExecute.append("UPDATE Items SET ").append(nameColToUpdate).append(" = ").append("'").append(dataToSet).append("'").append(" WHERE costNumber = ").append(currentCostNumber).append(" and userName = ").append("'").append(userName).append("'");
+            queryToExecute.append("UPDATE Items SET ").append(nameColToUpdate)
+                    .append(" = ").append("'").append(dataToSet).append("'")
+                    .append(" WHERE costNumber = ").append(currentCostNumber)
+                    .append(" and userName = ").append("'").append(userName)
+                    .append("'");
 
             preparedStatement = connection.prepareStatement(queryToExecute.toString());
             // Check that the update execute properly.
