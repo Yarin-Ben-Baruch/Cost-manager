@@ -38,6 +38,7 @@ public class RegisterPageGUI {
      */
     public void init() {
 
+        // Create new fields.
         registerFrame = new JFrame("Registration Form");
         userNameLabel = new JLabel("UserName");
         usernameTextField = new JTextField(15);
@@ -89,6 +90,7 @@ public class RegisterPageGUI {
         registerFrame.dispose();
     }
 
+    // Add locations.
     private void registerSetLocations(){
         //titleLabel.setLocation(150, 30);
         userNameLabel.setLocation(100, 100);
@@ -101,6 +103,7 @@ public class RegisterPageGUI {
         resetJButton.setLocation(270, 300);
     }
 
+    // Action listeners.
     private void addRegisterActionEvent() {
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -149,7 +152,7 @@ public class RegisterPageGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (termCheckBox.isSelected()){
-
+                    // Up the terms.
                     StringBuilder termMessage = new StringBuilder();
                     termMessage.append("1. In case of loss of information, the responsibility is on the user.\n");
                     termMessage.append("2. In case of hacking to the user, the responsibility is on the user.\n");
@@ -162,8 +165,8 @@ public class RegisterPageGUI {
         });
     }
 
+    // Set sizes.
     private void registerSetSize(){
-        //titleLabel.setSize(300, 30);
         userNameLabel.setSize(100, 20);
         usernameTextField.setSize(190, 20);
         passwordLabel.setSize(100, 20);
@@ -174,9 +177,9 @@ public class RegisterPageGUI {
         resetJButton.setSize(100, 20);
     }
 
+    // Add components to the frame.
     private void registerAddToFrame(){
         setColorToLabel();
-        //registerFrame.add(titleLabel);
         registerFrame.add(userNameLabel);
         registerFrame.add(usernameTextField);
         registerFrame.add(passwordLabel);
@@ -189,6 +192,7 @@ public class RegisterPageGUI {
 
     }
 
+    // Set colors.
     private void setColorToLabel(){
         userNameLabel.setForeground(Color.WHITE);
         passwordLabel.setForeground(Color.WHITE);
@@ -196,6 +200,7 @@ public class RegisterPageGUI {
         termCheckBox.setForeground(Color.WHITE);
     }
 
+    // Set fonts.
     private void registerSetFont(){
         //titleLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         userNameLabel.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -206,7 +211,6 @@ public class RegisterPageGUI {
         submitButton.setFont(new Font("Arial", Font.PLAIN, 15));
         resetJButton.setFont(new Font("Arial", Font.PLAIN, 15));
     }
-
 }
 
 

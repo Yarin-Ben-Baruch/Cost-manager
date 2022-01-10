@@ -39,43 +39,77 @@ public class Item {
         setUsername(userName);
     }
 
+    /**
+     * basic getter.
+     * @return int(costNumber).
+     */
     public int getCostNumber() {
         return costNumber;
     }
 
+    /**
+     * basic getter.
+     * @return String(name).
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * basic getter.
+     * @return String(description).
+     */
     public String getDescribing() {
         return description;
     }
 
+    /**
+     * basic getter.
+     * @return String(currency).
+     */
     public String getCurrency() {
         return currency;
     }
 
+    /**
+     * basic getter.
+     * @return Category(category).
+     */
     public Category getCategory() {
         return category;
     }
 
+    /**
+     * basic getter.
+     * @return String(sum).
+     */
     public String getSum() {
         return sum;
     }
 
+    /**
+     * basic getter.
+     * @return Date(date).
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * basic getter.
+     * @return String(username).
+     */
     public String getUserName() {
         return username;
     }
 
+    // Basic Setter.
     private void setCostNumber(int i_CostNumber) {
         this.costNumber = i_CostNumber;
     }
 
-    public void setName(String name) throws CostManagerException {
+    // Setter that checks if the figure is empty, extra and also throws.
+    private void setName(String name) throws CostManagerException {
         if(name.isEmpty()){
             throw new CostManagerException("Can't add with empty name");
         }
@@ -84,7 +118,8 @@ public class Item {
         }
     }
 
-    public void setDescription(String description) throws CostManagerException {
+    // Setter that checks if the figure is empty, extra and also throws.
+    private void setDescription(String description) throws CostManagerException {
 
         if(description.isEmpty()){
             throw new CostManagerException("Can't add with empty description");
@@ -94,15 +129,18 @@ public class Item {
         }
     }
 
-    public void setCurrency(String currency) {
+    // Basic Setter.
+    private void setCurrency(String currency) {
         this.currency = currency;
     }
 
-    public void setCategory(Category category) {
+    // Basic Setter.
+    private void setCategory(Category category) {
         this.category = category;
     }
 
-    public void setSum(String sum) throws CostManagerException {
+    // Setter that checks if the figure is empty, extra and also throws.
+    private void setSum(String sum) throws CostManagerException {
         if(sum.isEmpty()){
             throw new CostManagerException("Can't add with empty sum");
         }
@@ -111,19 +149,30 @@ public class Item {
         }
     }
 
-    public void setDate(Date date) {
+    // Basic Setter.
+    private void setDate(Date date) {
         this.date = date;
     }
 
-    public void setUsername(String username) {
+    // Basic Setter.
+    private void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * basic override to hashCode.
+     * @return Objects.hash(costNumber, name, description, currency, category, sum, date, username).
+     */
     @Override
     public int hashCode() {
         return Objects.hash(costNumber, name, description, currency, category, sum, date, username);
     }
 
+    /**
+     * override to equals, base on Item.
+     * @param o is Item object.
+     * @return equals or not.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -132,17 +181,5 @@ public class Item {
         return costNumber == item.costNumber && Objects.equals(name, item.name) && Objects.equals(description, item.description) &&
                 Objects.equals(currency, item.currency) && Objects.equals(category, item.category) && Objects.equals(sum, item.sum) &&
                 Objects.equals(date, item.date) && Objects.equals(username, item.username);
-    }
-
-    @Override
-    public String toString() {
-        return costNumber +
-                "." + name +
-                "\ndescribing: " + description +
-                "\ncost: " + sum +
-                " " + currency +
-                " category= " + category.getCategoryName() +
-                " date=" + date +
-                " userName=" + username;
     }
 }

@@ -33,6 +33,7 @@ public class RemoveItemView {
         removeItemStart();
     }
 
+    // Create new fields.
     private void removeItemInit() {
         removeItemFrame = new JFrame();
         removeItemFromDBButton = new JButton("Remove Item from the list");
@@ -40,15 +41,19 @@ public class RemoveItemView {
         removeItemCostNumberTextField = new JTextField();
     }
 
+    // Start frame.
     private void removeItemStart() {
 
+        // Add a color.
         removeItemCostNumberLabel.setForeground(Color.WHITE);
 
         // this will center the frame
         removeItemFrame.setLocationRelativeTo(null);
 
+        // Add image background.
         removeItemFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
 
+        // add components to the frame.
         removeItemFrame.add(removeItemCostNumberLabel);
         removeItemFrame.add(removeItemCostNumberTextField);
         removeItemFrame.add(removeItemFromDBButton);
@@ -67,6 +72,7 @@ public class RemoveItemView {
         });
     }
 
+    // Set size and locations.
     private void setComponentsSizeAndLocations() {
         removeItemFrame.setSize(400,200);
         removeItemFrame.setResizable(false);
@@ -76,5 +82,4 @@ public class RemoveItemView {
         removeItemFromDBButton.setLocation((removeItemFrame.getWidth()- removeItemFromDBButton.getWidth())/2 , removeItemCostNumberTextField.getY() + removeItemCostNumberTextField.getHeight()+30);
 
     }
-
 }

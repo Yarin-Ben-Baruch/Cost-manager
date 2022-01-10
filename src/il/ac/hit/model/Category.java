@@ -16,6 +16,10 @@ public class Category {
         setCategoryName(category);
     }
 
+    /**
+     * basic getter.
+     * @return string ( categoryName ).
+     */
     public String getCategoryName() {
         return categoryName;
     }
@@ -30,6 +34,11 @@ public class Category {
         }
     }
 
+    /**
+     * override to equals, base on categoryName.
+     * @param o is Category object.
+     * @return equals or not.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,15 +47,12 @@ public class Category {
         return Objects.equals(categoryName, category.categoryName);
     }
 
+    /**
+     * basic override to hashCode.
+     * @return Objects.hash(categoryName).
+     */
     @Override
     public int hashCode() {
         return Objects.hash(categoryName);
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "categoryName='" + categoryName + '\'' +
-                '}';
     }
 }

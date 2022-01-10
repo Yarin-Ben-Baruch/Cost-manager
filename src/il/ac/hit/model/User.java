@@ -20,10 +20,18 @@ public class User {
         setPassword(password);
     }
 
+    /**
+     * basic getter.
+     * @return String(userName).
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * basic getter.
+     * @return String(password).
+     */
     public String getPassword() {
         return password;
     }
@@ -36,6 +44,11 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * override to equals, base on User.
+     * @param o is User object.
+     * @return equals or not.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,16 +57,12 @@ public class User {
         return Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
     }
 
+    /**
+     * basic override to hashCode.
+     * @return Objects.hash(userName, password).
+     */
     @Override
     public int hashCode() {
         return Objects.hash(userName, password);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

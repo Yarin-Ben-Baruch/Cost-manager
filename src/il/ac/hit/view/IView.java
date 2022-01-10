@@ -78,6 +78,9 @@ public interface IView {
      */
     void openLogin();
 
+    /**
+     * a basic setter.
+     * @param vm save the view model as a member.
+     */
     void setIViewModel(IViewModel vm);
-
 }

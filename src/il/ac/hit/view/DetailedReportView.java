@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
  */
 public class DetailedReportView {
 
+    //Fields.
     private final IViewModel viewModel;
     private final String userName;
     private JFrame reportFrame;
@@ -42,30 +43,34 @@ public class DetailedReportView {
         String[] months;
         String[] years;
 
+        //Initializes the days.
         days = new String[31];
         for (int i =0 ; i<31 ; i++) {
             days[i] = String.valueOf(i+1);
         }
+
+        //Initializes the months.
         months = new String[12];
         for (int i =0 ; i<12 ; i++) {
             months[i] = String.valueOf(i+1);
         }
+
+        //Initializes the years.
         years = new String[16];
         for (int i =0 ; i <16 ; i++) {
             years[i] = String.valueOf(i+2010);
         }
 
+        // Creates new fields.
         reportFrame = new JFrame();
         showReportStartDateLabel = new JLabel("Start date:");
         showReportStartDateDayComboBox = new JComboBox<>(days);
         showReportStartDateMonthComboBox = new JComboBox<>(months);
         showReportStartDateYearComboBox = new JComboBox<>(years);
-
         showReportEndDateLabel = new JLabel("End date:");
         showReportEndDateDayComboBox = new JComboBox<>(days);
         showReportEndDateMonthComboBox = new JComboBox<>(months);
         showReportEndDateYearComboBox = new JComboBox<>(years);
-
         showReportActionButton = new JButton("Show the report");
     }
 
@@ -77,6 +82,7 @@ public class DetailedReportView {
 
         reportFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
 
+        // Add to the frame.
         reportFrame.add(showReportStartDateLabel);
         reportFrame.add(showReportStartDateDayComboBox);
         reportFrame.add(showReportStartDateMonthComboBox);
@@ -94,10 +100,11 @@ public class DetailedReportView {
         setComponentsSizeAndLocation();
         reportFrame.setVisible(true);
 
-
+        // Action listener.
         showReportActionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // show the report.
                 viewModel.getDetailedReport(
                         java.sql.Date.valueOf(showReportStartDateYearComboBox.getSelectedItem()+ "-" +
                                 showReportStartDateMonthComboBox.getSelectedItem() +
@@ -112,6 +119,7 @@ public class DetailedReportView {
         });
     }
 
+    // Set bounds and sizes.
     private void setComponentsSizeAndLocation() {
 
         showReportStartDateLabel.setBounds(50, 30, 80, 30);
@@ -130,6 +138,7 @@ public class DetailedReportView {
 
     }
 
+    // Set colors.
     private void setColorToLabel(){
         showReportStartDateLabel.setForeground(Color.WHITE);
         showReportEndDateLabel.setForeground(Color.WHITE);

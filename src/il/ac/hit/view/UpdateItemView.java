@@ -32,10 +32,12 @@ public class UpdateItemView {
         updateItemStart();
     }
 
+    // Init method.
     private void updateItemInit() {
         String[] columnsToUpdate;
         columnsToUpdate = new String[]{"name", "description", "category", "sum"};
 
+        // Create new fields.
         updateItemColNameLabel = new JLabel("Col name to change:");
         updateItemColNameComboBox = new JComboBox<>(columnsToUpdate);
         updateItemDataToSetLabel = new JLabel("Data to set:");
@@ -46,6 +48,7 @@ public class UpdateItemView {
         updateFrame = new JFrame();
     }
 
+    // Start method.
     private void updateItemStart() {
 
         setColorToLabel();
@@ -53,8 +56,10 @@ public class UpdateItemView {
         // this will center the frame
         updateFrame.setLocationRelativeTo(null);
 
+        // Add image background.
         updateFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
 
+        // Add components to the frame.
         updateFrame.add(updateItemColNameLabel);
         updateFrame.add(updateItemColNameComboBox);
         updateFrame.add(updateItemDataToSetLabel);
@@ -76,11 +81,13 @@ public class UpdateItemView {
                         updateItemCostNumberTextField.getText(),
                         userName);
 
+                // Close the frame.
                 updateFrame.dispose();
             }
         });
     }
 
+    // Set size and bounds.
     private void setComponentsSizeAndLocation() {
         updateFrame.setSize(400,300);
         updateFrame.setResizable(false);
@@ -94,11 +101,11 @@ public class UpdateItemView {
         updateItemToDBButton.setLocation((updateFrame.getWidth()- updateItemToDBButton.getWidth())/2 , updateItemCostNumberTextField.getY() + updateItemCostNumberTextField.getHeight()+30);
 
     }
-    
+
+    // Set colors.
     private void setColorToLabel(){
         updateItemColNameLabel.setForeground(Color.WHITE);
         updateItemDataToSetLabel.setForeground(Color.WHITE);
         updateItemCostNumberLabel.setForeground(Color.WHITE);
-
     }
 }

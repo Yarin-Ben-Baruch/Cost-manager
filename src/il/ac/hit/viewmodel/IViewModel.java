@@ -10,7 +10,16 @@ import java.sql.Date;
  */
 public interface IViewModel {
 
+    /**
+     * basic set
+     * @param view save as a member class.
+     */
     void setView(IView view);
+
+    /**
+     * basic set
+     * @param model save as a member class.
+     */
     void setModel(IModel model);
 
     /**

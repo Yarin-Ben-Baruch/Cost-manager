@@ -35,7 +35,7 @@ public class AddCategoryView {
         addCategoryStart();
     }
 
-    // init the frame
+    // Init the frame.
     private void addCategoryInit() {
         // Creating the AddCategory Action.
         addCategoryFrame = new JFrame();
@@ -44,15 +44,16 @@ public class AddCategoryView {
         addCategoryToDBButton = new JButton("Add category to the list");
     }
 
-    // start the frame
+    // Start the frame.
     private void addCategoryStart() {
         // Creating the Add Category Panel.
         addCategoryLabel.setForeground(Color.WHITE);
 
-        // this will center the frame
+        // This will center the frame.
         addCategoryFrame.setLocationRelativeTo(null);
-
+        // Add photo background.
         addCategoryFrame.setContentPane(new JLabel(new ImageIcon("src/images/General background.jpg")));
+        // Add to frame.
         addCategoryFrame.add(addCategoryLabel,BorderLayout.LINE_START);
         addCategoryFrame.add(addCategoryTextField,BorderLayout.CENTER);
         addCategoryFrame.add(addCategoryToDBButton,BorderLayout.PAGE_END);
@@ -62,6 +63,7 @@ public class AddCategoryView {
         addCategoryFrame.setSize(400,150);
         addCategoryFrame.setResizable(false);
 
+        // Set size and Bounds.
         addCategoryLabel.setBounds(65, 20, 100, 30);
         addCategoryTextField.setBounds(addCategoryLabel.getX()+ addCategoryLabel.getWidth()+10, addCategoryLabel.getY(), 160, 30);
         addCategoryToDBButton.setSize(250, 30);
@@ -69,17 +71,19 @@ public class AddCategoryView {
 
         addCategoryFrame.setVisible(true);
 
+        // Action listener.
         addCategoryToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    // Check is category exist.
                     viewModel.addNewCategoryIfExists(new Category(addCategoryTextField.getText()));
                 } catch (CostManagerException ex) {
                     applicationPageGUI.showErrorMessage(new Message(ex.getMessage()));
                 }
+                // dispose frame.
                 addCategoryFrame.dispose();
             }
         });
     }
-
 }

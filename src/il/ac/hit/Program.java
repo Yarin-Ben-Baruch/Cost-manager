@@ -11,9 +11,11 @@ public class Program {
     public static void main(String[] args) {
 
         IModel model;
-        model = new DBModel();
+        // get object from DBModel (Singleton).
+        model = DBModel.getObject();
         IViewModel vm = new CostManagerViewModel();
         IView view = new ViewsManager();
+        // Make sure you invoke this class during the execution of the AWT Event thread.
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -21,6 +23,7 @@ public class Program {
                 view.start();
             }
         });
+        // MVVM.
         vm.setModel(model);
         vm.setView(view);
         view.setIViewModel(vm);

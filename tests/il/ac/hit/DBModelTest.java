@@ -20,8 +20,7 @@ class DBModelTest {
     @BeforeEach
     void setUp() {
 
-        test = new DBModel();
-
+        test = DBModel.getObject();
     }
 
     @AfterEach

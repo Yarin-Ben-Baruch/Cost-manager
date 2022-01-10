@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class ViewsManager implements IView {
 
+    // fields.
     private LoginPageGUI loginPage;
     private ApplicationPageGUI applicationPage;
     private IViewModel viewModel;

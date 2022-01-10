@@ -168,7 +168,7 @@ public class ApplicationPageGUI {
         // adding the new items to the cost table.
         for(Item item : itemsList){
             Vector<String> addRowToTable = new Vector<>();
-
+            // Build row in the table cost.
             addRowToTable.add(String.valueOf(item.getCostNumber()));
             addRowToTable.add(item.getName());
             addRowToTable.add(item.getDescribing());
@@ -201,6 +201,7 @@ public class ApplicationPageGUI {
         int index = 1;
         for(Category category : categoriesList){
             Vector<String> addRowToTable = new Vector<>();
+            // Build row in the category table.
             addRowToTable.add(String.valueOf(index));
             addRowToTable.add(String.valueOf(category.getCategoryName()));
 
@@ -267,6 +268,7 @@ public class ApplicationPageGUI {
 
         Vector<String> addColToTable = new Vector<>();
 
+        // names of column table.
         addColToTable.add("Cost number");
         addColToTable.add("Name");
         addColToTable.add("Description");
@@ -288,6 +290,7 @@ public class ApplicationPageGUI {
         return addColToTable;
     }
 
+    // Add components.
     private void addingComponentsStart() {
         // setting the layout to be GridLayout.
         buttonsPanel.setLayout(new GridLayout(1,8));
@@ -331,21 +334,30 @@ public class ApplicationPageGUI {
         mainFrame.add(buttonsPanel,BorderLayout.NORTH);
     }
 
+    // Action listeners.
     private void buttonActionListeners() {
+        // Action lister for the get items.
         showItemsButton.addActionListener(e -> viewModel.getItems(m_Username));
 
+        // Action lister for the get categories.
         showCategoriesButton.addActionListener(e -> viewModel.getAllCategories());
 
+        // Action lister for the get detailed report.
         showReportButton.addActionListener(e -> new DetailedReportView(viewModel,m_Username));
 
+        // Action lister for the update item.
         updateItemButton.addActionListener(e -> new UpdateItemView(viewModel, m_Username));
 
+        // Action lister for the remove item.
         removeItemButton.addActionListener(e -> new RemoveItemView(viewModel, m_Username));
 
+        // Action lister for the add category.
         addCategory.addActionListener(e -> new AddCategoryView(viewModel, this));
 
+        // Action lister for the add item.
         addItemButton.addActionListener(e -> new AddItemView(viewModel, m_Username, costTableModel.getRowCount(), categoriesList,this));
 
+        // Action lister for the get current currencies.
         showCurrencies.addActionListener(e -> viewModel.getCurrencies());
 
         menu.addActionListener(e -> {
@@ -353,7 +365,5 @@ public class ApplicationPageGUI {
             viewsManager.openLogin();
         });
     }
-
-
 
 }

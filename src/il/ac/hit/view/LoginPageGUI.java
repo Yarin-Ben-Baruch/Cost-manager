@@ -40,6 +40,7 @@ public class LoginPageGUI{
         // Sub menu of Login.
         registerFrame = new RegisterPageGUI(viewModel);
 
+        // create new fields.
         loginFrame = new JFrame();
         loginUserNameLabel = new JLabel("USERNAME");
         loginPasswordLabel = new JLabel("PASSWORD");
@@ -59,6 +60,7 @@ public class LoginPageGUI{
         // this will center the frame
         loginFrame.setLocationRelativeTo(null);
 
+        // Add image background.
         loginFrame.setContentPane(new JLabel(new ImageIcon("src/images/Login background.jpg")));
 
         addLoginComponentsToFrame();
@@ -80,7 +82,6 @@ public class LoginPageGUI{
     public void openAfterRegister() {
         registerFrame.close();
         loginFrame.setVisible(true);
-
     }
 
     /**
@@ -107,7 +108,7 @@ public class LoginPageGUI{
 
     // Set size and locations of the Components.
     private void setLoginLocationAndSize() {
-
+        // set bounds.
         loginUserNameLabel.setBounds(50, 70, 100, 30);
         loginPasswordLabel.setBounds(50, 120, 100, 30);
         loginUserNameTextField.setBounds(150, 70, 150, 30);
@@ -121,6 +122,7 @@ public class LoginPageGUI{
     // Adding all the components to the frame.
     private void addLoginComponentsToFrame() {
         setColorToLabel();
+        // add to the frame.
         loginFrame.add(loginUserNameLabel);
         loginFrame.add(loginUserNameTextField);
         loginFrame.add(loginPasswordLabel);
@@ -131,12 +133,14 @@ public class LoginPageGUI{
         loginFrame.add(loginRegisterButton);
     }
 
+    //set colors.
     private void setColorToLabel(){
         loginUserNameLabel.setForeground(Color.WHITE);
         loginPasswordLabel.setForeground(Color.WHITE);
         loginShowPasswordCheckBox.setForeground(Color.WHITE);
     }
 
+    // Actions listeners.
     private void addLoginActionEvents() {
 
         loginButton.addActionListener(new ActionListener() {
@@ -144,6 +148,7 @@ public class LoginPageGUI{
             public void actionPerformed(ActionEvent e) {
                 String userText;
                 String pwdText;
+                // take txt from loginUserNameTextField.
                 userText = loginUserNameTextField.getText();
                 pwdText = new String(loginPasswordField.getPassword());
                 User user = new User(userText, pwdText);
@@ -154,6 +159,7 @@ public class LoginPageGUI{
         loginResetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // remove the text.
                 loginUserNameTextField.setText("");
                 loginPasswordField.setText("");
             }
@@ -166,6 +172,7 @@ public class LoginPageGUI{
                 if (loginShowPasswordCheckBox.isSelected()) {
                     loginPasswordField.setEchoChar((char) 0);
                 } else {
+                    // replace withe *.
                     loginPasswordField.setEchoChar('*');
                 }
             }

@@ -2,7 +2,6 @@ package il.ac.hit.model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -20,13 +19,23 @@ public class DBModel implements IModel {
 
     /*
     This class implements the DAO design pattern.
-
+    This class implements the Singleton design pattern.
      */
-
     private final String user = "admin";
     private final String password = "admin";
     private final String dbUrl = "jdbc:mysql://localhost:8889/admin";
+    private static DBModel dbModel = new DBModel();
 
+    // Singleton Principle.
+    private DBModel(){}
+
+    /**
+     * A method that returns the object that represents the class
+     * @return DBModel object.
+     */
+    public static DBModel getObject(){
+        return dbModel;
+    }
 
     /**
      * Add item method adding cost item for the items sql table.
@@ -47,6 +56,7 @@ public class DBModel implements IModel {
                             "values " +
                             "(?,?,?,?,?,?,?,?)");
 
+            // Replaces the question marks.
             preparedStatement.setInt(1, item.getCostNumber());
             preparedStatement.setString(2, item.getName());
             preparedStatement.setString(3, item.getDescribing());
@@ -81,14 +91,16 @@ public class DBModel implements IModel {
         Collection<Item> currentItems = new LinkedList<>();
 
         try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
-
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE userName = " +" ? ");
+
+            // Replaces the question marks
             preparedStatement.setString(1,userName);
             myResult = preparedStatement.executeQuery();
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
             {
+                // build new item inside to list.
                 currentItems.add(new Item(myResult.getInt("costNumber"), myResult.getString("name"),
                         myResult.getString("description"),myResult.getString("currency"),
                         new Category(myResult.getString("category")),myResult.getString("sum"),
@@ -154,6 +166,7 @@ public class DBModel implements IModel {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM items WHERE costNumber = ? AND userName = ?");
 
+            // Replaces the question marks.
             preparedStatement.setInt(1,currentCostNumber);
             preparedStatement.setString(2, userName);
 
@@ -188,6 +201,7 @@ public class DBModel implements IModel {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE date >= ? AND date <= ? AND userName = ?");
 
+            // Replaces the question marks.
             preparedStatement.setDate(1, startDate);
             preparedStatement.setDate(2, endDate);
             preparedStatement.setString(3, userName);
@@ -196,7 +210,7 @@ public class DBModel implements IModel {
 
             // Put all the values form the query in LinkedList.
             while(myResult.next()) {
-
+                //build new Item for the list.
                     Item currentItemToAdd = new Item(myResult.getInt("costNumber"), myResult.getString("name"),
                             myResult.getString("description"),myResult.getString("currency"),
                             new Category(myResult.getString("category")),myResult.getString("sum"),
@@ -233,6 +247,7 @@ public class DBModel implements IModel {
                             "values " +
                             "(?,?)");
 
+            // Replaces the question marks.
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getPassword());
 
@@ -268,6 +283,7 @@ public class DBModel implements IModel {
                                 "values " +
                                 "(?)");
 
+                // Replaces the question marks.
                 preparedStatement.setString(1, category.getCategoryName());
 
                 // Check that the add category was executed properly.
@@ -278,8 +294,8 @@ public class DBModel implements IModel {
                     throw new CostManagerException("Unable insert the category");
                 }
             }
+            // if category contains.
             else{
-
                 throw new CostManagerException("Can't add same category twice!");
             }
 
@@ -309,6 +325,7 @@ public class DBModel implements IModel {
             // Put all the values form the query in LinkedList.
             while (myResult.next())
             {
+                // Build a new user.
                 currentItems.add(new User(myResult.getString("userName"),
                         myResult.getString("password")));
             }
@@ -338,6 +355,7 @@ public class DBModel implements IModel {
             // Put all the values form the query in LinkedList.
             while (myResult.next())
             {
+                // build a new Category.
                 currentItems.add(new Category(myResult.getString("category")));
             }
 
@@ -362,7 +380,6 @@ public class DBModel implements IModel {
         try ( Connection connection = DriverManager.getConnection(dbUrl, this.user, password)) {
 
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users");
-
             myResult = preparedStatement.executeQuery();
 
             // Put all the values form the query in LinkedList.
@@ -438,6 +455,8 @@ public class DBModel implements IModel {
                                 "values " +
                                 "(?)");
 
+
+                // Replaces the question marks.
                 preparedStatement.setString(1, category.getCategoryName());
 
                 // Check that the add category was executed properly.
@@ -454,6 +473,7 @@ public class DBModel implements IModel {
         }
     }
 
+    //A method that aims to update the row number after deletion.
     private void updateCostNumberAfterRemove(String userName) throws CostManagerException {
 
         try {
@@ -461,6 +481,7 @@ public class DBModel implements IModel {
             allItems = (LinkedList<Item>)getItems(userName);
             String costNumber;
 
+            // Goes through all the expenses of a specific user, and updates their number.
             for(int i = 0 ; i < allItems.size(); i++){
                 costNumber = String.valueOf(allItems.get(i).getCostNumber());
                 updateItem("costNumber", String.valueOf(i+1), costNumber, userName);

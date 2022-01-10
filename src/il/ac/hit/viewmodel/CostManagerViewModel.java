@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
  * A class that implements the interface of the view model.
  */
 public class CostManagerViewModel implements IViewModel {
-
+    //fields.
     private IModel model;
     private IView view;
     private final ExecutorService service;
@@ -413,11 +413,19 @@ public class CostManagerViewModel implements IViewModel {
         });
     }
 
+    /**
+     * basic set
+     * @param view save as a member class.
+     */
     @Override
     public void setView(IView view) {
         this.view = view;
     }
 
+    /**
+     * basic set
+     * @param model save as a member class.
+     */
     @Override
     public void setModel(IModel model) {
         this.model = model;

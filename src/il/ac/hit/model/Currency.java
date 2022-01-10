@@ -18,10 +18,18 @@ public class Currency {
         setRate(rate);
     }
 
+    /**
+     * basic getter.
+     * @return string ( symbol).
+     */
     public String getSymbol() {
         return symbol;
     }
 
+    /**
+     * basic getter.
+     * @return double(rate).
+     */
     public double getRate() {
         return rate;
     }

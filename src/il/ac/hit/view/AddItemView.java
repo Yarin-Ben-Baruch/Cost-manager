@@ -33,7 +33,6 @@ public class AddItemView {
     private LinkedList<Category> categoriesList;
     private final ApplicationPageGUI applicationPageGUI;
 
-
     /**
      /**
      * Ctor that contain the init and start CategoryView.
@@ -49,39 +48,43 @@ public class AddItemView {
         this.currentTableSize = currentTableSize;
         this.categoriesList = categoriesList;
         this.applicationPageGUI = applicationPageGUI;
+
         addItemInit();
         addItemStart();
     }
 
     // init the frame
     private void addItemInit() {
+        // build array for currencies, categories and dates.
         String[] days;
         String[] months;
         String[] years;
         String[] currencies;
         String[] categories;
 
-        // Creating the detailed report Action.
+        //Initializes the days.
         days = new String[31];
         for (int i = 0 ; i < 31 ; i++) {
             days[i] = String.valueOf(i+1);
         }
 
+        //Initializes the months.
         months = new String[12];
         for (int i = 0 ; i < 12 ; i++) {
             months[i] = String.valueOf(i+1);
         }
 
+        //Initializes the years.
         years = new String[5];
         for (int i = 0 ; i < 5 ; i++) {
             years[i] = String.valueOf(i+2021);
         }
 
+        //Initializes the categories.
         categories = new String[categoriesList.size()];
         for (int i = 0; i< categoriesList.size(); i++){
             categories[i] = categoriesList.get(i).getCategoryName();
         }
-
 
 
         // currencies we support.
@@ -97,7 +100,6 @@ public class AddItemView {
         addItemCurrencyComboBox = new JComboBox<>(currencies);
         addItemCategoryLabel = new JLabel("Category:");
         addItemCategoryComboBox = new JComboBox<>(categories);
-        //addItemCategoryTextField = new JTextField();
         addItemSumLabel = new JLabel("Sum");
         addItemSumTextField = new JTextField();
         addItemDateLabel = new JLabel("Date:");
@@ -143,13 +145,14 @@ public class AddItemView {
 
         addItemFrame.setVisible(true);
 
-
+        // Action listener.
         addItemToDBButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 Item item = null;
                 try {
+                    // try to create new Item.
                     item = new Item(++currentTableSize,
                             addItemNameTextField.getText(),
                             addItemDescribingTextField.getText(),
@@ -163,8 +166,9 @@ public class AddItemView {
                 } catch (CostManagerException ex) {
                     applicationPageGUI.showErrorMessage(new Message(ex.getMessage()));
                 }
-
+                // Add the item.
                 viewModel.addItem(item);
+                // Close the frame.
                 addItemFrame.dispose();
             }
         });
@@ -173,6 +177,7 @@ public class AddItemView {
     // setting the size and location of the components in the frame.
     private void setComponentsLocationAndSize() {
 
+        // Set bounds to Currency and Date .
         addItemNameLabel.setBounds(50, 30, 80, 30);
         addItemCurrencyLabel.setBounds(addItemNameLabel.getX(), addItemNameLabel.getY()+50, 80, 30);
         addItemCategoryLabel.setBounds(addItemNameLabel.getX(), addItemCurrencyLabel.getY()+50, 80, 30);
@@ -180,12 +185,13 @@ public class AddItemView {
         addItemDateLabel.setBounds(addItemNameLabel.getX(), addItemSumLabel.getY()+50, 80, 30);
         addItemDescribingLabel.setBounds(addItemNameLabel.getX(), addItemDateLabel.getY() + 50, 80, 30);
 
+        // Set bounds to item name and item sum.
         addItemNameTextField.setBounds(addItemNameLabel.getWidth() + addItemNameLabel.getX(), addItemNameLabel.getY(), 150, 30);
         addItemCurrencyComboBox.setBounds(addItemNameTextField.getX(), addItemCurrencyLabel.getY(), 150, 30);
         addItemCategoryComboBox.setBounds(addItemNameTextField.getX(), addItemCategoryLabel.getY(), 150, 30);
-
         addItemSumTextField.setBounds(addItemNameTextField.getX(), addItemSumLabel.getY(), 100, 30);
 
+        // Set bounds to Date ComboBox.
         addItemDayComboBox.setBounds(addItemSumTextField.getX()+ addItemDayComboBox.getWidth(), addItemDateLabel.getY(), 100, 30);
         addItemMonthComboBox.setBounds(addItemDayComboBox.getX()+ addItemDayComboBox.getWidth(), addItemDateLabel.getY(), 100, 30);
         addItemYearComboBox.setBounds(addItemMonthComboBox.getX()+ addItemMonthComboBox.getWidth(), addItemDateLabel.getY(), 100, 30);
@@ -197,12 +203,14 @@ public class AddItemView {
 
     }
 
+    //Set colors.
     private void setColorToLabel(){
-            addItemDescribingLabel.setForeground(Color.WHITE);
-            addItemNameLabel.setForeground(Color.WHITE);
-            addItemCurrencyLabel.setForeground(Color.WHITE);
-            addItemCategoryLabel.setForeground(Color.WHITE);
-            addItemSumLabel.setForeground(Color.WHITE);
-            addItemDateLabel.setForeground(Color.WHITE);
-        }
+        // set colors.
+        addItemDescribingLabel.setForeground(Color.WHITE);
+        addItemNameLabel.setForeground(Color.WHITE);
+        addItemCurrencyLabel.setForeground(Color.WHITE);
+        addItemCategoryLabel.setForeground(Color.WHITE);
+        addItemSumLabel.setForeground(Color.WHITE);
+        addItemDateLabel.setForeground(Color.WHITE);
+    }
 }
