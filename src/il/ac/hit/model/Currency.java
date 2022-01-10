@@ -34,10 +34,12 @@ public class Currency {
         return rate;
     }
 
+    // basic setter.
     private void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
+    // basic setter.
     private void setRate(double rate) {
         this.rate = rate;
     }

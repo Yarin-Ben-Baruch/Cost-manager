@@ -33,7 +33,7 @@ public class DBModel implements IModel {
      * A method that returns the object that represents the class
      * @return DBModel object.
      */
-    public static DBModel getObject(){
+    public static DBModel getObject() {
         return dbModel;
     }
 

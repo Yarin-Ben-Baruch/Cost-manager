@@ -36,10 +36,12 @@ public class User {
         return password;
     }
 
+    // basic setter.
     private void setUserName(String userName) {
         this.userName = userName;
     }
 
+    // basic setter.
     private void setPassword(String password) {
         this.password = password;
     }
