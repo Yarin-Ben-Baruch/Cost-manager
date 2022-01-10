@@ -14,7 +14,6 @@ import java.util.List;
  * The object manages all the methods that need to be implemented from the view class,
  * and receives the relevant information from the objects relevant to that function.
  */
-
 public class ViewsManager implements IView {
 
     private LoginPageGUI loginPage;

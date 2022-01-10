@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
  * Inside the department there is data about what happens after clicking the login button,
  * and in addition. Option to click the register button.
  */
-
 public class LoginPageGUI{
 
     private final IViewModel viewModel;

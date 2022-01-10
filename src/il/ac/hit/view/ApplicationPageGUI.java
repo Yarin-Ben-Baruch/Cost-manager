@@ -18,7 +18,6 @@ import java.util.Vector;
  * The department manages all the sub-buttons that are inside it.
  * Each button in the class represents another object that is opened when you click on it.
  */
-
 public class ApplicationPageGUI {
     private IViewModel viewModel;
     private final ViewsManager viewsManager;

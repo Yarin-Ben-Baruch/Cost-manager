@@ -91,7 +91,7 @@ public class DBModel implements IModel {
                         myResult.getDate("date"), myResult.getString("userName")));
             }
         } catch (SQLException e) {
-            throw new CostManagerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB",e);
         }
 
         return currentItems;
@@ -202,7 +202,7 @@ public class DBModel implements IModel {
 
             }
         } catch (SQLException e) {
-            throw new CostManagerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB",e);
         }
 
         return reportItems;
@@ -309,7 +309,7 @@ public class DBModel implements IModel {
                         myResult.getString("password")));
             }
         } catch (SQLException e) {
-            throw new CostManagerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB",e);
         }
 
         return currentItems;
@@ -338,7 +338,7 @@ public class DBModel implements IModel {
             }
 
         } catch (SQLException e) {
-            throw new CostManagerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB",e);
         }
 
         return currentItems;
@@ -372,7 +372,7 @@ public class DBModel implements IModel {
                 throw new CostManagerException("User not Exists!");
 
         } catch (SQLException e) {
-            throw new CostManagerException("Unable to pull data from DB");
+            throw new CostManagerException("Unable to pull data from DB",e);
         }
 
     }
@@ -415,7 +415,7 @@ public class DBModel implements IModel {
             return result;
         }
         catch(java.io.IOException | java.lang.InterruptedException e) {
-            throw new CostManagerException("problem with getting currencies exchange rates");
+            throw new CostManagerException("problem with getting currencies exchange rates",e);
         }
     }
 

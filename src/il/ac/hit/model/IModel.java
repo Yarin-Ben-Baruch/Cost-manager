@@ -86,5 +86,10 @@ public interface IModel {
      */
     void checkIfUserExists(User user) throws CostManagerException;
 
+    /**
+     * getCurrencies return List of all the currencies in the cost manager application form the localhost:8080.
+     * @return Return list of all currencies in the localhost:8080.
+     * @throws CostManagerException A class wraps up the problems of the program.
+     */
     List<Currency> getCurrencies() throws CostManagerException;
 }

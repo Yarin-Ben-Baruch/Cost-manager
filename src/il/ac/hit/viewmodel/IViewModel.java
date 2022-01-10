@@ -8,7 +8,6 @@ import java.sql.Date;
 /**
  * An interface that includes all the actions between the model and view.
  */
-
 public interface IViewModel {
 
     void setView(IView view);
