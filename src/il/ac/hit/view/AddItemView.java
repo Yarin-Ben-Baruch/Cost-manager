@@ -80,7 +80,7 @@ public class AddItemView {
 
         //Initializes the categories.
         categories = new String[categoriesList.size()];
-        for (int i = 0; i< categoriesList.size(); i++){
+        for (int i = 0; i < categoriesList.size(); i++){
             categories[i] = categoriesList.get(i).getCategoryName();
         }
 

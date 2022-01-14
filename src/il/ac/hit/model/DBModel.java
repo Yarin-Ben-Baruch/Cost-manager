@@ -24,7 +24,7 @@ public class DBModel implements IModel {
     private final String user = "admin";
     private final String password = "admin";
     private final String dbUrl = "jdbc:mysql://localhost:8889/admin";
-    private static DBModel dbModel = new DBModel();
+    private static DBModel dbModel = null;
 
     // Singleton Principle.
     private DBModel(){}
@@ -34,6 +34,10 @@ public class DBModel implements IModel {
      * @return DBModel object.
      */
     public static DBModel getObject() {
+        // Creation only for first use in the class.
+        if(dbModel == null){
+            dbModel = new DBModel();
+        }
         return dbModel;
     }
 
