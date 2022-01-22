@@ -1,5 +1,4 @@
 package il.ac.hit;
-
 import il.ac.hit.model.CostManagerException;
 import il.ac.hit.model.Category;
 import il.ac.hit.model.DBModel;
@@ -7,10 +6,8 @@ import il.ac.hit.model.Item;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.Collection;
 import java.util.LinkedList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DBModelTest {
@@ -19,15 +16,12 @@ class DBModelTest {
 
     @BeforeEach
     void setUp() {
-
         test = DBModel.getObject();
     }
 
     @AfterEach
     void tearDown() {
         test = null;
-
-        //assertEquals();
     }
 
     @Test
@@ -38,13 +32,15 @@ class DBModelTest {
                     new Category("Car"),"1000",
                     java.sql.Date.valueOf("2015-09-09"), "Danoy"));
 
-            Collection<Item> report = test.getDetailedReport(java.sql.Date.valueOf("2015-08-08"), java.sql.Date.valueOf("2015-09-09"),"Danoy");
+            Collection<Item> report = test.getDetailedReport(java.sql.Date.valueOf("2015-08-08"),
+                    java.sql.Date.valueOf("2015-09-09"),"Danoy");
             LinkedList<Item> items = (LinkedList<Item>) report;
 
             Item item = new Item(3, "Dani",
                     "buy new car","nis",
                     new Category("Car"),"1000",
                     java.sql.Date.valueOf("2015-09-09"), "Danoy");
+
 
             assertEquals(item,items.get(0));
 
@@ -58,6 +54,7 @@ class DBModelTest {
         try {
             Collection<Item> allItems = test.getItems("Danoy");
             Collection<Item> allItems2 = test.getItems("Danoy");
+
 
             assertEquals(allItems,allItems2);
 
@@ -104,13 +101,11 @@ class DBModelTest {
 
             Collection<Item> allItemsAfterAddAndRemove = test.getItems("Danoy");
 
-            assertEquals(allItemsBeforeEdit,allItemsAfterAddAndRemove);
 
+            assertEquals(allItemsBeforeEdit,allItemsAfterAddAndRemove);
 
         } catch (CostManagerException e) {
             e.printStackTrace();
         }
     }
-
-
 }

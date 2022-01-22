@@ -50,15 +50,15 @@ public class DBModel implements IModel {
     @Override
     public void addItem(Item item) throws CostManagerException {
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+        String sqlStatement =
+                "insert into items (costNumber,name,description,currency,category,sum,date,userName) values (?,?,?,?,?,?,?,?)";
+
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+         PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement)) {
 
             // if the category is not exists add the category to the categories sql table.
             addCategoryInAddItem(item.getCategory());
 
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "insert into items (costNumber,name,description,currency,category,sum,date,userName) " +
-                            "values " +
-                            "(?,?,?,?,?,?,?,?)");
 
             // Replaces the question marks.
             preparedStatement.setInt(1, item.getCostNumber());
@@ -91,24 +91,25 @@ public class DBModel implements IModel {
     @Override
     public Collection<Item> getItems(String userName) throws CostManagerException {
 
-        ResultSet myResult;
-        Collection<Item> currentItems = new LinkedList<>();
+        String sqlStatement = "SELECT * from items WHERE userName =  ? ";
+                Collection<Item> currentItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE userName = " +" ? ");
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement)) {
 
             // Replaces the question marks
             preparedStatement.setString(1,userName);
-            myResult = preparedStatement.executeQuery();
 
-            // Put all the values form the query in LinkedList.
-            while (myResult.next())
-            {
-                // build new item inside to list.
-                currentItems.add(new Item(myResult.getInt("costNumber"), myResult.getString("name"),
-                        myResult.getString("description"),myResult.getString("currency"),
-                        new Category(myResult.getString("category")),myResult.getString("sum"),
-                        myResult.getDate("date"), myResult.getString("userName")));
+            try(ResultSet myResult = preparedStatement.executeQuery()){
+
+                // Put all the values form the query in LinkedList.
+                while (myResult.next()) {
+                    // build new item inside to list.
+                    currentItems.add(new Item(myResult.getInt("costNumber"), myResult.getString("name"),
+                            myResult.getString("description"), myResult.getString("currency"),
+                            new Category(myResult.getString("category")), myResult.getString("sum"),
+                            myResult.getDate("date"), myResult.getString("userName")));
+                }
             }
         } catch (SQLException e) {
             throw new CostManagerException("Unable to pull data from DB",e);
@@ -136,7 +137,6 @@ public class DBModel implements IModel {
                 throw new CostManagerException("Can't change here userName");
             }
 
-            PreparedStatement preparedStatement;
             StringBuilder queryToExecute = new StringBuilder();
             queryToExecute.append("UPDATE Items SET ").append(nameColToUpdate)
                     .append(" = ").append("'").append(dataToSet).append("'")
@@ -144,14 +144,15 @@ public class DBModel implements IModel {
                     .append(" and userName = ").append("'").append(userName)
                     .append("'");
 
-            preparedStatement = connection.prepareStatement(queryToExecute.toString());
-            // Check that the update execute properly.
-            int howManyUpdates = preparedStatement.executeUpdate();
+            try(PreparedStatement preparedStatement = connection.prepareStatement(queryToExecute.toString())) {
+                // Check that the update execute properly.
+                int howManyUpdates = preparedStatement.executeUpdate();
 
-            // If the update not execute properly throw CostMangerException.
-           if(howManyUpdates != 1){
-               throw new CostManagerException("Can't update the item !");
-           }
+                // If the update not execute properly throw CostMangerException.
+                if (howManyUpdates != 1) {
+                    throw new CostManagerException("Can't update the item !");
+                }
+            }
         }
         catch (SQLException | NumberFormatException e) {
             throw new CostManagerException("Unable to update data to DB",e);
@@ -166,13 +167,14 @@ public class DBModel implements IModel {
      */
     @Override
     public void removeItem(String costNumber, String userName) throws CostManagerException {
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
+        String sqlStatement = "DELETE FROM items WHERE costNumber = ? AND userName = ?";
+
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement)) {
 
             // parsing the string costNumber to int for the table.
             int currentCostNumber = Integer.parseInt(costNumber);
-
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM items WHERE costNumber = ? AND userName = ?");
 
             // Replaces the question marks.
             preparedStatement.setInt(1,currentCostNumber);
@@ -202,30 +204,29 @@ public class DBModel implements IModel {
     @Override
     public Collection<Item> getDetailedReport(Date startDate, Date endDate, String userName) throws CostManagerException {
         // report collection to the items the user asked for.
-        ResultSet myResult;
+        String sqlStatement = "SELECT * from items WHERE date >= ? AND date <= ? AND userName = ?";
         Collection<Item> reportItems = new LinkedList<>();
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
-
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from items WHERE date >= ? AND date <= ? AND userName = ?");
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement)) {
 
             // Replaces the question marks.
             preparedStatement.setDate(1, startDate);
             preparedStatement.setDate(2, endDate);
             preparedStatement.setString(3, userName);
 
-            myResult = preparedStatement.executeQuery();
-
-            // Put all the values form the query in LinkedList.
-            while(myResult.next()) {
-                //build new Item for the list.
+            try(ResultSet myResult = preparedStatement.executeQuery()) {
+                // Put all the values form the query in LinkedList.
+                while (myResult.next()) {
+                    //build new Item for the list.
                     Item currentItemToAdd = new Item(myResult.getInt("costNumber"), myResult.getString("name"),
-                            myResult.getString("description"),myResult.getString("currency"),
-                            new Category(myResult.getString("category")),myResult.getString("sum"),
+                            myResult.getString("description"), myResult.getString("currency"),
+                            new Category(myResult.getString("category")), myResult.getString("sum"),
                             myResult.getDate("date"), myResult.getString("userName"));
 
                     reportItems.add(currentItemToAdd);
 
+                }
             }
         } catch (SQLException e) {
             throw new CostManagerException("Unable to pull data from DB",e);
@@ -241,7 +242,11 @@ public class DBModel implements IModel {
      */
     @Override
     public void addNewUser(User user) throws CostManagerException {
-        try ( Connection connection = DriverManager.getConnection(dbUrl, this.user, password)) {
+
+        String sqlStatement = "insert into users (userName,password) values (?,?)";
+
+        try ( Connection connection = DriverManager.getConnection(dbUrl, this.user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement)) {
 
             Collection<User> allUsers = getAllUsers();
 
@@ -249,11 +254,6 @@ public class DBModel implements IModel {
             if(allUsers.contains(user)) {
                 throw new CostManagerException("This user is already exists");
             }
-
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "insert into users (userName,password) " +
-                            "values " +
-                            "(?,?)");
 
             // Replaces the question marks.
             preparedStatement.setString(1, user.getUserName());
@@ -279,17 +279,17 @@ public class DBModel implements IModel {
      */
     @Override
     public void addNewCategoryIfExists(Category category) throws CostManagerException {
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
+        String sqlStatement = "insert into categories (category) values (?)";
+
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement)) {
             // if category empty
 
             Collection<Category> allCategories = getAllCategories();
 
             // If the category is not in the list of the categories add the category.
             if(!allCategories.contains(category)){
-                PreparedStatement preparedStatement = connection.prepareStatement(
-                        "insert into categories (category) " +
-                                "values " +
-                                "(?)");
 
                 // Replaces the question marks.
                 preparedStatement.setString(1, category.getCategoryName());
@@ -321,14 +321,12 @@ public class DBModel implements IModel {
     @Override
     public Collection<User> getAllUsers() throws CostManagerException {
 
-        ResultSet myResult;
         Collection<User> currentItems = new LinkedList<>();
+        String sqlStatement = "SELECT * from users";
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
-
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users");
-
-            myResult = preparedStatement.executeQuery();
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
+              ResultSet myResult = preparedStatement.executeQuery()) {
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
@@ -352,13 +350,12 @@ public class DBModel implements IModel {
     @Override
     public Collection<Category> getAllCategories() throws CostManagerException {
 
-        ResultSet myResult ;
         Collection<Category> currentItems = new LinkedList<>();
+        String sqlStatement = "SELECT * from categories";
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
-
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from categories");
-            myResult = preparedStatement.executeQuery();
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
+              ResultSet myResult = preparedStatement.executeQuery()) {
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
@@ -382,13 +379,12 @@ public class DBModel implements IModel {
     @Override
     public void checkIfUserExists(User user) throws CostManagerException {
 
-        ResultSet myResult;
         Collection<User> currentItems = new LinkedList<>();
+        String sqlStatement = "SELECT * from users";
 
-        try ( Connection connection = DriverManager.getConnection(dbUrl, this.user, password)) {
-
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users");
-            myResult = preparedStatement.executeQuery();
+        try ( Connection connection = DriverManager.getConnection(dbUrl, this.user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement);
+              ResultSet myResult = preparedStatement.executeQuery()) {
 
             // Put all the values form the query in LinkedList.
             while (myResult.next())
@@ -452,17 +448,16 @@ public class DBModel implements IModel {
     // if the category is inside the method do nothing.
     // and if the category is not inside she put the category inside the list.
     private void addCategoryInAddItem(Category category) throws CostManagerException {
-        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password)) {
+
+        String sqlStatement = "insert into categories (category) values (?)";
+
+        try ( Connection connection = DriverManager.getConnection(dbUrl, user, password);
+              PreparedStatement preparedStatement = connection.prepareStatement(sqlStatement)) {
 
             Collection<Category> allCategories = getAllCategories();
 
             // If the category is not in the list of the categories add the category.
             if(!allCategories.contains(category) && !category.getCategoryName().isEmpty()){
-                PreparedStatement preparedStatement = connection.prepareStatement(
-                        "insert into categories (category) " +
-                                "values " +
-                                "(?)");
-
 
                 // Replaces the question marks.
                 preparedStatement.setString(1, category.getCategoryName());
